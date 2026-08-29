@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Chat History - Multi-View Intelligence Archive</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #070a12;
+      --card-bg: #162032;
+      --card-border: #2a3a54;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --user-prompt-bg: #091122;
+      --badge-bg: #1e293b;
+
+      --cat-ai: #c084fc;
+      --cat-software: #38bdf8;
+      --cat-hardware: #f59e0b;
+      --cat-creative: #f43f5e;
+      --cat-finance: #10b981;
+      --cat-outliers: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #0f172a;
+      border-bottom: 1px solid var(--card-border);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-title h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .view-mode-tabs {
+      display: flex;
+      background: #070a12;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #070a12;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      font-weight: 700;
+    }
+
+    .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .stat-pill {
+      background: rgba(30, 41, 59, 0.8);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat-pill strong {
+      color: var(--accent);
+    }
+
+    .view-container {
+      display: none;
+    }
+
+    .view-container.active {
+      display: block;
+    }
+
+    /* FEED VIEW */
+    .search-container {
+      max-width: 1400px;
+      margin: 20px auto 0;
+      padding: 0 20px;
+    }
+
+    .controls-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    select, button.btn {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    button.btn-primary {
+      background: var(--accent);
+      color: #070a12;
+      font-weight: 600;
+      border: none;
+    }
+
+    main.feed-main {
+      max-width: 1400px;
+      margin: 20px auto;
+      padding: 0 20px;
+      height: calc(100vh - 180px);
+      overflow-y: auto;
+    }
+
+    .threads-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .thread-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .thread-header {
+      background: #0f172a;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .turn-wrapper {
+      border-bottom: 1px dashed var(--card-border);
+      padding: 18px 20px;
+    }
+
+    .prompt-block {
+      background: var(--user-prompt-bg);
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+    }
+
+    .prompt-text {
+      color: #fff;
+      white-space: pre-wrap;
+    }
+
+    .response-block {
+      padding: 4px 0 10px;
+      font-size: 0.98rem;
+      color: #e2e8f0;
+    }
+
+    /* INFINITE CANVAS VIEW */
+    #canvasView {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 75px);
+      overflow: hidden;
+      background: #050811;
+      user-select: none;
+    }
+
+    .canvas-hud {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 900;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--card-border);
+      padding: 10px 16px;
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .canvas-subtabs {
+      display: flex;
+      background: rgba(7, 10, 18, 0.95);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .subtab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .subtab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .subtab-btn.active {
+      background: var(--accent);
+      color: #070a12;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+      font-weight: 700;
+    }
+
+    .canvas-hud input[type="text"] {
+      background: #050811;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      width: 160px;
+      outline: none;
+    }
+
+    .canvas-hud select {
+      padding: 6px 12px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* DUAL-THUMB RANGE SLIDER COMPONENT */
+    .dual-range-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+    }
+
+    .dual-slider-wrapper {
+      position: relative;
+      width: 150px;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+    }
+
+    .dual-slider-track-highlight {
+      position: absolute;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .dual-slider-wrapper input[type="range"] {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 16px;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .dual-slider-wrapper input[type="range"]::-webkit-slider-thumb {
+      pointer-events: auto;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      -webkit-appearance: none;
+      box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    .canvas-controls {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      z-index: 500;
+      display: flex;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--card-border);
+      padding: 8px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .canvas-controls button {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+
+    /* CATEGORY EDGE TIGHTNESS & STAR-CHART PHYSICS HUD */
+    .category-physics-hud {
+      position: absolute;
+      top: 80px;
+      right: 24px;
+      z-index: 950;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      backdrop-filter: blur(14px);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      width: 260px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    }
+
+    .physics-hud-header {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 6px;
+    }
+
+    .star-chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2px 0;
+    }
+
+    .cat-sliders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cat-slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      gap: 8px;
+    }
+
+    .cat-slider-row label {
+      width: 90px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cat-slider-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    #constellationCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+
+    #constellationCanvas:active {
+      cursor: grabbing;
+    }
+
+    .canvas-tooltip {
+      position: absolute;
+      z-index: 1500;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 10px 14px;
+      max-width: 340px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      display: none;
+      backdrop-filter: blur(10px);
+    }
+
+    /* KNOWLEDGE OVERLAP MULTI-VIEW */
+    .dashboard-main {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 20px;
+      height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+
+    .overlap-subnav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      width: fit-content;
+    }
+
+    .overlap-subbtn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .overlap-subbtn.active {
+      background: var(--accent);
+      color: #070a12;
+    }
+
+    .overlap-hud {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .slider-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slider-box input[type="range"] {
+      width: 180px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .topic-tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: 600px;
+    }
+
+    .topic-tag-pill {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .topic-tag-pill:hover, .topic-tag-pill.active {
+      border-color: var(--accent);
+      color: #fff;
+      background: rgba(56, 189, 248, 0.15);
+    }
+
+    /* COLLAPSIBLE MINDMAP TREE STYLES */
+    .mindmap-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mindmap-domain-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .mindmap-domain-header {
+      padding: 16px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mindmap-domain-header:hover {
+      background: #1e293b;
+    }
+
+    .mindmap-domain-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mindmap-domain-badge {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .mindmap-branch-list {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mindmap-topic-branch {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+
+    .mindmap-topic-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mindmap-leaves-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+    }
+
+    .mindmap-leaf-card {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mindmap-leaf-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* DOMAIN MATRIX HEATMAP */
+    .domain-matrix-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .matrix-cell {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .matrix-cell:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .matrix-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .category-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .cat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .cat-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .cat-card-count {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .overlap-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .overlap-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .overlap-node {
+      flex: 1;
+      background: #070a12;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+    }
+
+    .overlap-node:hover {
+      border-color: var(--accent);
+    }
+
+    .overlap-connector {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* ANALYTICS & MEDIA VIEW */
+    .circadian-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 220px;
+      padding-top: 20px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .circadian-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .circadian-bar {
+      width: 100%;
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .circadian-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    .media-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .media-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .media-preview-box {
+      width: 100%;
+      height: 150px;
+      background: #070a12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .media-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-info {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+    }
+
+    .media-info .filename {
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* SIDE DRAWER */
+    .side-drawer {
+      position: fixed;
+      top: 65px;
+      right: -650px;
+      width: 620px;
+      height: calc(100vh - 65px);
+      background: #0f172a;
+      border-left: 1px solid var(--card-border);
+      z-index: 2000;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      background: #1e293b;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .close-drawer {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="logo-title">
+        <h1>✨ Gemini Archive Synthesis</h1>
+      </div>
+
+      <div class="view-mode-tabs">
+        <button class="tab-btn active" id="tabCanvas" onclick="switchView('canvas')">🌌 Canvas & Charts</button>
+        <button class="tab-btn" id="tabFeed" onclick="switchView('feed')">📜 Stitched Feed</button>
+        <button class="tab-btn" id="tabTaxonomy" onclick="switchView('taxonomy')">🏷️ Taxonomy & Outliers</button>
+        <button class="tab-btn" id="tabOverlap" onclick="switchView('overlap')">🔗 Knowledge Overlap</button>
+        <button class="tab-btn" id="tabAnalytics" onclick="switchView('analytics')">📊 Circadian Rhythm</button>
+        <button class="tab-btn" id="tabMedia" onclick="switchView('media')">🖼️ Media Hub</button>
+      </div>
+
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-pill">Chats: <strong id="statThreads">2,423</strong></div>
+        <div class="stat-pill">Turns: <strong id="statDots">8,258</strong></div>
+        <div class="stat-pill">Voice: <strong id="statVoice">677</strong></div>
+        <div class="stat-pill">Skipped: <strong style="color: #f43f5e;">691 WAVs</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- INFINITE CANVAS CONSTELLATION VIEW -->
+  <div id="canvasView" class="view-container active">
+    <div class="canvas-hud">
+      <!-- CANVAS MODE SUB-TABS -->
+      <div class="canvas-subtabs">
+        <button class="subtab-btn active" id="subtabChat" onclick="selectCanvasSubtab('chat')">💬 Timeline Constellation</button>
+        <button class="subtab-btn" id="subtabUnified" onclick="selectCanvasSubtab('topic_clusters')">🌌 Unified Galaxy & Fusion Matrix</button>
+        <button class="subtab-btn" id="subtabMonth" onclick="selectCanvasSubtab('month')">📊 Monthly Breakdown</button>
+        <button class="subtab-btn" id="subtabYear" onclick="selectCanvasSubtab('year')">📊 Annual Distribution</button>
+      </div>
+
+      <select id="granularitySelect" style="display:none;" onchange="changeGranularity(this.value)">
+        <option value="chat" selected>💬 Timeline Constellation (Dots View)</option>
+        <option value="topic_clusters">🌌 Unified Galaxy & Fusion Matrix</option>
+        <option value="day">📊 Day by Day (Timeline Bar/Line Chart)</option>
+        <option value="week">📊 Week by Week (Timeline Bar/Line Chart)</option>
+        <option value="month">📊 Month by Month (Timeline Bar/Line Chart)</option>
+        <option value="year">📊 Year by Year (Timeline Bar/Line Chart)</option>
+      </select>
+
+      <select id="axisSelect" onchange="changeAxisMode(this.value)">
+        <option value="nonlinear" selected>🌊 Axis: Non-Linear Density (Expand & Crunch)</option>
+        <option value="linear">⏱️ Axis: Linear Calendar Time (Strict 1:1 Scale)</option>
+      </select>
+
+      <!-- DUAL-THUMB RANGE SLIDER (SINGLE BAR WITH TWO SCROLLERS) -->
+      <div class="dual-range-container">
+        <span>🧵 Turns: <strong id="turnRangeStr" style="color: var(--accent);">1 – 50+</strong></span>
+        <div class="dual-slider-wrapper">
+          <div class="dual-slider-track-highlight" id="dualTrackHighlight"></div>
+          <input type="range" id="sliderMin" min="1" max="50" value="1" oninput="onDualSliderInput()">
+          <input type="range" id="sliderMax" min="1" max="50" value="50" oninput="onDualSliderInput()">
+        </div>
+      </div>
+
+      <select id="compactModeSelect" onchange="toggleCompactingMode(this.value)">
+        <option value="compact" selected>⚡ Layout: Auto-Condense Active Points</option>
+        <option value="expanded">🌌 Layout: Fixed Grid Track Layout</option>
+      </select>
+
+      <input type="text" id="canvasSearch" placeholder="🔍 Highlight on Canvas..." autocomplete="off">
+      <button class="btn" style="background: rgba(30, 41, 59, 0.95); border: 1px solid var(--accent); color: var(--accent); font-weight: 700;" onclick="toggleMatrixPanel()">📊 Edge Fusion Matrix</button>
+    </div>
+
+    <!-- MULTI-SELECT DOMAIN ISLAND GALAXY CHECKBOX FILTER BAR -->
+    <div class="domain-island-pills" id="domainIslandPills" style="position: absolute; top: 76px; left: 24px; z-index: 900; display: flex; gap: 8px; align-items: center; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+      <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 2px;">Filter Galaxies:</span>
+      <label class="galaxy-chk-btn active" id="chkLabelAll" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid var(--card-border);">
+        <input type="checkbox" id="chkAll" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('all');" style="cursor: pointer;">
+        <span>🌐 All Galaxies</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelAi" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(192, 132, 252, 0.4); color: var(--cat-ai);">
+        <input type="checkbox" id="chkAi" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('ai_agents');" style="cursor: pointer;">
+        <span>🤖 AI Agents</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelSoftware" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(56, 189, 248, 0.4); color: var(--cat-software);">
+        <input type="checkbox" id="chkSoftware" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('software');" style="cursor: pointer;">
+        <span>💻 Software</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelHardware" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(52, 211, 153, 0.4); color: var(--cat-hardware);">
+        <input type="checkbox" id="chkHardware" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('hardware');" style="cursor: pointer;">
+        <span>🛠️ Hardware</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelCreative" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(245, 158, 11, 0.4); color: var(--cat-creative);">
+        <input type="checkbox" id="chkCreative" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('creative');" style="cursor: pointer;">
+        <span>🎨 Creative</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelFinance" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(244, 63, 94, 0.4); color: var(--cat-finance);">
+        <input type="checkbox" id="chkFinance" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('finance');" style="cursor: pointer;">
+        <span>💼 Finance</span>
+      </label>
+      <label class="galaxy-chk-btn active" id="chkLabelOutliers" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(100, 116, 139, 0.4); color: var(--cat-outliers);">
+        <input type="checkbox" id="chkOutliers" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('outliers');" style="cursor: pointer;">
+        <span>🔍 Outliers</span>
+      </label>
+    </div>
+
+    <!-- CATEGORY INTERCONNECTION EDGE QUALITY MATRIX HUD -->
+    <div class="category-matrix-hud" id="matrixHud" style="display: none; position: absolute; top: 125px; right: 24px; z-index: 950; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 14px 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); width: 340px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px;">📊 Edge Fusion & Matrix Filter</span>
+        <button class="btn" style="padding: 2px 6px; font-size: 0.7rem; background: rgba(255,255,255,0.1);" onclick="toggleMatrixPanel()">✕</button>
+      </div>
+
+      <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.35;">
+        Toggle matrix cells to filter <strong>Solid (A-A)</strong> or <strong>50-50 Dual-Color (A-B)</strong> edges. Unconnected nodes are automatically hidden!
+      </div>
+
+      <div style="display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap;">
+        <button class="btn" style="font-size: 0.68rem; padding: 3px 8px; background: rgba(56, 189, 248, 0.2); border: 1px solid var(--accent); color: #fff;" onclick="setMatrixPreset('all')">🌐 Select All</button>
+        <button class="btn" style="font-size: 0.68rem; padding: 3px 8px; background: rgba(52, 211, 153, 0.2); border: 1px solid #34d399; color: #34d399;" onclick="setMatrixPreset('solid')">🟩 Solid Only (A-A)</button>
+        <button class="btn" style="font-size: 0.68rem; padding: 3px 8px; background: rgba(192, 132, 252, 0.2); border: 1px solid #c084fc; color: #c084fc;" onclick="setMatrixPreset('cross')">🔀 50-50 Cross Only (A-B)</button>
+        <button class="btn" style="font-size: 0.68rem; padding: 3px 8px; background: rgba(244, 63, 94, 0.2); border: 1px solid #f43f5e; color: #f43f5e;" onclick="setMatrixPreset('none')">🚫 Clear All</button>
+      </div>
+
+      <div id="matrixTableGridContainer" style="overflow-x: auto;"></div>
+    </div>
+
+    <div class="canvas-controls">
+      <button class="btn" onclick="zoomCanvasAtCenter(1.25)">➕ Zoom In</button>
+      <button class="btn" onclick="zoomCanvasAtCenter(0.75)">➖ Zoom Out</button>
+      <button class="btn btn-primary" onclick="fitCanvasView()">🎯 Reset View</button>
+    </div>
+
+    <canvas id="constellationCanvas"></canvas>
+
+    <div class="canvas-tooltip" id="canvasTooltip">
+      <div class="tooltip-header">
+        <span id="ttTurnInfo">Chat Info</span>
+        <span id="ttDate">Date</span>
+      </div>
+      <div class="tooltip-body" id="ttSnippet">Snippet...</div>
+    </div>
+  </div>
+
+  <!-- STITCHED FEED VIEW -->
+  <div id="feedView" class="view-container">
+    <div class="search-container">
+      <div class="controls-card">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search across stitched conversation threads..." autocomplete="off">
+        </div>
+        <div class="filter-group">
+          <select id="sortSelect">
+            <option value="desc">Newest Threads First</option>
+            <option value="asc">Oldest Threads First</option>
+          </select>
+          <select id="voiceFilter">
+            <option value="0">All Threads</option>
+            <option value="1">🎙️ Voice Input Threads</option>
+          </select>
+          <button class="btn btn-primary" id="searchBtn">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="feed-main">
+      <div class="results-summary">
+        <span id="resultsCount">Loading stitched conversations...</span>
+        <span id="pageSummary"></span>
+      </div>
+      <div class="threads-list" id="threadsList"></div>
+      <div class="pagination">
+        <button class="btn" id="prevBtn" disabled>&laquo; Previous</button>
+        <span class="pagination-info" id="pageInfo">Page 1</span>
+        <button class="btn" id="nextBtn">Next &raquo;</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- TAXONOMY & OUTLIERS VIEW -->
+  <div id="taxonomyView" class="view-container">
+    <main class="dashboard-main">
+      <h2 style="margin-bottom: 20px; font-size: 1.3rem;">🏷️ Domain Taxonomy & Categorization</h2>
+      <div class="category-cards-grid" id="categoryCardsGrid"></div>
+    </main>
+  </div>
+
+  <!-- KNOWLEDGE OVERLAP MULTI-VIEW INTELLIGENCE HUB -->
+  <div id="overlapView" class="view-container">
+    <main class="dashboard-main">
+      <div class="overlap-subnav">
+        <button class="overlap-subbtn active" id="subbtnMindmap" onclick="switchOverlapSubView('mindmap')">🧭 Domain Mindmap & Tree Explorer</button>
+        <button class="overlap-subbtn" id="subbtnMatrix" onclick="switchOverlapSubView('matrix')">🌉 Cross-Domain Heatmap</button>
+        <button class="overlap-subbtn" id="subbtnList" onclick="switchOverlapSubView('list')">📜 Linked Pair List</button>
+      </div>
+
+      <div class="overlap-hud">
+        <div class="slider-box">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">⚡ Minimum Similarity: <strong id="simValStr" style="color: var(--accent);">0.38</strong></span>
+          <input type="range" id="simSlider" min="0.30" max="0.85" step="0.02" value="0.38" oninput="updateSimThreshold(this.value)">
+        </div>
+
+        <div class="filter-group">
+          <select id="overlapCatFilter" onchange="loadOverlapData()">
+            <option value="">All Domains</option>
+            <option value="ai_agents">🤖 AI Agents</option>
+            <option value="software">💻 Software</option>
+            <option value="hardware">🛠️ Hardware</option>
+            <option value="creative">🎨 Creative</option>
+            <option value="finance">💼 Finance</option>
+            <option value="outliers">🔍 Outliers</option>
+          </select>
+          <button class="btn" onclick="toggleExpandMindmap(true)">Expand All</button>
+          <button class="btn" onclick="toggleExpandMindmap(false)">Collapse All</button>
+        </div>
+
+        <div class="topic-tags-cloud" id="topTopicCloud"></div>
+      </div>
+
+      <!-- COLLAPSIBLE MINDMAP TREE SUBVIEW -->
+      <div id="overlapMindmapView" style="display: block;">
+        <div class="mindmap-container" id="mindmapTreeContainer"></div>
+      </div>
+
+      <!-- DOMAIN MATRIX SUBVIEW -->
+      <div id="overlapMatrixView" style="display: none;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 14px;">🌉 Cross-Domain Interconnection Matrix</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Number of cross-thread similarity links discovered between different domains:</p>
+        <div class="domain-matrix-container" id="domainMatrixGrid"></div>
+      </div>
+
+      <!-- LINKED PAIR LIST SUBVIEW -->
+      <div id="overlapListView" style="display: none;">
+        <div class="overlap-list" id="overlapList"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ANALYTICS VIEW -->
+  <div id="analyticsView" class="view-container">
+    <main class="dashboard-main">
+      <div class="analytics-card" style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 24px; border-radius: 14px;">
+        <h3>⏰ Circadian Activity Rhythm (Peak Chat Hours)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Distribution of all 8,258 chat turns across 24 hours of the day (24-Hour Clock):</p>
+        <div class="circadian-chart" id="circadianChart"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MEDIA HUB GALLERY VIEW -->
+  <div id="mediaView" class="view-container">
+    <main class="dashboard-main">
+      <div class="results-summary" style="margin-bottom: 16px;">
+        <span>Preserved Media Assets & Attachments (Images, PDFs, CSVs, ZIPs)</span>
+      </div>
+      <div class="media-grid" id="mediaGrid"></div>
+    </main>
+  </div>
+
+  <!-- SIDE DRAWER FOR CANVAS INSPECTION -->
+  <div class="side-drawer" id="sideDrawer">
+    <div class="drawer-header">
+      <h3 id="drawerTitle">Conversation Thread</h3>
+      <button class="close-drawer" onclick="closeDrawer()">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </div>
+
+  <script>
+    // Category Tightness & Star Chart State
+    let categoryTightness = {
+      'ai_agents': 1.0,
+      'software': 1.0,
+      'hardware': 1.0,
+      'creative': 1.0,
+      'finance': 1.0,
+      'outliers': 1.0
+    };
+
+    let pendingCategoryTightness = { ...categoryTightness };
+
+    function updatePendingCatTightness(cat, val) {
+      pendingCategoryTightness[cat] = parseFloat(val) || 1.0;
+      drawStarChart(pendingCategoryTightness);
+    }
+
+    function applyCategoryPhysics() {
+      categoryTightness = { ...pendingCategoryTightness };
+      physicsMode = 'dynamic';
+      const sel = document.getElementById('physicsModeSelect');
+      if (sel) sel.value = 'dynamic';
+
+      if (currentView === 'canvas') {
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        nodes.forEach(n => {
+          // Velocity explosion to contract into category clusters
+          n.vx = (Math.random() - 0.5) * 24;
+          n.vy = (Math.random() - 0.5) * 24;
+        });
+        drawCanvas();
+        drawStarChart(categoryTightness);
+      }
+    }
+
+    function togglePhysicsPanel() {
+      const hud = document.getElementById('physicsHud');
+      if (hud.style.display === 'none' || !hud.style.display) {
+        hud.style.display = 'flex';
+        drawStarChart(pendingCategoryTightness);
+      } else {
+        hud.style.display = 'none';
+      }
+    }
+
+    function drawStarChart(state = pendingCategoryTightness) {
+      const scCanvas = document.getElementById('starChartCanvas');
+      if (!scCanvas) return;
+      const sctx = scCanvas.getContext('2d');
+      const w = scCanvas.width;
+      const h = scCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const radius = 48;
+
+      sctx.clearRect(0, 0, w, h);
+
+      const cats = Object.keys(CATEGORY_MAP);
+      const angleStep = (Math.PI * 2) / cats.length;
+
+      // Draw Star Radar Axis Webs
+      sctx.beginPath();
+      cats.forEach((cat, idx) => {
+        const a = (idx * angleStep) - (Math.PI / 2);
+        const x = cx + Math.cos(a) * radius;
+        const y = cy + Math.sin(a) * radius;
+        sctx.moveTo(cx, cy);
+        sctx.lineTo(x, y);
+      });
+      sctx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+      sctx.lineWidth = 1;
+      sctx.stroke();
+
+      // Concentric Web Rings
+      [0.33, 0.66, 1.0].forEach(rFactor => {
+        sctx.beginPath();
+        cats.forEach((cat, idx) => {
+          const a = (idx * angleStep) - (Math.PI / 2);
+          const x = cx + Math.cos(a) * radius * rFactor;
+          const y = cy + Math.sin(a) * radius * rFactor;
+          if (idx === 0) sctx.moveTo(x, y); else sctx.lineTo(x, y);
+        });
+        sctx.closePath();
+        sctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+        sctx.stroke();
+      });
+
+      // Filled Weight Polygon
+      sctx.beginPath();
+      cats.forEach((cat, idx) => {
+        const a = (idx * angleStep) - (Math.PI / 2);
+        const weight = (state[cat] || 1.0) / 2.5;
+        const rVal = radius * Math.min(1.0, Math.max(0.1, weight));
+        const x = cx + Math.cos(a) * rVal;
+        const y = cy + Math.sin(a) * rVal;
+        if (idx === 0) sctx.moveTo(x, y); else sctx.lineTo(x, y);
+      });
+      sctx.closePath();
+      sctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+      sctx.fill();
+      sctx.strokeStyle = '#38bdf8';
+      sctx.lineWidth = 2;
+      sctx.stroke();
+
+      // Category Vertex Dots
+      cats.forEach((cat, idx) => {
+        const a = (idx * angleStep) - (Math.PI / 2);
+        const weight = (state[cat] || 1.0) / 2.5;
+        const rVal = radius * Math.min(1.0, Math.max(0.1, weight));
+        const x = cx + Math.cos(a) * rVal;
+        const y = cy + Math.sin(a) * rVal;
+
+        sctx.beginPath();
+        sctx.arc(x, y, 3.5, 0, Math.PI * 2);
+        sctx.fillStyle = CATEGORY_COLORS[cat] || '#38bdf8';
+        sctx.fill();
+      });
+    }
+
+    // 6 Distinct Domain Island Galaxies & Multi-Select Checkbox Filter Set
+    const activeGalaxyIslands = new Set(['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers']);
+
+    const GALAXY_ISLAND_CENTERS = {
+      'ai_agents': { x: 1000, y: 700, title: '🤖 AI Agents Galaxy', color: '#c084fc' },
+      'software':  { x: 2200, y: 700, title: '💻 Software Galaxy', color: '#38bdf8' },
+      'creative':  { x: 1600, y: 1100, title: '🎨 Creative Galaxy', color: '#f59e0b' },
+      'hardware':  { x: 1000, y: 1500, title: '🛠️ Hardware Galaxy', color: '#34d399' },
+      'finance':   { x: 2200, y: 1500, title: '💼 Finance Galaxy', color: '#f43f5e' },
+      'outliers':  { x: 1600, y: 1850, title: '🔍 Outliers Galaxy', color: '#64748b' }
+    };
+
+    function toggleGalaxyCheckbox(catKey) {
+      if (catKey === 'all') {
+        const allChecked = activeGalaxyIslands.size === 6;
+        if (allChecked) {
+          activeGalaxyIslands.clear();
+        } else {
+          ['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers'].forEach(k => activeGalaxyIslands.add(k));
+        }
+      } else {
+        if (activeGalaxyIslands.has(catKey)) {
+          activeGalaxyIslands.delete(catKey);
+        } else {
+          activeGalaxyIslands.add(catKey);
+        }
+      }
+
+      // Sync Checkboxes
+      const allChecked = activeGalaxyIslands.size === 6;
+      const chkAll = document.getElementById('chkAll'); if (chkAll) chkAll.checked = allChecked;
+      const chkAi = document.getElementById('chkAi'); if (chkAi) chkAi.checked = activeGalaxyIslands.has('ai_agents');
+      const chkSw = document.getElementById('chkSoftware'); if (chkSw) chkSw.checked = activeGalaxyIslands.has('software');
+      const chkHw = document.getElementById('chkHardware'); if (chkHw) chkHw.checked = activeGalaxyIslands.has('hardware');
+      const chkCr = document.getElementById('chkCreative'); if (chkCr) chkCr.checked = activeGalaxyIslands.has('creative');
+      const chkFn = document.getElementById('chkFinance'); if (chkFn) chkFn.checked = activeGalaxyIslands.has('finance');
+      const chkOt = document.getElementById('chkOutliers'); if (chkOt) chkOt.checked = activeGalaxyIslands.has('outliers');
+
+      drawCanvas();
+    }
+
+    // 6x6 Interconnection Pair Matrix Filter Set
+    const activeMatrixPairs = new Set();
+    const ALL_CATEGORIES = ['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers'];
+
+    function initDefaultMatrixPairs() {
+      activeMatrixPairs.clear();
+      for (let i = 0; i < ALL_CATEGORIES.length; i++) {
+        for (let j = i; j < ALL_CATEGORIES.length; j++) {
+          activeMatrixPairs.add(getPairKey(ALL_CATEGORIES[i], ALL_CATEGORIES[j]));
+        }
+      }
+    }
+    initDefaultMatrixPairs();
+
+    function getPairKey(c1, c2) {
+      return [c1, c2].sort().join(':');
+    }
+
+    function toggleMatrixPanel() {
+      const el = document.getElementById('matrixHud');
+      if (el) {
+        const isHidden = el.style.display === 'none';
+        el.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) renderMatrixTableGrid();
+      }
+    }
+
+    function setMatrixPreset(mode) {
+      activeMatrixPairs.clear();
+      if (mode === 'all') {
+        initDefaultMatrixPairs();
+      } else if (mode === 'solid') {
+        ALL_CATEGORIES.forEach(c => activeMatrixPairs.add(getPairKey(c, c)));
+      } else if (mode === 'cross') {
+        for (let i = 0; i < ALL_CATEGORIES.length; i++) {
+          for (let j = i + 1; j < ALL_CATEGORIES.length; j++) {
+            activeMatrixPairs.add(getPairKey(ALL_CATEGORIES[i], ALL_CATEGORIES[j]));
+          }
+        }
+      }
+      renderMatrixTableGrid();
+      drawCanvas();
+    }
+
+    function toggleMatrixCell(c1, c2) {
+      const key = getPairKey(c1, c2);
+      if (activeMatrixPairs.has(key)) {
+        activeMatrixPairs.delete(key);
+      } else {
+        activeMatrixPairs.add(key);
+      }
+      renderMatrixTableGrid();
+      drawCanvas();
+    }
+
+    function renderMatrixTableGrid() {
+      const container = document.getElementById('matrixTableGridContainer');
+      if (!container) return;
+
+      const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
+      const nodeMap = {};
+      if (overlapData && overlapData.nodes) overlapData.nodes.forEach(n => nodeMap[n.id] = n);
+
+      const pairCounts = {};
+      relations.forEach(rel => {
+        const src = nodeMap[rel.source_key];
+        const tgt = nodeMap[rel.target_key];
+        if (src && tgt) {
+          const c1 = src.category || 'outliers';
+          const c2 = tgt.category || 'outliers';
+          const k = getPairKey(c1, c2);
+          pairCounts[k] = (pairCounts[k] || 0) + 1;
+        }
+      });
+
+      const catShort = {
+        'ai_agents': '🤖 AI',
+        'software':  '💻 SW',
+        'hardware':  '🛠️ HW',
+        'creative':  '🎨 CR',
+        'finance':   '💼 FN',
+        'outliers':  '🔍 OT'
+      };
+
+      let html = '<table style="width:100%; border-collapse:collapse; font-size:0.68rem; text-align:center;">';
+      html += '<thead><tr><th style="padding:3px; border:1px solid rgba(255,255,255,0.1);"></th>';
+      ALL_CATEGORIES.forEach(c => {
+        html += `<th style="padding:3px; border:1px solid rgba(255,255,255,0.1); color:${CATEGORY_COLORS[c]}; font-weight:700;">${catShort[c]}</th>`;
+      });
+      html += '</tr></thead><tbody>';
+
+      ALL_CATEGORIES.forEach(c1 => {
+        html += `<tr><td style="padding:3px; border:1px solid rgba(255,255,255,0.1); color:${CATEGORY_COLORS[c1]}; font-weight:700; text-align:left;">${catShort[c1]}</td>`;
+        ALL_CATEGORIES.forEach(c2 => {
+          const key = getPairKey(c1, c2);
+          const isActive = activeMatrixPairs.has(key);
+          const count = pairCounts[key] || 0;
+          const isDiagonal = (c1 === c2);
+
+          const cellBg = isActive 
+            ? (isDiagonal ? `rgba(52, 211, 153, 0.25)` : `rgba(56, 189, 248, 0.25)`)
+            : 'rgba(15, 23, 42, 0.5)';
+          const borderColor = isActive ? (isDiagonal ? '#34d399' : '#38bdf8') : 'rgba(255,255,255,0.08)';
+
+          html += `<td onclick="toggleMatrixCell('${c1}', '${c2}')" style="padding:4px 2px; border:1px solid ${borderColor}; background:${cellBg}; cursor:pointer; font-weight:${isActive ? '700' : '400'}; color:${isActive ? '#fff' : 'var(--text-muted)'};" title="${c1} ↔ ${c2}: ${count} edges (${isDiagonal ? 'Solid' : '50-50 Dual-Color'})">
+            ${count > 0 ? count : '·'}
+          </td>`;
+        });
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    let currentGranularity = 'chat';
+    let currentAxisMode = 'nonlinear';
+    let currentOverlapSubView = 'mindmap';
+    let currentCompactMode = 'compact';
+
+    let currentPage = 1;
+    const limit = 10;
+    const expandedThreads = new Set();
+    const openMindmapCategories = new Set(['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers']);
+
+    // Data States
+    let canvasData = null;
+    let analyticsData = null;
+    let categoryData = null;
+    let overlapData = null;
+    let selectedTopic = "";
+
+    // Dual Slider Boundary State
+    let minTurnsFilter = 1;
+    let maxTurnsFilter = 50;
+
+    // Main Canvas State
+    let canvas, ctx;
+    let scale = 1.0;
+    let panX = 100;
+    let panY = 200;
+    let isDragging = false;
+    let dragStartX, dragStartY;
+    let hoveredNode = null;
+    let worldWidth = 16000;
+
+    // DOM Elements
+    const feedView = document.getElementById('feedView');
+    const canvasView = document.getElementById('canvasView');
+    const taxonomyView = document.getElementById('taxonomyView');
+    const overlapView = document.getElementById('overlapView');
+    const analyticsView = document.getElementById('analyticsView');
+    const mediaView = document.getElementById('mediaView');
+
+    const tabFeed = document.getElementById('tabFeed');
+    const tabCanvas = document.getElementById('tabCanvas');
+    const tabTaxonomy = document.getElementById('tabTaxonomy');
+    const tabOverlap = document.getElementById('tabOverlap');
+    const tabAnalytics = document.getElementById('tabAnalytics');
+    const tabMedia = document.getElementById('tabMedia');
+
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const voiceFilter = document.getElementById('voiceFilter');
+    const searchBtn = document.getElementById('searchBtn');
+
+    const threadsList = document.getElementById('threadsList');
+    const resultsCount = document.getElementById('resultsCount');
+    const pageInfo = document.getElementById('pageInfo');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const canvasSearch = document.getElementById('canvasSearch');
+    const canvasTooltip = document.getElementById('canvasTooltip');
+    const sideDrawer = document.getElementById('sideDrawer');
+
+    const CATEGORY_MAP = {
+      'ai_agents': '🤖 AI Agents & Cognition',
+      'software': '💻 Software & Systems Architecture',
+      'hardware': '🛠️ Hardware & 3D Fabrication',
+      'creative': '🎨 Creative, Music & Media',
+      'finance': '💼 Finance & Commerce',
+      'outliers': '🔍 Outliers & Miscellanea'
+    };
+
+    const CATEGORY_COLORS = {
+      'ai_agents': '#c084fc',
+      'software': '#38bdf8',
+      'hardware': '#f59e0b',
+      'creative': '#f43f5e',
+      'finance': '#10b981',
+      'outliers': '#64748b'
+    };
+
+    function capitalize(s) {
+      if (!s) return '';
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function switchView(mode) {
+      try {
+        currentView = mode;
+
+        document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+
+        const tabMap = {
+          'canvas': 'tabCanvas',
+          'feed': 'tabFeed',
+          'taxonomy': 'tabTaxonomy',
+          'overlap': 'tabOverlap',
+          'analytics': 'tabAnalytics',
+          'media': 'tabMedia'
+        };
+
+        const viewMap = {
+          'canvas': 'canvasView',
+          'feed': 'feedView',
+          'taxonomy': 'taxonomyView',
+          'overlap': 'overlapView',
+          'analytics': 'analyticsView',
+          'media': 'mediaView'
+        };
+
+        const targetTab = document.getElementById(tabMap[mode]);
+        const targetView = document.getElementById(viewMap[mode]);
+
+        if (targetTab) targetTab.classList.add('active');
+        if (targetView) targetView.classList.add('active');
+
+        if (mode === 'canvas') {
+          if (!canvasData) initCanvasData(); else resizeCanvas();
+        } else if (mode === 'feed') {
+          const list = document.getElementById('threadsList');
+          if (list && list.children.length === 0) loadThreads(1);
+        } else if (mode === 'taxonomy') {
+          if (!categoryData) loadTaxonomyData();
+        } else if (mode === 'overlap') {
+          if (!overlapData) loadOverlapData();
+        } else if (mode === 'analytics') {
+          if (!analyticsData) loadAnalytics();
+        } else if (mode === 'media') {
+          if (!analyticsData) loadAnalytics();
+        }
+      } catch (err) {
+        console.error('Error switching view:', err);
+      }
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        document.getElementById('statTotal').innerText = data.total_chats.toLocaleString();
+        document.getElementById('statVoice').innerText = data.voice_chats.toLocaleString();
+        document.getElementById('statThreads').innerText = data.total_threads.toLocaleString();
+      } catch (err) {
+        console.error('Failed to load stats:', err);
+      }
+    }
+
+    async function selectCanvasSubtab(granularity) {
+      document.querySelectorAll('.subtab-btn').forEach(btn => btn.classList.remove('active'));
+
+      const map = {
+        'chat': 'subtabChat',
+        'topic_clusters': 'subtabTopic',
+        'similarity_tree': 'subtabSimilarity',
+        'month': 'subtabMonth',
+        'year': 'subtabYear'
+      };
+
+      const activeBtn = document.getElementById(map[granularity] || 'subtabChat');
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const sel = document.getElementById('granularitySelect');
+      if (sel) sel.value = granularity;
+
+      await changeGranularity(granularity);
+    }
+
+    async function changeGranularity(granularity) {
+      currentGranularity = granularity;
+      if (granularity === 'similarity_tree' || granularity === 'topic_clusters') {
+        if (!overlapData) await loadOverlapData();
+      }
+      await initCanvasData();
+    }
+
+    function changeAxisMode(mode) {
+      currentAxisMode = mode;
+      layoutConstellation();
+      fitCanvasView();
+      drawCanvas();
+    }
+
+    function toggleCompactingMode(mode) {
+      currentCompactMode = mode;
+      layoutConstellation();
+      drawCanvas();
+    }
+
+    // --- DUAL-THUMB RANGE SLIDER CONTROL ---
+    function onDualSliderInput() {
+      const minEl = document.getElementById('sliderMin');
+      const maxEl = document.getElementById('sliderMax');
+
+      let val1 = parseInt(minEl.value) || 1;
+      let val2 = parseInt(maxEl.value) || 50;
+
+      if (val1 > val2) {
+        let temp = val1;
+        val1 = val2;
+        val2 = temp;
+      }
+
+      minTurnsFilter = val1;
+      maxTurnsFilter = val2;
+
+      const minPct = ((val1 - 1) / 49) * 100;
+      const maxPct = ((val2 - 1) / 49) * 100;
+
+      const track = document.getElementById('dualTrackHighlight');
+      if (track) {
+        track.style.left = `${minPct}%`;
+        track.style.width = `${maxPct - minPct}%`;
+      }
+
+      const maxLabelStr = val2 >= 50 ? '50+' : val2;
+      document.getElementById('turnRangeStr').innerText = `${val1} – ${maxLabelStr}`;
+
+      if (currentCompactMode === 'compact') {
+        layoutConstellation();
+      }
+      if (ctx) drawCanvas();
+    }
+
+    // --- KNOWLEDGE OVERLAP & MINDMAP TREE ---
+    function switchOverlapSubView(sub) {
+      currentOverlapSubView = sub;
+      ['Mindmap', 'Matrix', 'List'].forEach(s => {
+        const btn = document.getElementById(`subbtn${s}`);
+        const view = document.getElementById(`overlap${s}View`);
+        if (btn) btn.classList.remove('active');
+        if (view) view.style.display = 'none';
+      });
+
+      const activeBtn = document.getElementById(`subbtn${capitalize(sub)}`);
+      const activeView = document.getElementById(`overlap${capitalize(sub)}View`);
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeView) activeView.style.display = 'block';
+
+      if (sub === 'mindmap') {
+        if (overlapData) renderMindmapTree(overlapData);
+      } else if (sub === 'matrix') {
+        loadDomainMatrix();
+      }
+    }
+
+    function capitalize(s) {
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    function updateSimThreshold(val) {
+      document.getElementById('simValStr').innerText = val;
+      loadOverlapData();
+    }
+
+    function filterByTopic(topic) {
+      if (selectedTopic === topic) {
+        selectedTopic = "";
+      } else {
+        selectedTopic = topic;
+      }
+      loadOverlapData();
+    }
+
+    function toggleExpandMindmap(expandAll) {
+      if (expandAll) {
+        Object.keys(CATEGORY_MAP).forEach(k => openMindmapCategories.add(k));
+      } else {
+        openMindmapCategories.clear();
+      }
+      if (overlapData) renderMindmapTree(overlapData);
+    }
+
+    function toggleCategoryCollapse(catKey) {
+      if (openMindmapCategories.has(catKey)) {
+        openMindmapCategories.delete(catKey);
+      } else {
+        openMindmapCategories.add(catKey);
+      }
+      if (overlapData) renderMindmapTree(overlapData);
+    }
+
+    async function loadOverlapData() {
+      try {
+        const res = await fetch('/api/overlap?limit=3000&min_similarity=0.25');
+        overlapData = await res.json();
+
+        renderTopicCloud(overlapData.top_topics || []);
+        renderOverlapList(overlapData.relations || []);
+        renderMindmapTree(overlapData);
+        layoutConstellation();
+        renderMatrixTableGrid();
+        drawCanvas();
+      } catch (err) {
+        console.error('Failed to load overlap data:', err);
+      }
+    }
+
+    function renderTopicCloud(topics) {
+      const cloud = document.getElementById('topTopicCloud');
+      cloud.innerHTML = '';
+
+      topics.forEach(t => {
+        const pill = document.createElement('span');
+        pill.className = `topic-tag-pill ${selectedTopic === t ? 'active' : ''}`;
+        pill.innerText = `#${t}`;
+        pill.onclick = () => filterByTopic(t);
+        cloud.appendChild(pill);
+      });
+    }
+
+    function renderMindmapTree(data) {
+      const container = document.getElementById('mindmapTreeContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const relations = data.relations || [];
+      const nodes = data.nodes || [];
+
+      if (relations.length === 0) {
+        container.innerHTML = '<div class="loading-spinner">No knowledge overlap links found for the selected similarity threshold.</div>';
+        return;
+      }
+
+      const domainGroups = {
+        'ai_agents': [],
+        'software': [],
+        'hardware': [],
+        'creative': [],
+        'finance': [],
+        'outliers': []
+      };
+
+      relations.forEach(rel => {
+        const sCat = rel.source_category || 'outliers';
+        const tCat = rel.target_category || 'outliers';
+
+        if (domainGroups[sCat]) domainGroups[sCat].push(rel);
+        if (tCat !== sCat && domainGroups[tCat]) domainGroups[tCat].push(rel);
+      });
+
+      Object.keys(CATEGORY_MAP).forEach(catKey => {
+        const rels = domainGroups[catKey] || [];
+        if (rels.length === 0) return;
+
+        const isExpanded = openMindmapCategories.has(catKey);
+
+        const domainCard = document.createElement('div');
+        domainCard.className = 'mindmap-domain-card';
+
+        const topicClusters = {};
+        rels.forEach(rel => {
+          let topics = [];
+          try { topics = JSON.parse(rel.shared_topics_json || '[]'); } catch(e){}
+          if (topics.length === 0) topics = ['General Knowledge Link'];
+
+          topics.forEach(top => {
+            if (!topicClusters[top]) topicClusters[top] = [];
+            topicClusters[top].push(rel);
+          });
+        });
+
+        let branchesHtml = '';
+        if (isExpanded) {
+          Object.keys(topicClusters).slice(0, 8).forEach(topicName => {
+            const topicRels = topicClusters[topicName];
+
+            let leavesHtml = '';
+            topicRels.slice(0, 6).forEach(rel => {
+              leavesHtml += `
+                <div class="mindmap-leaf-card" onclick="openDrawerForThread('${rel.source_key}')">
+                  <div style="font-size: 0.75rem; color: var(--accent); font-weight: bold; margin-bottom: 4px;">
+                    ⚡ ${Math.round(rel.similarity_score * 100)}% Similarity
+                  </div>
+                  <div style="color: #fff; font-size: 0.85rem; font-weight: 600;">${escapeHtml(rel.source_snippet || 'Thread A')}</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">&harr; ${escapeHtml(rel.target_snippet || 'Thread B')}</div>
+                </div>
+              `;
+            });
+
+            branchesHtml += `
+              <div class="mindmap-topic-branch">
+                <div class="mindmap-topic-title">
+                  <span>🏷️ Topic Cluster: #${topicName}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">(${topicRels.length} linked pairs)</span>
+                </div>
+                <div class="mindmap-leaves-grid">
+                  ${leavesHtml}
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        domainCard.innerHTML = `
+          <div class="mindmap-domain-header" onclick="toggleCategoryCollapse('${catKey}')">
+            <div class="mindmap-domain-title">
+              <span style="color: ${CATEGORY_COLORS[catKey]};">${CATEGORY_MAP[catKey]}</span>
+              <span class="mindmap-domain-badge">${rels.length} Connected Links</span>
+            </div>
+            <div style="color: var(--text-muted); font-size: 0.9rem;">
+              ${isExpanded ? '▲ Collapse' : '▼ Expand Topic Branches'}
+            </div>
+          </div>
+          ${isExpanded ? `<div class="mindmap-branch-list">${branchesHtml}</div>` : ''}
+        `;
+
+        container.appendChild(domainCard);
+      });
+    }
+
+    function renderOverlapList(relations) {
+      const list = document.getElementById('overlapList');
+      if (!list) return;
+      list.innerHTML = '';
+
+      if (!relations || relations.length === 0) {
+        list.innerHTML = '<div class="loading-spinner">No cross-thread knowledge overlap links found for current threshold.</div>';
+        return;
+      }
+
+      relations.forEach(rel => {
+        const card = document.createElement('div');
+        card.className = 'overlap-card';
+
+        let topics = [];
+        try { topics = JSON.parse(rel.shared_topics_json || '[]'); } catch(e){}
+        const topicBadge = topics.length > 0 ? `Shared Topics: ${topics.join(', ')}` : '';
+
+        card.innerHTML = `
+          <div class="overlap-node" onclick="openDrawerForThread('${rel.source_key}')">
+            <div style="font-size: 0.75rem; color: ${CATEGORY_COLORS[rel.source_category] || 'var(--accent)'}; font-weight: bold;">
+              ${rel.source_category ? CATEGORY_MAP[rel.source_category] : '📅 ' + rel.source_ts}
+            </div>
+            <div style="color: #fff; font-weight: 600; margin-top: 4px;">${escapeHtml(rel.source_snippet || 'Thread A')}</div>
+          </div>
+          <div class="overlap-connector">
+            <div>⚡ ${Math.round(rel.similarity_score * 100)}% Similarity</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">${topicBadge}</div>
+          </div>
+          <div class="overlap-node" onclick="openDrawerForThread('${rel.target_key}')">
+            <div style="font-size: 0.75rem; color: ${CATEGORY_COLORS[rel.target_category] || 'var(--accent)'}; font-weight: bold;">
+              ${rel.target_category ? CATEGORY_MAP[rel.target_category] : '📅 ' + rel.target_ts}
+            </div>
+            <div style="color: #fff; font-weight: 600; margin-top: 4px;">${escapeHtml(rel.target_snippet || 'Thread B')}</div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    async function loadDomainMatrix() {
+      const minSim = document.getElementById('simSlider').value || '0.38';
+      try {
+        const res = await fetch(`/api/domain_matrix?min_similarity=${minSim}`);
+        const data = await res.json();
+
+        const grid = document.getElementById('domainMatrixGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+
+        (data.matrix || []).forEach(row => {
+          const cell = document.createElement('div');
+          cell.className = 'matrix-cell';
+          cell.onclick = () => {
+            document.getElementById('overlapCatFilter').value = row.source_cat;
+            switchOverlapSubView('list');
+            loadOverlapData();
+          };
+
+          cell.innerHTML = `
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: bold;">
+              ${CATEGORY_MAP[row.source_cat] || row.source_cat} &harr;<br>${CATEGORY_MAP[row.target_cat] || row.target_cat}
+            </div>
+            <div class="matrix-val">${row.link_count}</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">Links &ge; ${(minSim*100).toFixed(0)}%</div>
+          `;
+          grid.appendChild(cell);
+        });
+      } catch (err) {
+        console.error('Failed to load matrix:', err);
+      }
+    }
+
+    // --- TAXONOMY DATA & OVERLAP DASHBOARD ---
+    async function loadTaxonomyData() {
+      try {
+        const res = await fetch('/api/categories');
+        categoryData = await res.json();
+
+        const grid = document.getElementById('categoryCardsGrid');
+        grid.innerHTML = '';
+
+        (categoryData.categories_summary || []).forEach(cat => {
+          const card = document.createElement('div');
+          card.className = 'cat-card';
+          card.onclick = () => filterFeedByCategory(cat.primary_category);
+
+          const titleStr = CATEGORY_MAP[cat.primary_category] || cat.primary_category;
+          card.innerHTML = `
+            <div class="cat-card-title">${titleStr}</div>
+            <div class="cat-card-count">${cat.thread_count.toLocaleString()}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">Click to filter conversation feed ↗</div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Failed to load taxonomy:', err);
+      }
+    }
+
+    function filterFeedByCategory(catKey) {
+      switchView('feed');
+      loadThreads(1, catKey);
+    }
+
+    // --- ANALYTICS & MEDIA HUB ---
+    async function loadAnalytics() {
+      try {
+        const res = await fetch('/api/analytics');
+        analyticsData = await res.json();
+
+        renderCircadianChart(analyticsData.hourly_distribution || []);
+        renderMediaGrid(analyticsData.media_items || []);
+      } catch (err) {
+        console.error('Failed to load analytics:', err);
+      }
+    }
+
+    function renderCircadianChart(hourlyData) {
+      const container = document.getElementById('circadianChart');
+      container.innerHTML = '';
+
+      const maxVal = Math.max(...hourlyData, 1);
+      hourlyData.forEach((val, hour) => {
+        const col = document.createElement('div');
+        col.className = 'circadian-bar-col';
+
+        const heightPct = (val / maxVal) * 100;
+        const hourStr = hour.toString().padStart(2, '0');
+
+        col.innerHTML = `
+          <div class="circadian-bar" style="height: ${heightPct}%;" title="${hourStr}:00 - ${val} turns"></div>
+          <div class="circadian-label">${hourStr}h</div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderMediaGrid(items) {
+      const grid = document.getElementById('mediaGrid');
+      grid.innerHTML = '';
+
+      if (items.length === 0) {
+        grid.innerHTML = '<div class="loading-spinner">No media attachments found.</div>';
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'media-card';
+        card.onclick = () => openDrawerForThread(item.group_key);
+
+        let previewHtml = '';
+        card.innerHTML = `
+          <div class="media-preview-box">${previewHtml}</div>
+          <div class="media-info">
+            <div class="filename">${item.filename}</div>
+            <div style="color: var(--text-muted); font-size: 0.75rem;">📅 ${item.timestamp.split(' ')[0]}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    let physicsMode = 'dynamic'; // Default to dynamic simulation so attraction & repulsion actively run
+
+    function changePhysicsMode(mode) {
+      physicsMode = mode;
+      const sel = document.getElementById('physicsModeSelect');
+      if (sel) sel.value = mode;
+
+      if (mode === 'static') {
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        nodes.forEach(n => {
+          if (typeof n.targetX === 'number') {
+            n.worldX = n.targetX;
+            n.worldY = n.targetY;
+            n.vx = 0;
+            n.vy = 0;
+          }
+        });
+      }
+      drawCanvas();
+    }
+
+    let jellyTime = 0;
+    let draggedNode = null;
+
+    let physicsRunning = false;
+
+    function startPhysicsEngine() {
+      if (physicsRunning) return;
+      physicsRunning = true;
+
+      function physicsStep() {
+        if (currentView === 'canvas') {
+          if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
+            const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+            const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
+
+            jellyTime += 0.045; // Harmonic wave time ticker
+
+            if (physicsMode === 'static') {
+              nodes.forEach(n => {
+                if (typeof n.targetX === 'number' && !n.isPinned) {
+                  n.worldX = n.targetX;
+                  n.worldY = n.targetY;
+                  n.vx = 0;
+                  n.vy = 0;
+                }
+              });
+            } else {
+              // Organic Floating Jelly Physics Engine
+              const nodeMap = {};
+              nodes.forEach(n => {
+                nodeMap[n.id] = n;
+                if (typeof n.vx !== 'number') { n.vx = 0; n.vy = 0; }
+              });
+
+              const centerX = 1600;
+              const centerY = 1000;
+
+              // 1. Calculate Category Centroids for Active High-Weight Categories
+              const catCentroids = {};
+              const catCounts = {};
+              nodes.forEach(n => {
+                const cat = n.category || 'outliers';
+                const weight = categoryTightness[cat] || 1.0;
+                if (weight >= 1.2 && typeof n.worldX === 'number') {
+                  if (!catCentroids[cat]) {
+                    catCentroids[cat] = { x: 0, y: 0 };
+                    catCounts[cat] = 0;
+                  }
+                  catCentroids[cat].x += n.worldX;
+                  catCentroids[cat].y += n.worldY;
+                  catCounts[cat]++;
+                }
+              });
+
+              Object.keys(catCentroids).forEach(cat => {
+                if (catCounts[cat] > 0) {
+                  catCentroids[cat].x /= catCounts[cat];
+                  catCentroids[cat].y /= catCounts[cat];
+                }
+              });
+
+              // 2. Intra-Category Contraction Pull (Pulls all nodes of high-weight category toward category centroid)
+              nodes.forEach(n => {
+                if (typeof n.worldX === 'number' && !n.isPinned) {
+                  const cat = n.category || 'outliers';
+                  const weight = categoryTightness[cat] || 1.0;
+
+                  if (weight >= 1.2 && catCentroids[cat]) {
+                    const dx = catCentroids[cat].x - n.worldX;
+                    const dy = catCentroids[cat].y - n.worldY;
+                    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+                    // Active category contraction force
+                    const clusterForce = Math.min(30, dist * 0.08 * (weight * weight));
+                    n.vx += (dx / dist) * clusterForce;
+                    n.vy += (dy / dist) * clusterForce;
+                  }
+                }
+              });
+
+              // 3. Direct Edge Vector Spring Attraction (Connected nodes pull forcefully together along cyan lines!)
+              relations.forEach(rel => {
+                if (rel.similarity_score >= 0.25) {
+                  const source = nodeMap[rel.source_key];
+                  const target = nodeMap[rel.target_key];
+                  if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
+                    const cat = rel.source_category || source.category || rel.target_category || target.category || 'outliers';
+                    const weight = categoryTightness[cat] || 1.0;
+
+                    const dx = target.worldX - source.worldX;
+                    const dy = target.worldY - source.worldY;
+                    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+                    const restLength = Math.max(20, 100 * (1.0 - rel.similarity_score));
+                    const delta = dist - restLength;
+
+                    if (delta > 0) {
+                      // Powerful attraction force pulling connected nodes together along vector line!
+                      const attractForce = Math.min(35, delta * 0.20 * (rel.similarity_score * rel.similarity_score) * Math.min(4.0, weight));
+                      const fx = (dx / dist) * attractForce;
+                      const fy = (dy / dist) * attractForce;
+
+                      if (!source.isPinned) { source.vx += fx; source.vy += fy; }
+                      if (!target.isPinned) { target.vx -= fx; target.vy -= fy; }
+                    }
+                  }
+                }
+              });
+
+              // 4. Local Surface Collision Only (Prevents overlap without pushing distant connected nodes apart!)
+              const numNodes = nodes.length;
+              for (let i = 0; i < numNodes; i++) {
+                const n1 = nodes[i];
+                if (typeof n1.worldX !== 'number') continue;
+                const r1 = n1.radius || 8;
+
+                for (let j = i + 1; j < numNodes; j++) {
+                  const n2 = nodes[j];
+                  if (typeof n2.worldX !== 'number') continue;
+                  const r2 = n2.radius || 8;
+
+                  const dx = n2.worldX - n1.worldX;
+                  const dy = n2.worldY - n1.worldY;
+                  const distSq = dx * dx + dy * dy;
+
+                  const minDist = r1 + r2 + 16;
+                  if (distSq > 0 && distSq < (minDist * minDist)) {
+                    const dist = Math.sqrt(distSq) || 1;
+                    const overlap = minDist - dist;
+                    const repelForce = overlap * 0.40;
+
+                    const fx = (dx / dist) * repelForce;
+                    const fy = (dy / dist) * repelForce;
+
+                    if (!n1.isPinned) { n1.vx -= fx; n1.vy -= fy; }
+                    if (!n2.isPinned) { n2.vx += fx; n2.vy += fy; }
+                  }
+                }
+              }
+
+              // 5. Gentle Canvas Center Gravity & Jelly Sine Wave (NO RIGID ANCHOR PINNING!)
+              nodes.forEach(n => {
+                if (typeof n.worldX === 'number' && !n.isPinned) {
+                  const dx = centerX - n.worldX;
+                  const dy = centerY - n.worldY;
+                  const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+                  // Faint center gravity to keep constellation centered
+                  n.vx += (dx / dist) * Math.min(1.5, dist * 0.001);
+                  n.vy += (dy / dist) * Math.min(1.5, dist * 0.001);
+
+                  // Jelly Reverberation Harmonic Sine Wave
+                  const waveX = Math.sin(jellyTime + (n.worldY * 0.006)) * 0.35;
+                  const waveY = Math.cos(jellyTime * 0.85 + (n.worldX * 0.006)) * 0.35;
+                  n.vx += waveX;
+                  n.vy += waveY;
+
+                  // Velocity cap and fluid dampening
+                  const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                  if (speed > 24) {
+                    n.vx = (n.vx / speed) * 24;
+                    n.vy = (n.vy / speed) * 24;
+                  }
+
+                  n.vx *= 0.85;
+                  n.vy *= 0.85;
+                  n.worldX += n.vx;
+                  n.worldY += n.vy;
+                }
+              });
+            }
+          }
+
+          drawCanvas();
+        }
+        requestAnimationFrame(physicsStep);
+      }
+      requestAnimationFrame(physicsStep);
+    }
+
+    async function initCanvasData() {
+      canvas = document.getElementById('constellationCanvas');
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+
+      window.addEventListener('resize', resizeCanvas);
+
+      try {
+        if (!overlapData) {
+          const resOverlap = await fetch('/api/overlap?limit=3000&min_similarity=0.25');
+          overlapData = await resOverlap.json();
+        }
+        const res = await fetch(`/api/canvas?granularity=${(currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') ? 'chat' : currentGranularity}`);
+        canvasData = await res.json();
+        
+        onDualSliderInput();
+        layoutConstellation();
+        renderMatrixTableGrid();
+        fitCanvasView();
+        startPhysicsEngine();
+      } catch (err) {
+        console.error('Failed to load canvas data:', err);
+      }
+    }
+
+    function hashStr(str) {
+      if (str === null || str === undefined) return 0;
+      const s = String(str);
+      let hash = 0;
+      for (let i = 0; i < s.length; i++) {
+        hash = (hash << 5) - hash + s.charCodeAt(i);
+        hash |= 0;
+      }
+      return hash;
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvasView.clientWidth * dpr;
+      canvas.height = canvasView.clientHeight * dpr;
+      if (ctx) drawCanvas();
+    }
+
+    function layoutConstellation() {
+      if (!canvasData) return;
+
+      const minTs = canvasData.min_ts;
+      const maxTs = canvasData.max_ts || minTs + 1;
+      const timeSpan = Math.max(1, maxTs - minTs);
+
+      const marginX = 200;
+      const marginY = 160;
+      const drawWidth = worldWidth - (marginX * 2);
+
+      if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        const catNodes = {};
+        Object.keys(GALAXY_ISLAND_CENTERS).forEach(k => catNodes[k] = []);
+
+        nodes.forEach(n => {
+          const cat = n.category || 'outliers';
+          if (catNodes[cat]) catNodes[cat].push(n); else catNodes['outliers'].push(n);
+        });
+
+        Object.keys(GALAXY_ISLAND_CENTERS).forEach(catKey => {
+          const hub = GALAXY_ISLAND_CENTERS[catKey];
+          const domainNodes = catNodes[catKey] || [];
+
+          domainNodes.forEach((n, nIdx) => {
+            // Compact organic Phyllotaxis dispersion per island (zero cross-screen overlap!)
+            const a = nIdx * 2.39996 + (hashStr(n.id) % 100) * 0.01;
+            const tightness = categoryTightness[catKey] || 1.0;
+            const r = Math.max(16, (22 + Math.sqrt(nIdx) * 18) / Math.max(0.3, tightness));
+
+            n.targetX = hub.x + Math.cos(a) * r;
+            n.targetY = hub.y + Math.sin(a) * r;
+
+            if (typeof n.worldX !== 'number' || isNaN(n.worldX)) {
+              n.worldX = n.targetX + (Math.random() - 0.5) * 15;
+              n.worldY = n.targetY + (Math.random() - 0.5) * 15;
+              n.vx = 0;
+              n.vy = 0;
+            }
+            n.radius = 7.5;
+          });
+        });
+      } else if (currentGranularity === 'chat') {
+        const threads = canvasData.threads || [];
+        const visibleThreads = currentCompactMode === 'compact'
+          ? threads.filter(t => t.turn_count >= minTurnsFilter && (maxTurnsFilter >= 50 || t.turn_count <= maxTurnsFilter))
+          : threads;
+
+        const tracksEnd = [];
+
+        visibleThreads.forEach((thread, idx) => {
+          const normLin = (thread.ts_unix - minTs) / timeSpan;
+
+          let normFinal = normLin;
+          if (currentAxisMode === 'nonlinear') {
+            const rankNorm = idx / Math.max(1, visibleThreads.length - 1);
+            normFinal = (normLin * 0.35) + (rankNorm * 0.65);
+          }
+
+          const x = marginX + (normFinal * drawWidth);
+          thread.worldX = x;
+
+          const turnCnt = thread.turn_count || 1;
+          const logScale = thread.log_scale || 0.3;
+          thread.radius = 5.0 + (logScale * 6.5);
+
+          let trackIdx = 0;
+          const minSpacing = (thread.radius * 2) + 12;
+          while (tracksEnd[trackIdx] && tracksEnd[trackIdx] > x - minSpacing) {
+            trackIdx++;
+          }
+          tracksEnd[trackIdx] = x;
+
+          thread.worldY = marginY + (trackIdx * 32);
+        });
+      } else {
+        const nodes = canvasData.nodes || [];
+        nodes.forEach((node) => {
+          const normX = (node.start_ts - minTs) / timeSpan;
+          node.worldX = marginX + (normX * drawWidth);
+        });
+      }
+    }
+
+    function fitCanvasView() {
+      if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
+        scale = 0.35;
+        panX = (canvasView.clientWidth / 2) - (1600 * scale);
+        panY = (canvasView.clientHeight / 2) - (1000 * scale);
+      } else if (currentGranularity === 'chat') {
+        if (currentAxisMode === 'nonlinear') {
+          scale = 0.22;
+          panX = 60;
+          panY = 180;
+        } else {
+          scale = 0.16;
+          panX = 60;
+          panY = 120;
+        }
+      } else if (currentGranularity === 'year' || currentGranularity === 'month') {
+        scale = 0.45;
+        panX = 100;
+        panY = 80;
+      } else {
+        scale = 0.22;
+        panX = 80;
+        panY = 100;
+      }
+      if (ctx) drawCanvas();
+    }
+
+    function zoomCanvasAtPoint(factor, mouseX, mouseY) {
+      const newScale = Math.min(4.0, Math.max(0.02, scale * factor));
+      const scaleRatio = newScale / scale;
+
+      panX = mouseX - (mouseX - panX) * scaleRatio;
+      panY = mouseY - (mouseY - panY) * scaleRatio;
+      scale = newScale;
+
+      drawCanvas();
+    }
+
+    function zoomCanvasAtCenter(factor) {
+      const rect = canvas.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      zoomCanvasAtPoint(factor, centerX, centerY);
+    }
+
+    function drawCanvas() {
+      if (!canvas || !ctx || !canvasData) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const width = canvasView.clientWidth;
+      const height = canvasView.clientHeight;
+
+      ctx.save();
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, width, height);
+
+      ctx.fillStyle = '#050811';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.save();
+      ctx.translate(panX, panY);
+      ctx.scale(scale, scale);
+
+      if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
+        // Draw 6 Domain Island Galaxy Graphics (Hub Cores, Glowing Rings, and Titles)
+        Object.keys(GALAXY_ISLAND_CENTERS).forEach(catKey => {
+          const hub = GALAXY_ISLAND_CENTERS[catKey];
+          const isSelected = activeGalaxyIslands.has(catKey);
+          const alpha = isSelected ? 1.0 : 0.15;
+
+          ctx.globalAlpha = alpha;
+
+          // Glowing Hub Center Core
+          ctx.beginPath();
+          ctx.arc(hub.x, hub.y, 16, 0, Math.PI * 2);
+          ctx.fillStyle = hub.color;
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+
+          // Concentric Orbit Rings
+          [120, 240, 360].forEach(r => {
+            ctx.beginPath();
+            ctx.arc(hub.x, hub.y, r, 0, Math.PI * 2);
+            ctx.strokeStyle = hub.color;
+            ctx.globalAlpha = alpha * 0.15;
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([6, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          });
+
+          // Galaxy Island Title Banner
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 22px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.globalAlpha = alpha * 0.9;
+          ctx.fillText(hub.title, hub.x, hub.y - 35);
+          ctx.globalAlpha = 1.0;
+        });
+
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
+        const nodeMap = {};
+        nodes.forEach(n => nodeMap[n.id] = n);
+
+        const activeConnectedNodeIds = new Set();
+
+        // 1. Draw Active Fusion Vector Edges (Solid Same-Category vs 50-50 Dual-Color Cross-Category)
+        relations.forEach(rel => {
+          const source = nodeMap[rel.source_key];
+          const target = nodeMap[rel.target_key];
+          if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
+            const srcCat = source.category || 'outliers';
+            const tgtCat = target.category || 'outliers';
+            const pairKey = getPairKey(srcCat, tgtCat);
+
+            const srcActive = activeGalaxyIslands.has(srcCat);
+            const tgtActive = activeGalaxyIslands.has(tgtCat);
+            const matrixActive = activeMatrixPairs.has(pairKey);
+
+            // Render link if BOTH source & target categories are checked AND matrix pair is enabled!
+            if (srcActive && tgtActive && matrixActive) {
+              activeConnectedNodeIds.add(source.id);
+              activeConnectedNodeIds.add(target.id);
+
+              const isSameCategory = (srcCat === tgtCat);
+
+              if (isSameCategory) {
+                // Solid Fusion Line (Same Category A-A)
+                ctx.beginPath();
+                ctx.moveTo(source.worldX, source.worldY);
+                ctx.lineTo(target.worldX, target.worldY);
+                ctx.strokeStyle = CATEGORY_COLORS[srcCat] || '#38bdf8';
+                ctx.globalAlpha = Math.min(0.92, (rel.similarity_score || 0.4) * 0.85);
+                ctx.lineWidth = 1.6;
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+              } else {
+                // 50-50 Dual-Color Ratio Fusion Line (Cross-Category A-B)
+                const grad = ctx.createLinearGradient(source.worldX, source.worldY, target.worldX, target.worldY);
+                const colSrc = CATEGORY_COLORS[srcCat] || '#38bdf8';
+                const colTgt = CATEGORY_COLORS[tgtCat] || '#c084fc';
+                grad.addColorStop(0.0, colSrc);
+                grad.addColorStop(0.48, colSrc);
+                grad.addColorStop(0.52, colTgt);
+                grad.addColorStop(1.0, colTgt);
+
+                ctx.beginPath();
+                ctx.moveTo(source.worldX, source.worldY);
+                ctx.lineTo(target.worldX, target.worldY);
+                ctx.strokeStyle = grad;
+                ctx.globalAlpha = Math.min(0.98, (rel.similarity_score || 0.4) * 0.95);
+                ctx.lineWidth = 2.2;
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+              }
+            }
+          }
+        });
+
+        // 2. Draw Node Points (Filter out orphan nodes with 0 active edges!)
+        const searchTerm = canvasSearch.value.toLowerCase().trim();
+        nodes.forEach(node => {
+          // Hide orphan nodes that have no active edges under the current matrix filter!
+          if (!activeConnectedNodeIds.has(node.id)) return;
+
+          const cat = node.category || 'outliers';
+          const isHovered = hoveredNode === node;
+
+          ctx.beginPath();
+          ctx.arc(node.worldX, node.worldY, isHovered ? 14 : 7.5, 0, Math.PI * 2);
+          ctx.fillStyle = isHovered ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
+          ctx.fill();
+
+          ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.4)';
+          ctx.lineWidth = isHovered ? 2.5 : 1.0;
+          ctx.stroke();
+        });
+
+      } else {
+        drawTimeAxis();
+        const searchTerm = canvasSearch.value.toLowerCase().trim();
+
+        if (currentGranularity === 'chat') {
+          (canvasData.threads || []).forEach(thread => {
+            if (thread.turn_count < minTurnsFilter) return;
+            if (maxTurnsFilter < 50 && thread.turn_count > maxTurnsFilter) return;
+
+            let isMatch = false;
+            if (searchTerm) {
+              isMatch = thread.title_snippet.toLowerCase().includes(searchTerm) || thread.first_timestamp.includes(searchTerm);
+            }
+
+            const isHovered = hoveredNode === thread;
+            const isVoice = thread.has_audio_input === 1;
+
+            let radius = thread.radius || 6.0;
+            if (isHovered) radius = Math.max(14, radius * 2.2);
+
+            ctx.beginPath();
+            ctx.arc(thread.worldX, thread.worldY, radius, 0, Math.PI * 2);
+
+            if (searchTerm) {
+              ctx.fillStyle = isMatch ? (isVoice ? '#c084fc' : '#38bdf8') : 'rgba(51, 65, 85, 0.25)';
+            } else if (isHovered) {
+              ctx.fillStyle = '#f59e0b';
+            } else {
+              ctx.fillStyle = isVoice ? '#c084fc' : '#38bdf8';
+            }
+
+            ctx.fill();
+
+            if (isHovered || (searchTerm && isMatch)) {
+              ctx.strokeStyle = isHovered ? '#ffffff' : '#38bdf8';
+              ctx.lineWidth = 2.5;
+              ctx.stroke();
+            }
+
+            if (thread.turn_count >= 5 && radius * scale > 12) {
+              ctx.fillStyle = '#070a12';
+              ctx.font = 'bold 10px -apple-system, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.fillText(`${thread.turn_count}`, thread.worldX, thread.worldY + 3.5);
+            }
+          });
+        } else {
+          const nodes = canvasData.nodes || [];
+          if (nodes.length === 0) { ctx.restore(); ctx.restore(); return; }
+
+          const chartBaseY = 700;
+          const maxLogTurns = Math.max(...nodes.map(n => n.log_turns || 0.1), 1.0);
+          const maxBarHeight = 480;
+
+          let barWidth = 30;
+          if (currentGranularity === 'year') barWidth = 140;
+          if (currentGranularity === 'month') barWidth = 60;
+          if (currentGranularity === 'week') barWidth = 36;
+
+          ctx.beginPath();
+          ctx.moveTo(0, chartBaseY);
+          ctx.lineTo(worldWidth, chartBaseY);
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          nodes.forEach(node => {
+            const normHeight = (node.log_turns / maxLogTurns) * maxBarHeight;
+            const barH = Math.max(12, normHeight);
+            const barX = node.worldX - (barWidth / 2);
+            const barY = chartBaseY - barH;
+
+            node.barX = barX;
+            node.barY = barY;
+            node.barW = barWidth;
+            node.barH = barH;
+
+            const isHovered = hoveredNode === node;
+            let isMatch = false;
+            if (searchTerm) {
+              isMatch = node.period_key.toLowerCase().includes(searchTerm) || node.title_snippet.toLowerCase().includes(searchTerm);
+            }
+
+            const grad = ctx.createLinearGradient(0, barY, 0, chartBaseY);
+            if (searchTerm) {
+              grad.addColorStop(0, isMatch ? '#38bdf8' : 'rgba(51, 65, 85, 0.2)');
+              grad.addColorStop(1, isMatch ? 'rgba(56, 189, 248, 0.2)' : 'rgba(30, 41, 59, 0.1)');
+            } else if (isHovered) {
+              grad.addColorStop(0, '#f59e0b');
+              grad.addColorStop(1, 'rgba(245, 158, 11, 0.3)');
+            } else {
+              grad.addColorStop(0, node.has_audio_input ? '#c084fc' : '#38bdf8');
+              grad.addColorStop(1, 'rgba(15, 23, 42, 0.6)');
+            }
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(barX, barY, barWidth, barH);
+
+            ctx.strokeStyle = isHovered ? '#ffffff' : (isMatch ? '#38bdf8' : 'rgba(56, 189, 248, 0.4)');
+            ctx.lineWidth = isHovered ? 2.5 : 1;
+            ctx.strokeRect(barX, barY, barWidth, barH);
+
+            ctx.fillStyle = isHovered ? '#f59e0b' : '#94a3b8';
+            ctx.font = 'bold 15px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(node.period_key, node.worldX, chartBaseY + 24);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 13px -apple-system, sans-serif';
+            ctx.fillText(`${node.turn_count}t`, node.worldX, barY - 8);
+          });
+
+          ctx.beginPath();
+          ctx.moveTo(nodes[0].worldX, nodes[0].barY);
+          for (let i = 1; i < nodes.length; i++) {
+            ctx.lineTo(nodes[i].worldX, nodes[i].barY);
+          }
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          nodes.forEach(node => {
+            ctx.beginPath();
+            ctx.arc(node.worldX, node.barY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+          });
+        }
+      }
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function drawSimilarityTreeRings() {
+      const centerX = 1600;
+      const centerY = 1000;
+
+      // Center Hub Graphic Node
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Outer Hub Glowing Ring
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 32, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Concentric Orbit Rings Graphics
+      const tiers = [
+        { r: 220, color: 'rgba(56, 189, 248, 0.35)' },
+        { r: 420, color: 'rgba(192, 132, 252, 0.25)' },
+        { r: 680, color: 'rgba(100, 116, 139, 0.2)' },
+        { r: 940, color: 'rgba(51, 65, 85, 0.15)' }
+      ];
+
+      tiers.forEach(t => {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, t.r, 0, Math.PI * 2);
+        ctx.strokeStyle = t.color;
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([8, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // Domain Sector Spoke Graphics
+      const categoriesKeys = Object.keys(CATEGORY_MAP);
+      const sectorAngle = (Math.PI * 2) / categoriesKeys.length;
+
+      categoriesKeys.forEach((catKey, catIdx) => {
+        const angle = (catIdx * sectorAngle) - (Math.PI / 2);
+        const x2 = centerX + Math.cos(angle) * 1000;
+        const y2 = centerY + Math.sin(angle) * 1000;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.18)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      });
+    }
+
+    function drawTimeAxis() {
+      if (!canvasData) return;
+      const minTs = canvasData.min_ts;
+      const maxTs = canvasData.max_ts || minTs + 1;
+      const timeSpan = maxTs - minTs;
+      const marginX = 200;
+      const drawWidth = worldWidth - (marginX * 2);
+
+      ctx.beginPath();
+      ctx.moveTo(0, 50);
+      ctx.lineTo(worldWidth, 50);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3.5;
+      ctx.stroke();
+
+      const startDate = new Date(minTs * 1000);
+      const endDate = new Date(maxTs * 1000);
+
+      let curr = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+      while (curr <= endDate) {
+        const currUnix = curr.getTime() / 1000;
+
+        let normFinal = (currUnix - minTs) / timeSpan;
+        if (currentGranularity === 'chat' && currentAxisMode === 'nonlinear' && canvasData.threads) {
+          const idx = canvasData.threads.findIndex(t => t.ts_unix >= currUnix);
+          if (idx >= 0) {
+            const rankNorm = idx / Math.max(1, canvasData.threads.length - 1);
+            normFinal = (normFinal * 0.35) + (rankNorm * 0.65);
+          }
+        }
+
+        const x = marginX + (normFinal * drawWidth);
+
+        ctx.beginPath();
+        ctx.moveTo(x, 50);
+        ctx.lineTo(x, 4000);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 20px -apple-system, sans-serif';
+        ctx.textAlign = 'left';
+        const labelStr = curr.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        ctx.fillText(labelStr, x + 8, 38);
+
+        curr.setMonth(curr.getMonth() + 1);
+      }
+    }
+
+    // Pan & Node Dragging Events
+    canvasView.addEventListener('mousedown', (e) => {
+      if (e.target !== canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = (e.clientX - rect.left - panX) / scale;
+      const mouseY = (e.clientY - rect.top - panY) / scale;
+
+      // Check if clicking directly on a node in similarity views
+      if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        for (const n of nodes) {
+          if (typeof n.worldX === 'number') {
+            const dx = n.worldX - mouseX;
+            const dy = n.worldY - mouseY;
+            if (dx * dx + dy * dy <= 28 * 28) {
+              draggedNode = n;
+              draggedNode.isPinned = true;
+              return;
+            }
+          }
+        }
+      }
+
+      isDragging = true;
+      dragStartX = e.clientX - panX;
+      dragStartY = e.clientY - panY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (draggedNode) {
+        const rect = canvas.getBoundingClientRect();
+        draggedNode.worldX = (e.clientX - rect.left - panX) / scale;
+        draggedNode.worldY = (e.clientY - rect.top - panY) / scale;
+        draggedNode.vx = 0;
+        draggedNode.vy = 0;
+        return;
+      }
+
+      if (isDragging) {
+        panX = e.clientX - dragStartX;
+        panY = e.clientY - dragStartY;
+        return;
+      }
+
+      if (currentView === 'canvas' && canvasData && canvas) {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = (e.clientX - rect.left - panX) / scale;
+        const mouseY = (e.clientY - rect.top - panY) / scale;
+
+        let found = null;
+
+        if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
+          const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+          for (const n of nodes) {
+            const dx = n.worldX - mouseX;
+            const dy = n.worldY - mouseY;
+            if (dx * dx + dy * dy <= 22 * 22) {
+              found = n;
+              break;
+            }
+          }
+        } else if (currentGranularity === 'chat') {
+          for (const thread of (canvasData.threads || [])) {
+            if (thread.turn_count < minTurnsFilter) continue;
+            if (maxTurnsFilter < 50 && thread.turn_count > maxTurnsFilter) continue;
+
+            const dx = thread.worldX - mouseX;
+            const dy = thread.worldY - mouseY;
+            const r = (thread.radius || 6) / scale;
+            if (dx * dx + dy * dy <= Math.max(16 / scale, r) * Math.max(16 / scale, r)) {
+              found = thread;
+              break;
+            }
+          }
+        } else {
+          for (const node of (canvasData.nodes || [])) {
+            if (node.barX !== undefined &&
+                mouseX >= node.barX - 10 && mouseX <= node.barX + node.barW + 10 &&
+                mouseY >= node.barY - 20 && mouseY <= node.barY + node.barH + 40) {
+              found = node;
+              break;
+            }
+          }
+        }
+
+        if (found !== hoveredNode) {
+          hoveredNode = found;
+          if (hoveredNode) {
+            showTooltip(e.clientX, e.clientY, hoveredNode);
+          } else {
+            hideTooltip();
+          }
+        } else if (hoveredNode) {
+          positionTooltip(e.clientX, e.clientY);
+        }
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (draggedNode) {
+        draggedNode.isPinned = false;
+        // Jelly velocity snap back upon releasing the dragged node!
+        draggedNode.vx = (Math.random() - 0.5) * 10;
+        draggedNode.vy = (Math.random() - 0.5) * 10;
+        draggedNode = null;
+      }
+      isDragging = false;
+    });
+
+    canvasView.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const factor = e.deltaY < 0 ? 1.15 : 0.85;
+      zoomCanvasAtPoint(factor, mouseX, mouseY);
+    }, { passive: false });
+
+    canvasView.addEventListener('click', (e) => {
+      if (e.target !== canvas) return;
+      if (hoveredNode) {
+        if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
+          openDrawerForThread(hoveredNode.id);
+        } else if (currentGranularity === 'chat') {
+          openDrawerForThread(hoveredNode.group_key);
+        } else {
+          switchView('feed');
+          searchInput.value = hoveredNode.period_key;
+          loadThreads(1);
+        }
+      }
+    });
+
+    canvasSearch.addEventListener('input', () => {
+      drawCanvas();
+    });
+
+    function showTooltip(x, y, node) {
+      if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
+        document.getElementById('ttTurnInfo').innerText = `Domain: ${CATEGORY_MAP[node.category] || node.category}`;
+        document.getElementById('ttDate').innerText = node.timestamp || 'Similarity Node';
+        document.getElementById('ttSnippet').innerText = node.title || '(No snippet)';
+      } else if (currentGranularity === 'chat') {
+        const isVoice = node.has_audio_input === 1 ? ' 🎙️ Voice' : '';
+        document.getElementById('ttTurnInfo').innerText = `Chat (${node.turn_count} Turn${node.turn_count > 1 ? 's' : ''}${isVoice})`;
+        document.getElementById('ttDate').innerText = node.first_timestamp;
+        document.getElementById('ttSnippet').innerText = node.title_snippet || '(No prompt text)';
+      } else {
+        document.getElementById('ttTurnInfo').innerText = `Period: ${node.period_key}`;
+        document.getElementById('ttDate').innerText = `${node.thread_count} Chats • ${node.turn_count} Turns`;
+        document.getElementById('ttSnippet').innerText = `Click to filter feed to ${node.period_key}`;
+      }
+      canvasTooltip.style.display = 'block';
+      positionTooltip(x, y);
+    }
+
+    function positionTooltip(x, y) {
+      canvasTooltip.style.left = `${x + 15}px`;
+      canvasTooltip.style.top = `${y + 15}px`;
+    }
+
+    function hideTooltip() {
+      canvasTooltip.style.display = 'none';
+    }
+
+    // --- STITCHED FEED VIEW LOGIC ---
+    async function loadThreads(page = 1, categoryFilter = "") {
+      currentPage = page;
+      threadsList.innerHTML = '<div class="loading-spinner">Loading stitched conversation threads...</div>';
+
+      const q = searchInput.value.trim();
+      const sort = sortSelect.value;
+      const voice = voiceFilter.value;
+
+      const params = new URLSearchParams({
+        page: page,
+        limit: limit,
+        sort: sort,
+        audio_only: voice,
+        category: categoryFilter,
+        q: q
+      });
+
+      try {
+        const res = await fetch(`/api/chats?${params.toString()}`);
+        const data = await res.json();
+
+        renderThreads(data.threads);
+        updatePagination(data.total, data.page, data.limit);
+      } catch (err) {
+        console.error('Failed to load threads:', err);
+        threadsList.innerHTML = '<div class="loading-spinner" style="color: #f43f5e;">Error loading conversation threads.</div>';
+      }
+    }
+
+    function toggleExpandThread(threadKey) {
+      if (expandedThreads.has(threadKey)) {
+        expandedThreads.delete(threadKey);
+      } else {
+        expandedThreads.add(threadKey);
+      }
+      loadThreads(currentPage);
+    }
+
+    function renderThreads(threads) {
+      if (!threads || threads.length === 0) {
+        threadsList.innerHTML = '<div class="loading-spinner">No matching conversation threads found.</div>';
+        return;
+      }
+
+      threadsList.innerHTML = '';
+      threads.forEach(thread => {
+        const card = document.createElement('div');
+        card.className = 'thread-card';
+
+        const turns = thread.turns || [];
+        const isVoice = thread.has_audio_input === 1;
+        const voiceBadge = isVoice ? '<span class="voice-badge">🎙️ Voice Input</span>' : '';
+        const turnsBadge = `<span class="turns-count-badge">🧵 ${thread.turn_count} Turn${thread.turn_count > 1 ? 's' : ''}</span>`;
+        const detailsLink = thread.details_url ? `<div class="details-link"><a href="${thread.details_url}" target="_blank">View on Gemini ↗</a></div>` : '';
+
+        const dateRangeStr = (thread.first_timestamp === thread.last_timestamp) 
+          ? `📅 ${thread.first_timestamp}` 
+          : `📅 ${thread.first_timestamp} &rarr; ${thread.last_timestamp}`;
+
+        let turnsHtml = '';
+        const isExpanded = expandedThreads.has(thread.group_key) || turns.length <= 4;
+
+        turns.forEach((turn, idx) => {
+          if (!isExpanded && idx >= 2 && idx < turns.length - 1) {
+            return;
+          }
+
+          if (!isExpanded && idx === 2 && turns.length > 3) {
+            const hiddenCount = turns.length - 3;
+            turnsHtml += `
+              <button class="expand-btn" onclick="toggleExpandThread('${thread.group_key}')">
+                👇 Expand all ${turns.length} turns in this conversation (${hiddenCount} hidden turn${hiddenCount > 1 ? 's' : ''})
+              </button>
+            `;
+          }
+
+          let responseHtml = turn.response_html || '';
+          responseHtml = responseHtml.replace(/href="([^"]+\.(?:jpg|png|webp|pdf|csv|zip))"/gi, 'href="/media/$1"');
+          responseHtml = responseHtml.replace(/src="([^"]+\.(?:jpg|png|webp))"/gi, 'src="/media/$1"');
+
+          let mediaHtml = '';
+          let mediaFiles = [];
+          try {
+            mediaFiles = JSON.parse(turn.media_files_json || '[]');
+          } catch (e) {}
+
+          if (mediaFiles && mediaFiles.length > 0) {
+            const links = mediaFiles.map(f => `<li><a href="/media/${f}" target="_blank">📎 ${f}</a></li>`).join('');
+            mediaHtml = `
+              <div class="media-attachments">
+                <strong>Attached Assets:</strong>
+                <ul>${links}</ul>
+              </div>
+            `;
+          }
+
+          const turnVoice = turn.was_audio_input === 1 ? ' 🎙️' : '';
+          const promptText = turn.prompt_text ? turn.prompt_text : '<em>(No text prompt)</em>';
+
+          turnsHtml += `
+            <div class="turn-wrapper">
+              <div class="turn-header">
+                <span class="turn-number">Turn ${idx + 1} of ${turns.length}${turnVoice}</span>
+                <span>📅 ${turn.timestamp_iso || turn.timestamp_raw}</span>
+              </div>
+              <div class="prompt-block">
+                <div class="prompt-label">User Prompt</div>
+                <div class="prompt-text">${escapeHtml(promptText)}</div>
+              </div>
+              <div class="response-block">
+                ${responseHtml}
+              </div>
+              ${mediaHtml}
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="thread-header">
+            <div class="thread-meta">
+              <span class="thread-date">${dateRangeStr}</span>
+              ${turnsBadge}
+              ${voiceBadge}
+            </div>
+            ${detailsLink}
+          </div>
+          <div class="turns-container">
+            ${turnsHtml}
+          </div>
+        `;
+
+        threadsList.appendChild(card);
+      });
+
+      document.querySelectorAll('pre code').forEach((el) => {
+        hljs.highlightElement(el);
+      });
+    }
+
+    // --- SIDE DRAWER FOR CANVAS INSPECTION ---
+    async function openDrawerForThread(groupKey) {
+      sideDrawer.classList.add('open');
+      document.getElementById('drawerTitle').innerText = `Loading Thread...`;
+      const drawerBody = document.getElementById('drawerBody');
+      drawerBody.innerHTML = '<div class="loading-spinner">Loading conversation details...</div>';
+
+      try {
+        const isThreadId = groupKey.length > 8 && !/^\d+$/.test(groupKey);
+        const paramKey = isThreadId ? `thread_id=${groupKey}` : `q=`;
+        const res = await fetch(`/api/chats?${paramKey}&limit=1`);
+        const data = await res.json();
+
+        if (data.threads && data.threads.length > 0) {
+          const t = data.threads[0];
+          document.getElementById('drawerTitle').innerText = `🧵 Thread (${t.turn_count} turns)`;
+          let html = '';
+          t.turns.forEach((turn, idx) => {
+            let respHtml = turn.response_html || '';
+            respHtml = respHtml.replace(/href="([^"]+\.(?:jpg|png|webp|pdf|csv|zip))"/gi, 'href="/media/$1"');
+            respHtml = respHtml.replace(/src="([^"]+\.(?:jpg|png|webp))"/gi, 'src="/media/$1"');
+
+            html += `
+              <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--card-border);">
+                <div style="font-size: 0.8rem; color: var(--accent); font-weight: 700; margin-bottom: 6px;">Turn ${idx+1} of ${t.turns.length} &bull; ${turn.timestamp_iso}</div>
+                <div class="prompt-block">
+                  <div class="prompt-text">${escapeHtml(turn.prompt_text)}</div>
+                </div>
+                <div class="response-block">${respHtml}</div>
+              </div>
+            `;
+          });
+          drawerBody.innerHTML = html;
+          drawerBody.querySelectorAll('pre code').forEach((el) => hljs.highlightElement(el));
+        }
+      } catch (err) {
+        console.error('Failed to load drawer thread:', err);
+      }
+    }
+
+    function closeDrawer() {
+      sideDrawer.classList.remove('open');
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function updatePagination(total, page, pageSize) {
+      const totalPages = Math.ceil(total / pageSize) || 1;
+      resultsCount.innerText = `Found ${total.toLocaleString()} stitched conversation threads`;
+      pageInfo.innerText = `Page ${page} of ${totalPages}`;
+
+      prevBtn.disabled = page <= 1;
+      nextBtn.disabled = page >= totalPages;
+    }
+
+    searchBtn.addEventListener('click', () => loadThreads(1));
+    searchInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') loadThreads(1);
+    });
+    sortSelect.addEventListener('change', () => loadThreads(1));
+    voiceFilter.addEventListener('change', () => loadThreads(1));
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) loadThreads(currentPage - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      loadThreads(currentPage + 1);
+    });
+
+    fetchStats();
+    initCanvasData();
+  </script>
+</body>
+</html>
