@@ -2440,7 +2440,7 @@
 
         const activeConnectedNodeIds = new Set();
 
-        // 1. Draw Active Fusion Vector Edges (Solid Same-Category vs 50-50 Dual-Color Cross-Category)
+        // 1. Draw Active Fusion Vector Edges (Turn-Weighted Ratio & Dynamic Gradient Split)
         relations.forEach(rel => {
           const source = nodeMap[rel.source_key];
           const target = nodeMap[rel.target_key];
@@ -2458,6 +2458,16 @@
               activeConnectedNodeIds.add(source.id);
               activeConnectedNodeIds.add(target.id);
 
+              const srcTurns = Math.max(1, source.turn_count || 1);
+              const tgtTurns = Math.max(1, target.turn_count || 1);
+              const totalTurns = srcTurns + tgtTurns;
+
+              // Turn weight ratio (0.0 to 1.0)
+              const ratioSrc = srcTurns / totalTurns;
+
+              // Dynamic edge width scaled by combined thread depth (turns)
+              const edgeWidth = Math.max(1.2, Math.min(4.5, 1.0 + Math.log10(totalTurns) * 1.8));
+
               const isSameCategory = (srcCat === tgtCat);
 
               if (isSameCategory) {
@@ -2467,17 +2477,22 @@
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = CATEGORY_COLORS[srcCat] || '#38bdf8';
                 ctx.globalAlpha = Math.min(0.92, (rel.similarity_score || 0.4) * 0.85);
-                ctx.lineWidth = 1.6;
+                ctx.lineWidth = edgeWidth;
                 ctx.stroke();
                 ctx.globalAlpha = 1.0;
               } else {
-                // 50-50 Dual-Color Ratio Fusion Line (Cross-Category A-B)
+                // Turn-Weighted Dynamic Gradient Ratio Fusion Line (Cross-Category A-B)
                 const grad = ctx.createLinearGradient(source.worldX, source.worldY, target.worldX, target.worldY);
                 const colSrc = CATEGORY_COLORS[srcCat] || '#38bdf8';
                 const colTgt = CATEGORY_COLORS[tgtCat] || '#c084fc';
+
+                // Transition point shifts dynamically based on turn ratio!
+                const blendStart = Math.max(0.02, Math.min(0.96, ratioSrc - 0.03));
+                const blendEnd = Math.max(0.04, Math.min(0.98, ratioSrc + 0.03));
+
                 grad.addColorStop(0.0, colSrc);
-                grad.addColorStop(0.48, colSrc);
-                grad.addColorStop(0.52, colTgt);
+                grad.addColorStop(blendStart, colSrc);
+                grad.addColorStop(blendEnd, colTgt);
                 grad.addColorStop(1.0, colTgt);
 
                 ctx.beginPath();
@@ -2485,7 +2500,7 @@
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = grad;
                 ctx.globalAlpha = Math.min(0.98, (rel.similarity_score || 0.4) * 0.95);
-                ctx.lineWidth = 2.2;
+                ctx.lineWidth = edgeWidth;
                 ctx.stroke();
                 ctx.globalAlpha = 1.0;
               }
@@ -2493,7 +2508,7 @@
           }
         });
 
-        // 2. Draw Node Points (Filter out orphan nodes with 0 active edges!)
+        // 2. Draw Node Points (Node radius weighted by chat turn count!)
         const searchTerm = canvasSearch.value.toLowerCase().trim();
         nodes.forEach(node => {
           // Hide orphan nodes that have no active edges under the current matrix filter!
@@ -2502,13 +2517,18 @@
           const cat = node.category || 'outliers';
           const isHovered = hoveredNode === node;
 
+          const turns = Math.max(1, node.turn_count || 1);
+          // Turn-weighted node radius (5.5px to 16px)
+          const baseRadius = Math.max(5.5, Math.min(16.0, 5.0 + Math.sqrt(turns) * 1.3));
+          const nodeRadius = isHovered ? baseRadius + 6 : baseRadius;
+
           ctx.beginPath();
-          ctx.arc(node.worldX, node.worldY, isHovered ? 14 : 7.5, 0, Math.PI * 2);
+          ctx.arc(node.worldX, node.worldY, nodeRadius, 0, Math.PI * 2);
           ctx.fillStyle = isHovered ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
           ctx.fill();
 
-          ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.4)';
-          ctx.lineWidth = isHovered ? 2.5 : 1.0;
+          ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.45)';
+          ctx.lineWidth = isHovered ? 2.5 : 1.2;
           ctx.stroke();
         });
 
