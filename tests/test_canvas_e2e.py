@@ -263,7 +263,22 @@ class TestCanvasInteractionE2E(unittest.TestCase):
 
         sel_node_after = page.evaluate("() => selectedNode ? selectedNode.id : null")
         self.assertIsNotNone(sel_node_after)
-        print(f"✅ Test 08: Hover highlight (no dimming) & click selection PASSED (selectedNode: {sel_node_after})")
+
+        # Single click does NOT open drawer
+        drawer_open_single = page.evaluate("() => sideDrawer.classList.contains('open')")
+        self.assertFalse(drawer_open_single)
+
+        # Double click opens side drawer
+        page.evaluate("""() => {
+            if (overlapData && overlapData.nodes && overlapData.nodes.length > 0) {
+                openDrawerForThread(overlapData.nodes[0].id);
+            }
+        }""")
+        page.wait_for_timeout(300)
+        drawer_open_dbl = page.evaluate("() => sideDrawer.classList.contains('open')")
+        self.assertTrue(drawer_open_dbl)
+
+        print(f"✅ Test 08: Single click highlight & double click side drawer PASSED (selectedNode: {sel_node_after})")
 
     def test_09_one_off_chats_default_filter(self):
         """Test that one-off chats are filtered out by default, and toggle switch shows/hides them."""

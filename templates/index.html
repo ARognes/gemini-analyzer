@@ -3384,7 +3384,19 @@
       zoomCanvasAtPoint(factor, mouseX, mouseY);
     }, { passive: false });
 
+    // Single click: Select & Highlight Node Network (no drawer opening)
     canvasView.addEventListener('click', (e) => {
+      if (e.target !== canvas) return;
+      if (hoveredNode) {
+        selectedNode = hoveredNode;
+      } else {
+        selectedNode = null;
+      }
+      drawCanvas();
+    });
+
+    // Double click: Open Side Panel with full thread information
+    canvasView.addEventListener('dblclick', (e) => {
       if (e.target !== canvas) return;
       if (hoveredNode) {
         selectedNode = hoveredNode;
@@ -3397,8 +3409,6 @@
           searchInput.value = hoveredNode.period_key;
           loadThreads(1);
         }
-      } else {
-        selectedNode = null;
       }
       drawCanvas();
     });
