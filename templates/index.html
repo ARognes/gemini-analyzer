@@ -942,8 +942,6 @@
       <div class="canvas-subtabs">
         <button class="subtab-btn active" id="subtabChat" onclick="selectCanvasSubtab('chat')">💬 Timeline Constellation</button>
         <button class="subtab-btn" id="subtabUnified" onclick="selectCanvasSubtab('topic_clusters')">🌌 Unified Galaxy & Fusion Matrix</button>
-        <button class="subtab-btn" id="subtabMonth" onclick="selectCanvasSubtab('month')">📊 Monthly Breakdown</button>
-        <button class="subtab-btn" id="subtabYear" onclick="selectCanvasSubtab('year')">📊 Annual Distribution</button>
       </div>
 
       <select id="granularitySelect" style="display:none;" onchange="changeGranularity(this.value)">
@@ -1020,6 +1018,36 @@
       <button class="tier-pill-btn" data-tier="small_project" onclick="filterByActionabilityTier('small_project')">📦 Small Project</button>
       <button class="tier-pill-btn" data-tier="large_project" onclick="filterByActionabilityTier('large_project')">🚀 Large Project</button>
       <button class="tier-pill-btn" data-tier="specialty_project" onclick="filterByActionabilityTier('specialty_project')">🔬 Specialty</button>
+    </div>
+
+    <!-- COMPACT TEMPORAL VOLUME PICTOGRAPH HUD -->
+    <div class="pictograph-hud" id="pictographHud" style="position: absolute; bottom: 24px; left: 24px; z-index: 900; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 10px 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); width: 320px; transition: all 0.3s ease;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <span style="font-size: 0.74rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px;">
+          📊 Temporal Volume Pictograph
+        </span>
+        <button id="pictographToggleBtn" class="btn" style="padding: 1px 6px; font-size: 0.68rem; background: rgba(255,255,255,0.08); color: var(--text-muted);" onclick="togglePictographBody()">_</button>
+      </div>
+
+      <div id="pictographBody">
+        <!-- Annual Micro-Bars -->
+        <div style="margin-bottom: 8px;">
+          <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; margin-bottom: 3px; display: flex; justify-content: space-between;">
+            <span>ANNUAL DISTRIBUTION</span>
+            <span id="picYearTotal">2024–2026</span>
+          </div>
+          <div id="picAnnualContainer" style="display: flex; gap: 8px; height: 26px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 8px; border-radius: 8px;"></div>
+        </div>
+
+        <!-- Monthly Sparkline Pictograph -->
+        <div>
+          <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; margin-bottom: 3px; display: flex; justify-content: space-between;">
+            <span>MONTHLY TREND SPARKLINE</span>
+            <span id="picMonthRange">15 Months</span>
+          </div>
+          <div id="picMonthlyContainer" style="display: flex; gap: 3px; height: 34px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 6px; border-radius: 8px;"></div>
+        </div>
+      </div>
     </div>
 
     <!-- CATEGORY INTERCONNECTION EDGE QUALITY MATRIX HUD -->
@@ -2289,10 +2317,89 @@
         onDualSliderInput();
         layoutConstellation();
         renderMatrixTableGrid();
+        loadPictographData();
         fitCanvasView();
         startPhysicsEngine();
       } catch (err) {
         console.error('Failed to load canvas data:', err);
+      }
+    }
+
+    async function loadPictographData() {
+      try {
+        const [resMonth, resYear] = await Promise.all([
+          fetch('/api/canvas?granularity=month').then(r => r.json()),
+          fetch('/api/canvas?granularity=year').then(r => r.json())
+        ]);
+
+        renderAnnualPictograph(resYear.nodes || []);
+        renderMonthlyPictograph(resMonth.nodes || []);
+      } catch (err) {
+        console.error('Failed to load pictograph data:', err);
+      }
+    }
+
+    function renderAnnualPictograph(nodes) {
+      const container = document.getElementById('picAnnualContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const maxChats = Math.max(...nodes.map(n => n.thread_count || 1), 1);
+      nodes.forEach(n => {
+        const bar = document.createElement('div');
+        const hPct = Math.max(20, (n.thread_count / maxChats) * 100);
+        bar.style.cssText = `flex: 1; height: ${hPct}%; background: linear-gradient(180deg, #38bdf8 0%, rgba(56, 189, 248, 0.4) 100%); border-radius: 4px; cursor: pointer; transition: transform 0.2s ease;`;
+        bar.title = `Year ${n.period_key}: ${n.thread_count} chats (${n.turn_count} turns) - Click to jump`;
+        bar.onmouseover = () => { bar.style.transform = 'scaleY(1.15)'; };
+        bar.onmouseout = () => { bar.style.transform = 'scaleY(1.0)'; };
+        bar.onclick = () => jumpToTimePeriod(n.start_ts, n.end_ts);
+        container.appendChild(bar);
+      });
+    }
+
+    function renderMonthlyPictograph(nodes) {
+      const container = document.getElementById('picMonthlyContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const maxChats = Math.max(...nodes.map(n => n.thread_count || 1), 1);
+      nodes.forEach(n => {
+        const bar = document.createElement('div');
+        const hPct = Math.max(15, (n.thread_count / maxChats) * 100);
+        bar.style.cssText = `flex: 1; height: ${hPct}%; background: linear-gradient(180deg, #c084fc 0%, rgba(192, 132, 252, 0.3) 100%); border-radius: 2px; cursor: pointer; transition: transform 0.2s ease;`;
+        bar.title = `${n.period_key}: ${n.thread_count} chats (${n.turn_count} turns) - Click to jump`;
+        bar.onmouseover = () => { bar.style.transform = 'scaleY(1.2)'; };
+        bar.onmouseout = () => { bar.style.transform = 'scaleY(1.0)'; };
+        bar.onclick = () => jumpToTimePeriod(n.start_ts, n.end_ts);
+        container.appendChild(bar);
+      });
+    }
+
+    function jumpToTimePeriod(startTs, endTs) {
+      if (!canvasData || !canvasData.min_ts) return;
+      const minTs = canvasData.min_ts;
+      const maxTs = canvasData.max_ts || minTs + 1;
+      const timeSpan = maxTs - minTs;
+
+      const drawWidth = 3600;
+      const marginX = 200;
+
+      const normStart = (startTs - minTs) / timeSpan;
+      const targetWorldX = marginX + (normStart * drawWidth);
+
+      panX = (canvas.width / 2) - (targetWorldX * scale);
+      drawCanvas();
+    }
+
+    function togglePictographBody() {
+      const body = document.getElementById('pictographBody');
+      const btn = document.getElementById('pictographToggleBtn');
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        btn.innerText = '_';
+      } else {
+        body.style.display = 'none';
+        btn.innerText = '□';
       }
     }
 
