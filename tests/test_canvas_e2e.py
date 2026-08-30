@@ -120,5 +120,47 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         self.assertIsNone(dragged_after, "draggedNode should be cleared after mouseup")
         print("✅ Test 03: Canvas node drag & spring physics PASSED")
 
+    def test_04_correlation_stats_api(self):
+        """Test that /api/correlation_stats returns valid histogram buckets and sample pairs."""
+        try:
+            res = urllib.request.urlopen(f"{SERVER_URL}/api/correlation_stats?min_similarity=0.30").read().decode()
+            data = json.loads(res)
+            self.assertEqual(data.get("threshold_pct"), 30)
+            self.assertGreater(data.get("total_pairs", 0), 50000)
+            self.assertGreater(len(data.get("buckets", [])), 10)
+            self.assertGreater(len(data.get("sample_pairs", [])), 5)
+
+            # Check that sample pair has similarity percentage and titles
+            first_pair = data["sample_pairs"][0]
+            self.assertIn("similarity_pct", first_pair)
+            self.assertIn("source_title", first_pair)
+            self.assertIn("target_title", first_pair)
+            print(f"✅ Test 04: Correlation stats API PASSED ({data['total_pairs']} candidate links, {len(data['sample_pairs'])} sample pairs)")
+        except Exception as e:
+            self.fail(f"Correlation API error: {e}")
+
+    def test_05_correlation_modal_ui(self):
+        """Test opening Correlation Spectrum Modal and interacting with threshold slider."""
+        page = self.page
+        page.evaluate("() => openCorrelationModal()")
+        page.wait_for_timeout(600)
+
+        modal = page.query_selector("#correlationModal")
+        self.assertIsNotNone(modal)
+        self.assertEqual(modal.evaluate("el => el.style.display"), "flex")
+
+        # Verify total pairs text is populated
+        total_txt = page.inner_text("#corrTotalPairs")
+        self.assertNotEqual(total_txt, "--")
+
+        # Change slider value to 50%
+        page.fill("#corrSlider", "50")
+        page.evaluate("() => updateCorrelationThreshold(50)")
+        page.wait_for_timeout(500)
+
+        slider_display = page.inner_text("#corrSliderValDisplay")
+        self.assertEqual(slider_display, "50%")
+        print("✅ Test 05: Correlation modal UI & slider interaction PASSED")
+
 if __name__ == "__main__":
     unittest.main()

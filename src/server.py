@@ -284,6 +284,98 @@ def get_domain_matrix_data(cursor, min_similarity=0.38):
         'matrix': matrix
     }
 
+def get_correlation_spectrum_data(cursor, min_similarity=0.30):
+    # 1. Get all similarity scores for histogram bucketing
+    cursor.execute('SELECT similarity_score FROM thread_relations')
+    all_scores = [r[0] for r in cursor.fetchall()]
+    total_pairs = len(all_scores)
+
+    # 2. Build 5% width histogram buckets (15% to 100%)
+    bucket_counts = {round(b / 100.0, 2): 0 for b in range(15, 100, 5)}
+    for s in all_scores:
+        b_key = round(max(0.15, min(0.95, (int(s * 100 // 5) * 5) / 100.0)), 2)
+        if b_key in bucket_counts:
+            bucket_counts[b_key] += 1
+
+    buckets = []
+    for b_min in sorted(bucket_counts.keys()):
+        b_max = round(b_min + 0.05, 2)
+        c = bucket_counts[b_min]
+        buckets.append({
+            'min': b_min,
+            'max': b_max,
+            'min_pct': int(b_min * 100),
+            'max_pct': int(b_max * 100),
+            'label': f"{int(b_min * 100)}–{int(b_max * 100)}%",
+            'count': c,
+            'is_qualified': b_min >= min_similarity
+        })
+
+    # 3. Qualified Slice Telemetry
+    cursor.execute('''
+        SELECT COUNT(*) FROM thread_relations WHERE similarity_score >= ?
+    ''', (min_similarity,))
+    tel_row = cursor.fetchone()
+    qualified_pairs = tel_row[0] if tel_row else 0
+
+    # 4. Fast Title Map & Sample Pairs Fetch
+    cursor.execute('''
+        SELECT 
+            COALESCE(NULLIF(thread_id, ''), CAST(id AS TEXT)) as gk,
+            COALESCE(prompt_text, '') as title
+        FROM chats
+        GROUP BY gk
+    ''')
+    title_map = {r[0]: (r[1] or '').strip()[:70] for r in cursor.fetchall()}
+
+    cursor.execute('''
+        SELECT 
+            tr.source_key,
+            tr.target_key,
+            tr.similarity_score,
+            tr.shared_topics_json,
+            COALESCE(tc1.primary_category, 'outliers') as source_cat,
+            COALESCE(tc2.primary_category, 'outliers') as target_cat
+        FROM thread_relations tr
+        LEFT JOIN thread_categories tc1 ON tr.source_key = tc1.group_key
+        LEFT JOIN thread_categories tc2 ON tr.target_key = tc2.group_key
+        WHERE tr.similarity_score >= ?
+        ORDER BY tr.similarity_score DESC
+        LIMIT 40
+    ''', (min_similarity,))
+    sample_rows = cursor.fetchall()
+
+    sample_pairs = []
+    for r in sample_rows:
+        shared = []
+        try:
+            shared = json.loads(r[3] or '[]')
+        except:
+            pass
+
+        s_key = r[0]
+        t_key = r[1]
+        sample_pairs.append({
+            'source_key': s_key,
+            'target_key': t_key,
+            'similarity_score': round(r[2], 3),
+            'similarity_pct': int(round(r[2] * 100)),
+            'source_title': title_map.get(s_key, s_key),
+            'target_title': title_map.get(t_key, t_key),
+            'source_cat': r[4],
+            'target_cat': r[5],
+            'shared_topics': shared
+        })
+
+    return {
+        'threshold': min_similarity,
+        'threshold_pct': int(round(min_similarity * 100)),
+        'total_pairs': total_pairs,
+        'qualified_pairs': qualified_pairs,
+        'buckets': buckets,
+        'sample_pairs': sample_pairs
+    }
+
 def get_canvas_constellation_data(cursor, granularity='chat'):
     if granularity == 'year':
         group_expr = "substr(timestamp_iso, 1, 4)"
@@ -619,6 +711,15 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
             conn = get_db()
             cursor = conn.cursor()
             data = get_domain_matrix_data(cursor, min_sim)
+            conn.close()
+            self.send_json(data)
+            return
+
+        if path == '/api/correlation_stats':
+            min_sim = float(query.get('min_similarity', ['0.30'])[0] or '0.30')
+            conn = get_db()
+            cursor = conn.cursor()
+            data = get_correlation_spectrum_data(cursor, min_sim)
             conn.close()
             self.send_json(data)
             return

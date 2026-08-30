@@ -53,7 +53,7 @@ def cosine_similarity(v1, v2):
     dot = sum(w * v2.get(term, 0.0) for term, w in v1.items())
     return dot
 
-def run_knowledge_linker(db_path, min_similarity=0.38):
+def run_knowledge_linker(db_path, min_similarity=0.15):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()

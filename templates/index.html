@@ -985,6 +985,7 @@
       </select>
 
       <input type="text" id="canvasSearch" placeholder="🔍 Highlight on Canvas..." autocomplete="off">
+      <button class="btn" style="background: rgba(30, 41, 59, 0.95); border: 1px solid #c084fc; color: #c084fc; font-weight: 700;" onclick="openCorrelationModal()">📈 Correlation Spectrum & Slicing</button>
       <button class="btn" style="background: rgba(30, 41, 59, 0.95); border: 1px solid var(--accent); color: var(--accent); font-weight: 700;" onclick="toggleMatrixPanel()">📊 Edge Fusion Matrix</button>
     </div>
 
@@ -3486,6 +3487,228 @@
 
     fetchStats();
     initCanvasData();
+  </script>
+
+  <!-- CORRELATION SPECTRUM & DYNAMIC SLICING INSPECTOR MODAL -->
+  <div id="correlationModal" style="display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(7, 10, 18, 0.85); backdrop-filter: blur(18px); align-items: center; justify-content: center; padding: 24px;">
+    <div style="background: rgba(15, 23, 42, 0.96); border: 1px solid var(--card-border); border-radius: 20px; width: 920px; max-width: 95vw; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.7); overflow: hidden;">
+      
+      <!-- Header -->
+      <div style="padding: 18px 24px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.5);">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: #c084fc; margin: 0; display: flex; align-items: center; gap: 8px;">
+            📈 Pairwise Correlation Spectrum & Dynamic Slicing Inspector
+          </h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin: 3px 0 0 0;">
+            Analyze pairwise relationship strength distribution across 2,423 chat threads and test correlation thresholds.
+          </p>
+        </div>
+        <button class="close-drawer" style="font-size: 1.5rem; color: var(--text-muted); background: none; border: none; cursor: pointer;" onclick="closeCorrelationModal()">&times;</button>
+      </div>
+
+      <!-- Content Body -->
+      <div style="padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; flex: 1;">
+        
+        <!-- Summary Stats Pills Bar -->
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <div style="background: rgba(30,41,59,0.8); border: 1px solid var(--card-border); padding: 8px 14px; border-radius: 12px; font-size: 0.8rem; color: var(--text-muted);">
+            Total Candidate Pairs: <strong id="corrTotalPairs" style="color: #ffffff;">--</strong>
+          </div>
+          <div style="background: rgba(192, 132, 252, 0.15); border: 1px solid rgba(192, 132, 252, 0.4); padding: 8px 14px; border-radius: 12px; font-size: 0.8rem; color: #c084fc;">
+            Qualified Active Pairs: <strong id="corrQualifiedPairs" style="color: #ffffff;">--</strong>
+          </div>
+          <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); padding: 8px 14px; border-radius: 12px; font-size: 0.8rem; color: #38bdf8;">
+            Active Cutoff Slice: <strong id="corrActiveSlice" style="color: #ffffff;">30%</strong>
+          </div>
+        </div>
+
+        <!-- Interactive Threshold Slider -->
+        <div style="background: rgba(30,41,59,0.4); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label for="corrSlider" style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">
+              🎛️ Adjust Similarity Threshold Cutoff (15% ↔ 95%):
+            </label>
+            <span id="corrSliderValDisplay" style="font-size: 1.0rem; font-weight: 800; color: #c084fc; background: rgba(192, 132, 252, 0.2); padding: 2px 10px; border-radius: 8px;">30%</span>
+          </div>
+          <input type="range" id="corrSlider" min="15" max="95" step="5" value="30" oninput="updateCorrelationThreshold(this.value)" style="width: 100%; accent-color: #c084fc; cursor: pointer;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">
+            <span>15% (Broad Gray Area)</span>
+            <span>40% (Moderate Link)</span>
+            <span>70% (Strong Match)</span>
+            <span>95% (Near Duplicate)</span>
+          </div>
+        </div>
+
+        <!-- Histogram Distribution Bar Chart -->
+        <div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; justify-content: space-between;">
+            <span>📊 Pair Count Frequency Distribution Across Similarity Brackets</span>
+            <span>Highlighted = Above Cutoff</span>
+          </div>
+          <div id="corrHistogramChart" style="display: flex; gap: 6px; height: 140px; align-items: flex-end; background: rgba(7,10,18,0.6); padding: 12px 14px; border-radius: 14px; border: 1px solid var(--card-border);"></div>
+        </div>
+
+        <!-- Sample Pairs List Table -->
+        <div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span>🔗 Sample Pair Relationships at &ge; <span id="corrSampleThreshold">30%</span> Similarity</span>
+            <button class="btn" style="padding: 3px 12px; font-size: 0.75rem; background: #c084fc; color: #070a12; font-weight: 800;" onclick="applyCorrelationThresholdToCanvas()">✨ Apply Threshold to Graph Canvas</button>
+          </div>
+          <div id="corrSampleList" style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 4px;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentCorrelationThreshold = 0.30;
+    let correlationData = null;
+
+    async function openCorrelationModal() {
+      const modal = document.getElementById('correlationModal');
+      if (modal) modal.style.display = 'flex';
+      await loadCorrelationStats(currentCorrelationThreshold);
+    }
+
+    function closeCorrelationModal() {
+      const modal = document.getElementById('correlationModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    async function loadCorrelationStats(thresh) {
+      try {
+        const res = await fetch(`/api/correlation_stats?min_similarity=${thresh}`);
+        correlationData = await res.json();
+        
+        document.getElementById('corrTotalPairs').innerText = (correlationData.total_pairs || 0).toLocaleString();
+        document.getElementById('corrQualifiedPairs').innerText = (correlationData.qualified_pairs || 0).toLocaleString();
+        document.getElementById('corrActiveSlice').innerText = `${correlationData.threshold_pct}%`;
+        document.getElementById('corrSampleThreshold').innerText = `${correlationData.threshold_pct}%`;
+
+        renderCorrelationHistogram(correlationData.buckets || [], correlationData.threshold);
+        renderCorrelationSamplePairs(correlationData.sample_pairs || []);
+      } catch (err) {
+        console.error('Failed to load correlation stats:', err);
+      }
+    }
+
+    let corrSliderTimer = null;
+    function updateCorrelationThreshold(val) {
+      currentCorrelationThreshold = parseFloat(val) / 100.0;
+      document.getElementById('corrSliderValDisplay').innerText = `${val}%`;
+      document.getElementById('corrActiveSlice').innerText = `${val}%`;
+      document.getElementById('corrSampleThreshold').innerText = `${val}%`;
+
+      if (corrSliderTimer) clearTimeout(corrSliderTimer);
+      corrSliderTimer = setTimeout(() => {
+        loadCorrelationStats(currentCorrelationThreshold);
+      }, 120);
+    }
+
+    function renderCorrelationHistogram(buckets, thresh) {
+      const chart = document.getElementById('corrHistogramChart');
+      if (!chart) return;
+      chart.innerHTML = '';
+
+      const maxCount = Math.max(...buckets.map(b => b.count || 1), 1);
+
+      buckets.forEach(b => {
+        const heightPct = Math.max(6, (b.count / maxCount) * 100);
+        const isQualified = b.min >= thresh;
+
+        const bar = document.createElement('div');
+        bar.style.flex = '1';
+        bar.style.height = '100%';
+        bar.style.display = 'flex';
+        bar.style.flexDirection = 'column';
+        bar.style.justifyContent = 'flex-end';
+        bar.style.alignItems = 'center';
+        bar.title = `${b.label}: ${b.count.toLocaleString()} Pair Relationships`;
+
+        const fill = document.createElement('div');
+        fill.style.width = '100%';
+        fill.style.height = `${heightPct}%`;
+        fill.style.borderRadius = '4px 4px 0 0';
+        fill.style.transition = 'all 0.3s ease';
+
+        if (isQualified) {
+          fill.style.background = 'linear-[#c084fc, #38bdf8]';
+          fill.style.background = 'linear-gradient(to top, #38bdf8, #c084fc)';
+          fill.style.boxShadow = '0 0 10px rgba(192, 132, 252, 0.4)';
+        } else {
+          fill.style.background = 'rgba(51, 65, 85, 0.4)';
+        }
+
+        const label = document.createElement('span');
+        label.style.fontSize = '0.62rem';
+        label.style.color = isQualified ? '#ffffff' : 'var(--text-muted)';
+        label.style.marginTop = '4px';
+        label.style.fontWeight = isQualified ? '700' : '400';
+        label.innerText = `${b.min_pct}%`;
+
+        bar.appendChild(fill);
+        bar.appendChild(label);
+        chart.appendChild(bar);
+      });
+    }
+
+    function renderCorrelationSamplePairs(pairs) {
+      const list = document.getElementById('corrSampleList');
+      if (!list) return;
+      list.innerHTML = '';
+
+      if (pairs.length === 0) {
+        list.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">No pair relationships qualify at this threshold cutoff level.</div>';
+        return;
+      }
+
+      pairs.forEach(p => {
+        const item = document.createElement('div');
+        item.style.background = 'rgba(30, 41, 59, 0.6)';
+        item.style.border = '1px solid var(--card-border)';
+        item.style.borderRadius = '10px';
+        item.style.padding = '10px 14px';
+        item.style.display = 'flex';
+        item.style.justifyContent = 'space-between';
+        item.style.alignItems = 'center';
+        item.style.gap = '12px';
+
+        const tagsHtml = (p.shared_topics || []).slice(0, 4).map(t => `<span style="font-size: 0.65rem; background: rgba(192,132,252,0.15); border: 1px solid rgba(192,132,252,0.3); color: #c084fc; padding: 1px 6px; border-radius: 6px;">#${escapeHtml(t)}</span>`).join(' ');
+
+        item.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+            <div style="display: flex; items-center; gap: 8px; font-size: 0.82rem; font-weight: 600; color: #ffffff;">
+              <span style="color: var(--cat-${p.source_cat || 'outliers'});">🔹 ${escapeHtml(p.source_title)}</span>
+              <span style="color: var(--text-muted);">&harr;</span>
+              <span style="color: var(--cat-${p.target_cat || 'outliers'});">🔸 ${escapeHtml(p.target_title)}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              ${tagsHtml}
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 0.85rem; font-weight: 800; color: #34d399; background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.4); padding: 3px 8px; border-radius: 8px;">
+              ${p.similarity_pct}% MATCH
+            </span>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    async function applyCorrelationThresholdToCanvas() {
+      closeCorrelationModal();
+      if (typeof selectCanvasSubtab === 'function') {
+        selectCanvasSubtab('topic_clusters');
+      }
+      if (typeof loadOverlapData === 'function') {
+        const res = await fetch(`/api/overlap?limit=3000&min_similarity=${currentCorrelationThreshold}`);
+        overlapData = await res.json();
+        layoutConstellation();
+        drawCanvas();
+      }
+    }
   </script>
 </body>
 </html>
