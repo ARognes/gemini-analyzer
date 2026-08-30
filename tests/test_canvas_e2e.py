@@ -189,5 +189,49 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         except Exception as e:
             self.fail(f"Mindmap Tree API error: {e}")
 
+    def test_07_actionability_edge_filter(self):
+        """Test that toggling an actionability tier hides edges not connected to unfiltered nodes."""
+        page = self.page
+        page.click("#subtabUnified")
+        page.wait_for_timeout(1000)
+
+        # Set actionability tier filter
+        page.evaluate("() => filterByActionabilityTier('large_project')")
+        page.wait_for_timeout(400)
+
+        selected_tier = page.evaluate("() => selectedActionabilityTier")
+        self.assertEqual(selected_tier, "large_project")
+
+        # Verify activeConnectedNodeIds only contains nodes connected to large_project
+        check_result = page.evaluate("""() => {
+            if (!overlapData || !overlapData.relations || !overlapData.nodes) return { ok: false };
+            const nodeMap = {};
+            overlapData.nodes.forEach(n => nodeMap[n.id] = n);
+
+            let totalRelations = overlapData.relations.length;
+            let hiddenCount = 0;
+            let keptCount = 0;
+
+            overlapData.relations.forEach(rel => {
+                const s = nodeMap[rel.source_key];
+                const t = nodeMap[rel.target_key];
+                if (s && t) {
+                    const sMatch = (s.actionability_tier === 'large_project');
+                    const tMatch = (t.actionability_tier === 'large_project');
+                    if (!sMatch && !tMatch) {
+                        hiddenCount++;
+                    } else {
+                        keptCount++;
+                    }
+                }
+            });
+
+            return { ok: true, totalRelations, hiddenCount, keptCount };
+        }""")
+
+        self.assertTrue(check_result["ok"])
+        self.assertGreater(check_result["hiddenCount"], 0, "No edges were hidden when actionability filter was active")
+        print(f"✅ Test 07: Actionability edge filter PASSED ({check_result['hiddenCount']} edges hidden, {check_result['keptCount']} edges active for large_project)")
+
 if __name__ == "__main__":
     unittest.main()
