@@ -2703,6 +2703,17 @@
         nodes.forEach(n => nodeMap[n.id] = n);
 
         const activeConnectedNodeIds = new Set();
+        const connectedNodeIds = new Set();
+        if (hoveredNode) {
+          const hId = hoveredNode.id || hoveredNode.group_key;
+          connectedNodeIds.add(hId);
+          relations.forEach(rel => {
+            if (rel.source_key === hId || rel.target_key === hId) {
+              connectedNodeIds.add(rel.source_key);
+              connectedNodeIds.add(rel.target_key);
+            }
+          });
+        }
 
         // 1. Draw Active Fusion Vector Edges (Turn-Weighted Ratio & Dynamic Gradient Split)
         relations.forEach(rel => {
@@ -2722,6 +2733,9 @@
               activeConnectedNodeIds.add(source.id);
               activeConnectedNodeIds.add(target.id);
 
+              const isConnectedToHovered = hoveredNode && (rel.source_key === hoveredNode.id || rel.target_key === hoveredNode.id);
+              const isDimmed = hoveredNode && !isConnectedToHovered;
+
               const srcTurns = Math.max(1, source.turn_count || 1);
               const tgtTurns = Math.max(1, target.turn_count || 1);
               const totalTurns = srcTurns + tgtTurns;
@@ -2730,7 +2744,8 @@
               const ratioSrc = srcTurns / totalTurns;
 
               // Dynamic edge width scaled by combined thread depth (turns)
-              const edgeWidth = Math.max(1.2, Math.min(4.5, 1.0 + Math.log10(totalTurns) * 1.8));
+              const baseWidth = Math.max(1.2, Math.min(4.5, 1.0 + Math.log10(totalTurns) * 1.8));
+              const edgeWidth = isConnectedToHovered ? baseWidth + 2.8 : baseWidth;
 
               const isSameCategory = (srcCat === tgtCat);
 
@@ -2740,9 +2755,14 @@
                 ctx.moveTo(source.worldX, source.worldY);
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = CATEGORY_COLORS[srcCat] || '#38bdf8';
-                ctx.globalAlpha = Math.min(0.92, (rel.similarity_score || 0.4) * 0.85);
+                ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.92, (rel.similarity_score || 0.4) * 0.85));
                 ctx.lineWidth = edgeWidth;
+                if (isConnectedToHovered) {
+                  ctx.shadowColor = CATEGORY_COLORS[srcCat] || '#38bdf8';
+                  ctx.shadowBlur = 14;
+                }
                 ctx.stroke();
+                ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1.0;
               } else {
                 // Turn-Weighted Dynamic Gradient Ratio Fusion Line (Cross-Category A-B)
@@ -2763,16 +2783,21 @@
                 ctx.moveTo(source.worldX, source.worldY);
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = grad;
-                ctx.globalAlpha = Math.min(0.98, (rel.similarity_score || 0.4) * 0.95);
+                ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.98, (rel.similarity_score || 0.4) * 0.95));
                 ctx.lineWidth = edgeWidth;
+                if (isConnectedToHovered) {
+                  ctx.shadowColor = '#38bdf8';
+                  ctx.shadowBlur = 14;
+                }
                 ctx.stroke();
+                ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1.0;
               }
             }
           }
         });
 
-        // 2. Draw Node Points (Node radius weighted by chat turn count!)
+        // 2. Draw Node Points (Node radius weighted by chat turn count & Neon Hover Reactivity)
         const searchTerm = canvasSearch.value.toLowerCase().trim();
         nodes.forEach(node => {
           // Hide orphan nodes that have no active edges under the current matrix filter!
@@ -2780,21 +2805,38 @@
           if (selectedActionabilityTier && node.actionability_tier !== selectedActionabilityTier) return;
 
           const cat = node.category || 'outliers';
-          const isHovered = hoveredNode === node;
+          const isHovered = (hoveredNode === node);
+          const isConnected = hoveredNode && connectedNodeIds.has(node.id);
+          const isDimmed = hoveredNode && !isConnected;
 
           const turns = Math.max(1, node.turn_count || 1);
           // Turn-weighted node radius (5.5px to 16px)
           const baseRadius = Math.max(5.5, Math.min(16.0, 5.0 + Math.sqrt(turns) * 1.3));
           const nodeRadius = isHovered ? baseRadius + 6 : baseRadius;
 
+          ctx.globalAlpha = isDimmed ? 0.20 : 1.0;
+
+          // Draw Outer Glowing Pulsing Ring on Hovered Node
+          if (isHovered) {
+            ctx.beginPath();
+            ctx.arc(node.worldX, node.worldY, nodeRadius + 8, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+            ctx.lineWidth = 3.5;
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 20;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+
           ctx.beginPath();
           ctx.arc(node.worldX, node.worldY, nodeRadius, 0, Math.PI * 2);
           ctx.fillStyle = isHovered ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
           ctx.fill();
 
-          ctx.strokeStyle = isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.45)';
-          ctx.lineWidth = isHovered ? 2.5 : 1.2;
+          ctx.strokeStyle = isHovered ? '#ffffff' : (isConnected ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.45)');
+          ctx.lineWidth = isHovered ? 3.0 : (isConnected ? 2.0 : 1.2);
           ctx.stroke();
+          ctx.globalAlpha = 1.0;
         });
 
       } else {
@@ -3112,40 +3154,27 @@
         const mouseX = (e.clientX - rect.left - panX) / scale;
         const mouseY = (e.clientY - rect.top - panY) / scale;
 
-        let found = null;
+        const hitRadiusWorld = Math.max(24, 32 / scale);
+        const hitRadiusSq = hitRadiusWorld * hitRadiusWorld;
 
-        if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
-          const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-          for (const n of nodes) {
+        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        for (const n of nodes) {
+          if (typeof n.worldX === 'number') {
             const dx = n.worldX - mouseX;
             const dy = n.worldY - mouseY;
-            if (dx * dx + dy * dy <= 22 * 22) {
+            if (dx * dx + dy * dy <= hitRadiusSq) {
               found = n;
               break;
             }
           }
-        } else if (currentGranularity === 'chat') {
-          for (const thread of (canvasData.threads || [])) {
-            if (thread.turn_count < minTurnsFilter) continue;
-            if (maxTurnsFilter < 50 && thread.turn_count > maxTurnsFilter) continue;
+        }
 
-            const dx = thread.worldX - mouseX;
-            const dy = thread.worldY - mouseY;
-            const r = (thread.radius || 6) / scale;
-            if (dx * dx + dy * dy <= Math.max(16 / scale, r) * Math.max(16 / scale, r)) {
-              found = thread;
-              break;
-            }
-          }
+        if (draggedNode) {
+          canvas.style.cursor = 'grabbing';
+        } else if (found) {
+          canvas.style.cursor = 'grab';
         } else {
-          for (const node of (canvasData.nodes || [])) {
-            if (node.barX !== undefined &&
-                mouseX >= node.barX - 10 && mouseX <= node.barX + node.barW + 10 &&
-                mouseY >= node.barY - 20 && mouseY <= node.barY + node.barH + 40) {
-              found = node;
-              break;
-            }
-          }
+          canvas.style.cursor = 'default';
         }
 
         if (found !== hoveredNode) {
@@ -3155,6 +3184,7 @@
           } else {
             hideTooltip();
           }
+          drawCanvas();
         } else if (hoveredNode) {
           positionTooltip(e.clientX, e.clientY);
         }
