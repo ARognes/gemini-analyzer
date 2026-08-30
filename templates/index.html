@@ -1752,10 +1752,10 @@
 
       const map = {
         'chat': 'subtabChat',
-        'topic_clusters': 'subtabTopic',
-        'similarity_tree': 'subtabSimilarity',
-        'month': 'subtabMonth',
-        'year': 'subtabYear'
+        'topic_clusters': 'subtabUnified',
+        'similarity_tree': 'subtabUnified',
+        'month': 'subtabChat',
+        'year': 'subtabChat'
       };
 
       const activeBtn = document.getElementById(map[granularity] || 'subtabChat');
@@ -3079,23 +3079,27 @@
       }
     }
 
-    // Pan & Node Dragging Events
+    // Pan & Node Dragging Events (Supports both Timeline & Galaxy Views)
     canvasView.addEventListener('mousedown', (e) => {
-      if (e.target !== canvas) return;
-
       const rect = canvas.getBoundingClientRect();
       const mouseX = (e.clientX - rect.left - panX) / scale;
       const mouseY = (e.clientY - rect.top - panY) / scale;
 
-      // Check if clicking directly on a node to drag with rubber band elasticity!
-      const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-      for (const n of nodes) {
+      const activeNodes = (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree')
+        ? ((overlapData && overlapData.nodes) ? overlapData.nodes : [])
+        : ((canvasData && canvasData.threads) ? canvasData.threads : []);
+
+      const hitRadiusWorld = Math.max(24, 32 / scale);
+      const hitRadiusSq = hitRadiusWorld * hitRadiusWorld;
+
+      for (const n of activeNodes) {
         if (typeof n.worldX === 'number') {
           const dx = n.worldX - mouseX;
           const dy = n.worldY - mouseY;
-          if (dx * dx + dy * dy <= 28 * 28) {
+          if (dx * dx + dy * dy <= hitRadiusSq) {
             draggedNode = n;
             draggedNode.isPinned = true;
+            canvas.style.cursor = 'grabbing';
             return;
           }
         }
@@ -3149,16 +3153,20 @@
         return;
       }
 
-      if (currentView === 'canvas' && canvasData && canvas) {
+      if (currentView === 'canvas' && canvas) {
         const rect = canvas.getBoundingClientRect();
         const mouseX = (e.clientX - rect.left - panX) / scale;
         const mouseY = (e.clientY - rect.top - panY) / scale;
 
+        const activeNodes = (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree')
+          ? ((overlapData && overlapData.nodes) ? overlapData.nodes : [])
+          : ((canvasData && canvasData.threads) ? canvasData.threads : []);
+
         const hitRadiusWorld = Math.max(24, 32 / scale);
         const hitRadiusSq = hitRadiusWorld * hitRadiusWorld;
 
-        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-        for (const n of nodes) {
+        let found = null;
+        for (const n of activeNodes) {
           if (typeof n.worldX === 'number') {
             const dx = n.worldX - mouseX;
             const dy = n.worldY - mouseY;
