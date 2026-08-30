@@ -2219,10 +2219,10 @@
 
       function physicsStep() {
         if (currentView === 'canvas') {
-          if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
-            const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-            const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
+          const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+          const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
 
+          if (nodes.length > 0) {
             jellyTime += 0.045; // Harmonic wave time ticker
 
             if (physicsMode === 'static') {
@@ -3045,18 +3045,16 @@
       const mouseX = (e.clientX - rect.left - panX) / scale;
       const mouseY = (e.clientY - rect.top - panY) / scale;
 
-      // Check if clicking directly on a node in similarity views
-      if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
-        const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-        for (const n of nodes) {
-          if (typeof n.worldX === 'number') {
-            const dx = n.worldX - mouseX;
-            const dy = n.worldY - mouseY;
-            if (dx * dx + dy * dy <= 28 * 28) {
-              draggedNode = n;
-              draggedNode.isPinned = true;
-              return;
-            }
+      // Check if clicking directly on a node to drag with rubber band elasticity!
+      const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+      for (const n of nodes) {
+        if (typeof n.worldX === 'number') {
+          const dx = n.worldX - mouseX;
+          const dy = n.worldY - mouseY;
+          if (dx * dx + dy * dy <= 28 * 28) {
+            draggedNode = n;
+            draggedNode.isPinned = true;
+            return;
           }
         }
       }
@@ -3069,10 +3067,37 @@
     window.addEventListener('mousemove', (e) => {
       if (draggedNode) {
         const rect = canvas.getBoundingClientRect();
-        draggedNode.worldX = (e.clientX - rect.left - panX) / scale;
-        draggedNode.worldY = (e.clientY - rect.top - panY) / scale;
-        draggedNode.vx = 0;
-        draggedNode.vy = 0;
+        const newX = (e.clientX - rect.left - panX) / scale;
+        const newY = (e.clientY - rect.top - panY) / scale;
+
+        draggedNode.worldX = newX;
+        draggedNode.worldY = newY;
+
+        // Pull connected neighbor nodes in real-time along rubber band edges!
+        const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
+        const nodeMap = {};
+        if (overlapData && overlapData.nodes) overlapData.nodes.forEach(n => nodeMap[n.id] = n);
+
+        relations.forEach(rel => {
+          if (rel.source_key === draggedNode.id || rel.target_key === draggedNode.id) {
+            const neighborId = (rel.source_key === draggedNode.id) ? rel.target_key : rel.source_key;
+            const neighbor = nodeMap[neighborId];
+            if (neighbor && !neighbor.isPinned && typeof neighbor.worldX === 'number') {
+              const dx = draggedNode.worldX - neighbor.worldX;
+              const dy = draggedNode.worldY - neighbor.worldY;
+              const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+              const restLength = Math.max(30, 110 * (1.0 - rel.similarity_score * 0.6));
+              const delta = dist - restLength;
+
+              if (delta > 0) {
+                // Real-time elastic spring pull on neighboring nodes during drag!
+                const pullForce = Math.min(18, delta * 0.22 * Math.max(0.4, rel.similarity_score));
+                neighbor.vx += (dx / dist) * pullForce;
+                neighbor.vy += (dy / dist) * pullForce;
+              }
+            }
+          }
+        });
         return;
       }
 
