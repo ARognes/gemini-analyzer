@@ -2338,7 +2338,7 @@
                     if (selectedActionabilityTier) {
                       const srcMatch = (source.actionability_tier === selectedActionabilityTier);
                       const tgtMatch = (target.actionability_tier === selectedActionabilityTier);
-                      if (!srcMatch && !tgtMatch) return;
+                      if (!srcMatch || !tgtMatch) return;
                     }
 
                     const dx = target.worldX - source.worldX;
@@ -2767,11 +2767,11 @@
           const source = nodeMap[rel.source_key];
           const target = nodeMap[rel.target_key];
           if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
-            // Actionable Filter Edge Guard: Hide all edges not associated with any of the unfiltered nodes!
+            // Actionable Filter Edge Guard: Both endpoints MUST be active/unfiltered nodes!
             if (selectedActionabilityTier) {
               const srcMatch = (source.actionability_tier === selectedActionabilityTier);
               const tgtMatch = (target.actionability_tier === selectedActionabilityTier);
-              if (!srcMatch && !tgtMatch) return;
+              if (!srcMatch || !tgtMatch) return;
             }
 
             const srcCat = source.category || 'outliers';

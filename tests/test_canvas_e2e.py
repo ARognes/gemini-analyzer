@@ -218,7 +218,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
                 if (s && t) {
                     const sMatch = (s.actionability_tier === 'large_project');
                     const tMatch = (t.actionability_tier === 'large_project');
-                    if (!sMatch && !tMatch) {
+                    if (!sMatch || !tMatch) {
                         hiddenCount++;
                     } else {
                         keptCount++;
