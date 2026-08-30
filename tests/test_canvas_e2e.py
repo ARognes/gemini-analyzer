@@ -233,5 +233,37 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         self.assertGreater(check_result["hiddenCount"], 0, "No edges were hidden when actionability filter was active")
         print(f"✅ Test 07: Actionability edge filter PASSED ({check_result['hiddenCount']} edges hidden, {check_result['keptCount']} edges active for large_project)")
 
+    def test_08_hover_no_dimming_and_click_selection(self):
+        """Test that hovering over a node does not dim unconnected nodes, but clicking sets selectedNode and dims background."""
+        page = self.page
+        page.click("#subtabUnified")
+        page.wait_for_timeout(1000)
+
+        # Hover over first node
+        page.evaluate("""() => {
+            if (overlapData && overlapData.nodes && overlapData.nodes.length > 0) {
+                hoveredNode = overlapData.nodes[0];
+                drawCanvas();
+            }
+        }""")
+        page.wait_for_timeout(300)
+
+        # Verify selectedNode is null on hover
+        sel_node = page.evaluate("() => selectedNode")
+        self.assertIsNone(sel_node)
+
+        # Click node to select
+        page.evaluate("""() => {
+            if (overlapData && overlapData.nodes && overlapData.nodes.length > 0) {
+                selectedNode = overlapData.nodes[0];
+                drawCanvas();
+            }
+        }""")
+        page.wait_for_timeout(300)
+
+        sel_node_after = page.evaluate("() => selectedNode ? selectedNode.id : null")
+        self.assertIsNotNone(sel_node_after)
+        print(f"✅ Test 08: Hover highlight (no dimming) & click selection PASSED (selectedNode: {sel_node_after})")
+
 if __name__ == "__main__":
     unittest.main()

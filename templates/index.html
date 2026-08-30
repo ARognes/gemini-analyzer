@@ -1618,6 +1618,7 @@
     var categoryData = null;
     var overlapData = null;
     var selectedTopic = "";
+    var selectedNode = null;
 
     // Dual Slider Boundary State
     var minTurnsFilter = 1;
@@ -2570,35 +2571,21 @@
 
       if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
         const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
-        const catNodes = {};
-        Object.keys(GALAXY_ISLAND_CENTERS).forEach(k => catNodes[k] = []);
 
-        nodes.forEach(n => {
-          const cat = n.category || 'outliers';
-          if (catNodes[cat]) catNodes[cat].push(n); else catNodes['outliers'].push(n);
-        });
-
-        Object.keys(GALAXY_ISLAND_CENTERS).forEach(catKey => {
-          const hub = GALAXY_ISLAND_CENTERS[catKey];
-          const domainNodes = catNodes[catKey] || [];
-
-          domainNodes.forEach((n, nIdx) => {
-            // Compact organic Phyllotaxis dispersion per island (zero cross-screen overlap!)
-            const a = nIdx * 2.39996 + (hashStr(n.id) % 100) * 0.01;
-            const tightness = categoryTightness[catKey] || 1.0;
-            const r = Math.max(16, (22 + Math.sqrt(nIdx) * 18) / Math.max(0.3, tightness));
-
-            n.targetX = hub.x + Math.cos(a) * r;
-            n.targetY = hub.y + Math.sin(a) * r;
-
-            if (typeof n.worldX !== 'number' || isNaN(n.worldX)) {
-              n.worldX = n.targetX + (Math.random() - 0.5) * 15;
-              n.worldY = n.targetY + (Math.random() - 0.5) * 15;
-              n.vx = 0;
-              n.vy = 0;
-            }
-            n.radius = 7.5;
-          });
+        nodes.forEach((n, nIdx) => {
+          if (typeof n.worldX !== 'number' || isNaN(n.worldX)) {
+            // Deterministic pseudo-random initial spawn across canvas world area
+            const h = hashStr(n.id);
+            const angle = (h % 628) / 100.0;
+            const dist = 40 + ((h >> 4) % 650);
+            n.targetX = 1600 + Math.cos(angle) * dist;
+            n.targetY = 1000 + Math.sin(angle) * dist;
+            n.worldX = n.targetX;
+            n.worldY = n.targetY;
+            n.vx = 0;
+            n.vy = 0;
+          }
+          n.radius = 7.5;
         });
       } else if (currentGranularity === 'chat') {
         const threads = canvasData.threads || [];
@@ -2706,58 +2693,33 @@
       ctx.scale(scale, scale);
 
       if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
-        // Draw 6 Domain Island Galaxy Graphics (Hub Cores, Glowing Rings, and Titles)
-        Object.keys(GALAXY_ISLAND_CENTERS).forEach(catKey => {
-          const hub = GALAXY_ISLAND_CENTERS[catKey];
-          const isSelected = activeGalaxyIslands.has(catKey);
-          const alpha = isSelected ? 1.0 : 0.15;
-
-          ctx.globalAlpha = alpha;
-
-          // Glowing Hub Center Core
-          ctx.beginPath();
-          ctx.arc(hub.x, hub.y, 16, 0, Math.PI * 2);
-          ctx.fillStyle = hub.color;
-          ctx.fill();
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2.5;
-          ctx.stroke();
-
-          // Concentric Orbit Rings
-          [120, 240, 360].forEach(r => {
-            ctx.beginPath();
-            ctx.arc(hub.x, hub.y, r, 0, Math.PI * 2);
-            ctx.strokeStyle = hub.color;
-            ctx.globalAlpha = alpha * 0.15;
-            ctx.lineWidth = 1.2;
-            ctx.setLineDash([6, 6]);
-            ctx.stroke();
-            ctx.setLineDash([]);
-          });
-
-          // Galaxy Island Title Banner
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 22px -apple-system, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.globalAlpha = alpha * 0.9;
-          ctx.fillText(hub.title, hub.x, hub.y - 35);
-          ctx.globalAlpha = 1.0;
-        });
-
         const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
         const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
         const nodeMap = {};
         nodes.forEach(n => nodeMap[n.id] = n);
 
         const activeConnectedNodeIds = new Set();
-        const connectedNodeIds = new Set();
+        const hoveredConnectedNodeIds = new Set();
+        const selectedConnectedNodeIds = new Set();
+
         if (hoveredNode) {
           const hId = hoveredNode.id || hoveredNode.group_key;
-          connectedNodeIds.add(hId);
+          hoveredConnectedNodeIds.add(hId);
           relations.forEach(rel => {
             if (rel.source_key === hId || rel.target_key === hId) {
-              connectedNodeIds.add(rel.source_key);
-              connectedNodeIds.add(rel.target_key);
+              hoveredConnectedNodeIds.add(rel.source_key);
+              hoveredConnectedNodeIds.add(rel.target_key);
+            }
+          });
+        }
+
+        if (selectedNode) {
+          const sId = selectedNode.id || selectedNode.group_key;
+          selectedConnectedNodeIds.add(sId);
+          relations.forEach(rel => {
+            if (rel.source_key === sId || rel.target_key === sId) {
+              selectedConnectedNodeIds.add(rel.source_key);
+              selectedConnectedNodeIds.add(rel.target_key);
             }
           });
         }
@@ -2788,7 +2750,10 @@
               activeConnectedNodeIds.add(target.id);
 
               const isConnectedToHovered = hoveredNode && (rel.source_key === hoveredNode.id || rel.target_key === hoveredNode.id);
-              const isDimmed = hoveredNode && !isConnectedToHovered;
+              const isConnectedToSelected = selectedNode && (rel.source_key === selectedNode.id || rel.target_key === selectedNode.id);
+
+              // ONLY dim edges when a node is explicitly selected (clicked on)!
+              const isDimmed = selectedNode && !isConnectedToSelected;
 
               const srcTurns = Math.max(1, source.turn_count || 1);
               const tgtTurns = Math.max(1, target.turn_count || 1);
@@ -2799,7 +2764,7 @@
 
               // Dynamic edge width scaled by combined thread depth (turns)
               const baseWidth = Math.max(1.2, Math.min(4.5, 1.0 + Math.log10(totalTurns) * 1.8));
-              const edgeWidth = isConnectedToHovered ? baseWidth + 2.8 : baseWidth;
+              const edgeWidth = (isConnectedToHovered || isConnectedToSelected) ? baseWidth + 2.8 : baseWidth;
 
               const isSameCategory = (srcCat === tgtCat);
 
@@ -2811,7 +2776,7 @@
                 ctx.strokeStyle = CATEGORY_COLORS[srcCat] || '#38bdf8';
                 ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.92, (rel.similarity_score || 0.4) * 0.85));
                 ctx.lineWidth = edgeWidth;
-                if (isConnectedToHovered) {
+                if (isConnectedToHovered || isConnectedToSelected) {
                   ctx.shadowColor = CATEGORY_COLORS[srcCat] || '#38bdf8';
                   ctx.shadowBlur = 14;
                 }
@@ -2839,7 +2804,7 @@
                 ctx.strokeStyle = grad;
                 ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.98, (rel.similarity_score || 0.4) * 0.95));
                 ctx.lineWidth = edgeWidth;
-                if (isConnectedToHovered) {
+                if (isConnectedToHovered || isConnectedToSelected) {
                   ctx.shadowColor = '#38bdf8';
                   ctx.shadowBlur = 14;
                 }
@@ -2860,23 +2825,28 @@
 
           const cat = node.category || 'outliers';
           const isHovered = (hoveredNode === node);
-          const isConnected = hoveredNode && connectedNodeIds.has(node.id);
-          const isDimmed = hoveredNode && !isConnected;
+          const isConnectedToHovered = hoveredNode && hoveredConnectedNodeIds.has(node.id);
+
+          const isSelected = (selectedNode === node);
+          const isConnectedToSelected = selectedNode && selectedConnectedNodeIds.has(node.id);
+
+          // ONLY dim background nodes when a node is explicitly selected (clicked on)!
+          const isDimmed = selectedNode && !isConnectedToSelected;
 
           const turns = Math.max(1, node.turn_count || 1);
           // Turn-weighted node radius (5.5px to 16px)
           const baseRadius = Math.max(5.5, Math.min(16.0, 5.0 + Math.sqrt(turns) * 1.3));
-          const nodeRadius = isHovered ? baseRadius + 6 : baseRadius;
+          const nodeRadius = (isHovered || isSelected) ? baseRadius + 6 : baseRadius;
 
-          ctx.globalAlpha = isDimmed ? 0.20 : 1.0;
+          ctx.globalAlpha = isDimmed ? 0.18 : 1.0;
 
-          // Draw Outer Glowing Pulsing Ring on Hovered Node
-          if (isHovered) {
+          // Draw Outer Glowing Pulsing Ring on Hovered or Selected Node
+          if (isHovered || isSelected) {
             ctx.beginPath();
             ctx.arc(node.worldX, node.worldY, nodeRadius + 8, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+            ctx.strokeStyle = isSelected ? '#f59e0b' : 'rgba(56, 189, 248, 0.85)';
             ctx.lineWidth = 3.5;
-            ctx.shadowColor = '#38bdf8';
+            ctx.shadowColor = isSelected ? '#f59e0b' : '#38bdf8';
             ctx.shadowBlur = 20;
             ctx.stroke();
             ctx.shadowBlur = 0;
@@ -2884,11 +2854,11 @@
 
           ctx.beginPath();
           ctx.arc(node.worldX, node.worldY, nodeRadius, 0, Math.PI * 2);
-          ctx.fillStyle = isHovered ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
+          ctx.fillStyle = (isHovered || isSelected) ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
           ctx.fill();
 
-          ctx.strokeStyle = isHovered ? '#ffffff' : (isConnected ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.45)');
-          ctx.lineWidth = isHovered ? 3.0 : (isConnected ? 2.0 : 1.2);
+          ctx.strokeStyle = (isHovered || isSelected) ? '#ffffff' : ((isConnectedToHovered || isConnectedToSelected) ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.45)');
+          ctx.lineWidth = (isHovered || isSelected) ? 3.0 : ((isConnectedToHovered || isConnectedToSelected) ? 2.2 : 1.2);
           ctx.stroke();
           ctx.globalAlpha = 1.0;
         });
@@ -3277,6 +3247,7 @@
     canvasView.addEventListener('click', (e) => {
       if (e.target !== canvas) return;
       if (hoveredNode) {
+        selectedNode = hoveredNode;
         if (currentGranularity === 'similarity_tree' || currentGranularity === 'topic_clusters') {
           openDrawerForThread(hoveredNode.id);
         } else if (currentGranularity === 'chat') {
@@ -3286,7 +3257,10 @@
           searchInput.value = hoveredNode.period_key;
           loadThreads(1);
         }
+      } else {
+        selectedNode = null;
       }
+      drawCanvas();
     });
 
     canvasSearch.addEventListener('input', () => {
