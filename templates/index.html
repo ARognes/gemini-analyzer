@@ -935,6 +935,18 @@
     </div>
   </header>
 
+  <!-- TOP-DOWN HIERARCHICAL DRILL BREADCRUMB BAR -->
+  <div id="topDownBreadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; padding: 7px 24px; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid var(--card-border); color: var(--text-muted); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+    <span style="font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px;">Navigation Level:</span>
+    <span class="crumb" onclick="resetDrillToTop()" style="cursor: pointer; color: #fff; text-decoration: underline; text-underline-offset: 3px;">🌐 Macro Overview (2,423 Threads)</span>
+    <span>&rarr;</span>
+    <span class="crumb" id="crumbDomain" style="color: var(--accent);">All Domains</span>
+    <span>&rarr;</span>
+    <span class="crumb" id="crumbTier" style="color: #c084fc;">All Actionability Tiers</span>
+    <span>&rarr;</span>
+    <span class="crumb" id="crumbThread" style="color: #34d399; font-weight: 700;">Click any node to focus target thread</span>
+  </div>
+
   <!-- INFINITE CANVAS CONSTELLATION VIEW -->
   <div id="canvasView" class="view-container active">
     <div class="canvas-hud">
@@ -1367,8 +1379,7 @@
       const chkHw = document.getElementById('chkHardware'); if (chkHw) chkHw.checked = activeGalaxyIslands.has('hardware');
       const chkCr = document.getElementById('chkCreative'); if (chkCr) chkCr.checked = activeGalaxyIslands.has('creative');
       const chkFn = document.getElementById('chkFinance'); if (chkFn) chkFn.checked = activeGalaxyIslands.has('finance');
-      const chkOt = document.getElementById('chkOutliers'); if (chkOt) chkOt.checked = activeGalaxyIslands.has('outliers');
-
+      updateDrillBreadcrumb();
       drawCanvas();
     }
 
@@ -1402,7 +1413,73 @@
         }
       });
 
+      updateDrillBreadcrumb();
       if (currentView === 'canvas') {
+        drawCanvas();
+      } else {
+        loadThreads(1);
+      }
+    }
+
+    // Top-Down Hierarchical Navigation State & Breadcrumb Handler
+    let focusedThreadNode = null;
+
+    function updateDrillBreadcrumb() {
+      const cDom = document.getElementById('crumbDomain');
+      const cTier = document.getElementById('crumbTier');
+      const cThread = document.getElementById('crumbThread');
+
+      if (cDom) {
+        if (activeGalaxyIslands.size === 6) {
+          cDom.innerText = 'All Domains (6 Galaxies)';
+        } else if (activeGalaxyIslands.size === 1) {
+          const singleCat = Array.from(activeGalaxyIslands)[0];
+          cDom.innerText = `Domain: ${CATEGORY_MAP[singleCat] || singleCat}`;
+        } else {
+          cDom.innerText = `Domains (${activeGalaxyIslands.size} Selected)`;
+        }
+      }
+
+      if (cTier) {
+        if (selectedActionabilityTier) {
+          const tierLabel = ACTIONABILITY_TIER_LABELS[selectedActionabilityTier] || selectedActionabilityTier;
+          cTier.innerText = `Tier: ${tierLabel}`;
+        } else {
+          cTier.innerText = 'All Actionability Tiers';
+        }
+      }
+
+      if (cThread) {
+        if (focusedThreadNode) {
+          const snippet = (focusedThreadNode.title || focusedThreadNode.title_snippet || '').slice(0, 40);
+          cThread.innerText = `Focused: "${snippet}..."`;
+        } else {
+          cThread.innerText = 'Click any node to focus target thread';
+        }
+      }
+    }
+
+    function resetDrillToTop() {
+      ['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers'].forEach(k => activeGalaxyIslands.add(k));
+      const chkAll = document.getElementById('chkAll'); if (chkAll) chkAll.checked = true;
+      const chkAi = document.getElementById('chkAi'); if (chkAi) chkAi.checked = true;
+      const chkSw = document.getElementById('chkSoftware'); if (chkSw) chkSw.checked = true;
+      const chkHw = document.getElementById('chkHardware'); if (chkHw) chkHw.checked = true;
+      const chkCr = document.getElementById('chkCreative'); if (chkCr) chkCr.checked = true;
+      const chkFn = document.getElementById('chkFinance'); if (chkFn) chkFn.checked = true;
+      const chkOt = document.getElementById('chkOutliers'); if (chkOt) chkOt.checked = true;
+
+      selectedActionabilityTier = '';
+      document.querySelectorAll('.tier-pill-btn').forEach(btn => {
+        if (btn.getAttribute('data-tier') === '') btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      focusedThreadNode = null;
+      setMatrixPreset('all');
+      updateDrillBreadcrumb();
+      if (currentView === 'canvas') {
+        fitCanvasView();
         drawCanvas();
       } else {
         loadThreads(1);
