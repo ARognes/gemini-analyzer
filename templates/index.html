@@ -2533,8 +2533,15 @@
 
                   n.vx *= 0.70;
                   n.vy *= 0.70;
+
+                  if (isNaN(n.vx)) n.vx = 0;
+                  if (isNaN(n.vy)) n.vy = 0;
+
                   n.worldX += n.vx;
                   n.worldY += n.vy;
+
+                  if (isNaN(n.worldX)) n.worldX = n.targetX || 1800;
+                  if (isNaN(n.worldY)) n.worldY = n.targetY || 1100;
                 }
               });
             }
@@ -2671,35 +2678,81 @@
     }
 
     function layoutConstellation() {
-      if (!canvasData) return;
-
-      const minTs = canvasData.min_ts;
-      const maxTs = canvasData.max_ts || minTs + 1;
-      const timeSpan = Math.max(1, maxTs - minTs);
-
-      const marginX = 200;
-      const marginY = 160;
-      const drawWidth = worldWidth - (marginX * 2);
-
       if (currentGranularity === 'topic_clusters' || currentGranularity === 'similarity_tree') {
         const nodes = (overlapData && overlapData.nodes) ? overlapData.nodes : [];
+        const relations = (overlapData && overlapData.relations) ? overlapData.relations : [];
 
-        nodes.forEach((n, nIdx) => {
-          if (typeof n.worldX !== 'number' || isNaN(n.worldX)) {
-            // Deterministic pseudo-random initial spawn across canvas world area
-            const h = hashStr(n.id);
-            const angle = (h % 628) / 100.0;
-            const dist = 40 + ((h >> 4) % 650);
-            n.targetX = 1600 + Math.cos(angle) * dist;
-            n.targetY = 1000 + Math.sin(angle) * dist;
-            n.worldX = n.targetX;
-            n.worldY = n.targetY;
-            n.vx = 0;
-            n.vy = 0;
-          }
-          n.radius = 7.5;
+        // Build node degree & cluster map
+        const nodeMap = {};
+        const nodeDegrees = {};
+        const clustersMap = {};
+
+        nodes.forEach(n => {
+          nodeMap[n.id] = n;
+          nodeDegrees[n.id] = 0;
+          const tag = n.data_tag || n.category || 'outliers';
+          if (!clustersMap[tag]) clustersMap[tag] = [];
+          clustersMap[tag].push(n);
         });
-      } else if (currentGranularity === 'chat') {
+
+        relations.forEach(r => {
+          if (nodeDegrees[r.source_key] !== undefined) nodeDegrees[r.source_key]++;
+          if (nodeDegrees[r.target_key] !== undefined) nodeDegrees[r.target_key]++;
+        });
+
+        // Sort cluster names by total node count descending
+        const clusterKeys = Object.keys(clustersMap).sort((a, b) => clustersMap[b].length - clustersMap[a].length);
+
+        const centerX = 1600;
+        const centerY = 1000;
+
+        clusterKeys.forEach((tag, cIdx) => {
+          const cNodes = clustersMap[tag];
+          // Sort nodes within cluster by degree descending
+          cNodes.sort((a, b) => (nodeDegrees[b.id] || 0) - (nodeDegrees[a.id] || 0));
+
+          // Determine sector center (Cx, Cy) for cluster using Golden Spiral packing
+          let Cx, Cy;
+          if (cIdx === 0) {
+            Cx = centerX;
+            Cy = centerY;
+          } else {
+            const angle = cIdx * 2.3999632297286533; // Golden angle
+            const radius = 180.0 * Math.sqrt(cIdx) + 120.0;
+            Cx = centerX + Math.cos(angle) * radius;
+            Cy = centerY + Math.sin(angle) * radius;
+          }
+
+          cNodes.forEach((node, idx) => {
+            if (idx === 0) {
+              node.targetX = Cx;
+              node.targetY = Cy;
+              node.worldX = Cx;
+              node.worldY = Cy;
+            } else {
+              const subAngle = ((idx - 1) / Math.max(1, cNodes.length - 1)) * 2 * Math.PI;
+              const subDist = 65 + Math.floor((idx - 1) / 6) * 45;
+              node.targetX = Cx + Math.cos(subAngle) * subDist;
+              node.targetY = Cy + Math.sin(subAngle) * subDist;
+              node.worldX = node.targetX;
+              node.worldY = node.targetY;
+            }
+          });
+        });
+
+        nodes.forEach(n => {
+          n.radius = 7.5;
+          if (typeof n.vx !== 'number') n.vx = 0;
+          if (typeof n.vy !== 'number') n.vy = 0;
+        });
+      } else if (currentGranularity === 'chat' && canvasData) {
+        const minTs = canvasData.min_ts;
+        const maxTs = canvasData.max_ts || minTs + 1;
+        const timeSpan = Math.max(1, maxTs - minTs);
+        const marginX = 200;
+        const marginY = 160;
+        const drawWidth = worldWidth - (marginX * 2);
+
         const threads = canvasData.threads || [];
         const visibleThreads = currentCompactMode === 'compact'
           ? threads.filter(t => t.turn_count >= minTurnsFilter && (maxTurnsFilter >= 50 || t.turn_count <= maxTurnsFilter))
@@ -2786,6 +2839,94 @@
       zoomCanvasAtPoint(factor, centerX, centerY);
     }
 
+    function drawClusterBoundingHulls(ctx) {
+      if (!overlapData || !overlapData.nodes) return;
+      const nodes = overlapData.nodes;
+
+      const clusterBounds = {};
+      nodes.forEach(n => {
+        if (hideOneOffChats && (n.actionability_tier === 'one_off' || n.turn_count <= 1)) return;
+        if (hideAppCommands && n.actionability_tier === 'app_command') return;
+        const nTurns = n.turn_count || 1;
+        if (nTurns < minTurnsFilter || (maxTurnsFilter < 50 && nTurns > maxTurnsFilter)) return;
+        if (selectedActionabilityTier && n.actionability_tier !== selectedActionabilityTier) return;
+        if (selectedDataTag && n.data_tag !== selectedDataTag) return;
+
+        const tag = n.data_tag || n.category || 'outliers';
+        if (typeof n.worldX !== 'number' || isNaN(n.worldX)) return;
+
+        if (!clusterBounds[tag]) {
+          clusterBounds[tag] = {
+            minX: n.worldX, maxX: n.worldX,
+            minY: n.worldY, maxY: n.worldY,
+            count: 0,
+            cat: n.category || 'outliers'
+          };
+        }
+        const b = clusterBounds[tag];
+        b.minX = Math.min(b.minX, n.worldX);
+        b.maxX = Math.max(b.maxX, n.worldX);
+        b.minY = Math.min(b.minY, n.worldY);
+        b.maxY = Math.max(b.maxY, n.worldY);
+        b.count++;
+      });
+
+      Object.keys(clusterBounds).forEach(tag => {
+        const b = clusterBounds[tag];
+        if (b.count < 2) return;
+
+        const pad = 45;
+        const x = b.minX - pad;
+        const y = b.minY - pad;
+        const w = (b.maxX - b.minX) + pad * 2;
+        const h = (b.maxY - b.minY) + pad * 2;
+        const r = 24;
+
+        const catColor = CATEGORY_COLORS[b.cat] || '#38bdf8';
+
+        ctx.beginPath();
+        if (typeof ctx.roundRect === 'function') {
+          ctx.roundRect(x, y, w, h, r);
+        } else {
+          ctx.rect(x, y, w, h);
+        }
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.45)';
+        ctx.fill();
+
+        ctx.strokeStyle = catColor;
+        ctx.globalAlpha = 0.28;
+        ctx.lineWidth = 2.0;
+        ctx.setLineDash([8, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1.0;
+
+        const labelText = `🏷️ #${tag.replace('_', ' ').toUpperCase()} (${b.count})`;
+        ctx.font = 'bold 13px system-ui, sans-serif';
+        const textWidth = ctx.measureText(labelText).width;
+
+        const bannerW = textWidth + 24;
+        const bannerH = 26;
+        const bannerX = x + 16;
+        const bannerY = y - 13;
+
+        ctx.beginPath();
+        if (typeof ctx.roundRect === 'function') {
+          ctx.roundRect(bannerX, bannerY, bannerW, bannerH, 10);
+        } else {
+          ctx.rect(bannerX, bannerY, bannerW, bannerH);
+        }
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+        ctx.fill();
+        ctx.strokeStyle = catColor;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.fillStyle = catColor;
+        ctx.fillText(labelText, bannerX + 12, bannerY + 17);
+      });
+    }
+
     function drawCanvas() {
       if (!canvas || !ctx || !canvasData) return;
 
@@ -2835,6 +2976,9 @@
             }
           });
         }
+
+        // 0. Draw Translucent Cluster Bounding Hull Container Pills & Header Banners
+        drawClusterBoundingHulls(ctx);
 
         // 1. Draw Active Fusion Vector Edges (Turn-Weighted Ratio & Dynamic Gradient Split)
         relations.forEach(rel => {
