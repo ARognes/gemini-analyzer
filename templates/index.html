@@ -953,10 +953,9 @@
         <option value="year">📊 Year by Year (Timeline Bar/Line Chart)</option>
       </select>
 
-      <select id="axisSelect" onchange="changeAxisMode(this.value)">
-        <option value="nonlinear" selected>🌊 Axis: Non-Linear Density (Expand & Crunch)</option>
-        <option value="linear">⏱️ Axis: Linear Calendar Time (Strict 1:1 Scale)</option>
-      </select>
+      <button class="btn" id="axisToggleBtn" style="background: rgba(30, 41, 59, 0.85); border: 1px solid var(--accent); color: var(--accent); font-weight: 700; font-size: 0.8rem; border-radius: 10px; padding: 5px 12px;" onclick="toggleAxisMode()">
+        🌊 Axis: Non-Linear Density
+      </button>
 
       <!-- DUAL-THUMB RANGE SLIDER (SINGLE BAR WITH TWO SCROLLERS) -->
       <div class="dual-range-container">
@@ -1699,10 +1698,23 @@
       await initCanvasData();
     }
 
-    function changeAxisMode(mode) {
-      currentAxisMode = mode;
+    function toggleAxisMode() {
+      currentAxisMode = (currentAxisMode === 'nonlinear') ? 'linear' : 'nonlinear';
+      const btn = document.getElementById('axisToggleBtn');
+      if (btn) {
+        if (currentAxisMode === 'linear') {
+          btn.innerHTML = '⏱️ Axis: Strict Linear Time';
+          btn.style.borderColor = '#c084fc';
+          btn.style.color = '#c084fc';
+          btn.style.background = 'rgba(192, 132, 252, 0.15)';
+        } else {
+          btn.innerHTML = '🌊 Axis: Non-Linear Density';
+          btn.style.borderColor = 'var(--accent)';
+          btn.style.color = 'var(--accent)';
+          btn.style.background = 'rgba(30, 41, 59, 0.85)';
+        }
+      }
       layoutConstellation();
-      fitCanvasView();
       drawCanvas();
     }
 
