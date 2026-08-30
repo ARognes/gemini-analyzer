@@ -3,6 +3,7 @@ import sqlite3
 import json
 import re
 import math
+import collections
 import urllib.parse
 import mimetypes
 from datetime import datetime
@@ -376,6 +377,128 @@ def get_correlation_spectrum_data(cursor, min_similarity=0.30):
         'sample_pairs': sample_pairs
     }
 
+def get_mindmap_tree_data(cursor):
+    cursor.execute('SELECT COUNT(*) FROM chats')
+    total_chats = cursor.fetchone()[0]
+
+    cursor.execute('''
+        SELECT 
+            COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) as group_key,
+            COALESCE(tc.primary_category, 'outliers') as category,
+            COALESCE(tc.actionability_tier, 'one_off') as actionability_tier,
+            COUNT(*) as turn_count,
+            MAX(c.was_audio_input) as has_audio,
+            MIN(c.timestamp_iso) as first_ts,
+            COALESCE(c.prompt_text, '') as title
+        FROM chats c
+        LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
+        WHERE c.timestamp_iso != "1970-01-01 00:00:00"
+        GROUP BY group_key
+        ORDER BY first_ts DESC
+    ''')
+    thread_rows = cursor.fetchall()
+    total_threads = len(thread_rows)
+
+    cursor.execute('''
+        SELECT source_key, target_key, similarity_score, shared_topics_json
+        FROM thread_relations
+        WHERE similarity_score >= 0.35
+        ORDER BY similarity_score DESC
+    ''')
+    rel_rows = cursor.fetchall()
+
+    rel_map = collections.defaultdict(list)
+    for r in rel_rows:
+        s_key, t_key, sim = r[0], r[1], r[2]
+        rel_map[s_key].append({'target': t_key, 'sim_pct': int(round(sim * 100))})
+        rel_map[t_key].append({'target': s_key, 'sim_pct': int(round(sim * 100))})
+
+    tree = {
+        'id': 'root',
+        'name': '🌐 Gemini Archive',
+        'thread_count': total_threads,
+        'chat_count': total_chats,
+        'children': []
+    }
+
+    category_threads = collections.defaultdict(list)
+    for r in thread_rows:
+        category_threads[r[1]].append({
+            'id': r[0],
+            'category': r[1],
+            'tier': r[2],
+            'turn_count': r[3],
+            'has_audio': r[4],
+            'first_ts': r[5],
+            'title': (r[6] or '').strip()[:70],
+            'matches': rel_map.get(r[0], [])[:3]
+        })
+
+    cat_labels = {
+        'ai_agents': ('🤖 AI Agents', '#c084fc'),
+        'software': ('💻 Software Engineering', '#38bdf8'),
+        'hardware': ('🛠️ Hardware & Electronics', '#34d399'),
+        'creative': ('🎨 Creative & Content', '#f59e0b'),
+        'finance': ('💼 Finance & Markets', '#f43f5e'),
+        'outliers': ('🔬 Specialty & Outliers', '#94a3b8')
+    }
+
+    tier_labels = {
+        'large_project': '🚀 Large Projects',
+        'specialty_project': '🔬 Specialty Projects',
+        'small_project': '📌 Small Projects',
+        'journal': '📔 Journal Entries',
+        'theory': '💡 Theories & Ideas',
+        'one_off': '💬 One-off Chats'
+    }
+
+    for cat_key, (cat_name, cat_color) in cat_labels.items():
+        cat_items = category_threads[cat_key]
+        if not cat_items:
+            continue
+
+        domain_node = {
+            'id': f'domain_{cat_key}',
+            'name': cat_name,
+            'color': cat_color,
+            'thread_count': len(cat_items),
+            'children': []
+        }
+
+        tier_groups = collections.defaultdict(list)
+        for item in cat_items:
+            tier_groups[item['tier']].append(item)
+
+        for tier_key, tier_name in tier_labels.items():
+            t_items = tier_groups[tier_key]
+            if not t_items:
+                continue
+
+            tier_node = {
+                'id': f'tier_{cat_key}_{tier_key}',
+                'name': tier_name,
+                'color': cat_color,
+                'thread_count': len(t_items),
+                'children': [
+                    {
+                        'id': item['id'],
+                        'name': item['title'],
+                        'category': cat_key,
+                        'tier': item['tier'],
+                        'turn_count': item['turn_count'],
+                        'has_audio': item['has_audio'],
+                        'first_ts': item['first_ts'],
+                        'matches': item['matches']
+                    }
+                    for item in t_items[:20]
+                ]
+            }
+            domain_node['children'].append(tier_node)
+
+        tree['children'].append(domain_node)
+
+    return tree
+
 def get_canvas_constellation_data(cursor, granularity='chat'):
     if granularity == 'year':
         group_expr = "substr(timestamp_iso, 1, 4)"
@@ -720,6 +843,14 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
             conn = get_db()
             cursor = conn.cursor()
             data = get_correlation_spectrum_data(cursor, min_sim)
+            conn.close()
+            self.send_json(data)
+            return
+
+        if path == '/api/mindmap_tree':
+            conn = get_db()
+            cursor = conn.cursor()
+            data = get_mindmap_tree_data(cursor)
             conn.close()
             self.send_json(data)
             return

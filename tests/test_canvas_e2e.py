@@ -162,5 +162,32 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         self.assertEqual(slider_display, "50%")
         print("✅ Test 05: Correlation modal UI & slider interaction PASSED")
 
+    def test_06_mindmap_tree_api(self):
+        """Test that /api/mindmap_tree returns valid 4-level hierarchical tree structure."""
+        try:
+            res = urllib.request.urlopen(f"{SERVER_URL}/api/mindmap_tree").read().decode()
+            tree = json.loads(res)
+            self.assertEqual(tree.get("id"), "root")
+            self.assertEqual(tree.get("thread_count"), 2423)
+            self.assertEqual(len(tree.get("children", [])), 6)
+
+            # Check domain node
+            ai_domain = next(c for c in tree["children"] if c["id"] == "domain_ai_agents")
+            self.assertGreater(ai_domain["thread_count"], 300)
+            self.assertGreater(len(ai_domain["children"]), 3)
+
+            # Check tier branch node
+            first_tier = ai_domain["children"][0]
+            self.assertIn("name", first_tier)
+            self.assertGreater(len(first_tier["children"]), 0)
+
+            # Check leaf node
+            first_leaf = first_tier["children"][0]
+            self.assertIn("name", first_leaf)
+            self.assertIn("turn_count", first_leaf)
+            print(f"✅ Test 06: Hierarchical Mindmap Tree API PASSED ({tree['thread_count']} threads across 6 domains)")
+        except Exception as e:
+            self.fail(f"Mindmap Tree API error: {e}")
+
 if __name__ == "__main__":
     unittest.main()
