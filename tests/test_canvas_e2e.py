@@ -265,5 +265,31 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         self.assertIsNotNone(sel_node_after)
         print(f"✅ Test 08: Hover highlight (no dimming) & click selection PASSED (selectedNode: {sel_node_after})")
 
+    def test_09_one_off_chats_default_filter(self):
+        """Test that one-off chats are filtered out by default, and toggle switch shows/hides them."""
+        page = self.page
+
+        # Verify default state is hideOneOffChats = true
+        is_hidden_default = page.evaluate("() => hideOneOffChats")
+        self.assertTrue(is_hidden_default)
+
+        # Click toggle button to show one-offs
+        page.evaluate("() => toggleOneOffChatsFilter()")
+        page.wait_for_timeout(300)
+
+        is_hidden_toggled = page.evaluate("() => hideOneOffChats")
+        self.assertFalse(is_hidden_toggled)
+
+        btn_text = page.inner_text("#btnToggleOneOffs")
+        self.assertIn("OFF", btn_text)
+
+        # Click toggle button again to restore default
+        page.evaluate("() => toggleOneOffChatsFilter()")
+        page.wait_for_timeout(300)
+
+        is_hidden_restored = page.evaluate("() => hideOneOffChats")
+        self.assertTrue(is_hidden_restored)
+        print("✅ Test 09: One-off chats default filter & toggle switch PASSED")
+
 if __name__ == "__main__":
     unittest.main()

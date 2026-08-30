@@ -985,12 +985,13 @@
       </select>
 
       <input type="text" id="canvasSearch" placeholder="🔍 Highlight on Canvas..." autocomplete="off">
+      <button class="btn" id="btnToggleOneOffs" style="background: rgba(30, 41, 59, 0.95); border: 1px solid #f59e0b; color: #f59e0b; font-weight: 700;" onclick="toggleOneOffChatsFilter()">⚡ Exclude One-Off Noise: ON</button>
       <button class="btn" style="background: rgba(30, 41, 59, 0.95); border: 1px solid #c084fc; color: #c084fc; font-weight: 700;" onclick="openCorrelationModal()">📈 Correlation Spectrum & Slicing</button>
       <button class="btn" style="background: rgba(30, 41, 59, 0.95); border: 1px solid var(--accent); color: var(--accent); font-weight: 700;" onclick="toggleMatrixPanel()">📊 Edge Fusion Matrix</button>
     </div>
 
     <!-- MULTI-SELECT DOMAIN ISLAND GALAXY CHECKBOX FILTER BAR -->
-    <div class="domain-island-pills" id="domainIslandPills" style="position: absolute; top: 76px; left: 24px; z-index: 900; display: flex; gap: 8px; align-items: center; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+    <div class="domain-island-pills" id="domainIslandPills" style="position: absolute; top: 86px; left: 24px; z-index: 800; display: flex; gap: 8px; align-items: center; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
       <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 2px;">Filter Galaxies:</span>
       <label class="galaxy-chk-btn active" id="chkLabelAll" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid var(--card-border);">
         <input type="checkbox" id="chkAll" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('all');" style="cursor: pointer;">
@@ -1619,6 +1620,26 @@
     var overlapData = null;
     var selectedTopic = "";
     var selectedNode = null;
+    var hideOneOffChats = true;
+
+    function toggleOneOffChatsFilter() {
+      hideOneOffChats = !hideOneOffChats;
+      const btn = document.getElementById('btnToggleOneOffs');
+      if (btn) {
+        if (hideOneOffChats) {
+          btn.innerHTML = '⚡ Exclude One-Off Noise: ON';
+          btn.style.borderColor = '#f59e0b';
+          btn.style.color = '#f59e0b';
+          btn.style.background = 'rgba(30, 41, 59, 0.95)';
+        } else {
+          btn.innerHTML = '⚡ Exclude One-Off Noise: OFF (Showing All)';
+          btn.style.borderColor = '#94a3b8';
+          btn.style.color = '#94a3b8';
+          btn.style.background = 'rgba(15, 23, 42, 0.6)';
+        }
+      }
+      drawCanvas();
+    }
 
     // Dual Slider Boundary State
     var minTurnsFilter = 1;
@@ -2336,6 +2357,12 @@
                   const source = nodeMap[rel.source_key];
                   const target = nodeMap[rel.target_key];
                   if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
+                    if (hideOneOffChats) {
+                      const srcIsOneOff = (source.actionability_tier === 'one_off' || source.turn_count <= 1);
+                      const tgtIsOneOff = (target.actionability_tier === 'one_off' || target.turn_count <= 1);
+                      if (srcIsOneOff || tgtIsOneOff) return;
+                    }
+
                     if (selectedActionabilityTier) {
                       const srcMatch = (source.actionability_tier === selectedActionabilityTier);
                       const tgtMatch = (target.actionability_tier === selectedActionabilityTier);
@@ -2729,6 +2756,13 @@
           const source = nodeMap[rel.source_key];
           const target = nodeMap[rel.target_key];
           if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
+            // Hide One-Off Chats by default if hideOneOffChats is ON
+            if (hideOneOffChats) {
+              const srcIsOneOff = (source.actionability_tier === 'one_off' || source.turn_count <= 1);
+              const tgtIsOneOff = (target.actionability_tier === 'one_off' || target.turn_count <= 1);
+              if (srcIsOneOff || tgtIsOneOff) return;
+            }
+
             // Actionable Filter Edge Guard: Both endpoints MUST be active/unfiltered nodes!
             if (selectedActionabilityTier) {
               const srcMatch = (source.actionability_tier === selectedActionabilityTier);
@@ -2821,6 +2855,7 @@
         nodes.forEach(node => {
           // Hide orphan nodes that have no active edges under the current matrix filter!
           if (!activeConnectedNodeIds.has(node.id)) return;
+          if (hideOneOffChats && (node.actionability_tier === 'one_off' || node.turn_count <= 1)) return;
           if (selectedActionabilityTier && node.actionability_tier !== selectedActionabilityTier) return;
 
           const cat = node.category || 'outliers';
