@@ -139,19 +139,40 @@ def get_categories_data(cursor):
         'threads': threads
     }
 
+def get_data_driven_tags(cursor):
+    cursor.execute('''
+        SELECT tag_id, tag_label, thread_count, thread_keys_json
+        FROM data_driven_tags
+        ORDER BY thread_count DESC
+        LIMIT 60
+    ''')
+    rows = cursor.fetchall()
+    
+    tags = []
+    for r in rows:
+        tags.append({
+            'tag_id': r[0],
+            'tag_label': r[1],
+            'thread_count': r[2],
+            'thread_keys': json.loads(r[3] or '[]')
+        })
+    return tags
+
 def get_overlap_data(cursor, min_similarity=0.38, category="", topic="", limit=2000):
-    # Fetch all clean threads from category taxonomy
+    # Fetch all clean threads from category taxonomy and data-driven tags
     cursor.execute('''
         SELECT 
             tc.group_key as id,
             COALESCE(tc.primary_category, 'outliers') as category,
             COALESCE(tc.actionability_tier, 'one_off') as actionability_tier,
+            COALESCE(tdt.primary_tag, 'general') as data_tag,
             tc.actionability_tags_json,
             MIN(c.timestamp_iso) as timestamp,
             c.prompt_text as title,
             COUNT(*) as turn_count
         FROM thread_categories tc
         JOIN chats c ON tc.group_key = COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT))
+        LEFT JOIN thread_data_tags tdt ON tc.group_key = tdt.group_key
         GROUP BY tc.group_key
     ''')
     all_cat_nodes = [dict(r) for r in cursor.fetchall()]
@@ -851,6 +872,14 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
             conn = get_db()
             cursor = conn.cursor()
             data = get_mindmap_tree_data(cursor)
+            conn.close()
+            self.send_json(data)
+            return
+
+        if path == '/api/data_tags':
+            conn = get_db()
+            cursor = conn.cursor()
+            data = get_data_driven_tags(cursor)
             conn.close()
             self.send_json(data)
             return

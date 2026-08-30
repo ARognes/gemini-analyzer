@@ -291,5 +291,26 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         self.assertTrue(is_hidden_restored)
         print("✅ Test 09: One-off chats default filter & toggle switch PASSED")
 
+    def test_10_data_driven_tags_api(self):
+        """Test that /api/data_tags returns empirical ground-up topic clusters."""
+        try:
+            res = urllib.request.urlopen(f"{SERVER_URL}/api/data_tags").read().decode()
+            tags = json.loads(res)
+            self.assertGreater(len(tags), 20)
+            
+            first_tag = tags[0]
+            self.assertIn("tag_id", first_tag)
+            self.assertIn("tag_label", first_tag)
+            self.assertGreater(first_tag["thread_count"], 0)
+            
+            # Verify no stopwords in top 10 tags
+            top_tag_ids = [t["tag_id"].lower() for t in tags[:10]]
+            for sw in ["like", "but", "because", "they", "them", "you"]:
+                self.assertNotIn(sw, top_tag_ids)
+                
+            print(f"✅ Test 10: Data-driven tags API PASSED ({len(tags)} clean empirical clusters returned, top: #{tags[0]['tag_id']})")
+        except Exception as e:
+            self.fail(f"Data-driven tags API error: {e}")
+
 if __name__ == "__main__":
     unittest.main()

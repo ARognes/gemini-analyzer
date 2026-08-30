@@ -1033,6 +1033,11 @@
       <button class="tier-pill-btn" data-tier="specialty_project" onclick="filterByActionabilityTier('specialty_project')">🔬 Specialty</button>
     </div>
 
+    <!-- GROUND-UP DATA-DRIVEN TOPIC TAG CLUSTERS FILTER BAR -->
+    <div class="data-tag-pills-bar" id="dataTagPillsBar" style="position: absolute; top: 162px; left: 24px; z-index: 850; display: flex; gap: 6px; align-items: center; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); max-width: 85vw; overflow-x: auto; white-space: nowrap;">
+      <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;">Data Tags:</span>
+    </div>
+
     <!-- COMPACT TEMPORAL VOLUME PICTOGRAPH HUD -->
     <div class="pictograph-hud" id="pictographHud" style="position: absolute; bottom: 24px; left: 24px; z-index: 900; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 10px 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); width: 320px; transition: all 0.3s ease; pointer-events: none;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; pointer-events: auto;">
@@ -1621,6 +1626,49 @@
     var selectedTopic = "";
     var selectedNode = null;
     var hideOneOffChats = true;
+    var dataTagsList = [];
+    var selectedDataTag = "";
+
+    async function loadDataTags() {
+      try {
+        const res = await fetch('/api/data_tags');
+        dataTagsList = await res.json();
+        renderDataTagPills();
+      } catch (err) {
+        console.error('Failed to load data tags:', err);
+      }
+    }
+
+    function filterByDataTag(tagId) {
+      selectedDataTag = (selectedDataTag === tagId) ? '' : tagId;
+      renderDataTagPills();
+      drawCanvas();
+    }
+
+    function renderDataTagPills() {
+      const container = document.getElementById('dataTagPillsBar');
+      if (!container) return;
+      
+      let html = `<span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px;">Data Tags:</span>`;
+      
+      const allActive = !selectedDataTag ? 'active' : '';
+      html += `
+        <button class="data-tag-btn ${allActive}" onclick="filterByDataTag('')" style="background: ${allActive ? 'rgba(56, 189, 248, 0.25)' : 'rgba(30, 41, 59, 0.6)'}; border: 1px solid ${allActive ? '#38bdf8' : 'var(--card-border)'}; color: ${allActive ? '#38bdf8' : '#94a3b8'}; padding: 2px 9px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+          🌐 All Data Tags
+        </button>
+      `;
+
+      (dataTagsList || []).slice(0, 25).forEach(t => {
+        const isActive = (selectedDataTag === t.tag_id);
+        html += `
+          <button class="data-tag-btn ${isActive ? 'active' : ''}" onclick="filterByDataTag('${t.tag_id}')" style="background: ${isActive ? 'rgba(192, 132, 252, 0.25)' : 'rgba(30, 41, 59, 0.6)'}; border: 1px solid ${isActive ? '#c084fc' : 'rgba(255,255,255,0.1)'}; color: ${isActive ? '#c084fc' : '#cbd5e1'}; padding: 2px 9px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+            🏷️ #${escapeHtml(t.tag_label)} (${t.thread_count})
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
 
     function toggleOneOffChatsFilter() {
       hideOneOffChats = !hideOneOffChats;
@@ -2369,6 +2417,12 @@
                       if (!srcMatch || !tgtMatch) return;
                     }
 
+                    if (selectedDataTag) {
+                      const srcMatch = (source.data_tag === selectedDataTag);
+                      const tgtMatch = (target.data_tag === selectedDataTag);
+                      if (!srcMatch || !tgtMatch) return;
+                    }
+
                     const dx = target.worldX - source.worldX;
                     const dy = target.worldY - source.worldY;
                     const dist = Math.sqrt(dx * dx + dy * dy) || 1;
@@ -2770,6 +2824,13 @@
               if (!srcMatch || !tgtMatch) return;
             }
 
+            // Data-Driven Tag Filter Edge Guard: Both endpoints MUST match selected data tag!
+            if (selectedDataTag) {
+              const srcMatch = (source.data_tag === selectedDataTag);
+              const tgtMatch = (target.data_tag === selectedDataTag);
+              if (!srcMatch || !tgtMatch) return;
+            }
+
             const srcCat = source.category || 'outliers';
             const tgtCat = target.category || 'outliers';
             const pairKey = getPairKey(srcCat, tgtCat);
@@ -2857,6 +2918,7 @@
           if (!activeConnectedNodeIds.has(node.id)) return;
           if (hideOneOffChats && (node.actionability_tier === 'one_off' || node.turn_count <= 1)) return;
           if (selectedActionabilityTier && node.actionability_tier !== selectedActionabilityTier) return;
+          if (selectedDataTag && node.data_tag !== selectedDataTag) return;
 
           const cat = node.category || 'outliers';
           const isHovered = (hoveredNode === node);
@@ -3548,6 +3610,7 @@
     });
 
     fetchStats();
+    loadDataTags();
     initCanvasData();
   </script>
 
