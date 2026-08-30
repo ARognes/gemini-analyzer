@@ -1231,6 +1231,22 @@
     <div class="drawer-body" id="drawerBody"></div>
   </div>
 
+  <!-- DEDICATED INTERWOVEN QUERY RESULTS SIDE DRAWER -->
+  <div class="side-drawer" id="queryResultsDrawer" style="width: 480px; z-index: 1200;">
+    <div class="drawer-header" style="background: rgba(15, 23, 42, 0.98); border-bottom: 1px solid #f59e0b;">
+      <h3 id="queryDrawerTitle" style="color: #f59e0b; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+        🔍 Interwoven Subgraph Query
+      </h3>
+      <button class="close-drawer" onclick="closeQueryDrawer()">&times;</button>
+    </div>
+    <div style="padding: 12px 20px; background: rgba(30, 41, 59, 0.6); border-bottom: 1px solid var(--card-border); display: flex; gap: 10px; align-items: center;">
+      <button class="btn" style="flex: 1; background: rgba(245, 158, 11, 0.18); border: 1px solid #f59e0b; color: #f59e0b; font-weight: 700; font-size: 0.8rem;" onclick="exportQueryCollection('markdown')">📥 Export Markdown</button>
+      <button class="btn" style="flex: 1; background: rgba(56, 189, 248, 0.18); border: 1px solid #38bdf8; color: #38bdf8; font-weight: 700; font-size: 0.8rem;" onclick="exportQueryCollection('json')">📥 Export JSON</button>
+      <button class="btn" style="background: rgba(244, 63, 94, 0.18); border: 1px solid #f43f5e; color: #f43f5e; font-weight: 700; font-size: 0.8rem;" onclick="clearSubgraphSearch()">❌ Clear</button>
+    </div>
+    <div class="drawer-body" id="queryDrawerBody"></div>
+  </div>
+
   <script>
     // Category Tightness & Star Chart State
     let categoryTightness = {
@@ -1714,6 +1730,125 @@
     // Dual Slider Boundary State
     var minTurnsFilter = 1;
     var maxTurnsFilter = 50;
+
+    // --- INTERWOVEN SUBGRAPH SEARCH STATE & ENGINE ---
+    var activeSearchQuery = "";
+    var searchMatchingNodeIds = new Set();
+    var searchPathEdges = new Set();
+    var searchSnippets = {};
+    var searchThreadsList = [];
+    var searchDebounceTimer = null;
+
+    async function performSubgraphSearch(query) {
+      if (!query || !query.trim()) {
+        clearSubgraphSearch();
+        return;
+      }
+      activeSearchQuery = query.trim();
+
+      try {
+        const res = await fetch(`/api/search_subgraph?q=${encodeURIComponent(activeSearchQuery)}`);
+        const data = await res.json();
+
+        searchMatchingNodeIds = new Set(data.matching_node_ids || []);
+        searchPathEdges = new Set((data.path_edge_ids || []).map(e => `${e.source}:${e.target}`));
+        searchSnippets = data.snippets || {};
+        searchThreadsList = data.threads || [];
+
+        renderQueryResultsDrawer(data);
+        drawCanvas();
+      } catch (err) {
+        console.error("Failed to perform subgraph search:", err);
+      }
+    }
+
+    function clearSubgraphSearch() {
+      activeSearchQuery = "";
+      searchMatchingNodeIds.clear();
+      searchPathEdges.clear();
+      searchSnippets = {};
+      searchThreadsList = [];
+
+      const drawer = document.getElementById('queryResultsDrawer');
+      if (drawer) drawer.classList.remove('open');
+
+      const input = document.getElementById('canvasSearch');
+      if (input) input.value = "";
+
+      drawCanvas();
+    }
+
+    function closeQueryDrawer() {
+      const drawer = document.getElementById('queryResultsDrawer');
+      if (drawer) drawer.classList.remove('open');
+    }
+
+    function renderQueryResultsDrawer(data) {
+      const drawer = document.getElementById('queryResultsDrawer');
+      const title = document.getElementById('queryDrawerTitle');
+      const body = document.getElementById('queryDrawerBody');
+      if (!drawer || !body) return;
+
+      title.innerHTML = `🔍 Subgraph: "${data.query}" (${data.total_matches} threads)`;
+      body.innerHTML = '';
+
+      if (!data.threads || data.threads.length === 0) {
+        body.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-muted);">No interwoven threads found matching "${data.query}".</div>`;
+        drawer.classList.add('open');
+        return;
+      }
+
+      data.threads.forEach(t => {
+        const card = document.createElement('div');
+        card.style.cssText = 'padding: 14px; margin-bottom: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; cursor: pointer; transition: transform 0.15s ease;';
+        card.innerHTML = `
+          <div style="font-weight: 700; color: #f59e0b; font-size: 0.92rem; margin-bottom: 6px;">${t.title}</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">📅 ${t.timestamp || ''}</div>
+          <div style="font-size: 0.82rem; color: #e2e8f0; background: rgba(15, 23, 42, 0.8); padding: 8px 12px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+            "${t.snippet}"
+          </div>
+        `;
+        card.onclick = () => {
+          openDrawerForThread(t.id);
+        };
+        body.appendChild(card);
+      });
+
+      drawer.classList.add('open');
+    }
+
+    function exportQueryCollection(format) {
+      if (!searchThreadsList || searchThreadsList.length === 0) return;
+
+      let content = "";
+      let filename = `query_${activeSearchQuery.replace(/\s+/g, '_')}.${format === 'json' ? 'json' : 'md'}`;
+      let mime = format === 'json' ? 'application/json' : 'text/markdown';
+
+      if (format === 'json') {
+        content = JSON.stringify({
+          query: activeSearchQuery,
+          match_count: searchThreadsList.length,
+          threads: searchThreadsList
+        }, null, 2);
+      } else {
+        content = `# Interwoven Topic Collection: "${activeSearchQuery}"\n\n`;
+        content += `**Total Threads**: ${searchThreadsList.length}\n\n`;
+        searchThreadsList.forEach((t, i) => {
+          content += `### ${i + 1}. ${t.title}\n`;
+          content += `- **Thread ID**: \`${t.id}\`\n`;
+          content += `- **Timestamp**: ${t.timestamp}\n`;
+          content += `- **Match Snippet**: "${t.snippet}"\n\n`;
+        });
+      }
+
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
 
     // Main Canvas Global State
     var canvas, ctx;
@@ -2925,6 +3060,68 @@
         ctx.fillStyle = catColor;
         ctx.fillText(labelText, bannerX + 12, bannerY + 17);
       });
+
+      // Draw Translucent Query Subgraph Bounding Hull Pill
+      if (activeSearchQuery && searchMatchingNodeIds.size >= 2) {
+        let qMinX = Infinity, qMaxX = -Infinity, qMinY = Infinity, qMaxY = -Infinity, qCount = 0;
+        nodes.forEach(n => {
+          if (searchMatchingNodeIds.has(n.id) && typeof n.worldX === 'number' && !isNaN(n.worldX)) {
+            qMinX = Math.min(qMinX, n.worldX);
+            qMaxX = Math.max(qMaxX, n.worldX);
+            qMinY = Math.min(qMinY, n.worldY);
+            qMaxY = Math.max(qMaxY, n.worldY);
+            qCount++;
+          }
+        });
+
+        if (qCount >= 2 && qMinX !== Infinity) {
+          const pad = 55;
+          const qx = qMinX - pad;
+          const qy = qMinY - pad;
+          const qw = (qMaxX - qMinX) + pad * 2;
+          const qh = (qMaxY - qMinY) + pad * 2;
+          const qr = 28;
+
+          ctx.beginPath();
+          if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(qx, qy, qw, qh, qr);
+          } else {
+            ctx.rect(qx, qy, qw, qh);
+          }
+          ctx.fillStyle = 'rgba(245, 158, 11, 0.12)';
+          ctx.fill();
+
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = 3.0;
+          ctx.setLineDash([10, 6]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          const qLabelStr = `🔍 Subgraph: "${activeSearchQuery}" (${qCount} nodes)`;
+          ctx.font = 'bold 15px system-ui, sans-serif';
+          const textW = ctx.measureText(qLabelStr).width;
+
+          const qbW = textW + 28;
+          const qbH = 32;
+          const qbX = qx + 20;
+          const qbY = qy - 16;
+
+          ctx.beginPath();
+          if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(qbX, qbY, qbW, qbH, 12);
+          } else {
+            ctx.rect(qbX, qbY, qbW, qbH);
+          }
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.98)';
+          ctx.fill();
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
+
+          ctx.fillStyle = '#f59e0b';
+          ctx.fillText(qLabelStr, qbX + 14, qbY + 21);
+        }
+      }
     }
 
     function drawCanvas() {
@@ -3030,9 +3227,10 @@
 
               const isConnectedToHovered = hoveredNode && (rel.source_key === hoveredNode.id || rel.target_key === hoveredNode.id);
               const isConnectedToSelected = selectedNode && (rel.source_key === selectedNode.id || rel.target_key === selectedNode.id);
+              const isSearchEdge = activeSearchQuery && (searchPathEdges.has(`${rel.source_key}:${rel.target_key}`) || searchPathEdges.has(`${rel.target_key}:${rel.source_key}`));
 
-              // ONLY dim edges when a node is explicitly selected (clicked on)!
-              const isDimmed = selectedNode && !isConnectedToSelected;
+              // Dim non-matching edges if a query is active or a node is selected!
+              const isDimmed = (selectedNode && !isConnectedToSelected) || (activeSearchQuery && !isSearchEdge);
 
               const srcTurns = Math.max(1, source.turn_count || 1);
               const tgtTurns = Math.max(1, target.turn_count || 1);
@@ -3043,17 +3241,29 @@
 
               // Dynamic edge width scaled by combined thread depth (turns)
               const baseWidth = Math.max(1.2, Math.min(4.5, 1.0 + Math.log10(totalTurns) * 1.8));
-              const edgeWidth = (isConnectedToHovered || isConnectedToSelected) ? baseWidth + 2.8 : baseWidth;
+              const edgeWidth = (isSearchEdge || isConnectedToHovered || isConnectedToSelected) ? baseWidth + 3.0 : baseWidth;
 
               const isSameCategory = (srcCat === tgtCat);
 
-              if (isSameCategory) {
+              if (isSearchEdge) {
+                ctx.beginPath();
+                ctx.moveTo(source.worldX, source.worldY);
+                ctx.lineTo(target.worldX, target.worldY);
+                ctx.strokeStyle = '#f59e0b';
+                ctx.globalAlpha = 0.95;
+                ctx.lineWidth = edgeWidth;
+                ctx.shadowColor = '#f59e0b';
+                ctx.shadowBlur = 18;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1.0;
+              } else if (isSameCategory) {
                 // Solid Fusion Line (Same Category A-A)
                 ctx.beginPath();
                 ctx.moveTo(source.worldX, source.worldY);
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = CATEGORY_COLORS[srcCat] || '#38bdf8';
-                ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.92, (rel.similarity_score || 0.4) * 0.85));
+                ctx.globalAlpha = isDimmed ? 0.08 : (isConnectedToHovered ? 1.0 : Math.min(0.92, (rel.similarity_score || 0.4) * 0.85));
                 ctx.lineWidth = edgeWidth;
                 if (isConnectedToHovered || isConnectedToSelected) {
                   ctx.shadowColor = CATEGORY_COLORS[srcCat] || '#38bdf8';
@@ -3081,7 +3291,7 @@
                 ctx.moveTo(source.worldX, source.worldY);
                 ctx.lineTo(target.worldX, target.worldY);
                 ctx.strokeStyle = grad;
-                ctx.globalAlpha = isDimmed ? 0.12 : (isConnectedToHovered ? 1.0 : Math.min(0.98, (rel.similarity_score || 0.4) * 0.95));
+                ctx.globalAlpha = isDimmed ? 0.08 : (isConnectedToHovered ? 1.0 : Math.min(0.98, (rel.similarity_score || 0.4) * 0.95));
                 ctx.lineWidth = edgeWidth;
                 if (isConnectedToHovered || isConnectedToSelected) {
                   ctx.shadowColor = '#38bdf8';
@@ -3096,7 +3306,6 @@
         });
 
         // 2. Draw Node Points (Node radius weighted by chat turn count & Neon Hover Reactivity)
-        const searchTerm = canvasSearch.value.toLowerCase().trim();
         nodes.forEach(node => {
           // Hide orphan nodes that have no active edges under the current matrix filter!
           if (!activeConnectedNodeIds.has(node.id)) return;
@@ -3113,36 +3322,37 @@
 
           const isSelected = (selectedNode === node);
           const isConnectedToSelected = selectedNode && selectedConnectedNodeIds.has(node.id);
+          const isSearchMatch = activeSearchQuery && searchMatchingNodeIds.has(node.id);
 
-          // ONLY dim background nodes when a node is explicitly selected (clicked on)!
-          const isDimmed = selectedNode && !isConnectedToSelected;
+          // Dim non-matching nodes when a query or node selection is active!
+          const isDimmed = (selectedNode && !isConnectedToSelected) || (activeSearchQuery && !isSearchMatch);
 
           const turns = Math.max(1, node.turn_count || 1);
           // Turn-weighted node radius (5.5px to 16px)
           const baseRadius = Math.max(5.5, Math.min(16.0, 5.0 + Math.sqrt(turns) * 1.3));
-          const nodeRadius = (isHovered || isSelected) ? baseRadius + 6 : baseRadius;
+          const nodeRadius = (isHovered || isSelected || isSearchMatch) ? baseRadius + 6 : baseRadius;
 
-          ctx.globalAlpha = isDimmed ? 0.18 : 1.0;
+          ctx.globalAlpha = isDimmed ? 0.15 : 1.0;
 
-          // Draw Outer Glowing Pulsing Ring on Hovered or Selected Node
-          if (isHovered || isSelected) {
+          // Draw Outer Glowing Pulsing Ring on Hovered, Selected, or Search Match Node
+          if (isHovered || isSelected || isSearchMatch) {
             ctx.beginPath();
             ctx.arc(node.worldX, node.worldY, nodeRadius + 8, 0, Math.PI * 2);
-            ctx.strokeStyle = isSelected ? '#f59e0b' : 'rgba(56, 189, 248, 0.85)';
+            ctx.strokeStyle = isSearchMatch ? '#f59e0b' : (isSelected ? '#f59e0b' : 'rgba(56, 189, 248, 0.85)');
             ctx.lineWidth = 3.5;
-            ctx.shadowColor = isSelected ? '#f59e0b' : '#38bdf8';
-            ctx.shadowBlur = 20;
+            ctx.shadowColor = isSearchMatch ? '#f59e0b' : (isSelected ? '#f59e0b' : '#38bdf8');
+            ctx.shadowBlur = isSearchMatch ? 22 : 20;
             ctx.stroke();
             ctx.shadowBlur = 0;
           }
 
           ctx.beginPath();
           ctx.arc(node.worldX, node.worldY, nodeRadius, 0, Math.PI * 2);
-          ctx.fillStyle = (isHovered || isSelected) ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
+          ctx.fillStyle = (isSearchMatch || isHovered || isSelected) ? '#f59e0b' : (node.color || CATEGORY_COLORS[cat] || '#38bdf8');
           ctx.fill();
 
-          ctx.strokeStyle = (isHovered || isSelected) ? '#ffffff' : ((isConnectedToHovered || isConnectedToSelected) ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.45)');
-          ctx.lineWidth = (isHovered || isSelected) ? 3.0 : ((isConnectedToHovered || isConnectedToSelected) ? 2.2 : 1.2);
+          ctx.strokeStyle = (isSearchMatch || isHovered || isSelected) ? '#ffffff' : ((isConnectedToHovered || isConnectedToSelected) ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.45)');
+          ctx.lineWidth = (isSearchMatch || isHovered || isSelected) ? 3.0 : ((isConnectedToHovered || isConnectedToSelected) ? 2.2 : 1.2);
           ctx.stroke();
           ctx.globalAlpha = 1.0;
         });
@@ -3557,8 +3767,12 @@
       drawCanvas();
     });
 
-    canvasSearch.addEventListener('input', () => {
-      drawCanvas();
+    canvasSearch.addEventListener('input', (e) => {
+      const q = e.target.value;
+      if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        performSubgraphSearch(q);
+      }, 250);
     });
 
     function showTooltip(x, y, node) {

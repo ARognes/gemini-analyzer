@@ -158,6 +158,121 @@ def get_data_driven_tags(cursor):
         })
     return tags
 
+def get_subgraph_search(cursor, q):
+    if not q or not q.strip():
+        return {
+            'query': '',
+            'matching_node_ids': [],
+            'path_edge_ids': [],
+            'snippets': {},
+            'total_matches': 0,
+            'threads': []
+        }
+
+    clean_q = q.strip()
+    clean_terms = [t for t in re.sub(r'[^\w\s]', ' ', clean_q).split() if t.strip()]
+
+    if not clean_terms:
+        return {
+            'query': q,
+            'matching_node_ids': [],
+            'path_edge_ids': [],
+            'snippets': {},
+            'total_matches': 0,
+            'threads': []
+        }
+
+    like_conds = " AND ".join(["(c.prompt_text LIKE ? OR COALESCE(c.response_plain, '') LIKE ?)" for _ in clean_terms])
+    params = []
+    for term in clean_terms:
+        p = f"%{term}%"
+        params.extend([p, p])
+
+    sql = f'''
+        SELECT 
+            COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) as group_key,
+            c.id as turn_id,
+            COALESCE(NULLIF(c.prompt_text, ''), 'Untitled Thread') as title,
+            c.prompt_text,
+            COALESCE(c.response_plain, '') as response_text,
+            c.timestamp_iso
+        FROM chats c
+        WHERE {like_conds}
+        ORDER BY c.timestamp_iso DESC
+    '''
+    cursor.execute(sql, params)
+    rows = [dict(r) for r in cursor.fetchall()]
+
+    matching_keys_set = set()
+    snippets = {}
+    threads_map = {}
+
+    for r in rows:
+        g_key = r['group_key']
+        matching_keys_set.add(g_key)
+
+        prompt = r['prompt_text'] or ''
+        response = r['response_text'] or ''
+        title = r['title'] or ''
+
+        match_snippet = ""
+        for term in clean_terms:
+            low_p = prompt.lower()
+            idx = low_p.find(term.lower())
+            if idx >= 0:
+                start = max(0, idx - 40)
+                end = min(len(prompt), idx + 80)
+                match_snippet = ("..." if start > 0 else "") + prompt[start:end] + ("..." if end < len(prompt) else "")
+                break
+            low_r = response.lower()
+            idx_r = low_r.find(term.lower())
+            if idx_r >= 0:
+                start = max(0, idx_r - 40)
+                end = min(len(response), idx_r + 80)
+                match_snippet = ("..." if start > 0 else "") + response[start:end] + ("..." if end < len(response) else "")
+                break
+
+        if not match_snippet:
+            match_snippet = title[:100]
+
+        snippets[g_key] = match_snippet
+
+        if g_key not in threads_map:
+            threads_map[g_key] = {
+                'id': g_key,
+                'title': title,
+                'snippet': match_snippet,
+                'timestamp': r['timestamp_iso']
+            }
+
+    matching_node_ids = list(matching_keys_set)
+
+    path_edge_ids = []
+    if len(matching_node_ids) >= 2:
+        placeholders = ",".join(["?"] * len(matching_node_ids))
+        edge_sql = f'''
+            SELECT source_key, target_key, similarity_score
+            FROM thread_relations
+            WHERE source_key IN ({placeholders}) AND target_key IN ({placeholders})
+        '''
+        cursor.execute(edge_sql, matching_node_ids + matching_node_ids)
+        edge_rows = [dict(r) for r in cursor.fetchall()]
+        for e in edge_rows:
+            path_edge_ids.append({
+                'source': e['source_key'],
+                'target': e['target_key'],
+                'score': round(e['similarity_score'], 3)
+            })
+
+    return {
+        'query': clean_q,
+        'matching_node_ids': matching_node_ids,
+        'path_edge_ids': path_edge_ids,
+        'snippets': snippets,
+        'total_matches': len(matching_node_ids),
+        'threads': list(threads_map.values())
+    }
+
 def get_overlap_data(cursor, min_similarity=0.38, category="", topic="", limit=2000):
     # Fetch all clean threads from category taxonomy and data-driven tags
     cursor.execute('''
@@ -872,6 +987,15 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
             conn = get_db()
             cursor = conn.cursor()
             data = get_mindmap_tree_data(cursor)
+            conn.close()
+            self.send_json(data)
+            return
+
+        if path == '/api/search_subgraph':
+            q_val = query.get('q', [''])[0]
+            conn = get_db()
+            cursor = conn.cursor()
+            data = get_subgraph_search(cursor, q_val)
             conn.close()
             self.send_json(data)
             return

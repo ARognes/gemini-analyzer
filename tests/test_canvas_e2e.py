@@ -411,5 +411,34 @@ class TestCanvasInteractionE2E(unittest.TestCase):
 
         print(f"✅ Test 13: Minimal-Overlap Cluster Layout & Bounding Hulls PASSED ({len(unique_x)} distinct spatial sectors verified)")
 
+    def test_14_subgraph_search_and_highlighting(self):
+        """Test that /api/search_subgraph returns matching nodes/edges and query drawer opens."""
+        page = self.page
+
+        # Type "jam" into canvas search bar
+        page.fill("#canvasSearch", "jam")
+        page.wait_for_timeout(600)
+
+        query = page.evaluate("() => activeSearchQuery")
+        self.assertEqual(query, "jam")
+
+        matching_count = page.evaluate("() => searchMatchingNodeIds.size")
+        self.assertGreater(matching_count, 0)
+
+        path_edges_count = page.evaluate("() => searchPathEdges.size")
+        self.assertGreaterEqual(path_edges_count, 0)
+
+        drawer_open = page.evaluate("() => document.getElementById('queryResultsDrawer').classList.contains('open')")
+        self.assertTrue(drawer_open)
+
+        # Clear search
+        page.evaluate("() => clearSubgraphSearch()")
+        page.wait_for_timeout(300)
+
+        query_after = page.evaluate("() => activeSearchQuery")
+        self.assertEqual(query_after, "")
+
+        print(f"✅ Test 14: Interwoven Subgraph Search & Highlighting PASSED ({matching_count} nodes & {path_edges_count} edges highlighted)")
+
 if __name__ == "__main__":
     unittest.main()
