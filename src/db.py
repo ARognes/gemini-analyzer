@@ -14,10 +14,20 @@ def init_synthesis_tables(conn):
             primary_category TEXT,
             secondary_categories_json TEXT,
             keywords_json TEXT,
-            outlier_score REAL
+            outlier_score REAL,
+            actionability_tier TEXT,
+            actionability_tags_json TEXT
         );
     ''')
+    cursor.execute("PRAGMA table_info(thread_categories)")
+    cols = [r[1] for r in cursor.fetchall()]
+    if 'actionability_tier' not in cols:
+        cursor.execute("ALTER TABLE thread_categories ADD COLUMN actionability_tier TEXT;")
+    if 'actionability_tags_json' not in cols:
+        cursor.execute("ALTER TABLE thread_categories ADD COLUMN actionability_tags_json TEXT;")
+
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_cat_primary ON thread_categories(primary_category);')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_cat_tier ON thread_categories(actionability_tier);')
 
     # 2. Cross-Thread Relations & Knowledge Links Table
     cursor.execute('''

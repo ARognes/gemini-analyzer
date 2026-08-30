@@ -144,6 +144,8 @@ def get_overlap_data(cursor, min_similarity=0.38, category="", topic="", limit=2
         SELECT 
             tc.group_key as id,
             COALESCE(tc.primary_category, 'outliers') as category,
+            COALESCE(tc.actionability_tier, 'one_off') as actionability_tier,
+            tc.actionability_tags_json,
             MIN(c.timestamp_iso) as timestamp,
             c.prompt_text as title,
             COUNT(*) as turn_count
@@ -158,6 +160,10 @@ def get_overlap_data(cursor, min_similarity=0.38, category="", topic="", limit=2
     for n in all_cat_nodes:
         if not is_noise_or_sensitive(n['title']):
             n['color'] = CATEGORY_COLORS.get(n['category'], '#64748b')
+            try:
+                n['actionability_tags'] = json.loads(n.get('actionability_tags_json') or '[]')
+            except Exception:
+                n['actionability_tags'] = []
             clean_nodes_map[n['id']] = n
 
     params = [min_similarity]
@@ -395,13 +401,15 @@ def get_canvas_constellation_data(cursor, granularity='chat'):
             'nodes': nodes
         }
 
-def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", thread_id="", limit=20, offset=0):
+def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", tier="", thread_id="", limit=20, offset=0):
     audio_clause = "AND c.was_audio_input = 1" if audio_only else ""
     cat_clause = "AND tc.primary_category = ?" if category else ""
+    tier_clause = "AND tc.actionability_tier = ?" if tier else ""
     order_clause = "DESC" if sort == "desc" else "ASC"
 
     params_count = []
     if category: params_count.append(category)
+    if tier: params_count.append(tier)
 
     if thread_id:
         group_keys = [(thread_id, thread_id)]
@@ -411,7 +419,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
             SELECT COUNT(DISTINCT COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)))
             FROM chats c
             LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-            WHERE 1=1 {audio_clause} {cat_clause}
+            WHERE 1=1 {audio_clause} {cat_clause} {tier_clause}
         '''
         cursor.execute(count_sql, params_count)
         total = cursor.fetchone()[0]
@@ -423,7 +431,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
                 MAX(c.timestamp_iso) as max_ts
             FROM chats c
             LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-            WHERE 1=1 {audio_clause} {cat_clause}
+            WHERE 1=1 {audio_clause} {cat_clause} {tier_clause}
             GROUP BY group_key
             ORDER BY max_ts {order_clause}
             LIMIT ? OFFSET ?
@@ -444,7 +452,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
                 FROM chats c
                 JOIN chats_fts fts ON c.id = fts.rowid
                 LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-                WHERE chats_fts MATCH ? {audio_clause} {cat_clause}
+                WHERE chats_fts MATCH ? {audio_clause} {cat_clause} {tier_clause}
             '''
             cursor.execute(count_sql, [fts_query] + params_count)
             total = cursor.fetchone()[0]
@@ -457,7 +465,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
                 FROM chats c
                 JOIN chats_fts fts ON c.id = fts.rowid
                 LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-                WHERE chats_fts MATCH ? {audio_clause} {cat_clause}
+                WHERE chats_fts MATCH ? {audio_clause} {cat_clause} {tier_clause}
                 GROUP BY group_key
                 ORDER BY max_ts {order_clause}
                 LIMIT ? OFFSET ?
@@ -470,7 +478,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
                 SELECT COUNT(DISTINCT COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)))
                 FROM chats c
                 LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-                WHERE (c.prompt_text LIKE ? OR c.response_plain LIKE ?) {audio_clause} {cat_clause}
+                WHERE (c.prompt_text LIKE ? OR c.response_plain LIKE ?) {audio_clause} {cat_clause} {tier_clause}
             '''
             cursor.execute(count_sql, [like_term, like_term] + params_count)
             total = cursor.fetchone()[0]
@@ -482,7 +490,7 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
                     MAX(c.timestamp_iso) as max_ts
                 FROM chats c
                 LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
-                WHERE (c.prompt_text LIKE ? OR c.response_plain LIKE ?) {audio_clause} {cat_clause}
+                WHERE (c.prompt_text LIKE ? OR c.response_plain LIKE ?) {audio_clause} {cat_clause} {tier_clause}
                 GROUP BY group_key
                 ORDER BY max_ts {order_clause}
                 LIMIT ? OFFSET ?
@@ -624,11 +632,28 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
             self.send_json(data)
             return
 
+        if path == '/api/actionability_stats':
+            conn = get_db()
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT 
+                    COALESCE(tc.actionability_tier, 'one_off') as tier,
+                    COUNT(*) as count
+                FROM thread_categories tc
+                GROUP BY tier
+                ORDER BY count DESC
+            ''')
+            rows = [dict(r) for r in cursor.fetchall()]
+            conn.close()
+            self.send_json({'tiers': rows})
+            return
+
         if path == '/api/chats':
             q = query.get('q', [''])[0]
             sort = query.get('sort', ['desc'])[0]
             audio_only = int(query.get('audio_only', ['0'])[0] or '0')
             category = query.get('category', [''])[0]
+            tier = query.get('tier', [''])[0]
             thread_id = query.get('thread_id', [''])[0]
             page = max(1, int(query.get('page', ['1'])[0] or '1'))
             limit = min(50, max(1, int(query.get('limit', ['10'])[0] or '10')))
@@ -636,7 +661,7 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
 
             conn = get_db()
             cursor = conn.cursor()
-            total, threads = get_stitched_threads(cursor, q, sort, audio_only, category, thread_id, limit, offset)
+            total, threads = get_stitched_threads(cursor, q, sort, audio_only, category, tier, thread_id, limit, offset)
             conn.close()
 
             self.send_json({

@@ -103,6 +103,28 @@
       font-weight: 700;
     }
 
+    .tier-pill-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tier-pill-btn:hover {
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    .tier-pill-btn.active {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
     .stats-bar {
       display: flex;
       flex-wrap: wrap;
@@ -986,8 +1008,18 @@
       </label>
       <label class="galaxy-chk-btn active" id="chkLabelOutliers" style="display: flex; gap: 5px; align-items: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(100, 116, 139, 0.4); color: var(--cat-outliers);">
         <input type="checkbox" id="chkOutliers" checked onclick="event.stopPropagation(); toggleGalaxyCheckbox('outliers');" style="cursor: pointer;">
-        <span>🔍 Outliers</span>
-      </label>
+    </div>
+
+    <!-- MULTI-DIMENSIONAL ACTIONABILITY TIER FILTER PILLS BAR -->
+    <div class="actionability-tier-pills" id="actionabilityTierPills" style="position: absolute; top: 124px; left: 24px; z-index: 900; display: flex; gap: 6px; align-items: center; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+      <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 2px;">Actionability:</span>
+      <button class="tier-pill-btn active" data-tier="" onclick="filterByActionabilityTier('')">🌐 All Tiers</button>
+      <button class="tier-pill-btn" data-tier="one_off" onclick="filterByActionabilityTier('one_off')">⚡ One-Off</button>
+      <button class="tier-pill-btn" data-tier="journal" onclick="filterByActionabilityTier('journal')">📓 Journal</button>
+      <button class="tier-pill-btn" data-tier="theory" onclick="filterByActionabilityTier('theory')">💡 Theory</button>
+      <button class="tier-pill-btn" data-tier="small_project" onclick="filterByActionabilityTier('small_project')">📦 Small Project</button>
+      <button class="tier-pill-btn" data-tier="large_project" onclick="filterByActionabilityTier('large_project')">🚀 Large Project</button>
+      <button class="tier-pill-btn" data-tier="specialty_project" onclick="filterByActionabilityTier('specialty_project')">🔬 Specialty</button>
     </div>
 
     <!-- CATEGORY INTERCONNECTION EDGE QUALITY MATRIX HUD -->
@@ -1311,6 +1343,43 @@
       const chkOt = document.getElementById('chkOutliers'); if (chkOt) chkOt.checked = activeGalaxyIslands.has('outliers');
 
       drawCanvas();
+    }
+
+    // Multi-Dimensional Actionability Tier Badges & State
+    let selectedActionabilityTier = '';
+    const ACTIONABILITY_BADGES = {
+      'one_off': '<span class="badge" style="background: rgba(148, 163, 184, 0.2); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.4);">⚡ One-Off</span>',
+      'journal': '<span class="badge" style="background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.4);">📓 Journal</span>',
+      'theory': '<span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4);">💡 Theory</span>',
+      'small_project': '<span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">📦 Small Project</span>',
+      'large_project': '<span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4);">🚀 Large Project</span>',
+      'specialty_project': '<span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4);">🔬 Specialty</span>'
+    };
+
+    const ACTIONABILITY_TIER_LABELS = {
+      'one_off': '⚡ One-Off Conversation',
+      'journal': '📓 Journal Entry / Reflection',
+      'theory': '💡 Theoretical Concept / Hypothesis',
+      'small_project': '📦 Small Project / Script',
+      'large_project': '🚀 Large Project / Pipeline',
+      'specialty_project': '🔬 Specialty Domain Project'
+    };
+
+    function filterByActionabilityTier(tierKey) {
+      selectedActionabilityTier = tierKey;
+      document.querySelectorAll('.tier-pill-btn').forEach(btn => {
+        if (btn.getAttribute('data-tier') === tierKey) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      if (currentView === 'canvas') {
+        drawCanvas();
+      } else {
+        loadThreads(1);
+      }
     }
 
     // 6x6 Interconnection Pair Matrix Filter Set
@@ -2513,6 +2582,7 @@
         nodes.forEach(node => {
           // Hide orphan nodes that have no active edges under the current matrix filter!
           if (!activeConnectedNodeIds.has(node.id)) return;
+          if (selectedActionabilityTier && node.actionability_tier !== selectedActionabilityTier) return;
 
           const cat = node.category || 'outliers';
           const isHovered = hoveredNode === node;
