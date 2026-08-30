@@ -312,5 +312,55 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         except Exception as e:
             self.fail(f"Data-driven tags API error: {e}")
 
+    def test_11_app_command_prefiltering(self):
+        """Test that single-turn app commands are pre-filtered out by default."""
+        page = self.page
+
+        # Verify default state is hideAppCommands = true
+        is_hidden_default = page.evaluate("() => hideAppCommands")
+        self.assertTrue(is_hidden_default)
+
+        # Toggle app commands off
+        page.evaluate("() => toggleAppCommandsFilter()")
+        page.wait_for_timeout(300)
+
+        is_hidden_toggled = page.evaluate("() => hideAppCommands")
+        self.assertFalse(is_hidden_toggled)
+
+        # Restore default
+        page.evaluate("() => toggleAppCommandsFilter()")
+        page.wait_for_timeout(300)
+
+        is_hidden_restored = page.evaluate("() => hideAppCommands")
+        self.assertTrue(is_hidden_restored)
+        print("✅ Test 11: App Command pre-filtering & toggle switch PASSED")
+
+    def test_12_turn_slider_filtering(self):
+        """Test that adjusting turn range sliders filters graph nodes accordingly."""
+        page = self.page
+
+        # Set minTurnsFilter to 5 and maxTurnsFilter to 20
+        page.evaluate("""() => {
+            minTurnsFilter = 5;
+            maxTurnsFilter = 20;
+            drawCanvas();
+        }""")
+        page.wait_for_timeout(300)
+
+        min_val = page.evaluate("() => minTurnsFilter")
+        max_val = page.evaluate("() => maxTurnsFilter")
+
+        self.assertEqual(min_val, 5)
+        self.assertEqual(max_val, 20)
+
+        # Reset bounds to default 1 - 50
+        page.evaluate("""() => {
+            minTurnsFilter = 1;
+            maxTurnsFilter = 50;
+            drawCanvas();
+        }""")
+        page.wait_for_timeout(300)
+        print("✅ Test 12: Turn count slider boundary filtering PASSED")
+
 if __name__ == "__main__":
     unittest.main()

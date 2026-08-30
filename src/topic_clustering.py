@@ -26,6 +26,20 @@ CUSTOM_STOPWORDS = set([
     'look', 'take', 'come', 'go', 'going', 'give', 'put', 'let', 'show', 'find', 'try', 'tell'
 ])
 
+APP_COMMAND_PATTERNS = [
+    r'^\s*(open|launch|start|run|show|go to|play|set alarm|call|message|text|navigate to|search for)\b',
+    r'^\s*(youtube|home depot|maps|photos|audible|snapchat|play store|pandora|chrome|settings|meet|drive|keep|perplexity|allegiant|calendar|clock|contacts|gmail|messages|phone)\b'
+]
+
+def is_app_command_prompt(prompt_text):
+    if not prompt_text:
+        return False
+    p = prompt_text.strip()
+    for pat in APP_COMMAND_PATTERNS:
+        if re.search(pat, p, re.IGNORECASE):
+            return True
+    return False
+
 def tokenize(text):
     text = re.sub(r'https?://\S+|www\.\S+', '', text)
     text = re.sub(r'[^\w\s]', ' ', text)
@@ -48,7 +62,9 @@ def run_ground_up_clustering(db_path=DB_PATH):
         SELECT 
             COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) as group_key,
             COALESCE(tc.primary_category, 'outliers') as category,
-            GROUP_CONCAT(c.prompt_text, ' ') as full_text
+            GROUP_CONCAT(c.prompt_text, ' ') as full_text,
+            COUNT(*) as turn_count,
+            MIN(c.prompt_text) as sample_prompt
         FROM chats c
         LEFT JOIN thread_categories tc ON COALESCE(NULLIF(c.thread_id, ''), CAST(c.id AS TEXT)) = tc.group_key
         WHERE c.timestamp_iso != "1970-01-01 00:00:00"
@@ -57,6 +73,15 @@ def run_ground_up_clustering(db_path=DB_PATH):
     rows = cursor.fetchall()
     total_docs = len(rows)
     print(f"Processing {total_docs} threads...")
+
+    app_command_count = 0
+    for r in rows:
+        gk, cat, raw_text, turn_count, sample_prompt = r[0], r[1], r[2] or '', r[3], r[4] or ''
+        if turn_count == 1 and is_app_command_prompt(sample_prompt):
+            cursor.execute("UPDATE thread_categories SET actionability_tier = 'app_command' WHERE group_key = ?", (gk,))
+            app_command_count += 1
+
+    print(f"Categorized {app_command_count} single-turn chats as actionability_tier = 'app_command'.")
 
     doc_tokens = {}
     df_counts = collections.Counter()
