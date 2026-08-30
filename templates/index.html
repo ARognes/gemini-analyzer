@@ -1032,12 +1032,12 @@
     </div>
 
     <!-- COMPACT TEMPORAL VOLUME PICTOGRAPH HUD -->
-    <div class="pictograph-hud" id="pictographHud" style="position: absolute; bottom: 24px; left: 24px; z-index: 900; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 10px 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); width: 320px; transition: all 0.3s ease;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+    <div class="pictograph-hud" id="pictographHud" style="position: absolute; bottom: 24px; left: 24px; z-index: 900; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 10px 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); width: 320px; transition: all 0.3s ease; pointer-events: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; pointer-events: auto;">
         <span style="font-size: 0.74rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px;">
           📊 Temporal Volume Pictograph
         </span>
-        <button id="pictographToggleBtn" class="btn" style="padding: 1px 6px; font-size: 0.68rem; background: rgba(255,255,255,0.08); color: var(--text-muted);" onclick="togglePictographBody()">_</button>
+        <button id="pictographToggleBtn" class="btn" style="padding: 1px 6px; font-size: 0.68rem; background: rgba(255,255,255,0.08); color: var(--text-muted); pointer-events: auto;" onclick="togglePictographBody()">_</button>
       </div>
 
       <div id="pictographBody">
@@ -1047,7 +1047,7 @@
             <span>ANNUAL DISTRIBUTION</span>
             <span id="picYearTotal">2024–2026</span>
           </div>
-          <div id="picAnnualContainer" style="display: flex; gap: 8px; height: 26px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 8px; border-radius: 8px;"></div>
+          <div id="picAnnualContainer" style="display: flex; gap: 8px; height: 26px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 8px; border-radius: 8px; pointer-events: auto;"></div>
         </div>
 
         <!-- Monthly Sparkline Pictograph -->
@@ -1056,7 +1056,7 @@
             <span>MONTHLY TREND SPARKLINE</span>
             <span id="picMonthRange">15 Months</span>
           </div>
-          <div id="picMonthlyContainer" style="display: flex; gap: 3px; height: 34px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 6px; border-radius: 8px;"></div>
+          <div id="picMonthlyContainer" style="display: flex; gap: 3px; height: 34px; align-items: flex-end; background: rgba(30,41,59,0.5); padding: 4px 6px; border-radius: 8px; pointer-events: auto;"></div>
         </div>
       </div>
     </div>
@@ -1601,36 +1601,38 @@
       container.innerHTML = html;
     }
 
-    let currentGranularity = 'chat';
-    let currentAxisMode = 'nonlinear';
-    let currentOverlapSubView = 'mindmap';
-    let currentCompactMode = 'compact';
+    var currentGranularity = 'chat';
+    var currentAxisMode = 'nonlinear';
+    var currentOverlapSubView = 'mindmap';
+    var currentCompactMode = 'compact';
 
     let currentPage = 1;
     const limit = 10;
     const expandedThreads = new Set();
     const openMindmapCategories = new Set(['ai_agents', 'software', 'hardware', 'creative', 'finance', 'outliers']);
 
-    // Data States
-    let canvasData = null;
-    let analyticsData = null;
-    let categoryData = null;
-    let overlapData = null;
-    let selectedTopic = "";
+    // Data & Canvas Global States
+    var canvasData = null;
+    var analyticsData = null;
+    var categoryData = null;
+    var overlapData = null;
+    var selectedTopic = "";
 
     // Dual Slider Boundary State
-    let minTurnsFilter = 1;
-    let maxTurnsFilter = 50;
+    var minTurnsFilter = 1;
+    var maxTurnsFilter = 50;
 
-    // Main Canvas State
-    let canvas, ctx;
-    let scale = 1.0;
-    let panX = 100;
-    let panY = 200;
-    let isDragging = false;
-    let dragStartX, dragStartY;
-    let hoveredNode = null;
-    let worldWidth = 16000;
+    // Main Canvas Global State
+    var canvas, ctx;
+    var currentView = 'canvas';
+    var scale = 1.0;
+    var panX = 100;
+    var panY = 200;
+    var isDragging = false;
+    var dragStartX = 0, dragStartY = 0;
+    var hoveredNode = null;
+    var draggedNode = null;
+    var worldWidth = 16000;
 
     // DOM Elements
     const feedView = document.getElementById('feedView');
@@ -2209,8 +2211,6 @@
     }
 
     let jellyTime = 0;
-    let draggedNode = null;
-
     let physicsRunning = false;
 
     function startPhysicsEngine() {
@@ -2647,14 +2647,14 @@
       const width = canvasView.clientWidth;
       const height = canvasView.clientHeight;
 
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, width, height);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = '#050811';
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.save();
+      ctx.scale(dpr, dpr);
       ctx.translate(panX, panY);
       ctx.scale(scale, scale);
 
