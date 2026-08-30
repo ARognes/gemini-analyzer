@@ -2610,56 +2610,138 @@
                 }
               });
 
-              // 4. Expanded Inter-Node Buffer Space & Cushion Repulsion (Prevents crowding!)
-              const numNodes = nodes.length;
-              for (let i = 0; i < numNodes; i++) {
-                const n1 = nodes[i];
-                if (typeof n1.worldX !== 'number') continue;
+              // 4. Spatial Grid Density-Adaptive Repulsion Cushion (O(N) 60FPS physics!)
+              const activeSimNodes = nodes.filter(n => typeof n.worldX === 'number' && (!hideOneOffChats || (n.actionability_tier !== 'one_off' && n.turn_count > 1)));
+              const cellSize = 160;
+              const grid = {};
+              const neighborCounts = {};
+
+              activeSimNodes.forEach(n => {
+                neighborCounts[n.id] = 0;
+                const gx = Math.floor(n.worldX / cellSize);
+                const gy = Math.floor(n.worldY / cellSize);
+                const key = `${gx}:${gy}`;
+                if (!grid[key]) grid[key] = [];
+                grid[key].push(n);
+              });
+
+              // Pre-calculate neighbor density per node
+              activeSimNodes.forEach(n1 => {
+                const gx = Math.floor(n1.worldX / cellSize);
+                const gy = Math.floor(n1.worldY / cellSize);
+
+                for (let dgx = -1; dgx <= 1; dgx++) {
+                  for (let dgy = -1; dgy <= 1; dgy++) {
+                    const cellNodes = grid[`${gx + dgx}:${gy + dgy}`];
+                    if (!cellNodes) continue;
+
+                    for (let i = 0; i < cellNodes.length; i++) {
+                      const n2 = cellNodes[i];
+                      if (n1.id >= n2.id) continue;
+
+                      const dx = n2.worldX - n1.worldX;
+                      const dy = n2.worldY - n1.worldY;
+                      if (dx * dx + dy * dy < 25600) {
+                        neighborCounts[n1.id]++;
+                        neighborCounts[n2.id]++;
+                      }
+                    }
+                  }
+                }
+              });
+
+              // Repulsion physics pass
+              activeSimNodes.forEach(n1 => {
+                const gx = Math.floor(n1.worldX / cellSize);
+                const gy = Math.floor(n1.worldY / cellSize);
                 const r1 = n1.radius || 8;
+                const density1 = neighborCounts[n1.id] || 0;
 
-                for (let j = i + 1; j < numNodes; j++) {
-                  const n2 = nodes[j];
-                  if (typeof n2.worldX !== 'number') continue;
-                  const r2 = n2.radius || 8;
+                for (let dgx = -1; dgx <= 1; dgx++) {
+                  for (let dgy = -1; dgy <= 1; dgy++) {
+                    const cellNodes = grid[`${gx + dgx}:${gy + dgy}`];
+                    if (!cellNodes) continue;
 
-                  const dx = n2.worldX - n1.worldX;
-                  const dy = n2.worldY - n1.worldY;
-                  const distSq = dx * dx + dy * dy;
+                    for (let i = 0; i < cellNodes.length; i++) {
+                      const n2 = cellNodes[i];
+                      if (n1.id >= n2.id) continue;
 
-                  // 42px buffer padding between node surfaces
-                  const minDist = r1 + r2 + 42;
-                  if (distSq > 0 && distSq < (minDist * minDist)) {
-                    const dist = Math.sqrt(distSq) || 1;
-                    const overlap = minDist - dist;
-                    const repelForce = overlap * 0.25;
+                      const r2 = n2.radius || 8;
+                      const density2 = neighborCounts[n2.id] || 0;
+                      const dx = n2.worldX - n1.worldX;
+                      const dy = n2.worldY - n1.worldY;
+                      const distSq = dx * dx + dy * dy;
 
-                    const fx = (dx / dist) * repelForce;
-                    const fy = (dy / dist) * repelForce;
+                      const maxDensity = Math.max(density1, density2);
+                      const densityCushion = Math.min(65, maxDensity * 8.5);
+                      const minDist = r1 + r2 + 45 + densityCushion;
 
-                    if (!n1.isPinned) { n1.vx -= fx; n1.vy -= fy; }
-                    if (!n2.isPinned) { n2.vx += fx; n2.vy += fy; }
+                      if (distSq > 0 && distSq < (minDist * minDist)) {
+                        const dist = Math.sqrt(distSq) || 1;
+                        const overlap = minDist - dist;
+                        const repelForce = overlap * (0.28 + Math.min(0.4, maxDensity * 0.05));
+
+                        const fx = (dx / dist) * repelForce;
+                        const fy = (dy / dist) * repelForce;
+
+                        if (!n1.isPinned) { n1.vx -= fx; n1.vy -= fy; }
+                        if (!n2.isPinned) { n2.vx += fx; n2.vy += fy; }
+                      }
+                    }
+                  }
+                }
+              });
+
+              // 5. Inter-Cluster Boundary Repulsion (Keeps isolated node structures separate!)
+              const clusterCenters = {};
+              const clusterCounts = {};
+              nodes.forEach(n => {
+                const tag = n.data_tag || n.category || 'outliers';
+                if (!clusterCenters[tag]) {
+                  clusterCenters[tag] = { x: 0, y: 0 };
+                  clusterCounts[tag] = 0;
+                }
+                clusterCenters[tag].x += n.worldX;
+                clusterCenters[tag].y += n.worldY;
+                clusterCounts[tag]++;
+              });
+
+              const cTags = Object.keys(clusterCenters);
+              cTags.forEach(t => {
+                if (clusterCounts[t] > 0) {
+                  clusterCenters[t].x /= clusterCounts[t];
+                  clusterCenters[t].y /= clusterCounts[t];
+                }
+              });
+
+              for (let i = 0; i < cTags.length; i++) {
+                const t1 = cTags[i];
+                for (let j = i + 1; j < cTags.length; j++) {
+                  const t2 = cTags[j];
+                  const dx = clusterCenters[t2].x - clusterCenters[t1].x;
+                  const dy = clusterCenters[t2].y - clusterCenters[t1].y;
+                  const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                  if (dist < 320) {
+                    const push = (320 - dist) * 0.04;
+                    const pX = (dx / dist) * push;
+                    const pY = (dy / dist) * push;
+                    nodes.forEach(n => {
+                      const tag = n.data_tag || n.category || 'outliers';
+                      if (tag === t1 && !n.isPinned) { n.vx -= pX; n.vy -= pY; }
+                      if (tag === t2 && !n.isPinned) { n.vx += pX; n.vy += pY; }
+                    });
                   }
                 }
               }
 
-              // 5. Calm Center Gravity & High Dampening (Low speed cap & fast velocity decay)
+              // 6. Floating Wave Motion & Velocity Dampening (NO global center gravity!)
               nodes.forEach(n => {
                 if (typeof n.worldX === 'number' && !n.isPinned) {
-                  const dx = centerX - n.worldX;
-                  const dy = centerY - n.worldY;
-                  const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-
-                  // Faint center gravity to keep constellation centered
-                  n.vx += (dx / dist) * Math.min(0.8, dist * 0.0005);
-                  n.vy += (dy / dist) * Math.min(0.8, dist * 0.0005);
-
-                  // Subtle, calm floating sine wave
                   const waveX = Math.sin(jellyTime + (n.worldY * 0.006)) * 0.08;
                   const waveY = Math.cos(jellyTime * 0.85 + (n.worldX * 0.006)) * 0.08;
                   n.vx += waveX;
                   n.vy += waveY;
 
-                  // Strict low speed cap (8.0px max) and heavy friction dampening (0.70x)
                   const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
                   if (speed > 8.0) {
                     n.vx = (n.vx / speed) * 8.0;
@@ -2687,6 +2769,98 @@
         requestAnimationFrame(physicsStep);
       }
       requestAnimationFrame(physicsStep);
+    }
+
+    function runWarmupPhysicsSimulation(steps = 40) {
+      if (!overlapData || !overlapData.nodes) return;
+      const nodes = overlapData.nodes;
+      const relations = overlapData.relations || [];
+      if (nodes.length === 0) return;
+
+      const activeNodes = nodes.filter(n => typeof n.worldX === 'number' && (!hideOneOffChats || (n.actionability_tier !== 'one_off' && n.turn_count > 1)));
+      const nodeMap = {};
+      activeNodes.forEach(n => {
+        nodeMap[n.id] = n;
+        if (typeof n.vx !== 'number') { n.vx = 0; n.vy = 0; }
+      });
+
+      const cellSize = 140;
+
+      for (let k = 0; k < steps; k++) {
+        const grid = {};
+        activeNodes.forEach(n => {
+          const gx = Math.floor(n.worldX / cellSize);
+          const gy = Math.floor(n.worldY / cellSize);
+          const key = `${gx}:${gy}`;
+          if (!grid[key]) grid[key] = [];
+          grid[key].push(n);
+        });
+
+        activeNodes.forEach(n1 => {
+          const gx = Math.floor(n1.worldX / cellSize);
+          const gy = Math.floor(n1.worldY / cellSize);
+
+          for (let dgx = -1; dgx <= 1; dgx++) {
+            for (let dgy = -1; dgy <= 1; dgy++) {
+              const cellNodes = grid[`${gx + dgx}:${gy + dgy}`];
+              if (!cellNodes) continue;
+
+              for (let i = 0; i < cellNodes.length; i++) {
+                const n2 = cellNodes[i];
+                if (n1.id >= n2.id) continue;
+
+                const dx = n2.worldX - n1.worldX;
+                const dy = n2.worldY - n1.worldY;
+                const distSq = dx * dx + dy * dy;
+                const minDist = 110;
+
+                if (distSq > 0 && distSq < (minDist * minDist)) {
+                  const dist = Math.sqrt(distSq) || 1;
+                  const overlap = minDist - dist;
+                  const repelForce = overlap * 0.45;
+
+                  const fx = (dx / dist) * repelForce;
+                  const fy = (dy / dist) * repelForce;
+
+                  if (!n1.isPinned) { n1.vx -= fx; n1.vy -= fy; }
+                  if (!n2.isPinned) { n2.vx += fx; n2.vy += fy; }
+                }
+              }
+            }
+          }
+        });
+
+        relations.forEach(rel => {
+          if (rel.similarity_score >= 0.25) {
+            const source = nodeMap[rel.source_key];
+            const target = nodeMap[rel.target_key];
+            if (source && target) {
+              const dx = target.worldX - source.worldX;
+              const dy = target.worldY - source.worldY;
+              const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+              const restLength = Math.max(70, 150 * (1.0 - rel.similarity_score * 0.5));
+              const delta = dist - restLength;
+              const springForce = delta * 0.18;
+
+              const fx = (dx / dist) * springForce;
+              const fy = (dy / dist) * springForce;
+
+              if (!source.isPinned) { source.vx += fx; source.vy += fy; }
+              if (!target.isPinned) { target.vx -= fx; target.vy -= fy; }
+            }
+          }
+        });
+
+        activeNodes.forEach(n => {
+          if (!n.isPinned) {
+            n.worldX += n.vx;
+            n.worldY += n.vy;
+            n.vx *= 0.65;
+            n.vy *= 0.65;
+          }
+        });
+      }
     }
 
     async function initCanvasData() {
@@ -2880,6 +3054,9 @@
           if (typeof n.vx !== 'number') n.vx = 0;
           if (typeof n.vy !== 'number') n.vy = 0;
         });
+
+        // Run Rapid High-Speed Warmup Physics Settle (200 iterations before initial render)
+        runWarmupPhysicsSimulation(200);
       } else if (currentGranularity === 'chat' && canvasData) {
         const minTs = canvasData.min_ts;
         const maxTs = canvasData.max_ts || minTs + 1;
@@ -2974,6 +3151,79 @@
       zoomCanvasAtPoint(factor, centerX, centerY);
     }
 
+    function runWarmupPhysicsSimulation(steps = 200) {
+      if (!overlapData || !overlapData.nodes) return;
+      const nodes = overlapData.nodes;
+      const relations = overlapData.relations || [];
+      if (nodes.length === 0) return;
+
+      const nodeMap = {};
+      nodes.forEach(n => {
+        nodeMap[n.id] = n;
+        if (typeof n.vx !== 'number') { n.vx = 0; n.vy = 0; }
+      });
+
+      for (let k = 0; k < steps; k++) {
+        const numNodes = nodes.length;
+        for (let i = 0; i < numNodes; i++) {
+          const n1 = nodes[i];
+          if (typeof n1.worldX !== 'number') continue;
+          for (let j = i + 1; j < numNodes; j++) {
+            const n2 = nodes[j];
+            if (typeof n2.worldX !== 'number') continue;
+
+            const dx = n2.worldX - n1.worldX;
+            const dy = n2.worldY - n1.worldY;
+            const distSq = dx * dx + dy * dy;
+
+            const minDist = 110;
+            if (distSq > 0 && distSq < (minDist * minDist)) {
+              const dist = Math.sqrt(distSq) || 1;
+              const overlap = minDist - dist;
+              const repelForce = overlap * 0.45;
+
+              const fx = (dx / dist) * repelForce;
+              const fy = (dy / dist) * repelForce;
+
+              if (!n1.isPinned) { n1.vx -= fx; n1.vy -= fy; }
+              if (!n2.isPinned) { n2.vx += fx; n2.vy += fy; }
+            }
+          }
+        }
+
+        relations.forEach(rel => {
+          if (rel.similarity_score >= 0.25) {
+            const source = nodeMap[rel.source_key];
+            const target = nodeMap[rel.target_key];
+            if (source && target && typeof source.worldX === 'number' && typeof target.worldX === 'number') {
+              const dx = target.worldX - source.worldX;
+              const dy = target.worldY - source.worldY;
+              const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+              const restLength = Math.max(70, 150 * (1.0 - rel.similarity_score * 0.5));
+              const delta = dist - restLength;
+              const springForce = delta * 0.18;
+
+              const fx = (dx / dist) * springForce;
+              const fy = (dy / dist) * springForce;
+
+              if (!source.isPinned) { source.vx += fx; source.vy += fy; }
+              if (!target.isPinned) { target.vx -= fx; target.vy -= fy; }
+            }
+          }
+        });
+
+        nodes.forEach(n => {
+          if (typeof n.worldX === 'number' && !n.isPinned) {
+            n.worldX += n.vx;
+            n.worldY += n.vy;
+            n.vx *= 0.65;
+            n.vy *= 0.65;
+          }
+        });
+      }
+    }
+
     function drawClusterBoundingHulls(ctx) {
       if (!overlapData || !overlapData.nodes) return;
       const nodes = overlapData.nodes;
@@ -3008,7 +3258,7 @@
 
       Object.keys(clusterBounds).forEach(tag => {
         const b = clusterBounds[tag];
-        if (b.count < 2) return;
+        if (b.count < 3) return;
 
         const pad = 45;
         const x = b.minX - pad;
