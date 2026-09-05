@@ -315,6 +315,43 @@
     animFrameId = requestAnimationFrame(physicsStep);
   }
 
+  function computeMultiHopTraversal(startNodeId, maxHops = 4) {
+    if (!startNodeId) return { nodeDistances: new Map(), edgeDistances: new Map() };
+
+    const nodeDistances = new Map();
+    const edgeDistances = new Map();
+    const queue = [{ id: startNodeId, depth: 0 }];
+    nodeDistances.set(startNodeId, 0);
+
+    const relations = graphData.relations || [];
+    const adj = new Map();
+
+    relations.forEach(rel => {
+      if (!adj.has(rel.source_key)) adj.set(rel.source_key, []);
+      if (!adj.has(rel.target_key)) adj.set(rel.target_key, []);
+      adj.get(rel.source_key).push({ target: rel.target_key, relId: rel.id });
+      adj.get(rel.target_key).push({ target: rel.source_key, relId: rel.id });
+    });
+
+    while (queue.length > 0) {
+      const item = queue.shift();
+      if (!item || item.depth >= maxHops) continue;
+
+      const neighbors = adj.get(item.id) || [];
+      neighbors.forEach(({ target, relId }) => {
+        if (!nodeDistances.has(target)) {
+          nodeDistances.set(target, item.depth + 1);
+          edgeDistances.set(relId, item.depth + 1);
+          queue.push({ id: target, depth: item.depth + 1 });
+        } else if (nodeDistances.get(target) === item.depth + 1) {
+          edgeDistances.set(relId, item.depth + 1);
+        }
+      });
+    }
+
+    return { nodeDistances, edgeDistances };
+  }
+
   function drawCanvas() {
     if (!ctx || !canvasEl) return;
     const w = canvasEl.width;
@@ -343,6 +380,10 @@
     });
 
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
+    const isSelectionActive = !!$selectedNode;
+    const { nodeDistances, edgeDistances } = isSelectionActive 
+      ? computeMultiHopTraversal($selectedNode.id, 4) 
+      : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Edges
     relations.forEach(rel => {
@@ -353,7 +394,7 @@
       if (!src || !tgt) return;
 
       const isPathEdge = $searchPathEdges.has(rel.id);
-      const isSelected = $selectedNode && ($selectedNode.id === src.id || $selectedNode.id === tgt.id);
+      const edgeDist = edgeDistances.get(rel.id);
 
       ctx.beginPath();
       ctx.moveTo(src.worldX, src.worldY);
@@ -364,12 +405,17 @@
         ctx.lineWidth = 3.5;
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
-      } else if (isSelected) {
-        ctx.strokeStyle = '#60a5fa';
-        ctx.lineWidth = 2.5;
-        ctx.shadowBlur = 0;
+      } else if (isSelectionActive && edgeDist !== undefined) {
+        const opacityMap = { 1: 0.85, 2: 0.55, 3: 0.35, 4: 0.20 };
+        const opacity = opacityMap[edgeDist] || 0.15;
+        ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+        ctx.lineWidth = Math.max(1.2, 3.0 - (edgeDist * 0.5));
+        ctx.shadowBlur = edgeDist === 1 ? 8 : 0;
+        ctx.shadowColor = '#60a5fa';
       } else {
-        ctx.strokeStyle = isSubgraphActive ? 'rgba(255, 255, 255, 0.04)' : 'rgba(255, 255, 255, 0.12)';
+        ctx.strokeStyle = (isSubgraphActive || isSelectionActive) 
+          ? 'rgba(255, 255, 255, 0.04)' 
+          : 'rgba(255, 255, 255, 0.12)';
         ctx.lineWidth = 1.0;
         ctx.shadowBlur = 0;
       }
@@ -384,6 +430,7 @@
       const isMatch = $searchMatchingNodeIds.has(n.id);
       const isHovered = $hoveredNode && $hoveredNode.id === n.id;
       const isSel = $selectedNode && $selectedNode.id === n.id;
+      const dist = nodeDistances.get(n.id);
 
       ctx.beginPath();
       ctx.arc(n.worldX, n.worldY, n.radius || 8, 0, Math.PI * 2);
@@ -395,14 +442,42 @@
       if (isMatch) color = '#f59e0b';
       if (isSel) color = '#38bdf8';
 
-      ctx.fillStyle = isSubgraphActive && !isMatch ? 'rgba(100, 116, 139, 0.25)' : color;
+      if (isSelectionActive && dist !== undefined) {
+        const opacityMap = { 0: 1.0, 1: 0.85, 2: 0.60, 3: 0.40, 4: 0.25 };
+        const op = opacityMap[dist] || 0.2;
+        if (dist === 0) {
+          color = '#38bdf8';
+        } else if (dist === 1) {
+          color = `rgba(96, 165, 250, ${op})`;
+        } else if (dist === 2) {
+          color = `rgba(147, 197, 253, ${op})`;
+        } else {
+          color = `rgba(191, 219, 254, ${op})`;
+        }
+        ctx.fillStyle = color;
+      } else if (isSelectionActive) {
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.12)';
+      } else if (isSubgraphActive && !isMatch) {
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.25)';
+      } else {
+        ctx.fillStyle = color;
+      }
+
       ctx.fill();
 
       if (isMatch) {
         ctx.strokeStyle = '#f59e0b';
         ctx.lineWidth = 3.0;
         ctx.stroke();
-      } else if (isHovered || isSel) {
+      } else if (isSel) {
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3.0;
+        ctx.stroke();
+      } else if (isSelectionActive && dist !== undefined) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${dist === 1 ? 0.7 : 0.3})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      } else if (isHovered) {
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2.0;
         ctx.stroke();

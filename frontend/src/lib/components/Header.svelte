@@ -95,6 +95,14 @@
     </button>
     <button 
       class="subtab-btn" 
+      class:active={$activeSubtab === 'd3_constellation'} 
+      id="subtabD3"
+      onclick={() => activeSubtab.set('d3_constellation')}
+    >
+      🪐 D3 Graph
+    </button>
+    <button 
+      class="subtab-btn" 
       class:active={$activeSubtab === 'mindmap'} 
       id="subtabMindmap"
       onclick={() => activeSubtab.set('mindmap')}

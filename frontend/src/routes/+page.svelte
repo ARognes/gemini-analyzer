@@ -6,6 +6,7 @@
   import Header from '$lib/components/Header.svelte';
   import FilterBar from '$lib/components/FilterBar.svelte';
   import CanvasConstellation from '$lib/components/CanvasConstellation.svelte';
+  import D3Constellation from '$lib/components/D3Constellation.svelte';
   import SubgraphDrawer from '$lib/components/SubgraphDrawer.svelte';
   import ThreadDrawer from '$lib/components/ThreadDrawer.svelte';
   import CorrelationModal from '$lib/components/CorrelationModal.svelte';
@@ -25,13 +26,15 @@
 <div class="app-layout">
   <Header />
 
-  {#if $activeSubtab === 'topic_clusters'}
+  {#if $activeSubtab === 'topic_clusters' || $activeSubtab === 'd3_constellation'}
     <FilterBar />
   {/if}
 
   <main class="main-viewport">
     {#if $activeSubtab === 'topic_clusters'}
       <CanvasConstellation />
+    {:else if $activeSubtab === 'd3_constellation'}
+      <D3Constellation />
     {:else if $activeSubtab === 'mindmap'}
       <MindmapTree />
     {:else if $activeSubtab === 'matrix'}
