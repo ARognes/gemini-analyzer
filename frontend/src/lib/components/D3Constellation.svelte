@@ -19,6 +19,7 @@
   let canvasEl;
   let ctx;
   let simulation;
+  let zoomInstance;
 
   let graphData = $state({ nodes: [], relations: [] });
   let isLoaded = $state(false);
@@ -27,6 +28,12 @@
   let transform = $state(d3.zoomIdentity);
   let isDraggingNode = false;
   let lastClickTime = 0;
+
+  // Graph Context Menu state
+  let isContextMenuOpen = $state(false);
+  let contextMenuX = $state(0);
+  let contextMenuY = $state(0);
+  let contextMenuNode = $state(null);
 
   $effect(() => {
     if (isLoaded && ctx) {
@@ -38,28 +45,31 @@
     ctx = canvasEl.getContext('2d');
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('click', closeContextMenu);
 
-    // Setup D3 Zoom
-    const zoom = d3.zoom()
+    // Setup D3 Zoom - Filter strictly for Middle Mouse Button (button === 1) or Scroll Wheel
+    zoomInstance = d3.zoom()
       .scaleExtent([0.15, 5.0])
-      .filter((event) => !event.button && !isDraggingNode)
+      .filter((event) => {
+        if (event.type === 'wheel') return true;
+        if (event.type === 'mousedown') return event.button === 1; // Middle Mouse Button Panning
+        return true;
+      })
       .on('zoom', (event) => {
         transform = event.transform;
         drawCanvas();
       });
 
     const d3Canvas = d3.select(canvasEl);
-    d3Canvas.call(zoom);
+    d3Canvas.call(zoomInstance);
 
-    // Setup initial zoom centering (scale 0.45, centered on 1600, 1100)
-    const initialTransform = d3.zoomIdentity
-      .translate((canvasEl.width / 2) - (1600 * 0.45), (canvasEl.height / 2) - (1100 * 0.45))
-      .scale(0.45);
-    d3Canvas.call(zoom.transform, initialTransform);
+    // Initial zoom centering (scale 0.45, centered on 1600, 1100)
+    resetCameraView();
 
-    // Setup D3 Drag
+    // Setup D3 Drag - Left Mouse Button (button === 0) for Node Dragging
     const drag = d3.drag()
       .container(canvasEl)
+      .filter((event) => event.button === 0)
       .subject(event => {
         const [mx, my] = [event.x, event.y];
         const wx = (mx - transform.x) / transform.k;
@@ -90,8 +100,10 @@
         if (!event.subject) return;
         isDraggingNode = false;
         if (!event.active && simulation) simulation.alphaTarget(0);
-        event.subject.fx = null;
-        event.subject.fy = null;
+        if (!event.subject.isPinned) {
+          event.subject.fx = null;
+          event.subject.fy = null;
+        }
       });
 
     d3Canvas.call(drag);
@@ -109,6 +121,7 @@
   onDestroy(() => {
     if (simulation) simulation.stop();
     window.removeEventListener('resize', resizeCanvas);
+    window.removeEventListener('click', closeContextMenu);
   });
 
   function resizeCanvas() {
@@ -116,6 +129,14 @@
     canvasEl.width = canvasEl.clientWidth || window.innerWidth;
     canvasEl.height = canvasEl.clientHeight || window.innerHeight;
     if (isLoaded) drawCanvas();
+  }
+
+  function resetCameraView() {
+    if (!canvasEl || !zoomInstance) return;
+    const initialTransform = d3.zoomIdentity
+      .translate((canvasEl.width / 2) - (1600 * 0.45), (canvasEl.height / 2) - (1100 * 0.45))
+      .scale(0.45);
+    d3.select(canvasEl).call(zoomInstance.transform, initialTransform);
   }
 
   function initD3Simulation() {
@@ -395,6 +416,9 @@
   }
 
   function handleClick(e) {
+    // Only handle Left Click (button === 0) for selection
+    if (e.button !== 0) return;
+
     const rect = canvasEl.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
@@ -423,6 +447,48 @@
     lastClickTime = now;
   }
 
+  function handleContextMenu(e) {
+    // Intercept right-click ONLY on the graph canvas
+    e.preventDefault();
+    const rect = canvasEl.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const wx = (mx - transform.x) / transform.k;
+    const wy = (my - transform.y) / transform.k;
+
+    const nodes = graphData.nodes || [];
+    const hit = nodes.find(n => {
+      const dx = n.x - wx;
+      const dy = n.y - wy;
+      return (dx * dx + dy * dy) <= ((n.radius || 8) + 6) ** 2;
+    });
+
+    contextMenuX = e.clientX;
+    contextMenuY = e.clientY;
+    contextMenuNode = hit || null;
+    isContextMenuOpen = true;
+  }
+
+  function closeContextMenu() {
+    isContextMenuOpen = false;
+    contextMenuNode = null;
+  }
+
+  function togglePinNode(node) {
+    if (!node) return;
+    if (node.isPinned) {
+      node.isPinned = false;
+      node.fx = null;
+      node.fy = null;
+    } else {
+      node.isPinned = true;
+      node.fx = node.x;
+      node.fy = node.y;
+    }
+    drawCanvas();
+    closeContextMenu();
+  }
+
   async function openThreadDrawer(threadId) {
     try {
       const thread = await fetchStitchedThread(threadId);
@@ -433,6 +499,14 @@
     } catch (err) {
       console.error('Failed to open thread drawer:', err);
     }
+    closeContextMenu();
+  }
+
+  function copyThreadId(threadId) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(threadId);
+    }
+    closeContextMenu();
   }
 </script>
 
@@ -442,6 +516,7 @@
     bind:this={canvasEl}
     onmousemove={handleMouseMove}
     onclick={handleClick}
+    oncontextmenu={handleContextMenu}
   ></canvas>
 
   {#if $hoveredNode}
@@ -454,7 +529,42 @@
     </div>
   {/if}
 
-  <div class="d3-badge">🪐 D3.js Force Simulation Engine</div>
+  {#if isContextMenuOpen}
+    <div 
+      class="context-menu"
+      style="left: {contextMenuX}px; top: {contextMenuY}px;"
+      onclick={(e) => e.stopPropagation()}
+    >
+      {#if contextMenuNode}
+        <div class="menu-header">💬 {contextMenuNode.title || 'Chat Thread'}</div>
+        <button class="menu-item" onclick={() => openThreadDrawer(contextMenuNode.id)}>
+          📖 Inspect Full Thread
+        </button>
+        <button class="menu-item" onclick={() => togglePinNode(contextMenuNode)}>
+          📌 {contextMenuNode.isPinned ? 'Unpin Node Position' : 'Pin Node Position'}
+        </button>
+        <button class="menu-item" onclick={() => selectedActionabilityTier.set(contextMenuNode.actionability_tier)}>
+          🏷️ Filter by Tier ({contextMenuNode.actionability_tier || 'standard'})
+        </button>
+        <button class="menu-item" onclick={() => copyThreadId(contextMenuNode.id)}>
+          📋 Copy Thread ID
+        </button>
+      {:else}
+        <div class="menu-header">🌌 Graph Canvas Actions</div>
+        <button class="menu-item" onclick={() => { resetCameraView(); closeContextMenu(); }}>
+          🎯 Reset Camera & Zoom
+        </button>
+        <button class="menu-item" onclick={() => { hideOneOffChats.update(v => !v); closeContextMenu(); }}>
+          ⚡ Toggle One-Off Chats ({#if $hideOneOffChats}Show{:else}Hide{/if})
+        </button>
+        <button class="menu-item" onclick={() => { hideAppCommands.update(v => !v); closeContextMenu(); }}>
+          📱 Toggle App Commands ({#if $hideAppCommands}Show{:else}Hide{/if})
+        </button>
+      {/if}
+    </div>
+  {/if}
+
+  <div class="d3-badge">🪐 D3.js Force Engine • Middle Click: Pan • Left Click: Drag & Select • Right Click: Menu</div>
 </div>
 
 <style>
@@ -516,5 +626,46 @@
   .tooltip-meta {
     font-size: 0.7rem;
     color: #94a3b8;
+  }
+
+  .context-menu {
+    position: fixed;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 210px;
+    z-index: 1300;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .menu-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fbbf24;
+    padding: 0.35rem 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 0.2rem;
+  }
+
+  .menu-item {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .menu-item:hover {
+    background: rgba(59, 130, 246, 0.2);
+    color: #ffffff;
   }
 </style>
