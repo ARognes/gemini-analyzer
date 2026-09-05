@@ -1,0 +1,727 @@
+{
+  "threshold": 0.3,
+  "threshold_pct": 30,
+  "total_pairs": 76864,
+  "qualified_pairs": 11645,
+  "buckets": [
+    {
+      "min": 0.15,
+      "max": 0.2,
+      "min_pct": 15,
+      "max_pct": 20,
+      "label": "15\u201320%",
+      "count": 39448,
+      "is_qualified": false
+    },
+    {
+      "min": 0.2,
+      "max": 0.25,
+      "min_pct": 20,
+      "max_pct": 25,
+      "label": "20\u201325%",
+      "count": 18036,
+      "is_qualified": false
+    },
+    {
+      "min": 0.25,
+      "max": 0.3,
+      "min_pct": 25,
+      "max_pct": 30,
+      "label": "25\u201330%",
+      "count": 7735,
+      "is_qualified": false
+    },
+    {
+      "min": 0.3,
+      "max": 0.35,
+      "min_pct": 30,
+      "max_pct": 35,
+      "label": "30\u201335%",
+      "count": 4147,
+      "is_qualified": true
+    },
+    {
+      "min": 0.35,
+      "max": 0.4,
+      "min_pct": 35,
+      "max_pct": 40,
+      "label": "35\u201340%",
+      "count": 2216,
+      "is_qualified": true
+    },
+    {
+      "min": 0.4,
+      "max": 0.45,
+      "min_pct": 40,
+      "max_pct": 45,
+      "label": "40\u201345%",
+      "count": 1267,
+      "is_qualified": true
+    },
+    {
+      "min": 0.45,
+      "max": 0.5,
+      "min_pct": 45,
+      "max_pct": 50,
+      "label": "45\u201350%",
+      "count": 941,
+      "is_qualified": true
+    },
+    {
+      "min": 0.5,
+      "max": 0.55,
+      "min_pct": 50,
+      "max_pct": 55,
+      "label": "50\u201355%",
+      "count": 468,
+      "is_qualified": true
+    },
+    {
+      "min": 0.55,
+      "max": 0.6,
+      "min_pct": 55,
+      "max_pct": 60,
+      "label": "55\u201360%",
+      "count": 158,
+      "is_qualified": true
+    },
+    {
+      "min": 0.6,
+      "max": 0.65,
+      "min_pct": 60,
+      "max_pct": 65,
+      "label": "60\u201365%",
+      "count": 178,
+      "is_qualified": true
+    },
+    {
+      "min": 0.65,
+      "max": 0.7,
+      "min_pct": 65,
+      "max_pct": 70,
+      "label": "65\u201370%",
+      "count": 196,
+      "is_qualified": true
+    },
+    {
+      "min": 0.7,
+      "max": 0.75,
+      "min_pct": 70,
+      "max_pct": 75,
+      "label": "70\u201375%",
+      "count": 221,
+      "is_qualified": true
+    },
+    {
+      "min": 0.75,
+      "max": 0.8,
+      "min_pct": 75,
+      "max_pct": 80,
+      "label": "75\u201380%",
+      "count": 84,
+      "is_qualified": true
+    },
+    {
+      "min": 0.8,
+      "max": 0.85,
+      "min_pct": 80,
+      "max_pct": 85,
+      "label": "80\u201385%",
+      "count": 121,
+      "is_qualified": true
+    },
+    {
+      "min": 0.85,
+      "max": 0.9,
+      "min_pct": 85,
+      "max_pct": 90,
+      "label": "85\u201390%",
+      "count": 73,
+      "is_qualified": true
+    },
+    {
+      "min": 0.9,
+      "max": 0.95,
+      "min_pct": 90,
+      "max_pct": 95,
+      "label": "90\u201395%",
+      "count": 76,
+      "is_qualified": true
+    },
+    {
+      "min": 0.95,
+      "max": 1.0,
+      "min_pct": 95,
+      "max_pct": 100,
+      "label": "95\u2013100%",
+      "count": 1499,
+      "is_qualified": true
+    }
+  ],
+  "sample_pairs": [
+    {
+      "source_key": "76d22c668a806672",
+      "target_key": "68258b2d8eb40495",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Chipotle",
+      "target_title": "open Chipotle",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "chipotle",
+        "open"
+      ]
+    },
+    {
+      "source_key": "76d22c668a806672",
+      "target_key": "3fb262b73305295f",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Chipotle",
+      "target_title": "open Chipotle",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "chipotle",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "0599551dcf95af19",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "ef3b3d358d8e5bd4",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "9b7b25d6abea5cbd",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "fd234fb1bd604fa8",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "722e95993507eb72",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "e3f480891fcdf000",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "818847560e7535ab",
+      "target_key": "1e43e0194c1c03f1",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Snapchat",
+      "target_title": "open Snapchat",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "snapchat",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "bfd88444ce32d4b4",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "afc9277bdc03dffd",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "25a8ee36b7a2d85c",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "5d5e9d06ea5f97f8",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "dc4a9f29f0601539",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "2a3d368b36e2529d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "f1dd57cf88ea11fc",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "f906b00bc0c7a99d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "2b21cefd54e1f651",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "3408393d3c5edb89",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "9d5d4975170f1f5d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "c72009073a2df5b1",
+      "target_key": "fd62142e2a875cd2",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open maps",
+      "target_title": "open maps",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "maps",
+        "open"
+      ]
+    },
+    {
+      "source_key": "efe54fb84370be76",
+      "target_key": "4ba571435c90615b",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Pandora",
+      "target_title": "open Pandora",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "pandora",
+        "open"
+      ]
+    },
+    {
+      "source_key": "efe54fb84370be76",
+      "target_key": "f4f5fd81ba41bb00",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Pandora",
+      "target_title": "open Pandora",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "pandora",
+        "open"
+      ]
+    },
+    {
+      "source_key": "a161c3276c906d11",
+      "target_key": "3223e8d5a6fd0e9a",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open settings",
+      "target_title": "open settings",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "settings",
+        "open"
+      ]
+    },
+    {
+      "source_key": "a161c3276c906d11",
+      "target_key": "6de826a8b577670d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open settings",
+      "target_title": "open settings",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "settings",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "13f5cdc415c7ffdb",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "24ee5b53c8b57228",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "1c5029f023bd9ba3",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "1d581b52c6f16b8d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "0909b22771968906",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "bcfb9e6db552bf3d",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "9f18bd287bd78a75",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "07121559ce9c78c9",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "00feab0592cf70d9",
+      "target_key": "abfd19f74e09e084",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open photos",
+      "target_title": "open photos",
+      "source_cat": "ai_agents",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "photos",
+        "open"
+      ]
+    },
+    {
+      "source_key": "b4800b032fb7acff",
+      "target_key": "28c9911f7c5e4607",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "Open phone",
+      "target_title": "open phone",
+      "source_cat": "outliers",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "phone",
+        "open"
+      ]
+    },
+    {
+      "source_key": "f1fa84fa43e0c57f",
+      "target_key": "9855c2e1ff5580cb",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "a sensitive query.",
+      "target_title": "a sensitive query.",
+      "source_cat": "outliers",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "query",
+        "sensitive",
+        "communications"
+      ]
+    },
+    {
+      "source_key": "755202e56aeabd87",
+      "target_key": "d6fec1e01487e384",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Google meet",
+      "target_title": "open Google meet",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "meet",
+        "google",
+        "open"
+      ]
+    },
+    {
+      "source_key": "755202e56aeabd87",
+      "target_key": "3dcfae1e01c699f8",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Google meet",
+      "target_title": "open Google meet",
+      "source_cat": "ai_agents",
+      "target_cat": "ai_agents",
+      "shared_topics": [
+        "meet",
+        "google",
+        "open"
+      ]
+    },
+    {
+      "source_key": "755202e56aeabd87",
+      "target_key": "b912a64436009d8a",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "open Google meet",
+      "target_title": "open Google meet",
+      "source_cat": "ai_agents",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "meet",
+        "google",
+        "open"
+      ]
+    },
+    {
+      "source_key": "4e5e2455b3174a21",
+      "target_key": "e442415c02615ab4",
+      "similarity_score": 1.0,
+      "similarity_pct": 100,
+      "source_title": "a Communications query.",
+      "target_title": "a Communications query.",
+      "source_cat": "outliers",
+      "target_cat": "outliers",
+      "shared_topics": [
+        "communications",
+        "query"
+      ]
+    }
+  ]
+}

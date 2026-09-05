@@ -1,0 +1,3895 @@
+{
+  "daily_heatmap": {
+    "2025-06-21": 1,
+    "2025-07-11": 1,
+    "2025-07-15": 1,
+    "2025-07-31": 22,
+    "2025-08-01": 17,
+    "2025-08-02": 9,
+    "2025-08-03": 68,
+    "2025-08-04": 8,
+    "2025-08-05": 6,
+    "2025-08-06": 26,
+    "2025-08-07": 49,
+    "2025-08-08": 39,
+    "2025-08-09": 7,
+    "2025-08-10": 28,
+    "2025-08-11": 16,
+    "2025-08-12": 31,
+    "2025-08-13": 3,
+    "2025-08-14": 12,
+    "2025-08-15": 10,
+    "2025-08-18": 12,
+    "2025-08-19": 1,
+    "2025-08-22": 2,
+    "2025-08-23": 19,
+    "2025-08-24": 13,
+    "2025-08-25": 4,
+    "2025-08-27": 7,
+    "2025-08-30": 1,
+    "2025-08-31": 4,
+    "2025-09-03": 37,
+    "2025-09-04": 14,
+    "2025-09-05": 4,
+    "2025-09-06": 5,
+    "2025-09-07": 5,
+    "2025-09-10": 2,
+    "2025-09-11": 12,
+    "2025-09-13": 7,
+    "2025-09-14": 3,
+    "2025-09-15": 10,
+    "2025-09-16": 10,
+    "2025-09-17": 3,
+    "2025-09-18": 4,
+    "2025-09-19": 1,
+    "2025-09-21": 6,
+    "2025-09-22": 4,
+    "2025-09-23": 3,
+    "2025-09-24": 24,
+    "2025-09-25": 15,
+    "2025-09-26": 4,
+    "2025-09-28": 2,
+    "2025-09-29": 5,
+    "2025-09-30": 1,
+    "2025-10-01": 1,
+    "2025-10-02": 1,
+    "2025-10-03": 2,
+    "2025-10-04": 2,
+    "2025-10-05": 2,
+    "2025-10-06": 6,
+    "2025-10-07": 5,
+    "2025-10-09": 4,
+    "2025-10-11": 2,
+    "2025-10-12": 4,
+    "2025-10-13": 7,
+    "2025-10-14": 11,
+    "2025-10-16": 1,
+    "2025-10-18": 4,
+    "2025-10-19": 8,
+    "2025-10-20": 1,
+    "2025-10-21": 4,
+    "2025-10-22": 4,
+    "2025-10-24": 2,
+    "2025-10-26": 1,
+    "2025-10-28": 5,
+    "2025-10-29": 2,
+    "2025-10-31": 9,
+    "2025-11-01": 13,
+    "2025-11-02": 15,
+    "2025-11-03": 3,
+    "2025-11-04": 3,
+    "2025-11-05": 5,
+    "2025-11-06": 9,
+    "2025-11-07": 1,
+    "2025-11-08": 10,
+    "2025-11-09": 20,
+    "2025-11-10": 1,
+    "2025-11-11": 7,
+    "2025-11-12": 1,
+    "2025-11-13": 2,
+    "2025-11-14": 1,
+    "2025-11-15": 17,
+    "2025-11-16": 8,
+    "2025-11-17": 3,
+    "2025-11-18": 5,
+    "2025-11-20": 3,
+    "2025-11-22": 2,
+    "2025-11-23": 8,
+    "2025-11-26": 16,
+    "2025-11-28": 4,
+    "2025-11-29": 17,
+    "2025-11-30": 1,
+    "2025-12-01": 9,
+    "2025-12-02": 3,
+    "2025-12-03": 14,
+    "2025-12-04": 6,
+    "2025-12-05": 10,
+    "2025-12-07": 12,
+    "2025-12-08": 9,
+    "2025-12-09": 2,
+    "2025-12-11": 8,
+    "2025-12-12": 2,
+    "2025-12-13": 6,
+    "2025-12-14": 2,
+    "2025-12-16": 3,
+    "2025-12-17": 48,
+    "2025-12-18": 3,
+    "2025-12-19": 16,
+    "2025-12-20": 5,
+    "2025-12-21": 27,
+    "2025-12-22": 17,
+    "2025-12-23": 11,
+    "2025-12-24": 9,
+    "2025-12-25": 1,
+    "2025-12-26": 1,
+    "2025-12-27": 1,
+    "2025-12-28": 6,
+    "2025-12-29": 21,
+    "2025-12-30": 3,
+    "2025-12-31": 2,
+    "2026-01-01": 11,
+    "2026-01-02": 14,
+    "2026-01-04": 6,
+    "2026-01-05": 19,
+    "2026-01-06": 6,
+    "2026-01-07": 4,
+    "2026-01-08": 18,
+    "2026-01-09": 5,
+    "2026-01-10": 2,
+    "2026-01-12": 6,
+    "2026-01-13": 1,
+    "2026-01-14": 12,
+    "2026-01-15": 15,
+    "2026-01-16": 11,
+    "2026-01-17": 15,
+    "2026-01-18": 10,
+    "2026-01-19": 12,
+    "2026-01-20": 2,
+    "2026-01-21": 18,
+    "2026-01-22": 12,
+    "2026-01-23": 18,
+    "2026-01-24": 3,
+    "2026-01-25": 20,
+    "2026-01-26": 23,
+    "2026-01-27": 22,
+    "2026-01-28": 21,
+    "2026-01-29": 32,
+    "2026-01-30": 18,
+    "2026-01-31": 15,
+    "2026-02-01": 8,
+    "2026-02-02": 4,
+    "2026-02-03": 27,
+    "2026-02-04": 36,
+    "2026-02-05": 42,
+    "2026-02-06": 26,
+    "2026-02-07": 10,
+    "2026-02-08": 4,
+    "2026-02-09": 20,
+    "2026-02-10": 13,
+    "2026-02-11": 16,
+    "2026-02-12": 36,
+    "2026-02-13": 19,
+    "2026-02-14": 26,
+    "2026-02-15": 72,
+    "2026-02-16": 20,
+    "2026-02-17": 14,
+    "2026-02-18": 7,
+    "2026-02-19": 19,
+    "2026-02-20": 25,
+    "2026-02-21": 50,
+    "2026-02-22": 31,
+    "2026-02-23": 15,
+    "2026-02-24": 23,
+    "2026-02-25": 4,
+    "2026-02-27": 1,
+    "2026-03-02": 8,
+    "2026-03-04": 2,
+    "2026-03-06": 1,
+    "2026-03-07": 27,
+    "2026-03-09": 2,
+    "2026-03-10": 5,
+    "2026-03-11": 55,
+    "2026-03-12": 23,
+    "2026-03-13": 32,
+    "2026-03-14": 20,
+    "2026-03-15": 6,
+    "2026-03-16": 2,
+    "2026-03-17": 8,
+    "2026-03-18": 72,
+    "2026-03-19": 2,
+    "2026-03-20": 6,
+    "2026-03-21": 2,
+    "2026-03-22": 1,
+    "2026-03-23": 15,
+    "2026-03-24": 20,
+    "2026-03-25": 9,
+    "2026-03-26": 21,
+    "2026-03-27": 26,
+    "2026-03-28": 1,
+    "2026-03-29": 11,
+    "2026-03-30": 61,
+    "2026-04-01": 9,
+    "2026-04-02": 3,
+    "2026-04-03": 48,
+    "2026-04-04": 46,
+    "2026-04-05": 17,
+    "2026-04-06": 46,
+    "2026-04-07": 2,
+    "2026-04-10": 268,
+    "2026-04-11": 16,
+    "2026-04-12": 24,
+    "2026-04-13": 19,
+    "2026-04-14": 18,
+    "2026-04-15": 47,
+    "2026-04-16": 59,
+    "2026-04-17": 13,
+    "2026-04-18": 27,
+    "2026-04-19": 28,
+    "2026-04-20": 5,
+    "2026-04-21": 12,
+    "2026-04-22": 17,
+    "2026-04-23": 15,
+    "2026-04-24": 45,
+    "2026-04-25": 45,
+    "2026-04-26": 3,
+    "2026-04-27": 34,
+    "2026-04-28": 27,
+    "2026-04-29": 44,
+    "2026-04-30": 8,
+    "2026-05-01": 4,
+    "2026-05-02": 36,
+    "2026-05-03": 9,
+    "2026-05-04": 34,
+    "2026-05-05": 32,
+    "2026-05-06": 6,
+    "2026-05-07": 25,
+    "2026-05-08": 29,
+    "2026-05-09": 39,
+    "2026-05-10": 11,
+    "2026-05-11": 12,
+    "2026-05-12": 28,
+    "2026-05-13": 24,
+    "2026-05-14": 15,
+    "2026-05-15": 2,
+    "2026-05-16": 12,
+    "2026-05-17": 39,
+    "2026-05-18": 34,
+    "2026-05-19": 29,
+    "2026-05-20": 49,
+    "2026-05-21": 27,
+    "2026-05-22": 31,
+    "2026-05-23": 11,
+    "2026-05-24": 27,
+    "2026-05-25": 36,
+    "2026-05-26": 43,
+    "2026-05-27": 39,
+    "2026-05-28": 86,
+    "2026-05-29": 41,
+    "2026-05-30": 34,
+    "2026-05-31": 1,
+    "2026-06-01": 16,
+    "2026-06-02": 24,
+    "2026-06-03": 72,
+    "2026-06-04": 7,
+    "2026-06-05": 25,
+    "2026-06-06": 64,
+    "2026-06-07": 112,
+    "2026-06-08": 37,
+    "2026-06-10": 24,
+    "2026-06-11": 73,
+    "2026-06-12": 41,
+    "2026-06-13": 84,
+    "2026-06-14": 95,
+    "2026-06-15": 48,
+    "2026-06-16": 66,
+    "2026-06-17": 38,
+    "2026-06-18": 55,
+    "2026-06-19": 102,
+    "2026-06-20": 51,
+    "2026-06-21": 12,
+    "2026-06-22": 37,
+    "2026-06-23": 30,
+    "2026-06-24": 67,
+    "2026-06-25": 103,
+    "2026-06-26": 37,
+    "2026-06-27": 64,
+    "2026-06-28": 5,
+    "2026-06-29": 44,
+    "2026-06-30": 9,
+    "2026-07-01": 19,
+    "2026-07-02": 65,
+    "2026-07-03": 45,
+    "2026-07-04": 23,
+    "2026-07-05": 13,
+    "2026-07-06": 32,
+    "2026-07-07": 44,
+    "2026-07-08": 15,
+    "2026-07-09": 28,
+    "2026-07-10": 94,
+    "2026-07-11": 53,
+    "2026-07-12": 28,
+    "2026-07-14": 3,
+    "2026-07-15": 29,
+    "2026-07-16": 41,
+    "2026-07-17": 63,
+    "2026-07-18": 78,
+    "2026-07-19": 51,
+    "2026-07-20": 18,
+    "2026-07-21": 15,
+    "2026-07-22": 32,
+    "2026-07-23": 40,
+    "2026-07-24": 7,
+    "2026-07-25": 24,
+    "2026-07-26": 68,
+    "2026-07-27": 33,
+    "2026-07-28": 24,
+    "2026-07-29": 61,
+    "2026-07-30": 18,
+    "2026-07-31": 88,
+    "2026-08-01": 77,
+    "2026-08-02": 46,
+    "2026-08-03": 35,
+    "2026-08-04": 86,
+    "2026-08-05": 66,
+    "2026-08-06": 15,
+    "2026-08-07": 30,
+    "2026-08-08": 55,
+    "2026-08-09": 38,
+    "2026-08-10": 45,
+    "2026-08-11": 67,
+    "2026-08-12": 93,
+    "2026-08-13": 92,
+    "2026-08-14": 132,
+    "2026-08-15": 86,
+    "2026-08-16": 56,
+    "2026-08-17": 36,
+    "2026-08-18": 1,
+    "2026-08-19": 47,
+    "2026-08-20": 35,
+    "2026-08-21": 9,
+    "2026-08-22": 69,
+    "2026-08-23": 62,
+    "2026-08-24": 35,
+    "2026-08-25": 45,
+    "2026-08-26": 13,
+    "2026-08-27": 8
+  },
+  "hourly_distribution": [
+    291,
+    238,
+    159,
+    104,
+    73,
+    68,
+    69,
+    31,
+    88,
+    193,
+    214,
+    330,
+    472,
+    544,
+    556,
+    499,
+    605,
+    574,
+    670,
+    600,
+    491,
+    524,
+    453,
+    412
+  ],
+  "media_items": [
+    {
+      "filename": "2026-08-20_transaction_download-07ecafc967e79811_2.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_transaction_download%20%28-07ecafc967e79811.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_360Checking...2713-07ecafc967e79811.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_transaction_download-07ecafc967e79811_3.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_360PerformanceSavings.-07ecafc967e79811.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_transaction_download-07ecafc967e79811_1.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_transaction_download-07ecafc967e79811.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 121,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:46",
+      "snippet": "How does my spending look? Attached 7 files. - 2026-08-20_360PerformanceSavings."
+    },
+    {
+      "filename": "2026-08-20_transaction_download-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "activity%20%283%29-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "bk_download-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "activity%20%282%29-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "activity%20%281%29-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-cd2bcbcfe90c8703_1.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "2026-08-20_transaction_download%20%28-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "Chase6533_Activity_20260820-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "Chase6533_Activity_20260820%20%281%29-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "activity-cd2bcbcfe90c8703.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 122,
+      "group_key": "2f76f0c4825444de",
+      "timestamp": "2026-08-23 19:04:17",
+      "snippet": "Attached 10 files. - 2026-08-20_transaction_download (4).csv - activity.csv - Ch"
+    },
+    {
+      "filename": "421d8874-ce19-4480-be4d-606df7976-69a848b563d483e1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 212,
+      "group_key": "8d4c4cb6c79dec8d",
+      "timestamp": "2026-08-22 18:37:24",
+      "snippet": "My vape is not working it has enough juice in it and it is charged It is just no"
+    },
+    {
+      "filename": "image_0193a2-5e72b0c3496e9b21.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 228,
+      "group_key": "bb4ada08b8067be0",
+      "timestamp": "2026-08-22 10:50:58",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"R2wzjGRL\",\"type\":\"text\",\"x\":-1"
+    },
+    {
+      "filename": "bk_download-d808cee0f0e38c2f.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 243,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 23:37:27",
+      "snippet": "Can we compile together all of the gas purchases? Attached 1 file. - bk_download"
+    },
+    {
+      "filename": "319e75be-755c-4a3e-b8a0-2c7207d11-75a37835523bc02d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 256,
+      "group_key": "e64d484a347167fc",
+      "timestamp": "2026-08-20 17:40:27",
+      "snippet": "I like to use this every once in awhile but very rarely I imagine if I were to u"
+    },
+    {
+      "filename": "download%283%29-20925ef60872d1be.CSV",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "activity-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "Chase6533_Activity_20260820%20%281%29-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "activity%20%282%29-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "Chase6533_Activity_20260820-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "activity%20%281%29-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "Discover-AllAvailable-20260820-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "activity%20%283%29-20925ef60872d1be.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 274,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:15:10",
+      "snippet": "Attached 8 files. - activity (1).csv - activity (2).csv - activity (3).csv - act"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-224cbb5f94f53d6e_2.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_transaction_download%20%28-224cbb5f94f53d6e.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_360PerformanceSavings.-224cbb5f94f53d6e.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-224cbb5f94f53d6e_3.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_360Checking...2713-224cbb5f94f53d6e.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-224cbb5f94f53d6e_4.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-224cbb5f94f53d6e.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "2026-08-20_transaction_download-224cbb5f94f53d6e_1.csv",
+      "ext": "csv",
+      "is_img": false,
+      "chat_id": 275,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:14:55",
+      "snippet": "Attached 8 files. - 2026-08-20_360Checking...2713.csv - 2026-08-20_360Performanc"
+    },
+    {
+      "filename": "Finance-Statements-63968b7969d9337d.zip",
+      "ext": "zip",
+      "is_img": false,
+      "chat_id": 276,
+      "group_key": "7f6987a5cfef0d87",
+      "timestamp": "2026-08-20 09:13:48",
+      "snippet": "Attached 1 file. - Finance-Statements.zip"
+    },
+    {
+      "filename": "e43f615c-d0d7-4bac-adb2-2287f6bfc-9cbc815bbaea4445.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 298,
+      "group_key": "51a3bd68f7235fb3",
+      "timestamp": "2026-08-19 12:37:43",
+      "snippet": "This yellow Port seems to be the oil fill and not the previous one Attached 1 fi"
+    },
+    {
+      "filename": "41078c99-a81f-4d0f-a218-1f9e2baf8-53b9015e4df303ee.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 299,
+      "group_key": "51a3bd68f7235fb3",
+      "timestamp": "2026-08-19 12:36:55",
+      "snippet": "There is a hole opening with a plug at about the center of this image on this ma"
+    },
+    {
+      "filename": "00ffcb54-425f-44ce-bb5d-a5ccead7b-fc898c5a82f9fcbf.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 300,
+      "group_key": "51a3bd68f7235fb3",
+      "timestamp": "2026-08-19 12:36:21",
+      "snippet": "Attached 1 file. - 00ffcb54-425f-44ce-bb5d-a5ccead7b41c"
+    },
+    {
+      "filename": "ba9bbfb4-8fd4-4ebc-9c97-77ede99ce-422b131ada1226e3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 324,
+      "group_key": "d0efb1107cfea30c",
+      "timestamp": "2026-08-18 20:14:18",
+      "snippet": "This water cooler has a bunch of that. That brown grime in it from cardboard tha"
+    },
+    {
+      "filename": "dfd1d384-fc9d-4a23-9298-f4d5f146b-401765643760c721.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 385,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 14:12:23",
+      "snippet": "Attached 1 file. - dfd1d384-fc9d-4a23-9298-f4d5f146be04"
+    },
+    {
+      "filename": "2985135d-370a-42ac-8445-e6400ea7a-d4a1a10ff4a140db.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 393,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 13:35:55",
+      "snippet": "I've cleaned it off pretty well. They're still a good amount of carbon on the ou"
+    },
+    {
+      "filename": "547e12a5-2d0b-425d-9f70-3448cd6fc-e9b7db3662005e96.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 396,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 13:23:27",
+      "snippet": "Attached 1 file. - 547e12a5-2d0b-425d-9f70-3448cd6fcc15"
+    },
+    {
+      "filename": "40b9bbdc-9ef4-41d7-b86f-1941433ed-2095b7b2ce8e8f97.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 397,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 13:21:00",
+      "snippet": "So I got to get my wrench and unscrew this thing. That's the spark plug Attached"
+    },
+    {
+      "filename": "df07ccbf-4157-493c-8b6d-674dfb01d-fbf54a35b0aa0e08.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 402,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 12:47:24",
+      "snippet": "So this dongle thing here is what's leaking Attached 1 file. - df07ccbf-4157-493"
+    },
+    {
+      "filename": "c8664452-dce0-4f0c-b226-7710b3801-9c4484dbb1862a8a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 406,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 12:41:06",
+      "snippet": "We looked to have a gas leak Attached 1 file. - c8664452-dce0-4f0c-b226-7710b380"
+    },
+    {
+      "filename": "1267c6bf-8be8-4cae-bb66-dbe0bb73c-dfdba945339b6a57.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 411,
+      "group_key": "23c08451898e3602",
+      "timestamp": "2026-08-16 12:24:54",
+      "snippet": "I have this echo weed wacker that I want to perform some maintenance on Attached"
+    },
+    {
+      "filename": "image_02b980-3e9838a67ec70e7c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 446,
+      "group_key": "b2b60f41ac092e0e",
+      "timestamp": "2026-08-15 15:13:54",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"CzMlphFK\",\"type\":\"text\",\"x\":-1"
+    },
+    {
+      "filename": "image_8f1d70-c9016fa44e1b665b.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 583,
+      "group_key": "fc35da73f944ccb2",
+      "timestamp": "2026-08-14 18:40:08",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"aFJM0RDZxpYuHJ5fOYXBL\",\"type\":"
+    },
+    {
+      "filename": "image_8f3701-20a80ac9d7c58bdc.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 585,
+      "group_key": "fc35da73f944ccb2",
+      "timestamp": "2026-08-14 18:29:24",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"i8eKmW7V\",\"type\":\"text\",\"x\":-2"
+    },
+    {
+      "filename": "image_b881a4-3558378c06d27b03.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 630,
+      "group_key": "449ca8256ee1d1b2",
+      "timestamp": "2026-08-14 10:51:36",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"FmV1yehS\",\"type\":\"text\",\"x\":29"
+    },
+    {
+      "filename": "image_4e6d81-2dfbbcce881e5e3a.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 701,
+      "group_key": "8610a399268736b1",
+      "timestamp": "2026-08-13 14:19:38",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"VnulcTLqVygWoiWfwN2qK\",\"type\":"
+    },
+    {
+      "filename": "image_4e71c0-3bd1795dd3654c02.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 703,
+      "group_key": "8610a399268736b1",
+      "timestamp": "2026-08-13 14:17:16",
+      "snippet": "{\"type\":\"excalidraw/clipboard\",\"elements\":[{\"id\":\"PNAXAh1g\",\"type\":\"text\",\"x\":-3"
+    },
+    {
+      "filename": "11896-d1348b0cd3a45e69.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 740,
+      "group_key": "cd7e286c101cb867",
+      "timestamp": "2026-08-12 21:36:05",
+      "snippet": "Attached 3 files. - 11895.jpg - 11896.jpg - 11897.jpg"
+    },
+    {
+      "filename": "11897-d1348b0cd3a45e69.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 740,
+      "group_key": "cd7e286c101cb867",
+      "timestamp": "2026-08-12 21:36:05",
+      "snippet": "Attached 3 files. - 11895.jpg - 11896.jpg - 11897.jpg"
+    },
+    {
+      "filename": "11895-d1348b0cd3a45e69.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 740,
+      "group_key": "cd7e286c101cb867",
+      "timestamp": "2026-08-12 21:36:05",
+      "snippet": "Attached 3 files. - 11895.jpg - 11896.jpg - 11897.jpg"
+    },
+    {
+      "filename": "Screenshot%202026-08-09%20at%205.24.25\ufffd-8d12f497cd28870e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 950,
+      "group_key": "3ed8266020a7ebeb",
+      "timestamp": "2026-08-09 17:25:04",
+      "snippet": "I have these 3 resumes Attached 3 files. - Screenshot 2026-08-09 at 5.24.25 PM.j"
+    },
+    {
+      "filename": "Screenshot%202026-08-09%20at%205.24.35\ufffd-8d12f497cd28870e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 950,
+      "group_key": "3ed8266020a7ebeb",
+      "timestamp": "2026-08-09 17:25:04",
+      "snippet": "I have these 3 resumes Attached 3 files. - Screenshot 2026-08-09 at 5.24.25 PM.j"
+    },
+    {
+      "filename": "Screenshot%202026-08-09%20at%205.24.44\ufffd-8d12f497cd28870e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 950,
+      "group_key": "3ed8266020a7ebeb",
+      "timestamp": "2026-08-09 17:25:04",
+      "snippet": "I have these 3 resumes Attached 3 files. - Screenshot 2026-08-09 at 5.24.25 PM.j"
+    },
+    {
+      "filename": "a748563f-844f-4011-ac3a-b9fa1afd8-c0a0a60b3efea6c0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 982,
+      "group_key": "115abad300cce405",
+      "timestamp": "2026-08-08 15:21:00",
+      "snippet": "Can you put together a map of what this place looks like? Mainly the table space"
+    },
+    {
+      "filename": "93fd85d0-229b-435f-81aa-803ab7414-c0a0a60b3efea6c0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 982,
+      "group_key": "115abad300cce405",
+      "timestamp": "2026-08-08 15:21:00",
+      "snippet": "Can you put together a map of what this place looks like? Mainly the table space"
+    },
+    {
+      "filename": "f15d5752-cb05-480d-8d50-f2f0dcadd-c0a0a60b3efea6c0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 982,
+      "group_key": "115abad300cce405",
+      "timestamp": "2026-08-08 15:21:00",
+      "snippet": "Can you put together a map of what this place looks like? Mainly the table space"
+    },
+    {
+      "filename": "aee8933d-fe04-43dd-85d1-da5852022-c0a0a60b3efea6c0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 982,
+      "group_key": "115abad300cce405",
+      "timestamp": "2026-08-08 15:21:00",
+      "snippet": "Can you put together a map of what this place looks like? Mainly the table space"
+    },
+    {
+      "filename": "roadmap-e9d954cffef21b8d.zip",
+      "ext": "zip",
+      "is_img": false,
+      "chat_id": 1097,
+      "group_key": "2e0ab03b88180399",
+      "timestamp": "2026-08-05 18:10:55",
+      "snippet": "Attached 1 file. - roadmap.zip"
+    },
+    {
+      "filename": "1661bdfb-3092-403c-a299-77fd9515b-d4902cc8b538a22f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1196,
+      "group_key": "8a0d30224c2caf61",
+      "timestamp": "2026-08-04 11:30:00",
+      "snippet": "I have some coaxial cables from antenna I've taken from different router systems"
+    },
+    {
+      "filename": "6984798e-64a4-4f75-9684-f9e8d3968-cd3bdddcad177ce2.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1295,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-08-02 01:05:50",
+      "snippet": "Right here is where the high pressure line meets what I believe to be the conden"
+    },
+    {
+      "filename": "02be6284-e236-4e7e-a2c9-049319c26-4c53b0e2d9f88ed4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1298,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-08-02 00:52:49",
+      "snippet": "Okay, I'm looking top down again and I see this one that has three wires in it J"
+    },
+    {
+      "filename": "4e4d3c46-b6a4-405d-abf4-3ae9c1738-c18d9ac1f5dddda5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1300,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-08-02 00:46:12",
+      "snippet": "So that blue wire is still well connected The metal sheathing has just been pull"
+    },
+    {
+      "filename": "2e922499-ed22-4991-b34e-212c78804-e3638817e24582e1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1301,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-08-02 00:40:27",
+      "snippet": "Attached 1 file. - 2e922499-ed22-4991-b34e-212c78804d37"
+    },
+    {
+      "filename": "cb967aad-2ed9-4820-aea7-75656c33b-5b847de48c9585c7.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1303,
+      "group_key": "0ad25f275b7b5f57",
+      "timestamp": "2026-08-01 21:22:27",
+      "snippet": "I've got all this hardened beeswax but it's got a lot of impurities and dirt as "
+    },
+    {
+      "filename": "ccf70d54-0b4d-4430-8dc1-c6884a5dd-560176e3e8efac87.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1304,
+      "group_key": "a8ed06ac900adf38",
+      "timestamp": "2026-08-01 18:00:26",
+      "snippet": "A friend gave me some zucchini from this garden I don't know what to do with it "
+    },
+    {
+      "filename": "110513e5-f9fa-4ea8-a508-ead4f6dd5-97a214706d388a9a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1351,
+      "group_key": "a2bc6d522a620fec",
+      "timestamp": "2026-08-01 12:24:34",
+      "snippet": "I've got another microwave that's been sitting for a few weeks I'm pretty sure I"
+    },
+    {
+      "filename": "11586-a1e1ed13f355de95.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1445,
+      "group_key": "68b6f3400ee4c3ec",
+      "timestamp": "2026-07-31 13:38:19",
+      "snippet": ""
+    },
+    {
+      "filename": "11587-a1e1ed13f355de95.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1445,
+      "group_key": "68b6f3400ee4c3ec",
+      "timestamp": "2026-07-31 13:38:19",
+      "snippet": ""
+    },
+    {
+      "filename": "11588-a1e1ed13f355de95.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1445,
+      "group_key": "68b6f3400ee4c3ec",
+      "timestamp": "2026-07-31 13:38:19",
+      "snippet": ""
+    },
+    {
+      "filename": "e705f367-cba8-4f97-b0d4-5d40f057c-5fb1477c272e5623.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1496,
+      "group_key": "e30f8bd70b5e9bdf",
+      "timestamp": "2026-07-29 20:18:42",
+      "snippet": "I've got a light bulb that flickers constantly Attached 1 file. - e705f367-cba8-"
+    },
+    {
+      "filename": "3b865b9a-fd24-4d7a-b804-788cdd0cf-36a14c8590bae22c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1525,
+      "group_key": "b7ab04278073160d",
+      "timestamp": "2026-07-29 17:03:28",
+      "snippet": "I have a DC motor I've used before and it has a protruding rod which is chamfere"
+    },
+    {
+      "filename": "19cf11e7-613d-4d2c-9684-446564c1d-69b4d0fd2cf0cf87.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1526,
+      "group_key": "b7ab04278073160d",
+      "timestamp": "2026-07-29 16:54:43",
+      "snippet": "I've got this auger system built on a wooden rod On the end of the wooden rod, I"
+    },
+    {
+      "filename": "11586-f0375b0778f100e3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1570,
+      "group_key": "b32ccf8b1dd225f2",
+      "timestamp": "2026-07-28 00:22:11",
+      "snippet": "Attached 3 files. - 11586.jpg - 11587.jpg - 11588.jpg"
+    },
+    {
+      "filename": "11587-f0375b0778f100e3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1570,
+      "group_key": "b32ccf8b1dd225f2",
+      "timestamp": "2026-07-28 00:22:11",
+      "snippet": "Attached 3 files. - 11586.jpg - 11587.jpg - 11588.jpg"
+    },
+    {
+      "filename": "11588-f0375b0778f100e3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1570,
+      "group_key": "b32ccf8b1dd225f2",
+      "timestamp": "2026-07-28 00:22:11",
+      "snippet": "Attached 3 files. - 11586.jpg - 11587.jpg - 11588.jpg"
+    },
+    {
+      "filename": "Screenshot%202026-07-26%20at%207.11.46\ufffd-ccdffffa723a9fc9.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 1619,
+      "group_key": "e2246467a12ed7de",
+      "timestamp": "2026-07-26 19:12:09",
+      "snippet": "This is worse, The loop-rope wheel needs to be like a pulley-wheel Attached 1 fi"
+    },
+    {
+      "filename": "Screenshot%202026-07-26%20at%207.06.18\ufffd-135d97b92ffe3156.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 1620,
+      "group_key": "e2246467a12ed7de",
+      "timestamp": "2026-07-26 19:07:33",
+      "snippet": "Much better, but I still don't know how this braking system is supposed to work."
+    },
+    {
+      "filename": "Screenshot%202026-07-26%20at%207.00.31\ufffd-67052eb84cb2489e.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 1622,
+      "group_key": "e2246467a12ed7de",
+      "timestamp": "2026-07-26 19:00:38",
+      "snippet": "Attached 1 file. - Screenshot 2026-07-26 at 7.00.31 PM.png"
+    },
+    {
+      "filename": "c62e81c1-0344-49ce-993c-2c45223b9-a3ce854b2641d756.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1643,
+      "group_key": "2f79a0f6a8c37208",
+      "timestamp": "2026-07-26 17:43:27",
+      "snippet": "I've got a hole in this box and I'd like to repair it but I'm not sure how The t"
+    },
+    {
+      "filename": "73c5d029-67a0-4aa3-b360-3b702bac3-1aeeaa9a6ede6fb4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1653,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 06:02:14",
+      "snippet": "I am not at this time. There's a lot blocking my hands from being able to reach "
+    },
+    {
+      "filename": "50922d68-43a5-48b8-b737-49039cd30-7b2ff45e9fffe948.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1654,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 05:58:39",
+      "snippet": "Those are some wires down there. I can't really see what the connector is attach"
+    },
+    {
+      "filename": "Screenshot_20260726-053458-126df416715242c0.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 1656,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 05:35:49",
+      "snippet": "GWSCAN Attached 1 file. - Screenshot_20260726-053458.png"
+    },
+    {
+      "filename": "d443b4dc-2b6f-42f5-af4b-bdd5b3399-72988b3a68e17e25.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1660,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 05:02:12",
+      "snippet": "Attached 1 file. - d443b4dc-2b6f-42f5-af4b-bdd5b33991b9"
+    },
+    {
+      "filename": "54b69c69-07a6-47ed-92ce-016cc34c2-be3cc3c3e956c1ed.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1661,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 04:58:12",
+      "snippet": "Attached 1 file. - 54b69c69-07a6-47ed-92ce-016cc34c2249"
+    },
+    {
+      "filename": "eca00c16-0468-4860-9c81-c19fcff9f-905871e4c6619bde.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1666,
+      "group_key": "9788b5655bc41b14",
+      "timestamp": "2026-07-26 04:21:40",
+      "snippet": "I see that little unscrewable part in that pipe This is my Chevy Malibu 2021 I a"
+    },
+    {
+      "filename": "193d094a-b7fd-421c-a23f-1679c9264-d366ec51580bfcf9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1673,
+      "group_key": "65b626549765754e",
+      "timestamp": "2026-07-25 23:08:04",
+      "snippet": "Attached 2 files. - 193d094a-b7fd-421c-a23f-1679c9264867 - b427758a-0ac4-49de-9c"
+    },
+    {
+      "filename": "b427758a-0ac4-49de-9c28-0cf0d7a46-d366ec51580bfcf9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1673,
+      "group_key": "65b626549765754e",
+      "timestamp": "2026-07-25 23:08:04",
+      "snippet": "Attached 2 files. - 193d094a-b7fd-421c-a23f-1679c9264867 - b427758a-0ac4-49de-9c"
+    },
+    {
+      "filename": "4bf48dd4-71cd-4d70-a08f-1c6435bda-e71dedb671f71001.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1684,
+      "group_key": "54440671373a427d",
+      "timestamp": "2026-07-25 16:10:30",
+      "snippet": "Are there any good options here? Attached 1 file. - 4bf48dd4-71cd-4d70-a08f-1c64"
+    },
+    {
+      "filename": "8d70ecbc-dec6-412e-be62-5edb54147-461d54c2b51227ff.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1686,
+      "group_key": "54440671373a427d",
+      "timestamp": "2026-07-25 16:00:56",
+      "snippet": "It looks like I'm missing the head Also, do I need the fuel and a primer separat"
+    },
+    {
+      "filename": "4d4ca5c9-f531-484e-8d6f-efe5da644-d3dc7e8ffe37e89b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1695,
+      "group_key": "54440671373a427d",
+      "timestamp": "2026-07-25 13:54:46",
+      "snippet": "Of these three weed wackers which one should I buy? They are each $10 at rummage"
+    },
+    {
+      "filename": "36907a6a-6ee5-4bf0-adc0-fe2b525d0-0365beeb5382b8e1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1698,
+      "group_key": "6b69ea49b03c5d49",
+      "timestamp": "2026-07-24 17:48:57",
+      "snippet": "What about these larvae? Attached 1 file. - 36907a6a-6ee5-4bf0-adc0-fe2b525d03f6"
+    },
+    {
+      "filename": "11518-6f6024a4769194df.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1699,
+      "group_key": "6b69ea49b03c5d49",
+      "timestamp": "2026-07-24 17:45:36",
+      "snippet": "What's going on in this beehive deep frame? Attached 1 file. - 11518.jpg"
+    },
+    {
+      "filename": "8d6e9411-4818-4929-9330-c1fc385e3-983d2bbb7d7dfa25.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1726,
+      "group_key": "1124154d7ae3830f",
+      "timestamp": "2026-07-23 13:30:45",
+      "snippet": "I have 9 of these medium bee frames in a box and I have 11 of these boxes. I hav"
+    },
+    {
+      "filename": "933782bc-2d87-4acc-bf05-b3ad2cd34-ed6690267f453d9a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1845,
+      "group_key": "32501d5c884f751f",
+      "timestamp": "2026-07-19 12:47:35",
+      "snippet": "I would like to create an apierist suit for dealing with bees. I see that I need"
+    },
+    {
+      "filename": "11381-d85d2e33b000df41.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1846,
+      "group_key": "c00fd8954a1b2ce1",
+      "timestamp": "2026-07-19 12:22:36",
+      "snippet": "Attached 4 files. - 11378.jpg - 11379.jpg - 11380.jpg - 11381.jpg"
+    },
+    {
+      "filename": "11378-d85d2e33b000df41.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1846,
+      "group_key": "c00fd8954a1b2ce1",
+      "timestamp": "2026-07-19 12:22:36",
+      "snippet": "Attached 4 files. - 11378.jpg - 11379.jpg - 11380.jpg - 11381.jpg"
+    },
+    {
+      "filename": "11380-d85d2e33b000df41.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1846,
+      "group_key": "c00fd8954a1b2ce1",
+      "timestamp": "2026-07-19 12:22:36",
+      "snippet": "Attached 4 files. - 11378.jpg - 11379.jpg - 11380.jpg - 11381.jpg"
+    },
+    {
+      "filename": "11379-d85d2e33b000df41.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 1846,
+      "group_key": "c00fd8954a1b2ce1",
+      "timestamp": "2026-07-19 12:22:36",
+      "snippet": "Attached 4 files. - 11378.jpg - 11379.jpg - 11380.jpg - 11381.jpg"
+    },
+    {
+      "filename": "b5ad8ce7-639b-4734-b8e1-309af089c-2db5fa56f24bf725.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2040,
+      "group_key": "2bd3b73329653120",
+      "timestamp": "2026-07-16 00:50:31",
+      "snippet": "Attached 1 file. - b5ad8ce7-639b-4734-b8e1-309af089c3c2"
+    },
+    {
+      "filename": "00f37c8b-272c-413c-b96d-eccbe1d04-cd8d1daeb6784558.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2075,
+      "group_key": "5bd84f88062957c6",
+      "timestamp": "2026-07-12 19:45:26",
+      "snippet": "Attached 1 file. - 00f37c8b-272c-413c-b96d-eccbe1d04f91"
+    },
+    {
+      "filename": "9984a21f-ece6-4ed9-b13c-814a93fc6-1d672f1e979d10ba.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2076,
+      "group_key": "5bd84f88062957c6",
+      "timestamp": "2026-07-12 19:43:25",
+      "snippet": "Attached 1 file. - 9984a21f-ece6-4ed9-b13c-814a93fc6a56"
+    },
+    {
+      "filename": "1d694d97-aebb-4b6e-9193-d2fe21673-e6570ff503447b07.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2092,
+      "group_key": "22f11ff8f0970e0d",
+      "timestamp": "2026-07-12 13:42:16",
+      "snippet": "I have this whiteboard. What a good amount of scratches on it I wonder what I co"
+    },
+    {
+      "filename": "495abced-a76a-4098-9ee9-e7dd33ba3-308cf98a6e4e09ff.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2102,
+      "group_key": "30fda363b2f0b66f",
+      "timestamp": "2026-07-11 22:45:44",
+      "snippet": "Attached 1 file. - 495abced-a76a-4098-9ee9-e7dd33ba3a87"
+    },
+    {
+      "filename": "0ba460c0-15e2-418c-87f0-b4b08651e-5e943bc45cb5a8ee.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2105,
+      "group_key": "04f0129a938ed07a",
+      "timestamp": "2026-07-11 21:34:24",
+      "snippet": "Attached 1 file. - 0ba460c0-15e2-418c-87f0-b4b08651efb8"
+    },
+    {
+      "filename": "6c6a0d9b-1e43-4ad6-8256-e050e907f-d624ab317ff42848.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2106,
+      "group_key": "04f0129a938ed07a",
+      "timestamp": "2026-07-11 21:31:37",
+      "snippet": "Attached 1 file. - 6c6a0d9b-1e43-4ad6-8256-e050e907f3e5"
+    },
+    {
+      "filename": "cc59e88b-f42d-4f91-a206-1aab7ff61-70ca0664a3327c9c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2149,
+      "group_key": "0195e89389542a93",
+      "timestamp": "2026-07-11 01:23:11",
+      "snippet": "I made this corner joint by cutting after measuring them perfectly I do not want"
+    },
+    {
+      "filename": "904f0e85-fc51-49ea-a253-3b88f48ad-b4359bc4938c5748.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2151,
+      "group_key": "e4193698a79569d5",
+      "timestamp": "2026-07-11 01:18:30",
+      "snippet": "I've got this end of a beehive box. I need to corner better I used a chisel to g"
+    },
+    {
+      "filename": "006d288c-509b-4fff-843a-cd73e739d-e733d00036854ac1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2153,
+      "group_key": "eff2c549a24afaed",
+      "timestamp": "2026-07-11 00:14:01",
+      "snippet": "This print came out nearly perfect but is a little warped at the very end Becaus"
+    },
+    {
+      "filename": "d621b887-b0d6-46d1-b142-359c6e975-e733d00036854ac1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2153,
+      "group_key": "eff2c549a24afaed",
+      "timestamp": "2026-07-11 00:14:01",
+      "snippet": "This print came out nearly perfect but is a little warped at the very end Becaus"
+    },
+    {
+      "filename": "e3cf863c-4ca1-4cf6-9078-0681fda6b-69f7049352cd08c3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2197,
+      "group_key": "f28f07438b20c93c",
+      "timestamp": "2026-07-10 18:16:20",
+      "snippet": "I have a BB revolver It has two kinds of BB holders I'm not sure how to work thi"
+    },
+    {
+      "filename": "9a1987e0-cc14-4fab-9acb-2c9ed9943-169e2029f4fbe506.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2200,
+      "group_key": "04dcd01f513f6fd5",
+      "timestamp": "2026-07-10 17:13:36",
+      "snippet": "I've seen these kind of stove tops for a while. They're electronic I believe mea"
+    },
+    {
+      "filename": "a942ad53-92e8-40e5-927e-fb8151ada-81b4c81afec6485d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2218,
+      "group_key": "4758056e3cf48b25",
+      "timestamp": "2026-07-10 15:08:29",
+      "snippet": "So you can see here here that the end of this antenna is some kind of coaxial ca"
+    },
+    {
+      "filename": "102c7594-ded7-4ac5-a2f8-32e7c1d4e-8cf86eead0ceab9f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2232,
+      "group_key": "081ee1056518492e",
+      "timestamp": "2026-07-10 13:27:18",
+      "snippet": "I have a sieve that I defat fried some food in But now it is very dirty I have t"
+    },
+    {
+      "filename": "95381dc8-24c7-4e0a-9e0a-18d7510e6-f21e8211f02d6249.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2233,
+      "group_key": "4758056e3cf48b25",
+      "timestamp": "2026-07-10 13:26:13",
+      "snippet": "Attached 1 file. - 95381dc8-24c7-4e0a-9e0a-18d7510e6616"
+    },
+    {
+      "filename": "1b010247-79f9-4ab9-8c11-57ebcb0f0-1001646c55b88c48.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2234,
+      "group_key": "4758056e3cf48b25",
+      "timestamp": "2026-07-10 13:24:19",
+      "snippet": "This is what they came from Attached 1 file. - 1b010247-79f9-4ab9-8c11-57ebcb0f0"
+    },
+    {
+      "filename": "1a2fdccb-333e-4209-96e9-2b9a45728-1d91bf48c68d4356.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2236,
+      "group_key": "4758056e3cf48b25",
+      "timestamp": "2026-07-10 13:22:28",
+      "snippet": "I got these three antenna off of a modem Can I connect them to an esp32? Attache"
+    },
+    {
+      "filename": "fd719688-614f-488c-8e5f-c5b07fa51-59fd2d6cada9f407.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2275,
+      "group_key": "269450218b81d5d9",
+      "timestamp": "2026-07-09 10:46:14",
+      "snippet": "In my experience of using a blender, it needs a lot of liquid to work. Right now"
+    },
+    {
+      "filename": "ac7bec6b-de0e-4ff5-a5bc-c2142c0ef-ff9b008ba15b78a6.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2377,
+      "group_key": "51c23551de9e7593",
+      "timestamp": "2026-07-05 18:24:27",
+      "snippet": "Attached 1 file. - ac7bec6b-de0e-4ff5-a5bc-c2142c0efd39"
+    },
+    {
+      "filename": "08a5c6d5-18d5-4745-a848-933bf1a6f-f03ea69e1f64cb8c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2378,
+      "group_key": "51c23551de9e7593",
+      "timestamp": "2026-07-05 18:24:04",
+      "snippet": "Attached 2 files. - 08a5c6d5-18d5-4745-a848-933bf1a6f133 - 1715c653-2c79-4a41-bc"
+    },
+    {
+      "filename": "1715c653-2c79-4a41-bcb3-46355c71e-f03ea69e1f64cb8c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2378,
+      "group_key": "51c23551de9e7593",
+      "timestamp": "2026-07-05 18:24:04",
+      "snippet": "Attached 2 files. - 08a5c6d5-18d5-4745-a848-933bf1a6f133 - 1715c653-2c79-4a41-bc"
+    },
+    {
+      "filename": "Sketch-Your-Mind-f57ae445e26455d5.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 2400,
+      "group_key": "7ca6ed1ff6869c8a",
+      "timestamp": "2026-07-04 09:43:25",
+      "snippet": "So I have many books that I would like to make visual, and eventually 4d using t"
+    },
+    {
+      "filename": "e0ac73e4-7cd8-43c6-8aec-b46428785-09fda939ef46187e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2477,
+      "group_key": "bf349a1db4ef4724",
+      "timestamp": "2026-07-02 18:30:07",
+      "snippet": "This is the modem I'm using and it has some kind of cat5 looking cable with a me"
+    },
+    {
+      "filename": "Screenshot%202026-07-02%20at%2010.07.20-ff39367bba4c590a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2510,
+      "group_key": "16c83c71382c27ce",
+      "timestamp": "2026-07-02 10:07:28",
+      "snippet": "Attached 1 file. - Screenshot 2026-07-02 at 10.07.20 AM.jpg"
+    },
+    {
+      "filename": "96760542-7160-4a16-b6b1-5423a83cc-d8c8fa6737ced6fd.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2542,
+      "group_key": "511609bd9834eb7e",
+      "timestamp": "2026-06-29 16:07:50",
+      "snippet": "I'm looking at a bunch of Landis grain silos out here. Just west of Ames in Boon"
+    },
+    {
+      "filename": "Austin-Rognes-Traitify-Assessment-4e0dfd1d949364a4.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 2547,
+      "group_key": "2225240bd2d72b7e",
+      "timestamp": "2026-06-29 14:51:02",
+      "snippet": "Attached 1 file. - Austin-Rognes-Traitify-Assessment-Results-06-29-2026.pdf"
+    },
+    {
+      "filename": "0b5131f1-ce52-45a9-b45e-b7d337e05-de6a1b18a88cb029.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2566,
+      "group_key": "d8bc08a5c3cb3578",
+      "timestamp": "2026-06-29 06:35:24",
+      "snippet": "Attached 1 file. - 0b5131f1-ce52-45a9-b45e-b7d337e051e7"
+    },
+    {
+      "filename": "325127e1-ee2e-42aa-bfb5-9a34c2ec1-48c74f654f4c3aaf.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2573,
+      "group_key": "d8bc08a5c3cb3578",
+      "timestamp": "2026-06-29 05:29:44",
+      "snippet": "I am playing legend of Zelda breath of the wild guy in a major test of strength "
+    },
+    {
+      "filename": "11013-a9a1758e5466e69a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2584,
+      "group_key": "5d7380c4eca83982",
+      "timestamp": "2026-06-29 01:03:44",
+      "snippet": "In breath of the wild, what are some good recipes I can make here? Attached 4 fi"
+    },
+    {
+      "filename": "11012-a9a1758e5466e69a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2584,
+      "group_key": "5d7380c4eca83982",
+      "timestamp": "2026-06-29 01:03:44",
+      "snippet": "In breath of the wild, what are some good recipes I can make here? Attached 4 fi"
+    },
+    {
+      "filename": "11014-a9a1758e5466e69a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2584,
+      "group_key": "5d7380c4eca83982",
+      "timestamp": "2026-06-29 01:03:44",
+      "snippet": "In breath of the wild, what are some good recipes I can make here? Attached 4 fi"
+    },
+    {
+      "filename": "11011-a9a1758e5466e69a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2584,
+      "group_key": "5d7380c4eca83982",
+      "timestamp": "2026-06-29 01:03:44",
+      "snippet": "In breath of the wild, what are some good recipes I can make here? Attached 4 fi"
+    },
+    {
+      "filename": "karabiner_air-85df6f2f6378558b.json",
+      "ext": "json",
+      "is_img": false,
+      "chat_id": 2618,
+      "group_key": "a5445627ba1e3d75",
+      "timestamp": "2026-06-27 18:51:31",
+      "snippet": "what about this one? Attached 1 file. - karabiner_air.json"
+    },
+    {
+      "filename": "karabiner-db3987d0c10b0a23.json",
+      "ext": "json",
+      "is_img": false,
+      "chat_id": 2619,
+      "group_key": "a5445627ba1e3d75",
+      "timestamp": "2026-06-27 18:43:54",
+      "snippet": "Let's convert this one to Goku. Attached 1 file. - karabiner.json"
+    },
+    {
+      "filename": "351f6c2c-730d-4775-957e-5c1e99a10-6002d95bf8601aa3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2630,
+      "group_key": "a61dfc90a0e45335",
+      "timestamp": "2026-06-27 15:22:12",
+      "snippet": "All right, I got it, but as you can see I covered up the gold on this one. I ima"
+    },
+    {
+      "filename": "ef3f51e0-fcf8-47a9-939a-63191cc48-cb97835934d7e75d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2632,
+      "group_key": "a61dfc90a0e45335",
+      "timestamp": "2026-06-27 15:10:21",
+      "snippet": "So I can clamp it like this pretty easily and once I get a little bit of solder "
+    },
+    {
+      "filename": "c6cb5d52-9563-4a70-9c33-a6fb40739-bd73f27ec2559fc7.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2707,
+      "group_key": "16a65e52eadef548",
+      "timestamp": "2026-06-25 20:05:56",
+      "snippet": "Just look it around. There are some like puddles of isolated little pockets of w"
+    },
+    {
+      "filename": "55beb6ce-06bf-4fa4-89e8-284f74987-8c647963e04b5ab5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2710,
+      "group_key": "16a65e52eadef548",
+      "timestamp": "2026-06-25 19:56:40",
+      "snippet": "I'm just learning. I found some feathers, probably from a duck goose or a swan T"
+    },
+    {
+      "filename": "0e2952bc-be56-42a0-9049-d64c7b5fc-03fb02c19522bfbb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2713,
+      "group_key": "16a65e52eadef548",
+      "timestamp": "2026-06-25 19:49:45",
+      "snippet": "What is this? Attached 1 file. - 0e2952bc-be56-42a0-9049-d64c7b5fc7d6"
+    },
+    {
+      "filename": "39160abc-6f50-42c4-9821-f77f09217-2eb681574ee16635.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2724,
+      "group_key": "8dcfe469151af81e",
+      "timestamp": "2026-06-25 17:37:19",
+      "snippet": "I'm here at Lowe's and Ames. I wonder if they have any lubricant that would be g"
+    },
+    {
+      "filename": "10715-c4370953c26b8055.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2837,
+      "group_key": "b10136162720635c",
+      "timestamp": "2026-06-24 16:59:57",
+      "snippet": "Piano sheet music distillation into json yaml toml format Attached 2 files. - 10"
+    },
+    {
+      "filename": "10716-c4370953c26b8055.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2837,
+      "group_key": "b10136162720635c",
+      "timestamp": "2026-06-24 16:59:57",
+      "snippet": "Piano sheet music distillation into json yaml toml format Attached 2 files. - 10"
+    },
+    {
+      "filename": "How_Humans_and_AI_Master_Rubiks_C-0147b1975c5add98.mp3",
+      "ext": "mp3",
+      "is_img": false,
+      "chat_id": 2846,
+      "group_key": "72adda281294381f",
+      "timestamp": "2026-06-24 10:12:36",
+      "snippet": "Generate Audio Overview How_Humans_and_AI_Master_Rubiks_Cubes.mp3"
+    },
+    {
+      "filename": "10666-10b5862737b65955.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2857,
+      "group_key": "a61dfc90a0e45335",
+      "timestamp": "2026-06-24 01:23:10",
+      "snippet": "After cutting with a knife, the copper does not seem to show Attached 1 file. - "
+    },
+    {
+      "filename": "0c012340-8940-464f-afd0-8d697c0a2-c5c94e608ff65ffb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2881,
+      "group_key": "a61dfc90a0e45335",
+      "timestamp": "2026-06-23 18:02:29",
+      "snippet": "Okay I got the gold plates separated. I did lose one of the small ones in the gr"
+    },
+    {
+      "filename": "suspender-hook-a0324d421bc3cdda.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2919,
+      "group_key": "c83a360c50167d4a",
+      "timestamp": "2026-06-22 01:20:40",
+      "snippet": "These three show exactly what the design is, though the fourth is also nice, I w"
+    },
+    {
+      "filename": "hook-use-a0324d421bc3cdda.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2919,
+      "group_key": "c83a360c50167d4a",
+      "timestamp": "2026-06-22 01:20:40",
+      "snippet": "These three show exactly what the design is, though the fourth is also nice, I w"
+    },
+    {
+      "filename": "hook-wide-a0324d421bc3cdda.webp",
+      "ext": "webp",
+      "is_img": true,
+      "chat_id": 2919,
+      "group_key": "c83a360c50167d4a",
+      "timestamp": "2026-06-22 01:20:40",
+      "snippet": "These three show exactly what the design is, though the fourth is also nice, I w"
+    },
+    {
+      "filename": "hook-use%20copy-a0324d421bc3cdda.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2919,
+      "group_key": "c83a360c50167d4a",
+      "timestamp": "2026-06-22 01:20:40",
+      "snippet": "These three show exactly what the design is, though the fourth is also nice, I w"
+    },
+    {
+      "filename": "b9063e3c-361c-4e6b-9ace-50e5827cf-44134c613cef5574.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2939,
+      "group_key": "0134d74dedb48dea",
+      "timestamp": "2026-06-21 12:36:17",
+      "snippet": "I am building some beehive frames, I would like to construct the outer wooden po"
+    },
+    {
+      "filename": "94d52c44-6fcc-4551-8401-1ac743dcb-8adca14d59835d4f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2942,
+      "group_key": "56adc7831a4b5845",
+      "timestamp": "2026-06-20 20:10:02",
+      "snippet": "I now have all the ball bearings. How should I go about cleaning these? Attached"
+    },
+    {
+      "filename": "950978a7-be0d-4fab-b506-2ca988890-eb02cc6e0f074268.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2953,
+      "group_key": "22938bbabadcd035",
+      "timestamp": "2026-06-20 16:11:54",
+      "snippet": "What are these? Attached 1 file. - 950978a7-be0d-4fab-b506-2ca988890e0b"
+    },
+    {
+      "filename": "7d8f630b-cc1f-4998-bbf7-e08e4914f-c2e047cf08c350a4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2970,
+      "group_key": "22e5dd1bd8fb4597",
+      "timestamp": "2026-06-20 13:53:45",
+      "snippet": "Attached 1 file. - 7d8f630b-cc1f-4998-bbf7-e08e4914f617"
+    },
+    {
+      "filename": "5ce6cf12-626b-41de-a5df-e789dc823-bc49a9946e891753.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2971,
+      "group_key": "22e5dd1bd8fb4597",
+      "timestamp": "2026-06-20 13:51:27",
+      "snippet": "What kind of mushrooms are those? Attached 1 file. - 5ce6cf12-626b-41de-a5df-e78"
+    },
+    {
+      "filename": "cda97e38-d68a-4331-bea9-a8d4c3c75-c695e785987a2c4b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 2975,
+      "group_key": "22e5dd1bd8fb4597",
+      "timestamp": "2026-06-20 13:07:02",
+      "snippet": "What is this mushroom or fungi? Attached 1 file. - cda97e38-d68a-4331-bea9-a8d4c"
+    },
+    {
+      "filename": "e333bcd9-d05e-44df-b58e-4fe22b8d9-868700a56b562d29.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3047,
+      "group_key": "fdad11a3a4ed21ef",
+      "timestamp": "2026-06-19 13:25:23",
+      "snippet": "1 generated image. Attached 1 file. - e333bcd9-d05e-44df-b58e-4fe22b8d9b98"
+    },
+    {
+      "filename": "10600-9a7dafcd27a80257.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3067,
+      "group_key": "fdad11a3a4ed21ef",
+      "timestamp": "2026-06-19 03:51:08",
+      "snippet": "1 generated image. Attached 1 file. - 10600.jpg"
+    },
+    {
+      "filename": "bdf7944d-6ef6-4e9f-adbe-6135aef78-be0e833880f95a92.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3075,
+      "group_key": "fdad11a3a4ed21ef",
+      "timestamp": "2026-06-19 02:22:10",
+      "snippet": "Attached 1 file. - bdf7944d-6ef6-4e9f-adbe-6135aef78450"
+    },
+    {
+      "filename": "87364435-3a22-4203-9272-502fc4d0f-c513268a1f0a2a37.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3119,
+      "group_key": "93b288b3f3c1e9a6",
+      "timestamp": "2026-06-18 20:17:19",
+      "snippet": "So another problem I'm going to run into is I have four curtains. However I've o"
+    },
+    {
+      "filename": "e7008e43-cf63-47d0-ba8a-ad6119c20-06a5662e1d010f3f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3125,
+      "group_key": "93b288b3f3c1e9a6",
+      "timestamp": "2026-06-18 19:56:15",
+      "snippet": "I have created a curtain system where I thread a string through a curtain and I "
+    },
+    {
+      "filename": "f073f160-41fa-465b-bc4e-ee4df8438-06a5662e1d010f3f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3125,
+      "group_key": "93b288b3f3c1e9a6",
+      "timestamp": "2026-06-18 19:56:15",
+      "snippet": "I have created a curtain system where I thread a string through a curtain and I "
+    },
+    {
+      "filename": "10593-cc9a90388e727628.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3133,
+      "group_key": "b2ed7747211d0993",
+      "timestamp": "2026-06-18 17:23:07",
+      "snippet": "Or can you grasp from this? I'm trying to make a sequence file format to compres"
+    },
+    {
+      "filename": "10592-cc9a90388e727628.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3133,
+      "group_key": "b2ed7747211d0993",
+      "timestamp": "2026-06-18 17:23:07",
+      "snippet": "Or can you grasp from this? I'm trying to make a sequence file format to compres"
+    },
+    {
+      "filename": "65cd91d2-54a6-4b71-9100-fb7cd74e2-ef63c01ff9c7ee59.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3147,
+      "group_key": "39374590ebe64566",
+      "timestamp": "2026-06-18 13:24:48",
+      "snippet": "I'm learning about timing. Sometimes. I have issues with my own timing of things"
+    },
+    {
+      "filename": "the-super-tiny-compiler-fba51a5e6f002077.js",
+      "ext": "js",
+      "is_img": false,
+      "chat_id": 3303,
+      "group_key": "cd2f684b71693016",
+      "timestamp": "2026-06-14 22:38:17",
+      "snippet": "I'm getting a lot of good stuff out of this, but there is a lot of text to go th"
+    },
+    {
+      "filename": "image-bb9d38cda62f1bb5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3355,
+      "group_key": "9abeaa1043a460a3",
+      "timestamp": "2026-06-14 16:32:30",
+      "snippet": "This is a design for automating my Mac from the peripherals of control and view "
+    },
+    {
+      "filename": "image-f7fcb7c1dbe70b6f.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3362,
+      "group_key": "6475694619058d36",
+      "timestamp": "2026-06-14 15:56:26",
+      "snippet": "This is an idea a framework I have for how I want to accomplish tasks or let\u2019s s"
+    },
+    {
+      "filename": "image-ddd2bb875a34de62.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3374,
+      "group_key": "6baaed8bc31e8c39",
+      "timestamp": "2026-06-14 12:50:43",
+      "snippet": "Given the drawing and the quarters and dimes set for reference measurement. I wo"
+    },
+    {
+      "filename": "b5fe4e89-becd-4a39-b5bd-ebd136c61-4035882da8efa2af.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3386,
+      "group_key": "453452bfc586d70d",
+      "timestamp": "2026-06-14 11:01:46",
+      "snippet": "Attached 1 file. - b5fe4e89-becd-4a39-b5bd-ebd136c61f19"
+    },
+    {
+      "filename": "60a6f64d-b27a-4d65-b71d-07ed4b308-b6ebcf906f7ab689.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3476,
+      "group_key": "c0999d983eea5520",
+      "timestamp": "2026-06-13 14:48:31",
+      "snippet": "Here is a little more information on how it can work. Realistically it needs to "
+    },
+    {
+      "filename": "2fc21b2a-9718-43bd-a2a0-216ecf330-3543ecb5d1fb3076.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3477,
+      "group_key": "c0999d983eea5520",
+      "timestamp": "2026-06-13 14:47:23",
+      "snippet": "And you understand this Mac OS control program? Because I primarily use Mac OS, "
+    },
+    {
+      "filename": "7e7d1bab-ca8b-4fe6-86cf-9b82edd77-8f6a449c21ba5ad3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3526,
+      "group_key": "a61dfc90a0e45335",
+      "timestamp": "2026-06-11 17:39:21",
+      "snippet": "I have about eight of these old graphics cards. I could strip the leads off thes"
+    },
+    {
+      "filename": "90499aba-d224-4d09-9fac-4c3636a53-fd3b706eee2c8fcf.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3630,
+      "group_key": "e0a837a84b9d243c",
+      "timestamp": "2026-06-08 12:12:28",
+      "snippet": "We've got some kind of wood. I believe it's laminate Attached 1 file. - 90499aba"
+    },
+    {
+      "filename": "d7f6d643-8a20-40de-9402-914f7fd75-4d12c1e64f756010.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3681,
+      "group_key": "1cb93f14b1c21169",
+      "timestamp": "2026-06-07 22:10:26",
+      "snippet": "It works. Maybe one side is a little wonky looking but functionally it's fine an"
+    },
+    {
+      "filename": "f12a5f5f-be84-4f8e-bff2-8769530ff-4bfa68714668a42d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3682,
+      "group_key": "1cb93f14b1c21169",
+      "timestamp": "2026-06-07 22:05:19",
+      "snippet": "It looks like the very top layer on one of that semicircle piece got dislodged. "
+    },
+    {
+      "filename": "fc879caf-a86c-4c1b-9a64-5490fd6d7-cefda641dcb0b120.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3684,
+      "group_key": "7cde3bd83088341b",
+      "timestamp": "2026-06-07 21:29:18",
+      "snippet": "What about this one? Attached 1 file. - fc879caf-a86c-4c1b-9a64-5490fd6d7bec"
+    },
+    {
+      "filename": "21ac5874-e422-4810-b549-56cc9cd1f-4dc8f7d8d3a8e2ba.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3686,
+      "group_key": "7cde3bd83088341b",
+      "timestamp": "2026-06-07 21:25:16",
+      "snippet": "The left was $1 and the right spray bottle was four What's the difference betwee"
+    },
+    {
+      "filename": "21ac5874-e422-4810-b549-56cc9cd1f-4a4770f1048ca2d6.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3686,
+      "group_key": "7cde3bd83088341b",
+      "timestamp": "2026-06-07 21:25:16",
+      "snippet": "The left was $1 and the right spray bottle was four What's the difference betwee"
+    },
+    {
+      "filename": "c748fbdf-7140-452d-99c3-99f9a5906-315a917a77f90277.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3687,
+      "group_key": "7cde3bd83088341b",
+      "timestamp": "2026-06-07 21:22:32",
+      "snippet": "This zep bottle is 4.25 Attached 1 file. - c748fbdf-7140-452d-99c3-99f9a5906c49"
+    },
+    {
+      "filename": "49127fa1-0781-435f-800a-a515fb4ef-edd4a6ccb84135ed.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3708,
+      "group_key": "81981ed4e2eb2335",
+      "timestamp": "2026-06-07 20:07:43",
+      "snippet": "I'm just out exploring. I'm not sure how this fell. I wonder if it rotted in the"
+    },
+    {
+      "filename": "37a9aca0-0975-4c86-ba9e-2ffedaa0f-c78be3080e110dac.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3709,
+      "group_key": "81981ed4e2eb2335",
+      "timestamp": "2026-06-07 20:05:59",
+      "snippet": "I see this fallen tree. What kind of tree is it? It's very large Attached 1 file"
+    },
+    {
+      "filename": "6635e286-8f23-434a-a527-3ae1b367e-acf300c1e81814b3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3720,
+      "group_key": "2265e202f538e9c6",
+      "timestamp": "2026-06-07 19:26:16",
+      "snippet": "I've got some. How does this compare to the stuff I buy at the store? It's the s"
+    },
+    {
+      "filename": "9aaa305b-d50f-4a01-ad6e-4e3a56488-ade286321f6bec15.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3721,
+      "group_key": "2265e202f538e9c6",
+      "timestamp": "2026-06-07 19:23:48",
+      "snippet": "Given this area, is that very low dark part going to lead to Clay? Attached 1 fi"
+    },
+    {
+      "filename": "2c6bb7ca-d91f-40f8-8018-6d30b0331-05909297b4e7a8e0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3729,
+      "group_key": "76ec383286ba16fa",
+      "timestamp": "2026-06-07 18:18:24",
+      "snippet": "Would this be a precise enough scale to use for a centrifuge Attached 1 file. - "
+    },
+    {
+      "filename": "093a98c2-4c79-434b-b2fa-f19242e3c-548d8766c02c556e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3772,
+      "group_key": "76ec383286ba16fa",
+      "timestamp": "2026-06-06 22:28:40",
+      "snippet": "It looks as though it may only hold two blue carriers. I imagine this is an extr"
+    },
+    {
+      "filename": "63a6060c-a850-4173-b00f-a91225ec8-3d959803c043bbab.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3773,
+      "group_key": "76ec383286ba16fa",
+      "timestamp": "2026-06-06 22:24:11",
+      "snippet": "So I have this centrifuge I purchased at the Iowa State surplus for $10 Attached"
+    },
+    {
+      "filename": "080bf570-8b6e-4bdd-968e-6ab9ace3b-3d959803c043bbab.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3773,
+      "group_key": "76ec383286ba16fa",
+      "timestamp": "2026-06-06 22:24:11",
+      "snippet": "So I have this centrifuge I purchased at the Iowa State surplus for $10 Attached"
+    },
+    {
+      "filename": "image-59055aadbf9e8518.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3779,
+      "group_key": "48681c4fcc7c8674",
+      "timestamp": "2026-06-06 19:58:17",
+      "snippet": "I would like to make cardboard shelving brackets. However, I understand that car"
+    },
+    {
+      "filename": "c2882564-ed17-4908-9dfc-1b9c98822-72520f7a5173b804.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3789,
+      "group_key": "0ff5c84307302295",
+      "timestamp": "2026-06-06 16:25:00",
+      "snippet": "My metaquest 3 is having a battery issue. The last time I went to use it I had l"
+    },
+    {
+      "filename": "b86224c4-43ca-4cd9-96c4-f1cb30d5d-576fe407a7d5fad8.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3791,
+      "group_key": "6131955a01deac6d",
+      "timestamp": "2026-06-06 16:18:13",
+      "snippet": "So given my bamboo A1, would it be possible to create some kind of enclosure if "
+    },
+    {
+      "filename": "96cf820b-efac-444a-9557-d8ea2a394-e1adb95a142a6c76.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3794,
+      "group_key": "fe0211f0736931ba",
+      "timestamp": "2026-06-06 16:08:34",
+      "snippet": "This is another problem I have. It gets really gunky in there and I can try to s"
+    },
+    {
+      "filename": "da016f1f-1161-4751-96d0-887503d47-4c697f7da6d9e966.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3796,
+      "group_key": "fe0211f0736931ba",
+      "timestamp": "2026-06-06 16:03:06",
+      "snippet": "While working with the bamboo lab A1, I really enjoy it. However, I am disappoin"
+    },
+    {
+      "filename": "a47d5c99-638b-446f-a104-4ee2ebb4a-7b387fbbf89ce740.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3797,
+      "group_key": "6cf9686d2d9ff0bb",
+      "timestamp": "2026-06-06 15:59:10",
+      "snippet": "What about this chair I have? Attached 1 file. - a47d5c99-638b-446f-a104-4ee2ebb"
+    },
+    {
+      "filename": "41a12b6e-087b-40be-970d-9468ea4d0-9d3433bb2b7e5d32.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3801,
+      "group_key": "6cf9686d2d9ff0bb",
+      "timestamp": "2026-06-06 15:48:08",
+      "snippet": "What is this Starbucks coffee cup lid made out of Attached 1 file. - 41a12b6e-08"
+    },
+    {
+      "filename": "2618d36b-50ac-49d1-a1b2-fad2447bf-de801bb4db6faa48.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3829,
+      "group_key": "e943b6c98a3f3fdf",
+      "timestamp": "2026-06-06 11:03:38",
+      "snippet": "I've got these flat belt buckle systems that I'd like to duplicate. You can see "
+    },
+    {
+      "filename": "cf3aef02-04b8-417e-8ae9-d8ac92e02-f7bd408f7ba0084c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3855,
+      "group_key": "47bdbd3122cd01a0",
+      "timestamp": "2026-06-04 19:50:16",
+      "snippet": "I have two adapters. I have one gaming monitor and one working monitor Attached "
+    },
+    {
+      "filename": "f091ab7e-ea79-4b13-ba1d-a8b365c73-5e5a498b5b670c07.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3857,
+      "group_key": "f0da2bd40a4affc0",
+      "timestamp": "2026-06-04 13:03:28",
+      "snippet": "What about polymer based? Attached 1 file. - f091ab7e-ea79-4b13-ba1d-a8b365c7307"
+    },
+    {
+      "filename": "d3978724-2748-48c1-b4e8-8a26a9cee-d3249d73587bbd11.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 3861,
+      "group_key": "f0da2bd40a4affc0",
+      "timestamp": "2026-06-04 12:18:50",
+      "snippet": "I've got some clay I like to harden what temperature and how long do I have to b"
+    },
+    {
+      "filename": "image-b868c6b8e5432c9f.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3971,
+      "group_key": "be895682e5247816",
+      "timestamp": "2026-06-01 12:11:34",
+      "snippet": "The tracer rounds are used to identify what\u2019s going on within a black box world "
+    },
+    {
+      "filename": "image-11129c1cc548039e.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 3973,
+      "group_key": "be895682e5247816",
+      "timestamp": "2026-06-01 11:56:17",
+      "snippet": "This is the basis of my idea of liquid software Attached 1 file. - image.png"
+    },
+    {
+      "filename": "20213a52-690b-40ee-bb89-59572eda0-608e5b28c8307c88.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4047,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-29 15:35:04",
+      "snippet": "All right. So the bottom is ready as well. I can cut a Quick hole in the bottom "
+    },
+    {
+      "filename": "7f759a33-74ac-4271-8688-cc4af8628-db4074d5fb455c36.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4048,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-29 15:14:15",
+      "snippet": "Just about there. Just need some sanding. Put some screws and dowels in some woo"
+    },
+    {
+      "filename": "0ea63477-7665-4055-b909-5951fb288-08756b82709cd25a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4070,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-28 18:46:43",
+      "snippet": "This is the only corner I've done. This is my first corner. It looks pretty imma"
+    },
+    {
+      "filename": "10008-74619f9712bce20f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4134,
+      "group_key": "b9728c11627571f1",
+      "timestamp": "2026-05-28 00:45:22",
+      "snippet": "This is our wifi module Attached 1 file. - 10008.jpg"
+    },
+    {
+      "filename": "10003-c353b9ebf54b61ef.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4164,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-27 15:45:24",
+      "snippet": "Given all these boards, some of them are longer. The longer ones I can cut on si"
+    },
+    {
+      "filename": "10000-c353b9ebf54b61ef.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4164,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-27 15:45:24",
+      "snippet": "Given all these boards, some of them are longer. The longer ones I can cut on si"
+    },
+    {
+      "filename": "10001-c353b9ebf54b61ef.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4164,
+      "group_key": "0d37eb24d9e1f2bd",
+      "timestamp": "2026-05-27 15:45:24",
+      "snippet": "Given all these boards, some of them are longer. The longer ones I can cut on si"
+    },
+    {
+      "filename": "338b06a8-e566-48dd-8d1a-a5f988759-79b9c99bc0adbbab.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4176,
+      "group_key": "681236572c1ec0c9",
+      "timestamp": "2026-05-26 23:10:37",
+      "snippet": "Some of these parts really weren't that high before they fray like this, why not"
+    },
+    {
+      "filename": "cd30d132-3c08-4f12-84a0-bc7288560-b3cd8049a63b93c9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4179,
+      "group_key": "681236572c1ec0c9",
+      "timestamp": "2026-05-26 23:01:24",
+      "snippet": "How do I prevent my bamboo A1 printer from turning out like this? Attached 1 fil"
+    },
+    {
+      "filename": "295a7d08-6084-4c5d-b843-85695624d-e258d34e31ed2b10.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4224,
+      "group_key": "10c3d73fd9714b9e",
+      "timestamp": "2026-05-25 18:09:22",
+      "snippet": "This bamboo cutting board I put some of the 607zz ball bearings on them. I think"
+    },
+    {
+      "filename": "ba982a31-aae4-4f84-a8e3-a835493c9-75c2cb180c4595fc.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4301,
+      "group_key": "e97455138b68e4fa",
+      "timestamp": "2026-05-22 18:25:58",
+      "snippet": "This pot is $5, and appears to be iron Attached 1 file. - ba982a31-aae4-4f84-a8e"
+    },
+    {
+      "filename": "Soroban-by-Japanese-Gov-bc4b7495b245a4d7.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 4322,
+      "group_key": "38cc58f0bd414de9",
+      "timestamp": "2026-05-22 01:16:53",
+      "snippet": "Can you parse this document? Attached 1 file. - Soroban-by-Japanese-Gov.pdf"
+    },
+    {
+      "filename": "f92ea9c1-7250-4195-ab20-e505a8ba5-d694bb754bd1f4bb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4336,
+      "group_key": "f517713bc8b2cac7",
+      "timestamp": "2026-05-21 18:26:07",
+      "snippet": "What kind of wood is used in these Fisher-Price toys and what do they polish it "
+    },
+    {
+      "filename": "b44271d7-279e-4d78-8c8f-97094d253-a8513f63681ee8f9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4350,
+      "group_key": "1bdeb07e0ecbf90d",
+      "timestamp": "2026-05-20 23:43:09",
+      "snippet": "This is an Iowa State University SAE International student chapter formula racin"
+    },
+    {
+      "filename": "741cd0fd-ab9d-4b52-a608-29207a948-d7acfe2be375f407.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4386,
+      "group_key": "b87edbcf1d143916",
+      "timestamp": "2026-05-20 14:17:00",
+      "snippet": "All right, so I'm taking this microwave apart. I believe I have the capacitor on"
+    },
+    {
+      "filename": "6d23db76-b806-4d6b-9ed2-2dfe6d44e-23f4a16e245de0d1.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4403,
+      "group_key": "76fd3858407c6c2d",
+      "timestamp": "2026-05-19 20:28:22",
+      "snippet": "I have this very basic calculator here with me but I've never understood the blu"
+    },
+    {
+      "filename": "9830-f71d4618a2388a2f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4429,
+      "group_key": "1ee3a47503ad3388",
+      "timestamp": "2026-05-18 23:08:14",
+      "snippet": "Here is a reference image x 8 magnification and x 1 magnification, Attached 2 fi"
+    },
+    {
+      "filename": "9827-f71d4618a2388a2f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4429,
+      "group_key": "1ee3a47503ad3388",
+      "timestamp": "2026-05-18 23:08:14",
+      "snippet": "Here is a reference image x 8 magnification and x 1 magnification, Attached 2 fi"
+    },
+    {
+      "filename": "5088c731-ac86-4948-b66d-38d53e3a2-28701cb52bd5d02a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4442,
+      "group_key": "1ee3a47503ad3388",
+      "timestamp": "2026-05-18 20:14:04",
+      "snippet": "Do you see these suspender pieces? The one on the right is broken Attached 1 fil"
+    },
+    {
+      "filename": "0218abd7-607f-4284-a201-ac073137b-60c2a939f9a46df2.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4475,
+      "group_key": "6b619fc5853b87de",
+      "timestamp": "2026-05-17 16:59:14",
+      "snippet": "Do you see this grid system I've set up? this is for a kind of a game or a patte"
+    },
+    {
+      "filename": "584d2e29-e34d-4968-bb6d-e0baa0626-d715cfb1397a295d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4510,
+      "group_key": "34fba5150a2e5464",
+      "timestamp": "2026-05-16 11:52:37",
+      "snippet": "I got this microwave for signing on for the apartment, however, I'm never going "
+    },
+    {
+      "filename": "1ebbddbb-7779-4e57-b753-7b9bc8b3e-bd104edfc8db090b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4513,
+      "group_key": "3db438caf13863fd",
+      "timestamp": "2026-05-15 14:33:07",
+      "snippet": "Our entire South sledding glass door gets good Sun Attached 1 file. - 1ebbddbb-7"
+    },
+    {
+      "filename": "ee10b4d4-3fbf-444c-bd08-3400aa260-44f196b8560021c5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4514,
+      "group_key": "3db438caf13863fd",
+      "timestamp": "2026-05-15 14:30:08",
+      "snippet": "I own a wyze camera. I plug it in via a micro USB, and I can record pretty high "
+    },
+    {
+      "filename": "f609d5a7-893a-4792-8d58-501d8beee-f541e40793d60fac.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4525,
+      "group_key": "556547497623fc15",
+      "timestamp": "2026-05-14 21:24:09",
+      "snippet": "Attached 1 file. - f609d5a7-893a-4792-8d58-501d8beee42f"
+    },
+    {
+      "filename": "184bcc6a-19f6-4738-b5d8-3cb2a9d58-c276654f1ccb22b2.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4548,
+      "group_key": "8a1c7475f19ba405",
+      "timestamp": "2026-05-13 12:02:40",
+      "snippet": "It does spin Attached 1 file. - 184bcc6a-19f6-4738-b5d8-3cb2a9d58b03"
+    },
+    {
+      "filename": "ed4aa352-af65-4808-b713-95ed0541e-29bca434d7395787.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4549,
+      "group_key": "8a1c7475f19ba405",
+      "timestamp": "2026-05-13 12:01:15",
+      "snippet": "I'm at the Iowa State surplus and I have this centrifuge in front of me for $10 "
+    },
+    {
+      "filename": "17e3e78c-b496-4516-99ac-84c9fd0c8-aa181edce432da21.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4603,
+      "group_key": "53bd24ba70e6c6f6",
+      "timestamp": "2026-05-10 13:56:12",
+      "snippet": "I think this belonged to a fish tank Attached 1 file. - 17e3e78c-b496-4516-99ac-"
+    },
+    {
+      "filename": "51063522-f460-4d73-9e1b-7c6f5f370-d7db22c434e63b74.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4642,
+      "group_key": "f550fccbc2def160",
+      "timestamp": "2026-05-09 12:52:55",
+      "snippet": "I think I have another similar one here Attached 1 file. - 51063522-f460-4d73-9e"
+    },
+    {
+      "filename": "0d71753b-a680-44fc-b8e3-dec1324dc-e7e1748533350bef.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4643,
+      "group_key": "f550fccbc2def160",
+      "timestamp": "2026-05-09 12:52:05",
+      "snippet": "What is this? Attached 1 file. - 0d71753b-a680-44fc-b8e3-dec1324dc7b2"
+    },
+    {
+      "filename": "a0b86b4c-20da-48d3-8c97-9901b92ca-a37ff5ec23b9fc11.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4663,
+      "group_key": "d2528405a13fcc43",
+      "timestamp": "2026-05-08 14:11:03",
+      "snippet": "Is this some kind of an oak tree? Attached 1 file. - a0b86b4c-20da-48d3-8c97-990"
+    },
+    {
+      "filename": "da639eab-a30a-4dc6-a977-120edcdda-647cb7cd2512ee57.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4700,
+      "group_key": "2328658742fa1c30",
+      "timestamp": "2026-05-06 13:45:22",
+      "snippet": "There are many affordable monitors here. they mainly run on VGA and DisplayPort,"
+    },
+    {
+      "filename": "3cdd6749-97d1-4b1d-a07a-43f7fd861-77b2efd9207ecdc8.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4701,
+      "group_key": "8821958334ea04ff",
+      "timestamp": "2026-05-06 13:37:51",
+      "snippet": "Look at this mc9090 CR Attached 1 file. - 3cdd6749-97d1-4b1d-a07a-43f7fd861fbb"
+    },
+    {
+      "filename": "c90d75f9-c87c-464a-b202-31d470496-a5cf4b4a60305670.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4762,
+      "group_key": "87a3d856d12e3ed0",
+      "timestamp": "2026-05-04 13:08:28",
+      "snippet": "All right, so we scrubbed it with the 200 grit water soaked sandpaper with a blo"
+    },
+    {
+      "filename": "3d91655d-6d99-4a97-a0f1-7e96ba308-4ba7bc7d24af8a8e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4765,
+      "group_key": "87a3d856d12e3ed0",
+      "timestamp": "2026-05-04 12:52:54",
+      "snippet": "We are working on this car again. it has some texture on the side Attached 1 fil"
+    },
+    {
+      "filename": "11b18fe4-7393-47db-af66-7d0fab2ac-368f2e24aa60b856.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4772,
+      "group_key": "2ab41dc18b9e7b50",
+      "timestamp": "2026-05-03 21:22:44",
+      "snippet": "Do you see this here timer circuit Attached 1 file. - 11b18fe4-7393-47db-af66-7d"
+    },
+    {
+      "filename": "image_4e710f-b6402b7b4a6eed2a.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 4874,
+      "group_key": "a3cfce93681e23d6",
+      "timestamp": "2026-04-28 02:53:46",
+      "snippet": "nvim is still showing Attached 1 file. - image_4e710f.png"
+    },
+    {
+      "filename": "64db46d4-a689-4e35-b885-a6a0473e7-5b4045048fd3b1ee.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4920,
+      "group_key": "c006e87c08afd08c",
+      "timestamp": "2026-04-27 18:36:39",
+      "snippet": "Have a bunch of Styrofoam. What can I do with it that reduces its volume? Attach"
+    },
+    {
+      "filename": "image_40dee9-daac12121e43e9c4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4979,
+      "group_key": "47738f6b1e60e5ae",
+      "timestamp": "2026-04-25 01:02:34",
+      "snippet": "can you read these sticky notes? Attached 1 file. - image_40dee9.jpg"
+    },
+    {
+      "filename": "261a0a63-dccb-4c86-9104-1ac5eedee-42c5407e86743b20.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4980,
+      "group_key": "68466794cb36fc55",
+      "timestamp": "2026-04-24 22:35:27",
+      "snippet": "I bought this from Ikea from my scandvis board however does not fit Attached 1 f"
+    },
+    {
+      "filename": "2739d9f9-d973-4860-a77d-da0297823-08b773e85200e3d5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 4991,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 13:27:11",
+      "snippet": "I took the back off the lutron Attached 1 file. - 2739d9f9-d973-4860-a77d-da0297"
+    },
+    {
+      "filename": "01fb5458-f01d-4d5b-b030-e7575186c-1f5caf188e32928d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5012,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 01:45:43",
+      "snippet": "I'm really not seeing it anywhere on this device. Attached 1 file. - 01fb5458-f0"
+    },
+    {
+      "filename": "84cc8f58-e4e7-417d-a206-79e848fc0-2c2ffd70f0904e1f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5013,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 01:42:32",
+      "snippet": "There is no black tap plastic component or tab. This looks like an opening so th"
+    },
+    {
+      "filename": "c649381f-c399-4bee-9367-3d6d56abc-9ce46e05c28e9ff3.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5014,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 01:41:44",
+      "snippet": "Attached 1 file. - c649381f-c399-4bee-9367-3d6d56abc7c1"
+    },
+    {
+      "filename": "e7515e8f-9f43-45b7-85c2-64dabe593-56ca302015f77c8b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5015,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 01:40:23",
+      "snippet": "Are you referring to this thing on the bottom side? Attached 1 file. - e7515e8f-"
+    },
+    {
+      "filename": "77793a63-1de9-4217-8651-3150f9811-de6cf74b166cf415.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5017,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 01:19:28",
+      "snippet": "All right, all the connections have been made, however, it still does not work. "
+    },
+    {
+      "filename": "105095c8-faa6-4303-8efc-c7195848d-6e4cfad9786e983b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5023,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 00:51:19",
+      "snippet": "Attached 2 files. - 1846bc00-0cd3-4010-9025-29bd9dccb7b4 - 105095c8-faa6-4303-8e"
+    },
+    {
+      "filename": "1846bc00-0cd3-4010-9025-29bd9dccb-6e4cfad9786e983b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5023,
+      "group_key": "07871da55b5815e8",
+      "timestamp": "2026-04-24 00:51:19",
+      "snippet": "Attached 2 files. - 1846bc00-0cd3-4010-9025-29bd9dccb7b4 - 105095c8-faa6-4303-8e"
+    },
+    {
+      "filename": "5a32ddf2-b6e4-4f6c-a92b-2d99f35fc-a53bdb5e7ff10b26.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5029,
+      "group_key": "13f1d67e266dafe7",
+      "timestamp": "2026-04-23 23:20:55",
+      "snippet": "I like to recreate the entire like an entire software development team who may w"
+    },
+    {
+      "filename": "a999ab84-87a4-4b5a-9599-4fa66c79b-c7696847851fbacb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5030,
+      "group_key": "13f1d67e266dafe7",
+      "timestamp": "2026-04-23 23:18:54",
+      "snippet": "Attached 1 file. - a999ab84-87a4-4b5a-9599-4fa66c79b619"
+    },
+    {
+      "filename": "3a042516-262d-4515-8833-5deaed92e-6b39ec0a96cbf76f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5031,
+      "group_key": "13f1d67e266dafe7",
+      "timestamp": "2026-04-23 23:18:38",
+      "snippet": "Attached 1 file. - 3a042516-262d-4515-8833-5deaed92e06b"
+    },
+    {
+      "filename": "b2b7076f-295e-40bc-a005-7cc1f00da-01b6a001fd620a34.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5079,
+      "group_key": "209af70b18a81dc4",
+      "timestamp": "2026-04-19 14:59:52",
+      "snippet": "My Bambu lab nozzles are covered in PLA and PETG HF Attached 1 file. - b2b7076f-"
+    },
+    {
+      "filename": "0db5c10a-1f75-44bf-92fe-64b91675f-723e410946f6e171.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5083,
+      "group_key": "5b55e471dbed1293",
+      "timestamp": "2026-04-19 13:16:10",
+      "snippet": "I have with me this magnetizer demagnetizer system Attached 1 file. - 0db5c10a-1"
+    },
+    {
+      "filename": "0fd837e5-fc87-473e-84bd-de2af6a1d-b14010ecee42c2c0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5122,
+      "group_key": "81af2fd3e03fec2b",
+      "timestamp": "2026-04-18 17:16:27",
+      "snippet": "I have a bunch of Styrofoam saved up. what could I possibly do with it? Attached"
+    },
+    {
+      "filename": "55ea2364-07b4-480b-b3ca-71b8a9f6b-4e808168ee1f7ff4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5125,
+      "group_key": "4df4c1cfd3a70eec",
+      "timestamp": "2026-04-18 02:42:12",
+      "snippet": "I plugged in a USB b Led into a battery Bank, yet it only remains powered for ab"
+    },
+    {
+      "filename": "4ca209e6-835e-4066-8634-1860a6bfb-d4d86adc0b5b4678.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5141,
+      "group_key": "eaaa0a4c3b298d0d",
+      "timestamp": "2026-04-17 22:56:00",
+      "snippet": "I have this fancy packaging box with my I took apart, I'm attempting to understa"
+    },
+    {
+      "filename": "bfb02d02-cecc-4ae2-9405-5e5a0843f-2c6b9612fdeaa1d9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5278,
+      "group_key": "1647b0b458cd7cc0",
+      "timestamp": "2026-04-13 16:38:49",
+      "snippet": "What should we do, for this area we already tried coating it with a layer of pai"
+    },
+    {
+      "filename": "5b0e87c0-7105-49ec-a50b-c4292a7ef-e5ad9c0b5f5a115f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5279,
+      "group_key": "1647b0b458cd7cc0",
+      "timestamp": "2026-04-13 16:32:28",
+      "snippet": "So we got a lot of the dirt and other scuff off with with wd-40 and some cleanin"
+    },
+    {
+      "filename": "0379cf24-1fa8-4083-8a01-ec96b6449-0f758e3b48c4b5ad.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5280,
+      "group_key": "1647b0b458cd7cc0",
+      "timestamp": "2026-04-13 16:16:54",
+      "snippet": "We have some automotive spray paint to try to fix this but we don't really know "
+    },
+    {
+      "filename": "9229-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9231-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9232-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9223-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9227-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9225-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "9230-cff5c4de6a795675.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5305,
+      "group_key": "b9d626152058f264",
+      "timestamp": "2026-04-12 15:53:33",
+      "snippet": "Given these photos of this wooden box, the width of the entire box is 11.5 cm, t"
+    },
+    {
+      "filename": "c129e08e-2a58-48ef-901c-e6162b8b6-960fafdbbbf7e5ea.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5310,
+      "group_key": "ab134f803e970a7c",
+      "timestamp": "2026-04-11 14:44:21",
+      "snippet": "Attached 1 file. - c129e08e-2a58-48ef-901c-e6162b8b6e34"
+    },
+    {
+      "filename": "b13dd2cf-321b-43f1-b6be-02e795e70-3fb8af651d46548e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5311,
+      "group_key": "ab134f803e970a7c",
+      "timestamp": "2026-04-11 14:40:35",
+      "snippet": "This is what I'm seeing Attached 1 file. - b13dd2cf-321b-43f1-b6be-02e795e70522"
+    },
+    {
+      "filename": "dc3489f7-7e89-4ba5-bd88-5d196b0b1-9297daeac61e0e26.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5314,
+      "group_key": "ab134f803e970a7c",
+      "timestamp": "2026-04-11 14:32:26",
+      "snippet": "What is this thing? This is where the power line from the fuse goes Attached 1 f"
+    },
+    {
+      "filename": "a0a89485-450f-4751-bc51-4e5636885-ab2ba6636f052340.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5319,
+      "group_key": "ab134f803e970a7c",
+      "timestamp": "2026-04-11 14:11:36",
+      "snippet": "All right. Do you see this electronic stir? I bought it from the Iowa State surp"
+    },
+    {
+      "filename": "image_f398f0-ee86e5c183c2b91f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5651,
+      "group_key": "c32f4ca210e5171c",
+      "timestamp": "2026-04-05 02:18:48",
+      "snippet": "I moved them all to desktop, however they still do not work Attached 1 file. - i"
+    },
+    {
+      "filename": "image_f246f9-d6a472d6a4e6fdee.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5652,
+      "group_key": "c32f4ca210e5171c",
+      "timestamp": "2026-04-05 01:34:21",
+      "snippet": "I am following https://gist.github.com/TheNoiselessNoise/c2c7482fef8a7d9e9023aad"
+    },
+    {
+      "filename": "58399ba0-0352-4ce2-9658-453e2269c-0760833c1d7e4003.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5706,
+      "group_key": "fcbc9ee046f00739",
+      "timestamp": "2026-04-03 20:37:36",
+      "snippet": "Well this cornstarch work? Attached 1 file. - 58399ba0-0352-4ce2-9658-453e2269c7"
+    },
+    {
+      "filename": "abb2b897-c7a4-42c3-9baa-109364c3f-fdefd348f6551c6a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5711,
+      "group_key": "fcbc9ee046f00739",
+      "timestamp": "2026-04-03 20:11:02",
+      "snippet": "Would any of these work? Attached 1 file. - abb2b897-c7a4-42c3-9baa-109364c3f8c9"
+    },
+    {
+      "filename": "6f9811c6-c02a-458a-a65e-851ca65ac-357f0039ffed465e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5717,
+      "group_key": "fcbc9ee046f00739",
+      "timestamp": "2026-04-03 19:39:26",
+      "snippet": "What is this bendy strip of metal and where can I buy some? Attached 1 file. - 6"
+    },
+    {
+      "filename": "702cf880-76a3-44d0-9eac-72ff6320b-c28237afd7fb1419.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5773,
+      "group_key": "3517d8acaaf7997e",
+      "timestamp": "2026-03-30 16:10:38",
+      "snippet": "All right, so I've got another engineering anchored question for you, these Ikea"
+    },
+    {
+      "filename": "ef0ecf58-842c-4c01-992b-b37540ad9-c28237afd7fb1419.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5773,
+      "group_key": "3517d8acaaf7997e",
+      "timestamp": "2026-03-30 16:10:38",
+      "snippet": "All right, so I've got another engineering anchored question for you, these Ikea"
+    },
+    {
+      "filename": "e4197e37-382d-4b0c-adbb-1aef14202-cc3bbfe6a96665e9.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5787,
+      "group_key": "1e658d05aa886ca2",
+      "timestamp": "2026-03-30 14:28:00",
+      "snippet": "So I have two more questions for you. The first one is about these roller chairs"
+    },
+    {
+      "filename": "71d6d113-7d0f-4b2b-b960-f1a760c46-aafbcf66b56665f6.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5801,
+      "group_key": "2babbb95ac4a42e6",
+      "timestamp": "2026-03-30 13:38:51",
+      "snippet": "I see many of these kitchen lighting solutions and even monitor lights which off"
+    },
+    {
+      "filename": "282c8010-fba1-4913-aee2-dbb7e1c47-afad392d7ffda005.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5830,
+      "group_key": "c7522539b3503bb1",
+      "timestamp": "2026-03-29 15:32:16",
+      "snippet": "I'm in an Ikea. Do these sensors require a home Smart hub? Attached 1 file. - 28"
+    },
+    {
+      "filename": "f1f4ad50-e3a5-4e4e-9e39-6ffcb918e-5d83574e730c1e5a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5833,
+      "group_key": "dcc4a1763f90de7f",
+      "timestamp": "2026-03-29 13:54:29",
+      "snippet": "What is the difference between a light that works like this and other lights? At"
+    },
+    {
+      "filename": "PXL_20260327_024501561-8780d7bc321295de.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5849,
+      "group_key": "16e9949f862817d3",
+      "timestamp": "2026-03-27 11:56:25",
+      "snippet": "``` \u276f python3 tiers/src/ocr_pipeline/extract_data.py Scanning 47 images in Tier "
+    },
+    {
+      "filename": "PXL_20260327_024501561-ceeda0d15ee9a325.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5850,
+      "group_key": "16e9949f862817d3",
+      "timestamp": "2026-03-27 11:41:50",
+      "snippet": "``` Scanning 47 images in Tier 1... --- [PXL_20260327_024501561.jpg] --- ill eS "
+    },
+    {
+      "filename": "f0709dbb-5f05-422f-ba68-7f6d3eef4-cfa64501042162ea.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5864,
+      "group_key": "628a10f95202a3e5",
+      "timestamp": "2026-03-26 19:03:49",
+      "snippet": "I filled this bernzomatic torch up with lighter fluid. Is there any way I can am"
+    },
+    {
+      "filename": "755d1671-b21b-4297-b7a8-a9414a87f-3c207a211f4687d8.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5892,
+      "group_key": "16e9949f862817d3",
+      "timestamp": "2026-03-25 03:43:50",
+      "snippet": "Hey, can you read this? This is a problem I want solved to be able to find books"
+    },
+    {
+      "filename": "image-7e63a58d2fb98f77.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 5893,
+      "group_key": "49be4501248943d7",
+      "timestamp": "2026-03-24 18:24:13",
+      "snippet": "What kind of grasshopper is this Attached 1 file. - image.png"
+    },
+    {
+      "filename": "image_d4136a-f6a243faab864f46.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5900,
+      "group_key": "623c448078720700",
+      "timestamp": "2026-03-24 00:50:47",
+      "snippet": "all right, so I think it moved everything in the wrong direction here. Attached "
+    },
+    {
+      "filename": "daa46dfd-6697-4bfc-8081-c25aecb62-7db9ed12d32e0087.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 5927,
+      "group_key": "6001624ac453a8ec",
+      "timestamp": "2026-03-23 16:41:41",
+      "snippet": "I have a butane lighter on the right here and on the left I have a butane fuel c"
+    },
+    {
+      "filename": "image-4e87335165aa7a28.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6147,
+      "group_key": "89db429c1c395c0e",
+      "timestamp": "2026-03-11 20:10:04",
+      "snippet": "Can you find me a visual for how combination works Attached 1 file. - image.png"
+    },
+    {
+      "filename": "1fc35cbc-f4d2-4615-bde7-a2d52cb63-54f34847ff215b20.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6229,
+      "group_key": "c79cb19e0bb1d659",
+      "timestamp": "2026-02-24 10:05:34",
+      "snippet": "Everett blow up by Target exercise ball Attached 1 file. - 1fc35cbc-f4d2-4615-bd"
+    },
+    {
+      "filename": "image_d795bb-f90e64cf707806ab.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6234,
+      "group_key": "4d378fc143403fcb",
+      "timestamp": "2026-02-23 13:04:37",
+      "snippet": "All right, that solved that problem, but now there's a new problem. Attached 1 f"
+    },
+    {
+      "filename": "image-d66c96fae6c92111.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6250,
+      "group_key": "406abf49e47f1172",
+      "timestamp": "2026-02-22 17:28:18",
+      "snippet": "Can you read the last two messages aloud Attached 1 file. - image.png"
+    },
+    {
+      "filename": "b86ad618-a6c9-480f-ac2b-68cc637f9-d9244b00471a3b7c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6272,
+      "group_key": "7d06d92774c303e1",
+      "timestamp": "2026-02-22 09:33:38",
+      "snippet": "How do I use one of these Attached 1 file. - b86ad618-a6c9-480f-ac2b-68cc637f966"
+    },
+    {
+      "filename": "image_946da3-917ec58d572b4b2b.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6291,
+      "group_key": "4d378fc143403fcb",
+      "timestamp": "2026-02-21 11:26:13",
+      "snippet": "I do not see that icon. Attached is what I see Attached 1 file. - image_946da3.p"
+    },
+    {
+      "filename": "f0c7174e-4ddb-45ea-9f18-7b41fa6b2-c4b759ef108edd6b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6377,
+      "group_key": "c8773a498071698c",
+      "timestamp": "2026-02-17 18:35:02",
+      "snippet": "What about this one Attached 1 file. - f0c7174e-4ddb-45ea-9f18-7b41fa6b2acb"
+    },
+    {
+      "filename": "4b155558-3343-4661-9366-33372f5ea-c3ea7342f5db21f7.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6378,
+      "group_key": "c8773a498071698c",
+      "timestamp": "2026-02-17 18:30:51",
+      "snippet": "do any of these products look like they would qualify Attached 1 file. - 4b15555"
+    },
+    {
+      "filename": "https://yogaspot.nl/wp-content/uploads/2024/04/Hatha-Yoga-Pradipika-lesson-1.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 6392,
+      "group_key": "2de629cfb665a895",
+      "timestamp": "2026-02-16 11:40:48",
+      "snippet": "A pdf printable version works nicely"
+    },
+    {
+      "filename": "https://www.holybooks.com/wp-content/uploads/Hatha-Yoga-Pradipika-original-sanskrit-translation.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 6392,
+      "group_key": "2de629cfb665a895",
+      "timestamp": "2026-02-16 11:40:48",
+      "snippet": "A pdf printable version works nicely"
+    },
+    {
+      "filename": "https://healthsiren.in/wp-content/uploads/2023/09/Hatha-Yoga-Pradipika-Muktibodhananda.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 6392,
+      "group_key": "2de629cfb665a895",
+      "timestamp": "2026-02-16 11:40:48",
+      "snippet": "A pdf printable version works nicely"
+    },
+    {
+      "filename": "New-Notes-3x-ee59c08d733360e8.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6428,
+      "group_key": "6f575f70a80093f1",
+      "timestamp": "2026-02-15 18:49:35",
+      "snippet": "Can you OCR this? Attached 1 file. - New-Notes-3x.jpg"
+    },
+    {
+      "filename": "Scan2026-02-14_153738_001-5e98021e6ad90820.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6482,
+      "group_key": "890b4c9d2cea534e",
+      "timestamp": "2026-02-15 12:02:12",
+      "snippet": "Can your OCR this text and transform this into a text output with the diagram ke"
+    },
+    {
+      "filename": "6bf41ca8-bbd1-4dbd-8b9b-0c09aafd5-3cffa2e8ada52549.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6583,
+      "group_key": "815d83e3c03a4fb9",
+      "timestamp": "2026-02-10 22:20:09",
+      "snippet": "Attached 1 file. - 6bf41ca8-bbd1-4dbd-8b9b-0c09aafd543b"
+    },
+    {
+      "filename": "d07afed2-9e8c-4a8c-9cc3-bec21f9f6-c101cb259a14d56c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6623,
+      "group_key": "5f1d1f9cbf0b722a",
+      "timestamp": "2026-02-07 18:52:45",
+      "snippet": "Attached 1 file. - d07afed2-9e8c-4a8c-9cc3-bec21f9f68aa"
+    },
+    {
+      "filename": "image-bcc2ac4fddd15874.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6624,
+      "group_key": "5f1d1f9cbf0b722a",
+      "timestamp": "2026-02-07 18:51:58",
+      "snippet": "What kind of ballast or what sizes do I have? Attached 1 file. - image.png"
+    },
+    {
+      "filename": "5929-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5928-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5930-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5933-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5932-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5931-750722bcf58a6ebd.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5934-750722bcf58a6ebd.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6627,
+      "group_key": "199db3c0bcb33fc3",
+      "timestamp": "2026-02-06 22:55:49",
+      "snippet": "The first photo is a photo of the schedule at my grocery store, the rest of the "
+    },
+    {
+      "filename": "5929-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "5933-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "5928-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "5930-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "5932-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "5931-bf79469614421010.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6634,
+      "group_key": "2fb48aa06a693345",
+      "timestamp": "2026-02-06 19:20:44",
+      "snippet": "This is the schedule for the grocery store I work at which is sent out weekly, w"
+    },
+    {
+      "filename": "ea8b9df7-4c4a-463b-9599-5401fe263-d9d251a75b70665a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6645,
+      "group_key": "2e9bf5225ac181a0",
+      "timestamp": "2026-02-06 18:37:31",
+      "snippet": "How do I fix my shoe with shoe polish help it Attached 1 file. - ea8b9df7-4c4a-4"
+    },
+    {
+      "filename": "dd99027b-c411-41d4-8e1b-e099fb365-56882ece76782052.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6647,
+      "group_key": "e329578670f65a20",
+      "timestamp": "2026-02-06 16:48:41",
+      "snippet": "what about this one Attached 1 file. - dd99027b-c411-41d4-8e1b-e099fb365924"
+    },
+    {
+      "filename": "c1a3dbf9-84aa-4a3b-9c27-a2359f1e5-2cc834e552573531.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6651,
+      "group_key": "e329578670f65a20",
+      "timestamp": "2026-02-06 16:43:58",
+      "snippet": "How might I power this Attached 1 file. - c1a3dbf9-84aa-4a3b-9c27-a2359f1e5d26"
+    },
+    {
+      "filename": "e19b81a8-0dc1-4a45-ac2e-1deb99eb3-8f5106516b2e3948.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6653,
+      "group_key": "8dfdae71dcd0d39c",
+      "timestamp": "2026-02-05 21:13:08",
+      "snippet": "I have a few of these 6 inch lights these are what I mean not the LEDs Attached "
+    },
+    {
+      "filename": "33d168b5-ed2c-469e-ad17-fa735a32b-863d63350df8714f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6654,
+      "group_key": "8dfdae71dcd0d39c",
+      "timestamp": "2026-02-05 21:11:35",
+      "snippet": "I have a few lights like these can I DIY this and use a battery instead of the w"
+    },
+    {
+      "filename": "d87bfb35-5a4e-45ed-a3c7-664fb4e5f-4592da5cdadf47c5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6663,
+      "group_key": "7af30cf0c5797c7b",
+      "timestamp": "2026-02-05 19:03:59",
+      "snippet": "This apartment floor carpet is pretty disgusting Attached 1 file. - d87bfb35-5a4"
+    },
+    {
+      "filename": "827c7993-6955-4a91-854b-6e4460fc4-7198558585338695.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6677,
+      "group_key": "e9f95c51f76b3566",
+      "timestamp": "2026-02-05 17:48:02",
+      "snippet": "How do I use this bottle jack Attached 1 file. - 827c7993-6955-4a91-854b-6e4460f"
+    },
+    {
+      "filename": "da7f5538-3246-4b70-b628-904001ea7-65e175af5411b773.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6694,
+      "group_key": "287f7b99571a32f6",
+      "timestamp": "2026-02-05 00:53:00",
+      "snippet": "How do you use one of these Attached 1 file. - da7f5538-3246-4b70-b628-904001ea7"
+    },
+    {
+      "filename": "413c70f9-8e1d-4725-8df2-58da73c39-221f437fbddcc083.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6706,
+      "group_key": "215045cf6a6e0024",
+      "timestamp": "2026-02-04 21:38:10",
+      "snippet": "You see this flux cored bar I find this wire just above the mig wire Attached 1 "
+    },
+    {
+      "filename": "5899-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5904-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5902-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5887-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5877-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5901-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5882-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5880-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5885-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "5903-00a92003922012b5.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6713,
+      "group_key": "734ee16af120adf0",
+      "timestamp": "2026-02-04 16:36:34",
+      "snippet": "Please or these and convert them to a Google doc Attached 10 files. - 5882.png -"
+    },
+    {
+      "filename": "d136959f-4432-4694-8f98-beceae68b-2d49983e23dd98c2.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6736,
+      "group_key": "d573a00735b7d20a",
+      "timestamp": "2026-02-03 21:34:57",
+      "snippet": "I just bought a watch and I would like to tune it to the correct time Attached 1"
+    },
+    {
+      "filename": "b14166c9-29ff-46b4-ae7d-f36caf527-5a8f2733f2575f35.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6766,
+      "group_key": "e6f1e9d8e9f8a189",
+      "timestamp": "2026-02-01 21:39:32",
+      "snippet": "What kind of style of lights are these and what can they plug into Attached 1 fi"
+    },
+    {
+      "filename": "540745e7-38a5-464e-9620-18c01f557-53a01a41fc99c848.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6782,
+      "group_key": "a1c9a27a47bd4be9",
+      "timestamp": "2026-01-31 00:33:10",
+      "snippet": "Attached 2 files. - e6de19da-7cbb-4318-bbdd-4a1f643345b1 - 540745e7-38a5-464e-96"
+    },
+    {
+      "filename": "e6de19da-7cbb-4318-bbdd-4a1f64334-53a01a41fc99c848.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 6782,
+      "group_key": "a1c9a27a47bd4be9",
+      "timestamp": "2026-01-31 00:33:10",
+      "snippet": "Attached 2 files. - e6de19da-7cbb-4318-bbdd-4a1f643345b1 - 540745e7-38a5-464e-96"
+    },
+    {
+      "filename": "image-ab8eddee5f904ad6.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6794,
+      "group_key": "2438bffd24aef495",
+      "timestamp": "2026-01-30 23:37:25",
+      "snippet": "I'm looking for a printer preferably of brother brand that is a laser printer an"
+    },
+    {
+      "filename": "Agriland-Homepage-Final-30ba52bb341c68ff.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 6833,
+      "group_key": "adff9d1d43fbf834",
+      "timestamp": "2026-01-29 04:20:58",
+      "snippet": "What can you gather? Attached 1 file. - Agriland-Homepage-Final.pdf"
+    },
+    {
+      "filename": "image-68ff2ffff1b47e7a.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 6931,
+      "group_key": "2d5378797bded9c4",
+      "timestamp": "2026-01-23 19:22:33",
+      "snippet": "How often or how much or how long would you have to use the E-Cigarettes Attache"
+    },
+    {
+      "filename": "Austin%20Rognes%20-%20Resume-1b4da3f16757bc71.pdf",
+      "ext": "pdf",
+      "is_img": false,
+      "chat_id": 7083,
+      "group_key": "b4456dec00d1516e",
+      "timestamp": "2026-01-07 20:10:21",
+      "snippet": "Hello, I am engaging in contract work in the software engineering field, here is"
+    },
+    {
+      "filename": "8a050886-5c75-4445-a171-e15731e76-a537a7112ce7cea4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7111,
+      "group_key": "132e3991bde06378",
+      "timestamp": "2026-01-04 20:41:17",
+      "snippet": "Do you know what this PCB is for? Attached 1 file. - 8a050886-5c75-4445-a171-e15"
+    },
+    {
+      "filename": "5035-c52fda72a3a35ffb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7166,
+      "group_key": "a4518025bd49c039",
+      "timestamp": "2025-12-29 00:49:12",
+      "snippet": "My dishwasher is having trouble getting to the detergent Attached 4 files. - 503"
+    },
+    {
+      "filename": "5037-c52fda72a3a35ffb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7166,
+      "group_key": "a4518025bd49c039",
+      "timestamp": "2025-12-29 00:49:12",
+      "snippet": "My dishwasher is having trouble getting to the detergent Attached 4 files. - 503"
+    },
+    {
+      "filename": "5036-c52fda72a3a35ffb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7166,
+      "group_key": "a4518025bd49c039",
+      "timestamp": "2025-12-29 00:49:12",
+      "snippet": "My dishwasher is having trouble getting to the detergent Attached 4 files. - 503"
+    },
+    {
+      "filename": "5038-c52fda72a3a35ffb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7166,
+      "group_key": "a4518025bd49c039",
+      "timestamp": "2025-12-29 00:49:12",
+      "snippet": "My dishwasher is having trouble getting to the detergent Attached 4 files. - 503"
+    },
+    {
+      "filename": "9343f988-0450-4d63-9014-2496261f0-d3da53ba703f7801.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7200,
+      "group_key": "d1db44f1fb6a4a80",
+      "timestamp": "2025-12-22 07:28:11",
+      "snippet": "how do I use this Attached 1 file. - 9343f988-0450-4d63-9014-2496261f046d"
+    },
+    {
+      "filename": "69663d99-fc80-4cee-a739-ede9d3290-8a452a084f0d4525.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7203,
+      "group_key": "d1db44f1fb6a4a80",
+      "timestamp": "2025-12-22 04:56:54",
+      "snippet": "Can you please read my cursive and organize my sticky notes some way? Attached 1"
+    },
+    {
+      "filename": "2d12f277-7750-4c56-944f-3bdd9e9c0-adfbce98419966e7.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7204,
+      "group_key": "fdbc8329e3dab278",
+      "timestamp": "2025-12-22 04:52:08",
+      "snippet": "a sensitive query. Attached 1 file. - 2d12f277-7750-4c56-944f-3bdd9e9c0e5b"
+    },
+    {
+      "filename": "70fedfa3-3155-4fc7-8cc4-de4ae94f1-70a2964958e7ff90.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7212,
+      "group_key": "fdbc8329e3dab278",
+      "timestamp": "2025-12-22 03:04:16",
+      "snippet": "Can I incorporate this into my phone to be able to do use the functionality of t"
+    },
+    {
+      "filename": "3ead7316-1af4-4170-9692-8958ed004-17081aa1d53c819b.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7264,
+      "group_key": "d0bc5e78980dddc4",
+      "timestamp": "2025-12-17 21:38:37",
+      "snippet": "I'm going to grab my multimeter Attached 1 file. - 3ead7316-1af4-4170-9692-8958e"
+    },
+    {
+      "filename": "image-10413ead852f0480.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 7267,
+      "group_key": "03cdcb045b282a51",
+      "timestamp": "2025-12-17 21:35:10",
+      "snippet": "What do the cables with the X on them mean Attached 1 file. - image.png"
+    },
+    {
+      "filename": "ee231127-9a7c-4360-958d-8bede4dfc-509a371cd3b200a7.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7268,
+      "group_key": "2b386dfb3ace61bc",
+      "timestamp": "2025-12-17 21:33:08",
+      "snippet": "Do you see these cable symbols Attached 1 file. - ee231127-9a7c-4360-958d-8bede4"
+    },
+    {
+      "filename": "b4ed9fb9-9a68-46ee-8987-f367321d3-0a33d15f7454da1d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7281,
+      "group_key": "e303f3422cd8887a",
+      "timestamp": "2025-12-17 15:52:36",
+      "snippet": "I like to create a rock tumbler Attached 1 file. - b4ed9fb9-9a68-46ee-8987-f3673"
+    },
+    {
+      "filename": "62a949e3-de8b-4ac8-bc57-b937fa465-437f99610ae413e4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7282,
+      "group_key": "e303f3422cd8887a",
+      "timestamp": "2025-12-17 15:48:58",
+      "snippet": "hello Attached 1 file. - 62a949e3-de8b-4ac8-bc57-b937fa465baf"
+    },
+    {
+      "filename": "d3cf59bd-d08c-41bc-9f33-db11275c6-5050833fca3397a5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7294,
+      "group_key": "94edc64bfc08fbc5",
+      "timestamp": "2025-12-17 14:49:15",
+      "snippet": "Can you parse my cursive? Attached 1 file. - d3cf59bd-d08c-41bc-9f33-db11275c6e5"
+    },
+    {
+      "filename": "a2ab5737-130f-4a13-9508-d3ae75269-7d45569a72423ed5.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7340,
+      "group_key": "bde9462a4ae694ce",
+      "timestamp": "2025-12-08 03:40:59",
+      "snippet": "This is a tongue attachment Attached 1 file. - a2ab5737-130f-4a13-9508-d3ae75269"
+    },
+    {
+      "filename": "a70db971-f304-4190-8611-fdc08fcd0-d7da27fa101baf9c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7344,
+      "group_key": "c8a9d18ec11a78b1",
+      "timestamp": "2025-12-07 17:24:56",
+      "snippet": "Attached 2 files. - 4783ad48-6c72-4128-b949-ff290c9852fd - a70db971-f304-4190-86"
+    },
+    {
+      "filename": "4783ad48-6c72-4128-b949-ff290c985-d7da27fa101baf9c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7344,
+      "group_key": "c8a9d18ec11a78b1",
+      "timestamp": "2025-12-07 17:24:56",
+      "snippet": "Attached 2 files. - 4783ad48-6c72-4128-b949-ff290c9852fd - a70db971-f304-4190-86"
+    },
+    {
+      "filename": "88b8fd10-cad0-41b3-8715-99ee9eb1f-adefa6e8c3cff96e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7345,
+      "group_key": "75040581eccda47d",
+      "timestamp": "2025-12-07 17:20:45",
+      "snippet": "Attached 1 file. - 88b8fd10-cad0-41b3-8715-99ee9eb1fa6b"
+    },
+    {
+      "filename": "80eb4dd7-f414-4074-8237-22fb1f90b-b4f01b9544b82bfc.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7346,
+      "group_key": "75040581eccda47d",
+      "timestamp": "2025-12-07 17:18:16",
+      "snippet": "This battery is empty Attached 1 file. - 80eb4dd7-f414-4074-8237-22fb1f90ba83"
+    },
+    {
+      "filename": "d49c85c3-509f-4cc0-a2bb-bff8e17e0-33d6bae380d86894.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7347,
+      "group_key": "c8a9d18ec11a78b1",
+      "timestamp": "2025-12-07 16:00:42",
+      "snippet": "Attached 1 file. - d49c85c3-509f-4cc0-a2bb-bff8e17e065b"
+    },
+    {
+      "filename": "image-186ce13ac9d1477e.png",
+      "ext": "png",
+      "is_img": true,
+      "chat_id": 7349,
+      "group_key": "c8a9d18ec11a78b1",
+      "timestamp": "2025-12-07 14:31:37",
+      "snippet": "can you decompose this into and read the text into a file Attached 1 file. - ima"
+    },
+    {
+      "filename": "483d5172-c694-4932-8327-0698c595a-01f37dcb4f66d59d.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7441,
+      "group_key": "bb5db135a738bba0",
+      "timestamp": "2025-11-23 14:36:28",
+      "snippet": "Attached 1 file. - 483d5172-c694-4932-8327-0698c595a95c"
+    },
+    {
+      "filename": "297a73d4-368f-4c2e-b05e-522d8e02b-229e804c8366bafb.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7863,
+      "group_key": "72dc2aa7eb5353fa",
+      "timestamp": "2025-08-24 17:09:43",
+      "snippet": "This is the diagram to wire it to a router Attached 1 file. - 297a73d4-368f-4c2e"
+    },
+    {
+      "filename": "5d2cb79d-649d-4a95-a993-bd6c97898-943fd05538fec51a.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7864,
+      "group_key": "72dc2aa7eb5353fa",
+      "timestamp": "2025-08-24 17:08:36",
+      "snippet": "Do you see this installation guide? Attached 1 file. - 5d2cb79d-649d-4a95-a993-b"
+    },
+    {
+      "filename": "58b98250-f57d-402c-8142-f3e6d125d-d369b9cd18a83abd.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 7887,
+      "group_key": "6780a2d9c0cf4eab",
+      "timestamp": "2025-08-23 13:32:05",
+      "snippet": "Do you see this very small boat Attached 1 file. - 58b98250-f57d-402c-8142-f3e6d"
+    },
+    {
+      "filename": "1c77ad1a-2c74-437b-b346-242034d30-860861e8555f7b85.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8006,
+      "group_key": "245c6bb6cbefe7c5",
+      "timestamp": "2025-08-09 18:40:06",
+      "snippet": "Create a calendar event from this Attached 1 file. - 1c77ad1a-2c74-437b-b346-242"
+    },
+    {
+      "filename": "d1b6b2b3-c0be-43c3-a53f-1c6217f9a-1c2312301b005f0e.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8020,
+      "group_key": "bd689d6d11da6a05",
+      "timestamp": "2025-08-08 22:35:54",
+      "snippet": "Can you see this location Attached 1 file. - d1b6b2b3-c0be-43c3-a53f-1c6217f9a14"
+    },
+    {
+      "filename": "1ef62dbb-8ead-4ff2-8f75-827effc57-384e9c53318bccaa.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8061,
+      "group_key": "01ebba5d42bded9f",
+      "timestamp": "2025-08-07 18:57:35",
+      "snippet": "What is this Attached 1 file. - 1ef62dbb-8ead-4ff2-8f75-827effc575cb"
+    },
+    {
+      "filename": "37790015-3d53-4a4a-bbd8-683e2577f-b3a5c4a220de5bb8.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8068,
+      "group_key": "a2f348bdc85f954a",
+      "timestamp": "2025-08-07 16:56:32",
+      "snippet": "Attached 1 file. - 37790015-3d53-4a4a-bbd8-683e2577fa75"
+    },
+    {
+      "filename": "a8a8c4d3-b781-4cc0-8335-f817867e3-189f4821cbdb5976.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8069,
+      "group_key": "a2f348bdc85f954a",
+      "timestamp": "2025-08-07 16:55:59",
+      "snippet": "What model is this light motion sensor Attached 1 file. - a8a8c4d3-b781-4cc0-833"
+    },
+    {
+      "filename": "e812d185-ec78-47b5-ac15-fa9bbbfa2-b1160c9edd68537c.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8071,
+      "group_key": "a2f348bdc85f954a",
+      "timestamp": "2025-08-07 16:54:13",
+      "snippet": "What is the blue wire on this component Attached 1 file. - e812d185-ec78-47b5-ac"
+    },
+    {
+      "filename": "08d6640a-eda7-4bbd-a430-e547fea70-44c5853612287cbf.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8086,
+      "group_key": "57cbc6a758bb32b0",
+      "timestamp": "2025-08-07 16:32:05",
+      "snippet": "Attached 1 file. - 08d6640a-eda7-4bbd-a430-e547fea7037f"
+    },
+    {
+      "filename": "a2277e66-2987-407a-be16-7f5c72d10-0c2ade594524cce4.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8087,
+      "group_key": "57cbc6a758bb32b0",
+      "timestamp": "2025-08-07 16:31:28",
+      "snippet": "What kind of humidity switch is Attached 1 file. - a2277e66-2987-407a-be16-7f5c7"
+    },
+    {
+      "filename": "d49564aa-f4d5-43aa-ac94-88b72267e-8ebca1d7c140bd7f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8092,
+      "group_key": "2869ab82717d1518",
+      "timestamp": "2025-08-07 16:08:33",
+      "snippet": "Can you find the instruction manual for this light switch Attached 1 file. - d49"
+    },
+    {
+      "filename": "3b82a305-5f4a-4bc6-afbb-c7f539692-615b7f842a53c78f.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8100,
+      "group_key": "b6a2a7b46040d69e",
+      "timestamp": "2025-08-06 23:08:14",
+      "snippet": "Can you find the schematics for this capacitor Attached 1 file. - 3b82a305-5f4a-"
+    },
+    {
+      "filename": "https://www.google.com/search?q=https://www.ranmarine.io/wp-content/uploads/2022/04/Wasteshark-in-action-Canary-Wharf-scaled.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8158,
+      "group_key": "a62d91cc4f0a9cc9",
+      "timestamp": "2025-08-03 19:43:06",
+      "snippet": "show me a water cleaning robot"
+    },
+    {
+      "filename": "4115-b8b280a86979dba0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8161,
+      "group_key": "a62d91cc4f0a9cc9",
+      "timestamp": "2025-08-03 19:33:10",
+      "snippet": "I need to be able to husk corn cobs that are already in a bag that looks like th"
+    },
+    {
+      "filename": "4114-b8b280a86979dba0.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8161,
+      "group_key": "a62d91cc4f0a9cc9",
+      "timestamp": "2025-08-03 19:33:10",
+      "snippet": "I need to be able to husk corn cobs that are already in a bag that looks like th"
+    },
+    {
+      "filename": "6742cb77-5f0b-4205-a3c3-d61bb3871-2aa0897ca1a53ecd.jpg",
+      "ext": "jpg",
+      "is_img": true,
+      "chat_id": 8178,
+      "group_key": "91e4e3cc14594d15",
+      "timestamp": "2025-08-03 18:34:24",
+      "snippet": "Hey Google what is this Attached 1 file. - 6742cb77-5f0b-4205-a3c3-d61bb38712ee"
+    }
+  ]
+}
