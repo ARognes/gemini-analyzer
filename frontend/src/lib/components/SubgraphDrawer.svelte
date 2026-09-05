@@ -215,6 +215,13 @@
     font-weight: 600;
     color: #f8fafc;
     font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.35;
   }
 
   .tier-tag {

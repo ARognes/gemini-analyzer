@@ -252,7 +252,7 @@
     const clusterMap = {};
 
     nodes.forEach(n => {
-      if (!visibleNodes.has(n.id) || typeof n.x !== 'number') return;
+      if (!visibleNodes.has(n.id) || typeof n.x !== 'number' || typeof n.y !== 'number') return;
       const tag = n.data_tag || n.category || 'outliers';
       if (!clusterMap[tag]) clusterMap[tag] = [];
       clusterMap[tag].push(n);
@@ -262,25 +262,38 @@
       const cNodes = clusterMap[tag];
       if (cNodes.length < 3) return;
 
-      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      const allPoints = [];
+      const padding = 22;
+      const angleSteps = 8;
+
       cNodes.forEach(n => {
-        minX = Math.min(minX, n.x - (n.radius || 8) - 15);
-        minY = Math.min(minY, n.y - (n.radius || 8) - 15);
-        maxX = Math.max(maxX, n.x + (n.radius || 8) + 15);
-        maxY = Math.max(maxY, n.y + (n.radius || 8) + 15);
+        const r = (n.radius || 8) + padding;
+        for (let i = 0; i < angleSteps; i++) {
+          const angle = (i * 2 * Math.PI) / angleSteps;
+          allPoints.push([
+            n.x + r * Math.cos(angle),
+            n.y + r * Math.sin(angle)
+          ]);
+        }
       });
 
-      const w = maxX - minX;
-      const h = maxY - minY;
-      const r = 16;
+      const hull = d3.polygonHull(allPoints);
+      if (!hull || hull.length < 3) return;
 
       ctx.beginPath();
-      ctx.roundRect(minX, minY, w, h, r);
+      ctx.moveTo(hull[0][0], hull[0][1]);
+      for (let i = 1; i < hull.length; i++) {
+        ctx.lineTo(hull[i][0], hull[i][1]);
+      }
+      ctx.closePath();
+
       ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.15)';
-      ctx.lineWidth = 1.0;
-      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.18)';
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.setLineDash([6, 4]);
       ctx.stroke();
       ctx.setLineDash([]);
     });
@@ -634,6 +647,13 @@
     font-weight: 600;
     color: #38bdf8;
     margin-bottom: 0.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.35;
   }
 
   .tooltip-meta {

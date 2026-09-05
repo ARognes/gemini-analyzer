@@ -148,6 +148,16 @@
     border-left: 3px solid #3b82f6;
   }
 
+  .label {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.35;
+  }
+
   .children-block {
     display: flex;
     flex-direction: column;

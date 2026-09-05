@@ -114,6 +114,13 @@
     margin: 0 0 0.5rem 0;
     font-size: 1rem;
     color: #f8fafc;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.35;
   }
 
   .tags-row {
