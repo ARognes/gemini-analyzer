@@ -15,7 +15,7 @@ const config = {
 			strict: false
 		}),
 		paths: {
-			relative: true
+			base: process.env.NODE_ENV === 'production' ? '/gemini-analyzer' : ''
 		}
 	}
 };
