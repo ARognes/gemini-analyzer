@@ -406,17 +406,22 @@
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
       } else if (isSelectionActive && edgeDist !== undefined) {
-        const opacityMap = { 1: 0.85, 2: 0.55, 3: 0.35, 4: 0.20 };
-        const opacity = opacityMap[edgeDist] || 0.15;
-        ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
-        ctx.lineWidth = Math.max(1.2, 3.0 - (edgeDist * 0.5));
-        ctx.shadowBlur = edgeDist === 1 ? 8 : 0;
+        const edgeStyles = {
+          1: { width: 4.8, opacity: 0.90, blur: 12 },
+          2: { width: 3.2, opacity: 0.65, blur: 6 },
+          3: { width: 1.8, opacity: 0.40, blur: 0 },
+          4: { width: 0.9, opacity: 0.22, blur: 0 }
+        };
+        const styleConf = edgeStyles[edgeDist] || { width: 0.8, opacity: 0.15, blur: 0 };
+        ctx.strokeStyle = `rgba(96, 165, 250, ${styleConf.opacity})`;
+        ctx.lineWidth = styleConf.width;
+        ctx.shadowBlur = styleConf.blur;
         ctx.shadowColor = '#60a5fa';
       } else {
         ctx.strokeStyle = (isSubgraphActive || isSelectionActive) 
-          ? 'rgba(255, 255, 255, 0.04)' 
+          ? 'rgba(255, 255, 255, 0.03)' 
           : 'rgba(255, 255, 255, 0.12)';
-        ctx.lineWidth = 1.0;
+        ctx.lineWidth = 0.6;
         ctx.shadowBlur = 0;
       }
       ctx.stroke();
