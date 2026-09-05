@@ -87,19 +87,11 @@
   <div class="subtabs">
     <button 
       class="subtab-btn" 
-      class:active={$activeSubtab === 'topic_clusters'}
-      id="subtabUnified" 
-      onclick={() => activeSubtab.set('topic_clusters')}
-    >
-      🌌 Galaxy Graph
-    </button>
-    <button 
-      class="subtab-btn" 
       class:active={$activeSubtab === 'd3_constellation'} 
       id="subtabD3"
       onclick={() => activeSubtab.set('d3_constellation')}
     >
-      🪐 D3 Graph
+      🌌 Graph
     </button>
     <button 
       class="subtab-btn" 

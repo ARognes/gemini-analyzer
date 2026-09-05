@@ -195,7 +195,7 @@
   function initD3Simulation() {
     const rawNodes = graphData.nodes || [];
 
-    // Group initial nodes in circular sectors around canvas center
+    // Group initial nodes in spacious circular sectors around canvas center
     const clusters = {};
     rawNodes.forEach(n => {
       const tag = n.data_tag || n.category || 'outliers';
@@ -207,7 +207,7 @@
     const centerCanvasX = 1600;
     const centerCanvasY = 1100;
     const numTags = tags.length;
-    const mainRadius = 550;
+    const mainRadius = 1100;
 
     tags.forEach((tag, idx) => {
       const angle = (idx / numTags) * 2 * Math.PI;
@@ -217,7 +217,7 @@
       const clusterNodes = clusters[tag];
       const goldenAngle = 2.399963229728653;
       clusterNodes.forEach((n, nIdx) => {
-        const r = 35 * Math.sqrt(nIdx + 1);
+        const r = 55 * Math.sqrt(nIdx + 1);
         const theta = nIdx * goldenAngle;
         n.x = sectorCenterX + r * Math.cos(theta);
         n.y = sectorCenterY + r * Math.sin(theta);
@@ -237,15 +237,28 @@
       }));
 
     simulation = d3.forceSimulation(rawNodes)
-      .force('charge', d3.forceManyBody().strength(-90).distanceMax(240))
-      .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(70, 160 * (1.0 - d.similarity))).strength(0.4))
+      .force('charge', d3.forceManyBody().strength(-100).distanceMax(350))
+      .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(90, 220 * (1.0 - d.similarity))).strength(0.45))
       .force('center', d3.forceCenter(1600, 1100).strength(0.04))
-      .force('collide', d3.forceCollide().radius(d => d.radius + 14).strength(0.7))
+      .force('collide', d3.forceCollide().radius(d => d.radius + 16).strength(0.8))
       .force('cluster', forceClusterCentroid(0.14))
-      .alphaDecay(0.02)
+      .stop();
+
+    // Pre-compute 140 physics ticks offline synchronously for instant layout & zero startup lag
+    for (let i = 0; i < 140; i++) {
+      simulation.tick();
+    }
+
+    graphData.nodes = rawNodes;
+    graphData.links = links;
+
+    // Render initial equilibrated frame and attach live tick listener with low settled alpha
+    drawCanvas();
+
+    simulation
+      .alpha(0.02)
+      .alphaTarget(0)
       .on('tick', () => {
-        graphData.nodes = rawNodes;
-        graphData.links = links;
         drawCanvas();
       });
   }
@@ -684,7 +697,7 @@
     </div>
   {/if}
 
-  <div class="d3-badge">🪐 D3.js Force Engine • Middle Click: Pan • Left Click: Drag & Select • Right Click: Menu</div>
+  <div class="d3-badge">🌌 Constellation Graph • Middle Click: Pan • Left Click: Drag & Select • Right Click: Menu</div>
 </div>
 
 <style>

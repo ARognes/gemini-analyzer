@@ -26,14 +26,12 @@
 <div class="app-layout">
   <Header />
 
-  {#if $activeSubtab === 'topic_clusters' || $activeSubtab === 'd3_constellation'}
+  {#if $activeSubtab === 'd3_constellation'}
     <FilterBar />
   {/if}
 
   <main class="main-viewport">
-    {#if $activeSubtab === 'topic_clusters'}
-      <CanvasConstellation />
-    {:else if $activeSubtab === 'd3_constellation'}
+    {#if $activeSubtab === 'd3_constellation'}
       <D3Constellation />
     {:else if $activeSubtab === 'mindmap'}
       <MindmapTree />

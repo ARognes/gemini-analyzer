@@ -32,17 +32,17 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         canvas = page.query_selector("#constellationCanvas")
         self.assertIsNotNone(canvas, "Canvas #constellationCanvas missing from DOM")
 
-        tab_unified = page.query_selector("#subtabUnified")
-        self.assertIsNotNone(tab_unified, "Subtab #subtabUnified missing from DOM")
-        page.click("#subtabUnified")
+        tab_d3 = page.query_selector("#subtabD3")
+        self.assertIsNotNone(tab_d3, "Subtab #subtabD3 missing from DOM")
+        page.click("#subtabD3")
         page.wait_for_timeout(300)
 
-        self.assertIn("active", tab_unified.get_attribute("class"))
+        self.assertIn("active", tab_d3.get_attribute("class"))
         print("✅ Test 01: Subtab activation PASSED")
 
     def test_02_canvas_node_hover_hit_test(self):
         page = self.page
-        page.click("#subtabUnified")
+        page.click("#subtabD3")
         page.wait_for_timeout(500)
 
         # Mouse hover near canvas center
@@ -54,7 +54,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
 
     def test_03_canvas_node_drag_and_physics(self):
         page = self.page
-        page.click("#subtabUnified")
+        page.click("#subtabD3")
         page.wait_for_timeout(500)
 
         canvas = page.query_selector("#constellationCanvas")
@@ -129,7 +129,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
     def test_07_actionability_edge_filter(self):
         """Test toggling actionability tier buttons."""
         page = self.page
-        page.click("#subtabUnified")
+        page.click("#subtabD3")
         page.wait_for_timeout(300)
 
         page.click(".tier-project")
@@ -141,7 +141,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
     def test_08_hover_no_dimming_and_click_selection(self):
         """Test node click selection."""
         page = self.page
-        page.click("#subtabUnified")
+        page.click("#subtabD3")
         page.wait_for_timeout(300)
 
         canvas = page.query_selector("#constellationCanvas")
@@ -237,7 +237,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         page.wait_for_selector(".matrix-table-wrapper", timeout=15000)
         self.assertIsNotNone(page.query_selector(".matrix-table-wrapper"))
 
-        page.click("#subtabUnified")
+        page.click("#subtabD3")
         page.wait_for_timeout(300)
 
         print("✅ Test 13: Svelte view tab switching PASSED (Galaxy, Mindmap, Matrix)")
