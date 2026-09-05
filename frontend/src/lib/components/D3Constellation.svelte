@@ -23,6 +23,8 @@
 
   let graphData = $state({ nodes: [], relations: [] });
   let isLoaded = $state(false);
+  let loadProgress = $state(0);
+  let loadMessage = $state('Fetching graph dataset...');
 
   // Pan & Zoom transform
   let transform = $state(d3.zoomIdentity);
@@ -123,12 +125,14 @@
     d3Canvas.call(drag);
 
     try {
+      loadMessage = 'Loading canvas relationships & node clusters...';
+      loadProgress = 10;
       const data = await fetchCanvasData('chat', 0.38);
       graphData = data;
-      initD3Simulation();
-      isLoaded = true;
+      await initD3Simulation();
     } catch (err) {
       console.error('Failed to load D3 graph data:', err);
+      loadMessage = 'Error loading graph data.';
     }
   });
 
@@ -193,9 +197,16 @@
     return force;
   }
 
-  function initD3Simulation() {
+  async function initD3Simulation() {
     const rawNodes = graphData.nodes || [];
-    if (rawNodes.length === 0) return;
+    if (rawNodes.length === 0) {
+      isLoaded = true;
+      return;
+    }
+
+    loadMessage = 'Initializing cluster positions...';
+    loadProgress = 15;
+    await new Promise(r => setTimeout(r, 16));
 
     // Group initial nodes in spacious circular sectors around canvas center
     const clusters = {};
@@ -246,13 +257,26 @@
       .force('cluster', forceClusterCentroid(0.12))
       .stop();
 
-    // Pre-compute 100 physics ticks offline synchronously for instant layout & zero startup lag
-    for (let i = 0; i < 100; i++) {
-      simulation.tick();
-    }
-
     graphData.nodes = rawNodes;
     graphData.links = links;
+
+    // Asynchronously pre-compute 100 physics ticks in batches of 5
+    // yielding to main thread to animate loading progress smoothly
+    const totalTicks = 100;
+    const batchSize = 5;
+    let completedTicks = 0;
+
+    loadMessage = `Pre-computing physics layout (0 / ${totalTicks} ticks)...`;
+
+    while (completedTicks < totalTicks) {
+      for (let i = 0; i < batchSize && completedTicks < totalTicks; i++) {
+        simulation.tick();
+        completedTicks++;
+      }
+      loadProgress = Math.min(99, Math.round(20 + (completedTicks / totalTicks) * 79));
+      loadMessage = `Equilibrating graph layout (${completedTicks} / ${totalTicks} ticks)`;
+      await new Promise(r => setTimeout(r, 0));
+    }
 
     // Reset camera view to frame pre-computed layout perfectly
     resetCameraView();
@@ -264,6 +288,11 @@
       .on('tick', () => {
         drawCanvas();
       });
+
+    loadProgress = 100;
+    loadMessage = 'Layout complete! Rendering constellation...';
+    await new Promise(r => setTimeout(r, 80));
+    isLoaded = true;
   }
 
   function computeMultiHopTraversal(startNodeId, maxHops = 25, visibleNodes = null) {
@@ -653,10 +682,14 @@
   ></canvas>
 
   {#if !isLoaded}
-    <div class="loading-overlay">
+    <div class="loading-overlay" class:fade-out={loadProgress >= 100}>
       <div class="spinner"></div>
       <div class="loading-text">🌌 Loading Constellation Graph...</div>
-      <div class="loading-subtext">Equilibrating physics layout & pre-computing nodes</div>
+      <div class="loading-subtext">{loadMessage}</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" style="width: {loadProgress}%;"></div>
+      </div>
+      <div class="progress-percentage">{loadProgress}%</div>
     </div>
   {/if}
 
@@ -819,14 +852,20 @@
   .loading-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(9, 13, 22, 0.88);
+    background: rgba(9, 13, 22, 0.92);
     backdrop-filter: blur(16px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 1200;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    transition: opacity 0.25s ease-out;
+  }
+
+  .loading-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
   }
 
   .spinner {
@@ -853,5 +892,31 @@
   .loading-subtext {
     font-size: 0.8rem;
     color: #94a3b8;
+    min-height: 1.2rem;
+  }
+
+  .progress-bar-container {
+    width: 260px;
+    height: 8px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-top: 0.2rem;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+    border-radius: 9999px;
+    transition: width 0.08s linear;
+  }
+
+  .progress-percentage {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.05em;
   }
 </style>
