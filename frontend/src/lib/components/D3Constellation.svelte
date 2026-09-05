@@ -324,11 +324,26 @@
       const cNodes = clusterMap[tag];
       if (cNodes.length < 3) return;
 
+      // Calculate centroid and filter out extreme spatial outliers for compact hulls
+      let cx = 0, cy = 0;
+      cNodes.forEach(n => { cx += n.x; cy += n.y; });
+      cx /= cNodes.length;
+      cy /= cNodes.length;
+
+      let targetNodes = cNodes;
+      if (cNodes.length >= 4) {
+        let sumDist = 0;
+        cNodes.forEach(n => { sumDist += Math.hypot(n.x - cx, n.y - cy); });
+        const avgDist = sumDist / cNodes.length;
+        targetNodes = cNodes.filter(n => Math.hypot(n.x - cx, n.y - cy) <= 1.8 * avgDist);
+      }
+      if (targetNodes.length < 3) targetNodes = cNodes;
+
       const allPoints = [];
-      const padding = 22;
+      const padding = 18;
       const angleSteps = 8;
 
-      cNodes.forEach(n => {
+      targetNodes.forEach(n => {
         const r = (n.radius || 8) + padding;
         for (let i = 0; i < angleSteps; i++) {
           const angle = (i * 2 * Math.PI) / angleSteps;
@@ -411,9 +426,9 @@
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
       } else if (isSelectionActive && edgeDist !== undefined) {
-        const edgeWidth = Math.max(0.7, 5.2 * Math.pow(0.68, edgeDist - 1));
-        const edgeOpacity = Math.max(0.12, 0.92 * Math.pow(0.70, edgeDist - 1));
-        const edgeBlur = edgeDist === 1 ? 14 : (edgeDist === 2 ? 6 : 0);
+        const edgeWidth = Math.max(0.6, 4.5 * Math.pow(0.52, edgeDist - 1));
+        const edgeOpacity = Math.max(0.08, 0.90 * Math.pow(0.55, edgeDist - 1));
+        const edgeBlur = edgeDist === 1 ? 14 : (edgeDist === 2 ? 4 : 0);
 
         ctx.strokeStyle = `rgba(96, 165, 250, ${edgeOpacity})`;
         ctx.lineWidth = edgeWidth;
@@ -453,8 +468,8 @@
         ctx.shadowBlur = 22;
         ctx.fillStyle = color;
       } else if (isSelectionActive && dist !== undefined) {
-        const nodeOpacity = Math.max(0.14, 0.92 * Math.pow(0.72, dist - 1));
-        const nodeRadiusScale = Math.max(0.65, Math.pow(0.92, dist - 1));
+        const nodeOpacity = Math.max(0.10, 0.90 * Math.pow(0.58, dist - 1));
+        const nodeRadiusScale = Math.max(0.60, Math.pow(0.85, dist - 1));
         drawRadius = baseRadius * nodeRadiusScale;
         
         ctx.fillStyle = `rgba(96, 165, 250, ${nodeOpacity})`;
@@ -463,7 +478,7 @@
           ctx.shadowBlur = 10;
         } else if (dist === 2) {
           ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 4;
+          ctx.shadowBlur = 3;
         } else {
           ctx.shadowBlur = 0;
         }
