@@ -315,8 +315,10 @@
     animFrameId = requestAnimationFrame(physicsStep);
   }
 
-  function computeMultiHopTraversal(startNodeId, maxHops = 4) {
-    if (!startNodeId) return { nodeDistances: new Map(), edgeDistances: new Map() };
+  function computeMultiHopTraversal(startNodeId, maxHops = 4, visibleNodes = null) {
+    if (!startNodeId || (visibleNodes && !visibleNodes.has(startNodeId))) {
+      return { nodeDistances: new Map(), edgeDistances: new Map() };
+    }
 
     const nodeDistances = new Map();
     const edgeDistances = new Map();
@@ -327,10 +329,14 @@
     const adj = new Map();
 
     relations.forEach(rel => {
-      if (!adj.has(rel.source_key)) adj.set(rel.source_key, []);
-      if (!adj.has(rel.target_key)) adj.set(rel.target_key, []);
-      adj.get(rel.source_key).push({ target: rel.target_key, relId: rel.id });
-      adj.get(rel.target_key).push({ target: rel.source_key, relId: rel.id });
+      const u = rel.source_key;
+      const v = rel.target_key;
+      if (u && v && (!visibleNodes || (visibleNodes.has(u) && visibleNodes.has(v)))) {
+        if (!adj.has(u)) adj.set(u, []);
+        if (!adj.has(v)) adj.set(v, []);
+        adj.get(u).push({ target: v, relId: rel.id });
+        adj.get(v).push({ target: u, relId: rel.id });
+      }
     });
 
     while (queue.length > 0) {
@@ -339,7 +345,7 @@
 
       const neighbors = adj.get(item.id) || [];
       neighbors.forEach(({ target, relId }) => {
-        if (!nodeDistances.has(target)) {
+        if ((!visibleNodes || visibleNodes.has(target)) && !nodeDistances.has(target)) {
           nodeDistances.set(target, item.depth + 1);
           edgeDistances.set(relId, item.depth + 1);
           queue.push({ id: target, depth: item.depth + 1 });
@@ -382,7 +388,7 @@
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
     const isSelectionActive = !!$selectedNode;
     const { nodeDistances, edgeDistances } = isSelectionActive 
-      ? computeMultiHopTraversal($selectedNode.id, 4) 
+      ? computeMultiHopTraversal($selectedNode.id, 4, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Edges

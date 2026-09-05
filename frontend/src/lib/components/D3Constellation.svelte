@@ -147,13 +147,14 @@
 
   function resetCameraView() {
     if (!canvasEl || !zoomInstance) return;
+    const scale = 0.36;
     const initialTransform = d3.zoomIdentity
-      .translate((canvasEl.width / 2) - (1600 * 0.45), (canvasEl.height / 2) - (1100 * 0.45))
-      .scale(0.45);
+      .translate((canvasEl.width / 2) - (1600 * scale), (canvasEl.height / 2) - (1100 * scale))
+      .scale(scale);
     d3.select(canvasEl).call(zoomInstance.transform, initialTransform);
   }
 
-  function forceClusterCentroid(strength = 0.14) {
+  function forceClusterCentroid(strength = 0.12) {
     let nodes;
     function force(alpha) {
       const centroids = {};
@@ -194,6 +195,7 @@
 
   function initD3Simulation() {
     const rawNodes = graphData.nodes || [];
+    if (rawNodes.length === 0) return;
 
     // Group initial nodes in spacious circular sectors around canvas center
     const clusters = {};
@@ -207,7 +209,7 @@
     const centerCanvasX = 1600;
     const centerCanvasY = 1100;
     const numTags = tags.length;
-    const mainRadius = 1100;
+    const mainRadius = 600;
 
     tags.forEach((tag, idx) => {
       const angle = (idx / numTags) * 2 * Math.PI;
@@ -217,7 +219,7 @@
       const clusterNodes = clusters[tag];
       const goldenAngle = 2.399963229728653;
       clusterNodes.forEach((n, nIdx) => {
-        const r = 55 * Math.sqrt(nIdx + 1);
+        const r = 40 * Math.sqrt(nIdx + 1);
         const theta = nIdx * goldenAngle;
         n.x = sectorCenterX + r * Math.cos(theta);
         n.y = sectorCenterY + r * Math.sin(theta);
@@ -237,34 +239,37 @@
       }));
 
     simulation = d3.forceSimulation(rawNodes)
-      .force('charge', d3.forceManyBody().strength(-100).distanceMax(350))
-      .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(90, 220 * (1.0 - d.similarity))).strength(0.45))
+      .force('charge', d3.forceManyBody().strength(-100).distanceMax(300))
+      .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(80, 180 * (1.0 - d.similarity))).strength(0.4))
       .force('center', d3.forceCenter(1600, 1100).strength(0.04))
-      .force('collide', d3.forceCollide().radius(d => d.radius + 16).strength(0.8))
-      .force('cluster', forceClusterCentroid(0.14))
+      .force('collide', d3.forceCollide().radius(d => d.radius + 14).strength(0.75))
+      .force('cluster', forceClusterCentroid(0.12))
       .stop();
 
-    // Pre-compute 140 physics ticks offline synchronously for instant layout & zero startup lag
-    for (let i = 0; i < 140; i++) {
+    // Pre-compute 100 physics ticks offline synchronously for instant layout & zero startup lag
+    for (let i = 0; i < 100; i++) {
       simulation.tick();
     }
 
     graphData.nodes = rawNodes;
     graphData.links = links;
 
-    // Render initial equilibrated frame and attach live tick listener with low settled alpha
+    // Reset camera view to frame pre-computed layout perfectly
+    resetCameraView();
     drawCanvas();
 
     simulation
-      .alpha(0.02)
-      .alphaTarget(0)
+      .alpha(0.1)
+      .restart()
       .on('tick', () => {
         drawCanvas();
       });
   }
 
-  function computeMultiHopTraversal(startNodeId, maxHops = 25) {
-    if (!startNodeId) return { nodeDistances: new Map(), edgeDistances: new Map() };
+  function computeMultiHopTraversal(startNodeId, maxHops = 25, visibleNodes = null) {
+    if (!startNodeId || (visibleNodes && !visibleNodes.has(startNodeId))) {
+      return { nodeDistances: new Map(), edgeDistances: new Map() };
+    }
 
     const nodeDistances = new Map();
     const edgeDistances = new Map();
@@ -272,7 +277,6 @@
     nodeDistances.set(startNodeId, 0);
 
     const links = graphData.links || [];
-    const relations = graphData.relations || [];
     const adj = new Map();
 
     const addEdge = (u, v, id) => {
@@ -281,18 +285,11 @@
     };
 
     links.forEach(rel => {
-      const u = rel.source.id || rel.source_key || rel.source;
-      const v = rel.target.id || rel.target_key || rel.target;
-      if (u && v) {
+      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source.id || rel.source_key || rel.source);
+      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target.id || rel.target_key || rel.target);
+      if (u && v && (!visibleNodes || (visibleNodes.has(u) && visibleNodes.has(v)))) {
         addEdge(u, v, rel.id);
         addEdge(v, u, rel.id);
-      }
-    });
-
-    relations.forEach(rel => {
-      if (rel.source_key && rel.target_key) {
-        addEdge(rel.source_key, rel.target_key, rel.id);
-        addEdge(rel.target_key, rel.source_key, rel.id);
       }
     });
 
@@ -302,7 +299,7 @@
 
       const neighbors = adj.get(item.id) || [];
       neighbors.forEach(({ target }) => {
-        if (!nodeDistances.has(target)) {
+        if ((!visibleNodes || visibleNodes.has(target)) && !nodeDistances.has(target)) {
           nodeDistances.set(target, item.depth + 1);
           queue.push({ id: target, depth: item.depth + 1 });
         }
@@ -310,12 +307,14 @@
     }
 
     links.forEach(rel => {
-      const u = rel.source.id || rel.source_key || rel.source;
-      const v = rel.target.id || rel.target_key || rel.target;
-      if (nodeDistances.has(u) && nodeDistances.has(v)) {
-        const du = nodeDistances.get(u);
-        const dv = nodeDistances.get(v);
-        edgeDistances.set(rel.id, Math.max(du, dv));
+      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source.id || rel.source_key || rel.source);
+      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target.id || rel.target_key || rel.target);
+      if (u && v && (!visibleNodes || (visibleNodes.has(u) && visibleNodes.has(v)))) {
+        if (nodeDistances.has(u) && nodeDistances.has(v)) {
+          const du = nodeDistances.get(u);
+          const dv = nodeDistances.get(v);
+          edgeDistances.set(rel.id, Math.max(du, dv));
+        }
       }
     });
 
@@ -414,7 +413,7 @@
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
     const isSelectionActive = !!$selectedNode;
     const { nodeDistances, edgeDistances } = isSelectionActive 
-      ? computeMultiHopTraversal($selectedNode.id, 25) 
+      ? computeMultiHopTraversal($selectedNode.id, 25, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Translucent Cluster Hulls
@@ -653,6 +652,14 @@
     oncontextmenu={handleContextMenu}
   ></canvas>
 
+  {#if !isLoaded}
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <div class="loading-text">🌌 Loading Constellation Graph...</div>
+      <div class="loading-subtext">Equilibrating physics layout & pre-computing nodes</div>
+    </div>
+  {/if}
+
   {#if $hoveredNode}
     <div 
       class="tooltip"
@@ -807,5 +814,44 @@
   .menu-item:hover {
     background: rgba(59, 130, 246, 0.2);
     color: #ffffff;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.88);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+    gap: 0.8rem;
+  }
+
+  .spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(56, 189, 248, 0.15);
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f8fafc;
+    letter-spacing: 0.02em;
+  }
+
+  .loading-subtext {
+    font-size: 0.8rem;
+    color: #94a3b8;
   }
 </style>
