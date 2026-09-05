@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
-// Navigation state
-export const activeSubtab = writable('topic_clusters'); // 'chat', 'topic_clusters', 'mindmap', 'matrix'
+// Navigation state - Default to D3.js Engine
+export const activeSubtab = writable('d3_constellation'); // 'd3_constellation', 'topic_clusters', 'mindmap', 'matrix'
 
 // System Stats state
 /** @type {import('svelte/store').Writable<any>} */
