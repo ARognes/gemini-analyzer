@@ -26,9 +26,9 @@ export async function fetchDataTags() {
   return res.json();
 }
 
-export async function fetchCanvasData(granularity = 'chat') {
-  const res = await fetch(`/api/canvas?granularity=${granularity}`);
-  if (!res.ok) throw new Error('Failed to fetch canvas data');
+export async function fetchCanvasData(granularity = 'chat', minSim = 0.38) {
+  const res = await fetch(`/api/overlap?min_similarity=${minSim}&limit=3000`);
+  if (!res.ok) throw new Error('Failed to fetch canvas graph data');
   return res.json();
 }
 

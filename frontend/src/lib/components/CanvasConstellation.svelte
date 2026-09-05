@@ -113,7 +113,8 @@
       });
     });
 
-    // Center camera viewport
+    // Center camera viewport with initial scale 0.45
+    scale = 0.45;
     panX = (canvasEl.width / 2) - (centerCanvasX * scale);
     panY = (canvasEl.height / 2) - (centerCanvasY * scale);
   }

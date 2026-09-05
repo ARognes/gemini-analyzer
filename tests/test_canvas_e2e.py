@@ -247,7 +247,7 @@ class TestCanvasInteractionE2E(unittest.TestCase):
         page = self.page
 
         page.fill("#canvasSearch", "jam")
-        page.wait_for_timeout(600)
+        page.wait_for_selector("#queryResultsDrawer", timeout=5000)
 
         drawer = page.query_selector("#queryResultsDrawer")
         self.assertIsNotNone(drawer)
