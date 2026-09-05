@@ -13,6 +13,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 DB_PATH = os.path.join(DATA_DIR, 'gemini_archive.db')
 MEDIA_DIR = os.path.join(DATA_DIR, 'media')
 TEMPLATE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'templates', 'index.html')
+FRONTEND_BUILD_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend', 'build')
 
 CATEGORY_COLORS = {
     'ai_agents': '#c084fc',
@@ -903,6 +904,31 @@ class ArchiveRequestHandler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
+
+        svelte_index = os.path.join(FRONTEND_BUILD_DIR, 'index.html')
+        if (path == '/' or path == '/index.html') and os.path.exists(svelte_index):
+            with open(svelte_index, 'rb') as f:
+                content = f.read()
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(content)))
+            self.end_headers()
+            self.wfile.write(content)
+            return
+
+        if path.startswith('/_app/'):
+            asset_path = os.path.join(FRONTEND_BUILD_DIR, path.lstrip('/'))
+            if os.path.exists(asset_path) and os.path.isfile(asset_path):
+                ctype, _ = mimetypes.guess_type(asset_path)
+                if not ctype: ctype = 'application/octet-stream'
+                with open(asset_path, 'rb') as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header('Content-Type', ctype)
+                self.send_header('Content-Length', str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
 
         if path == '/' or path == '/index.html':
             if os.path.exists(TEMPLATE_PATH):
