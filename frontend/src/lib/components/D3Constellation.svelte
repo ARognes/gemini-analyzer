@@ -153,10 +153,49 @@
     d3.select(canvasEl).call(zoomInstance.transform, initialTransform);
   }
 
+  function forceClusterCentroid(strength = 0.065) {
+    let nodes;
+    function force(alpha) {
+      const centroids = {};
+      const counts = {};
+
+      nodes.forEach(n => {
+        const tag = n.data_tag || n.category;
+        if (!tag || tag === 'outliers') return;
+        if (!centroids[tag]) {
+          centroids[tag] = { x: 0, y: 0 };
+          counts[tag] = 0;
+        }
+        centroids[tag].x += n.x;
+        centroids[tag].y += n.y;
+        counts[tag]++;
+      });
+
+      Object.keys(centroids).forEach(tag => {
+        if (counts[tag] > 0) {
+          centroids[tag].x /= counts[tag];
+          centroids[tag].y /= counts[tag];
+        }
+      });
+
+      const k = alpha * strength;
+      nodes.forEach(n => {
+        const tag = n.data_tag || n.category;
+        if (!tag || tag === 'outliers' || !centroids[tag]) return;
+        const target = centroids[tag];
+        n.vx += (target.x - n.x) * k;
+        n.vy += (target.y - n.y) * k;
+      });
+    }
+
+    force.initialize = _nodes => { nodes = _nodes; };
+    return force;
+  }
+
   function initD3Simulation() {
     const rawNodes = graphData.nodes || [];
 
-    // Layout sector angles for data tags
+    // Group initial nodes in circular sectors around canvas center
     const clusters = {};
     rawNodes.forEach(n => {
       const tag = n.data_tag || n.category || 'outliers';
@@ -165,13 +204,13 @@
     });
 
     const tags = Object.keys(clusters);
-    const numClusters = tags.length;
     const centerCanvasX = 1600;
     const centerCanvasY = 1100;
-    const mainRadius = 850;
+    const numTags = tags.length;
+    const mainRadius = 550;
 
     tags.forEach((tag, idx) => {
-      const angle = (idx / numClusters) * Math.PI * 2;
+      const angle = (idx / numTags) * 2 * Math.PI;
       const sectorCenterX = centerCanvasX + Math.cos(angle) * mainRadius;
       const sectorCenterY = centerCanvasY + Math.sin(angle) * mainRadius;
 
@@ -202,6 +241,7 @@
       .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(70, 160 * (1.0 - d.similarity))).strength(0.4))
       .force('center', d3.forceCenter(1600, 1100).strength(0.04))
       .force('collide', d3.forceCollide().radius(d => d.radius + 14).strength(0.7))
+      .force('cluster', forceClusterCentroid(0.065))
       .alphaDecay(0.02)
       .on('tick', () => {
         graphData.nodes = rawNodes;
