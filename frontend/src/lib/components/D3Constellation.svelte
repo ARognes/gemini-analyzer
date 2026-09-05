@@ -67,11 +67,15 @@
     resetCameraView();
 
     // Setup D3 Drag - Left Mouse Button (button === 0) for Node Dragging
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+
     const drag = d3.drag()
       .container(canvasEl)
       .filter((event) => event.button === 0)
       .subject(event => {
-        const [mx, my] = [event.x, event.y];
+        const sourceEvt = event.sourceEvent || event;
+        const [mx, my] = d3.pointer(sourceEvt, canvasEl);
         const wx = (mx - transform.x) / transform.k;
         const wy = (my - transform.y) / transform.k;
         const nodes = graphData.nodes || [];
@@ -85,15 +89,25 @@
         if (!event.subject) return;
         isDraggingNode = true;
         if (!event.active && simulation) simulation.alphaTarget(0.3).restart();
+        
+        const sourceEvt = event.sourceEvent || event;
+        const [mx, my] = d3.pointer(sourceEvt, canvasEl);
+        const wx = (mx - transform.x) / transform.k;
+        const wy = (my - transform.y) / transform.k;
+        dragOffsetX = event.subject.x - wx;
+        dragOffsetY = event.subject.y - wy;
+
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
       })
       .on('drag', (event) => {
         if (!event.subject) return;
-        const wx = (event.x - transform.x) / transform.k;
-        const wy = (event.y - transform.y) / transform.k;
-        event.subject.fx = wx;
-        event.subject.fy = wy;
+        const sourceEvt = event.sourceEvent || event;
+        const [mx, my] = d3.pointer(sourceEvt, canvasEl);
+        const wx = (mx - transform.x) / transform.k;
+        const wy = (my - transform.y) / transform.k;
+        event.subject.fx = wx + dragOffsetX;
+        event.subject.fy = wy + dragOffsetY;
         drawCanvas();
       })
       .on('end', (event) => {
@@ -536,7 +550,6 @@
       onclick={(e) => e.stopPropagation()}
     >
       {#if contextMenuNode}
-        <div class="menu-header">💬 {contextMenuNode.title || 'Chat Thread'}</div>
         <button class="menu-item" onclick={() => openThreadDrawer(contextMenuNode.id)}>
           📖 Inspect Full Thread
         </button>
