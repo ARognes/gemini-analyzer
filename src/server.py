@@ -855,14 +855,14 @@ def get_stitched_threads(cursor, q="", sort="desc", audio_only=0, category="", t
     for group_key, t_id in group_keys:
         if t_id:
             cursor.execute('''
-                SELECT id, thread_id, timestamp_iso, timestamp_raw, prompt_text, response_html, media_files_json, details_url, was_audio_input
+                SELECT id, thread_id, timestamp_iso, timestamp_raw, prompt_text, response_html, response_plain, media_files_json, details_url, was_audio_input
                 FROM chats
                 WHERE thread_id = ?
                 ORDER BY timestamp_iso ASC
             ''', (t_id,))
         else:
             cursor.execute('''
-                SELECT id, thread_id, timestamp_iso, timestamp_raw, prompt_text, response_html, media_files_json, details_url, was_audio_input
+                SELECT id, thread_id, timestamp_iso, timestamp_raw, prompt_text, response_html, response_plain, media_files_json, details_url, was_audio_input
                 FROM chats
                 WHERE id = ?
             ''', (group_key,))

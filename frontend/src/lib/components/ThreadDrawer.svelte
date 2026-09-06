@@ -4,6 +4,16 @@
   function closeDrawer() {
     isThreadDrawerOpen.set(false);
   }
+
+  function getGeminiResponseHtml(turn) {
+    if (!turn) return '';
+    let html = turn.response_html || turn.response_plain || turn.response_text || '';
+    if (!html) return '';
+    
+    // Strip raw JSON tool metadata blobs if present
+    html = html.replace(/\{"contentMetadata":[\s\S]*?\}/g, '').trim();
+    return html;
+  }
 </script>
 
 {#if $isThreadDrawerOpen && $activeThreadDrawerData}
@@ -44,10 +54,12 @@
               <div class="text">{turn.prompt_text}</div>
             </div>
 
-            {#if turn.response_plain}
+            {#if getGeminiResponseHtml(turn)}
               <div class="response-box">
                 <div class="speaker">Gemini</div>
-                <div class="text">{turn.response_plain}</div>
+                <div class="text">
+                  {@html getGeminiResponseHtml(turn)}
+                </div>
               </div>
             {/if}
           </div>
@@ -216,6 +228,32 @@
     color: #e2e8f0;
     line-height: 1.45;
     white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .response-box .text :global(p) {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .response-box .text :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .response-box .text :global(strong) {
+    color: #93c5fd;
+  }
+
+  .response-box .text :global(a) {
+    color: #60a5fa;
+    text-decoration: underline;
+  }
+
+  .response-box .text :global(code) {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.8rem;
   }
 
   .empty-state {
