@@ -242,8 +242,10 @@
 
     const links = (graphData.relations || [])
       .filter(rel => nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key))
-      .map(rel => ({
-        id: rel.id,
+      .map((rel, idx) => ({
+        id: rel.id || `edge_${rel.source_key}_${rel.target_key}_${idx}`,
+        source_key: rel.source_key,
+        target_key: rel.target_key,
         source: nodeMap.get(rel.source_key),
         target: nodeMap.get(rel.target_key),
         similarity: rel.similarity_score
@@ -296,7 +298,7 @@
   }
 
   function computeMultiHopTraversal(startNodeId, maxHops = 2, visibleNodes = null) {
-    if (!startNodeId || (visibleNodes && !visibleNodes.has(startNodeId))) {
+    if (!startNodeId || !visibleNodes || !visibleNodes.has(startNodeId)) {
       return { nodeDistances: new Map(), edgeDistances: new Map() };
     }
 
@@ -308,15 +310,15 @@
     const links = graphData.links || [];
     const adj = new Map();
 
-    const addEdge = (u, v, id) => {
+    const addEdge = (u, v, relId) => {
       if (!adj.has(u)) adj.set(u, []);
-      adj.get(u).push({ target: v, relId: id });
+      adj.get(u).push({ target: v, relId });
     };
 
     links.forEach(rel => {
-      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source.id || rel.source_key || rel.source);
-      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target.id || rel.target_key || rel.target);
-      if (u && v && (!visibleNodes || (visibleNodes.has(u) && visibleNodes.has(v)))) {
+      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source_key || rel.source);
+      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target_key || rel.target);
+      if (u && v && visibleNodes.has(u) && visibleNodes.has(v)) {
         addEdge(u, v, rel.id);
         addEdge(v, u, rel.id);
       }
@@ -328,23 +330,26 @@
 
       const neighbors = adj.get(item.id) || [];
       neighbors.forEach(({ target }) => {
-        if ((!visibleNodes || visibleNodes.has(target)) && !nodeDistances.has(target)) {
+        if (visibleNodes.has(target) && !nodeDistances.has(target)) {
           nodeDistances.set(target, item.depth + 1);
           queue.push({ id: target, depth: item.depth + 1 });
         }
       });
     }
 
-    // Strict radial outgoing root edges: Math.abs(du - dv) === 1 ONLY
+    // Assign edgeDist ONLY to strict radial outgoing edges (Math.abs(du - dv) === 1)
     links.forEach(rel => {
-      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source.id || rel.source_key || rel.source);
-      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target.id || rel.target_key || rel.target);
-      if (u && v && (!visibleNodes || (visibleNodes.has(u) && visibleNodes.has(v)))) {
+      const u = typeof rel.source === 'object' ? rel.source.id : (rel.source_key || rel.source);
+      const v = typeof rel.target === 'object' ? rel.target.id : (rel.target_key || rel.target);
+      if (u && v && visibleNodes.has(u) && visibleNodes.has(v)) {
         if (nodeDistances.has(u) && nodeDistances.has(v)) {
           const du = nodeDistances.get(u);
           const dv = nodeDistances.get(v);
           if (Math.abs(du - dv) === 1) {
-            edgeDistances.set(rel.id, Math.max(du, dv));
+            const edgeHop = Math.max(du, dv);
+            if (rel.id && edgeHop <= maxHops) {
+              edgeDistances.set(rel.id, edgeHop);
+            }
           }
         }
       }
