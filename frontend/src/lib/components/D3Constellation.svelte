@@ -158,7 +158,7 @@
     d3.select(canvasEl).call(zoomInstance.transform, initialTransform);
   }
 
-  function forceClusterCentroid(strength = 0.12) {
+  function forceClusterGlob(strength = 0.12) {
     let nodes;
     function force(alpha) {
       const centroids = {};
@@ -183,13 +183,22 @@
         }
       });
 
-      const k = alpha * strength;
       nodes.forEach(n => {
         const tag = n.data_tag || n.category;
         if (!tag || tag === 'outliers' || !centroids[tag]) return;
         const target = centroids[tag];
-        n.vx += (target.x - n.x) * k;
-        n.vy += (target.y - n.y) * k;
+
+        if (n.fx != null && n.fy != null) {
+          n.offsetX = n.x - target.x;
+          n.offsetY = n.y - target.y;
+        } else {
+          const targetX = target.x + (n.offsetX || 0);
+          const targetY = target.y + (n.offsetY || 0);
+          n.x += (targetX - n.x) * Math.min(1, alpha * 2.0 + 0.15);
+          n.y += (targetY - n.y) * Math.min(1, alpha * 2.0 + 0.15);
+          n.vx *= 0.5;
+          n.vy *= 0.5;
+        }
       });
     }
 
@@ -232,8 +241,10 @@
       clusterNodes.forEach((n, nIdx) => {
         const r = 40 * Math.sqrt(nIdx + 1);
         const theta = nIdx * goldenAngle;
-        n.x = sectorCenterX + r * Math.cos(theta);
-        n.y = sectorCenterY + r * Math.sin(theta);
+        n.offsetX = r * Math.cos(theta);
+        n.offsetY = r * Math.sin(theta);
+        n.x = sectorCenterX + n.offsetX;
+        n.y = sectorCenterY + n.offsetY;
         n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
       });
     });
@@ -251,12 +262,18 @@
         similarity: rel.similarity_score
       }));
 
+    const interClusterLinks = links.filter(rel => {
+      const srcTag = rel.source?.data_tag || rel.source?.category || 'outliers';
+      const tgtTag = rel.target?.data_tag || rel.target?.category || 'outliers';
+      return srcTag !== tgtTag || srcTag === 'outliers';
+    });
+
     simulation = d3.forceSimulation(rawNodes)
       .force('charge', d3.forceManyBody().strength(-100).distanceMax(300))
-      .force('link', d3.forceLink(links).id(d => d.id).distance(d => Math.max(80, 180 * (1.0 - d.similarity))).strength(0.4))
+      .force('link', d3.forceLink(interClusterLinks).id(d => d.id).distance(d => Math.max(80, 180 * (1.0 - d.similarity))).strength(0.4))
       .force('center', d3.forceCenter(1600, 1100).strength(0.04))
       .force('collide', d3.forceCollide().radius(d => d.radius + 14).strength(0.75))
-      .force('cluster', forceClusterCentroid(0.12))
+      .force('cluster', forceClusterGlob(0.12))
       .stop();
 
     graphData.nodes = rawNodes;
@@ -490,10 +507,19 @@
         ctx.shadowColor = edgeDist === 1 ? '#38bdf8' : '#60a5fa';
         ctx.shadowBlur = b;
       } else {
-        ctx.strokeStyle = isSelectionActive 
-          ? 'rgba(255, 255, 255, 0.015)' 
-          : (isSubgraphActive ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.12)');
-        ctx.lineWidth = 0.4;
+        const srcTag = rel.source?.data_tag || rel.source?.category || 'outliers';
+        const tgtTag = rel.target?.data_tag || rel.target?.category || 'outliers';
+        const isIntraCluster = (srcTag === tgtTag && srcTag !== 'outliers');
+
+        if (isIntraCluster && !isSelectionActive && !isSubgraphActive) {
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+          ctx.lineWidth = 0.3;
+        } else {
+          ctx.strokeStyle = isSelectionActive 
+            ? 'rgba(255, 255, 255, 0.015)' 
+            : (isSubgraphActive ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.12)');
+          ctx.lineWidth = 0.4;
+        }
         ctx.shadowBlur = 0;
       }
       ctx.stroke();
