@@ -297,7 +297,7 @@
     isLoaded = true;
   }
 
-  function computeMultiHopTraversal(startNodeId, maxHops = 2, visibleNodes = null) {
+  function computeMultiHopTraversal(startNodeId, maxHops = 5, visibleNodes = null) {
     if (!startNodeId || !visibleNodes || !visibleNodes.has(startNodeId)) {
       return { nodeDistances: new Map(), edgeDistances: new Map() };
     }
@@ -452,7 +452,7 @@
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
     const isSelectionActive = !!$selectedNode;
     const { nodeDistances, edgeDistances } = isSelectionActive 
-      ? computeMultiHopTraversal($selectedNode.id, 2, visibleNodes) 
+      ? computeMultiHopTraversal($selectedNode.id, 5, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Translucent Cluster Hulls
@@ -476,17 +476,19 @@
         ctx.lineWidth = 3.5;
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
-      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 2) {
-        if (edgeDist === 1) {
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
-          ctx.lineWidth = 3.2;
-          ctx.shadowColor = '#38bdf8';
-          ctx.shadowBlur = 10;
-        } else if (edgeDist === 2) {
-          ctx.strokeStyle = 'rgba(96, 165, 250, 0.35)';
-          ctx.lineWidth = 1.5;
-          ctx.shadowBlur = 0;
-        }
+      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 5) {
+        const edgeOpacities = [0, 0.95, 0.65, 0.40, 0.22, 0.10];
+        const edgeWidths = [0, 3.4, 2.2, 1.5, 1.0, 0.7];
+        const edgeBlurs = [0, 12, 4, 0, 0, 0];
+
+        const op = edgeOpacities[edgeDist] || 0.10;
+        const w = edgeWidths[edgeDist] || 0.7;
+        const b = edgeBlurs[edgeDist] || 0;
+
+        ctx.strokeStyle = edgeDist === 1 ? `rgba(56, 189, 248, ${op})` : `rgba(96, 165, 250, ${op})`;
+        ctx.lineWidth = w;
+        ctx.shadowColor = edgeDist === 1 ? '#38bdf8' : '#60a5fa';
+        ctx.shadowBlur = b;
       } else {
         ctx.strokeStyle = isSelectionActive 
           ? 'rgba(255, 255, 255, 0.015)' 
@@ -520,17 +522,19 @@
         ctx.shadowColor = '#38bdf8';
         ctx.shadowBlur = 24;
         ctx.fillStyle = color;
-      } else if (isSelectionActive && dist !== undefined && dist <= 2) {
-        if (dist === 1) {
-          ctx.fillStyle = '#60a5fa';
-          ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 8;
-          drawRadius = baseRadius + 2;
-        } else if (dist === 2) {
-          ctx.fillStyle = 'rgba(96, 165, 250, 0.50)';
-          ctx.shadowBlur = 0;
-          drawRadius = baseRadius;
-        }
+      } else if (isSelectionActive && dist !== undefined && dist <= 5) {
+        const nodeOpacities = [1.0, 0.90, 0.70, 0.48, 0.28, 0.15];
+        const nodeRadiusScales = [1.0, 1.2, 1.0, 0.88, 0.78, 0.68];
+        const nodeBlurs = [24, 10, 3, 0, 0, 0];
+
+        const op = nodeOpacities[dist] || 0.15;
+        const scale = nodeRadiusScales[dist] || 0.68;
+        const b = nodeBlurs[dist] || 0;
+
+        ctx.fillStyle = `rgba(96, 165, 250, ${op})`;
+        ctx.shadowColor = '#60a5fa';
+        ctx.shadowBlur = b;
+        drawRadius = baseRadius * scale;
       } else if (isSelectionActive) {
         ctx.fillStyle = 'rgba(148, 163, 184, 0.06)';
         ctx.shadowBlur = 0;
