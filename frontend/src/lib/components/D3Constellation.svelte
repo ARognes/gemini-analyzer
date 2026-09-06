@@ -271,23 +271,26 @@
 
     simulation = d3.forceSimulation(rawNodes)
       .velocityDecay(0.65)
-      .alphaDecay(0.03)
-      .force('charge', d3.forceManyBody().strength(-40).distanceMax(250))
+      .alphaDecay(0.04)
+      .force('charge', d3.forceManyBody().strength(d => (d.data_tag && d.data_tag !== 'outliers' ? -2 : -15)).distanceMax(200))
       .force('link', d3.forceLink(interClusterLinks).id(d => d.id).distance(d => Math.max(70, 160 * (1.0 - d.similarity))).strength(0.4))
       .force('x', d3.forceX(1600).strength(0.04))
       .force('y', d3.forceY(1100).strength(0.04))
       .force('center', d3.forceCenter(1600, 1100).strength(0.05))
       .force('collide', d3.forceCollide().radius(d => d.radius + 12).strength(0.75))
       .force('cluster', forceClusterGlob(0.12))
+      .on('tick', () => {
+        if (isLoaded) drawCanvas();
+      })
       .stop();
 
     graphData.nodes = rawNodes;
     graphData.links = links;
 
-    // Asynchronously pre-compute 100 physics ticks in batches of 5
+    // Asynchronously pre-compute 180 physics ticks in batches of 6
     // yielding to main thread to animate loading progress smoothly
-    const totalTicks = 100;
-    const batchSize = 5;
+    const totalTicks = 180;
+    const batchSize = 6;
     let completedTicks = 0;
 
     loadMessage = `Pre-computing physics layout (0 / ${totalTicks} ticks)...`;
@@ -302,21 +305,17 @@
       await new Promise(r => setTimeout(r, 0));
     }
 
+    // Stop simulation after reaching pre-computed equilibrium
+    simulation.stop();
+
     // Reset camera view to frame pre-computed layout perfectly
     resetCameraView();
-    drawCanvas();
-
-    simulation
-      .alpha(0.1)
-      .restart()
-      .on('tick', () => {
-        drawCanvas();
-      });
 
     loadProgress = 100;
     loadMessage = 'Layout complete! Rendering constellation...';
     await new Promise(r => setTimeout(r, 80));
     isLoaded = true;
+    drawCanvas();
   }
 
   function computeMultiHopTraversal(startNodeId, maxHops = 5, visibleNodes = null) {
