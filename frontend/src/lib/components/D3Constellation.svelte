@@ -295,7 +295,7 @@
     isLoaded = true;
   }
 
-  function computeMultiHopTraversal(startNodeId, maxHops = 25, visibleNodes = null) {
+  function computeMultiHopTraversal(startNodeId, maxHops = 3, visibleNodes = null) {
     if (!startNodeId || (visibleNodes && !visibleNodes.has(startNodeId))) {
       return { nodeDistances: new Map(), edgeDistances: new Map() };
     }
@@ -342,7 +342,9 @@
         if (nodeDistances.has(u) && nodeDistances.has(v)) {
           const du = nodeDistances.get(u);
           const dv = nodeDistances.get(v);
-          edgeDistances.set(rel.id, Math.max(du, dv));
+          if (Math.abs(du - dv) <= 1) {
+            edgeDistances.set(rel.id, Math.min(du, dv) + 1);
+          }
         }
       }
     });
@@ -350,7 +352,7 @@
     return { nodeDistances, edgeDistances };
   }
 
-  function drawClusterBoundingHulls(visibleNodes) {
+  function drawClusterBoundingHulls(visibleNodes, isSelectionActive = false) {
     const nodes = graphData.nodes || [];
     const clusterMap = {};
 
@@ -405,9 +407,9 @@
       }
       ctx.closePath();
 
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
+      ctx.fillStyle = isSelectionActive ? 'rgba(59, 130, 246, 0.01)' : 'rgba(59, 130, 246, 0.05)';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.18)';
+      ctx.strokeStyle = isSelectionActive ? 'rgba(59, 130, 246, 0.03)' : 'rgba(59, 130, 246, 0.18)';
       ctx.lineWidth = 1.5;
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
@@ -442,11 +444,11 @@
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
     const isSelectionActive = !!$selectedNode;
     const { nodeDistances, edgeDistances } = isSelectionActive 
-      ? computeMultiHopTraversal($selectedNode.id, 25, visibleNodes) 
+      ? computeMultiHopTraversal($selectedNode.id, 3, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Translucent Cluster Hulls
-    drawClusterBoundingHulls(visibleNodes);
+    drawClusterBoundingHulls(visibleNodes, isSelectionActive);
 
     // Draw D3 Links
     links.forEach(rel => {
@@ -466,20 +468,27 @@
         ctx.lineWidth = 3.5;
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
-      } else if (isSelectionActive && edgeDist !== undefined) {
-        const edgeWidth = Math.max(0.6, 4.5 * Math.pow(0.52, edgeDist - 1));
-        const edgeOpacity = Math.max(0.08, 0.90 * Math.pow(0.55, edgeDist - 1));
-        const edgeBlur = edgeDist === 1 ? 14 : (edgeDist === 2 ? 4 : 0);
-
-        ctx.strokeStyle = `rgba(96, 165, 250, ${edgeOpacity})`;
-        ctx.lineWidth = edgeWidth;
-        ctx.shadowBlur = edgeBlur;
-        ctx.shadowColor = '#60a5fa';
+      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 3) {
+        if (edgeDist === 1) {
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
+          ctx.lineWidth = 3.5;
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 14;
+        } else if (edgeDist === 2) {
+          ctx.strokeStyle = 'rgba(96, 165, 250, 0.50)';
+          ctx.lineWidth = 2.0;
+          ctx.shadowColor = '#60a5fa';
+          ctx.shadowBlur = 5;
+        } else {
+          ctx.strokeStyle = 'rgba(96, 165, 250, 0.20)';
+          ctx.lineWidth = 1.0;
+          ctx.shadowBlur = 0;
+        }
       } else {
-        ctx.strokeStyle = (isSubgraphActive || isSelectionActive) 
-          ? 'rgba(255, 255, 255, 0.03)' 
-          : 'rgba(255, 255, 255, 0.12)';
-        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = isSelectionActive 
+          ? 'rgba(255, 255, 255, 0.02)' 
+          : (isSubgraphActive ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.12)');
+        ctx.lineWidth = 0.4;
         ctx.shadowBlur = 0;
       }
       ctx.stroke();
@@ -506,25 +515,26 @@
         color = '#38bdf8';
         drawRadius = baseRadius + 6;
         ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 22;
+        ctx.shadowBlur = 24;
         ctx.fillStyle = color;
-      } else if (isSelectionActive && dist !== undefined) {
-        const nodeOpacity = Math.max(0.10, 0.90 * Math.pow(0.58, dist - 1));
-        const nodeRadiusScale = Math.max(0.60, Math.pow(0.85, dist - 1));
-        drawRadius = baseRadius * nodeRadiusScale;
-        
-        ctx.fillStyle = `rgba(96, 165, 250, ${nodeOpacity})`;
+      } else if (isSelectionActive && dist !== undefined && dist <= 3) {
         if (dist === 1) {
+          ctx.fillStyle = '#60a5fa';
           ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 10;
+          ctx.shadowBlur = 12;
+          drawRadius = baseRadius + 2;
         } else if (dist === 2) {
+          ctx.fillStyle = 'rgba(96, 165, 250, 0.70)';
           ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 3;
+          ctx.shadowBlur = 4;
+          drawRadius = baseRadius;
         } else {
+          ctx.fillStyle = 'rgba(96, 165, 250, 0.35)';
           ctx.shadowBlur = 0;
+          drawRadius = baseRadius * 0.85;
         }
       } else if (isSelectionActive) {
-        ctx.fillStyle = 'rgba(100, 116, 139, 0.06)';
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.07)';
         ctx.shadowBlur = 0;
       } else if (isSubgraphActive && !isMatch) {
         ctx.fillStyle = 'rgba(100, 116, 139, 0.12)';
