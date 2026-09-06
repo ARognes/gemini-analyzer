@@ -194,10 +194,11 @@
         } else {
           const targetX = target.x + (n.offsetX || 0);
           const targetY = target.y + (n.offsetY || 0);
-          n.x += (targetX - n.x) * Math.min(1, alpha * 2.0 + 0.15);
-          n.y += (targetY - n.y) * Math.min(1, alpha * 2.0 + 0.15);
-          n.vx *= 0.5;
-          n.vy *= 0.5;
+          n.x += (targetX - n.x) * Math.min(1, alpha * 2.5 + 0.2);
+          n.y += (targetY - n.y) * Math.min(1, alpha * 2.5 + 0.2);
+          // Apply air resistance / friction damping to glob movement
+          n.vx *= 0.35;
+          n.vy *= 0.35;
         }
       });
     }
@@ -269,10 +270,14 @@
     });
 
     simulation = d3.forceSimulation(rawNodes)
-      .force('charge', d3.forceManyBody().strength(-100).distanceMax(300))
-      .force('link', d3.forceLink(interClusterLinks).id(d => d.id).distance(d => Math.max(80, 180 * (1.0 - d.similarity))).strength(0.4))
-      .force('center', d3.forceCenter(1600, 1100).strength(0.04))
-      .force('collide', d3.forceCollide().radius(d => d.radius + 14).strength(0.75))
+      .velocityDecay(0.65)
+      .alphaDecay(0.03)
+      .force('charge', d3.forceManyBody().strength(-40).distanceMax(250))
+      .force('link', d3.forceLink(interClusterLinks).id(d => d.id).distance(d => Math.max(70, 160 * (1.0 - d.similarity))).strength(0.4))
+      .force('x', d3.forceX(1600).strength(0.04))
+      .force('y', d3.forceY(1100).strength(0.04))
+      .force('center', d3.forceCenter(1600, 1100).strength(0.05))
+      .force('collide', d3.forceCollide().radius(d => d.radius + 12).strength(0.75))
       .force('cluster', forceClusterGlob(0.12))
       .stop();
 
