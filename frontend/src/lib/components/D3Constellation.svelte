@@ -295,7 +295,7 @@
     isLoaded = true;
   }
 
-  function computeMultiHopTraversal(startNodeId, maxHops = 3, visibleNodes = null) {
+  function computeMultiHopTraversal(startNodeId, maxHops = 2, visibleNodes = null) {
     if (!startNodeId || (visibleNodes && !visibleNodes.has(startNodeId))) {
       return { nodeDistances: new Map(), edgeDistances: new Map() };
     }
@@ -335,6 +335,7 @@
       });
     }
 
+    // Strict radial outgoing root edges: Math.abs(du - dv) === 1 ONLY
     links.forEach(rel => {
       const u = typeof rel.source === 'object' ? rel.source.id : (rel.source.id || rel.source_key || rel.source);
       const v = typeof rel.target === 'object' ? rel.target.id : (rel.target.id || rel.target_key || rel.target);
@@ -342,8 +343,8 @@
         if (nodeDistances.has(u) && nodeDistances.has(v)) {
           const du = nodeDistances.get(u);
           const dv = nodeDistances.get(v);
-          if (Math.abs(du - dv) <= 1) {
-            edgeDistances.set(rel.id, Math.min(du, dv) + 1);
+          if (Math.abs(du - dv) === 1) {
+            edgeDistances.set(rel.id, Math.max(du, dv));
           }
         }
       }
@@ -353,6 +354,8 @@
   }
 
   function drawClusterBoundingHulls(visibleNodes, isSelectionActive = false) {
+    if (isSelectionActive) return; // Hide cluster hulls during node selection for zero background glow
+
     const nodes = graphData.nodes || [];
     const clusterMap = {};
 
@@ -407,9 +410,9 @@
       }
       ctx.closePath();
 
-      ctx.fillStyle = isSelectionActive ? 'rgba(59, 130, 246, 0.01)' : 'rgba(59, 130, 246, 0.05)';
+      ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
       ctx.fill();
-      ctx.strokeStyle = isSelectionActive ? 'rgba(59, 130, 246, 0.03)' : 'rgba(59, 130, 246, 0.18)';
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.18)';
       ctx.lineWidth = 1.5;
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
@@ -444,7 +447,7 @@
     const isSubgraphActive = $searchMatchingNodeIds.size > 0;
     const isSelectionActive = !!$selectedNode;
     const { nodeDistances, edgeDistances } = isSelectionActive 
-      ? computeMultiHopTraversal($selectedNode.id, 3, visibleNodes) 
+      ? computeMultiHopTraversal($selectedNode.id, 2, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
     // Draw Translucent Cluster Hulls
@@ -468,25 +471,20 @@
         ctx.lineWidth = 3.5;
         ctx.shadowColor = '#f59e0b';
         ctx.shadowBlur = 18;
-      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 3) {
+      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 2) {
         if (edgeDist === 1) {
           ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
-          ctx.lineWidth = 3.5;
+          ctx.lineWidth = 3.2;
           ctx.shadowColor = '#38bdf8';
-          ctx.shadowBlur = 14;
+          ctx.shadowBlur = 10;
         } else if (edgeDist === 2) {
-          ctx.strokeStyle = 'rgba(96, 165, 250, 0.50)';
-          ctx.lineWidth = 2.0;
-          ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 5;
-        } else {
-          ctx.strokeStyle = 'rgba(96, 165, 250, 0.20)';
-          ctx.lineWidth = 1.0;
+          ctx.strokeStyle = 'rgba(96, 165, 250, 0.35)';
+          ctx.lineWidth = 1.5;
           ctx.shadowBlur = 0;
         }
       } else {
         ctx.strokeStyle = isSelectionActive 
-          ? 'rgba(255, 255, 255, 0.02)' 
+          ? 'rgba(255, 255, 255, 0.015)' 
           : (isSubgraphActive ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.12)');
         ctx.lineWidth = 0.4;
         ctx.shadowBlur = 0;
@@ -517,24 +515,19 @@
         ctx.shadowColor = '#38bdf8';
         ctx.shadowBlur = 24;
         ctx.fillStyle = color;
-      } else if (isSelectionActive && dist !== undefined && dist <= 3) {
+      } else if (isSelectionActive && dist !== undefined && dist <= 2) {
         if (dist === 1) {
           ctx.fillStyle = '#60a5fa';
           ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 8;
           drawRadius = baseRadius + 2;
         } else if (dist === 2) {
-          ctx.fillStyle = 'rgba(96, 165, 250, 0.70)';
-          ctx.shadowColor = '#60a5fa';
-          ctx.shadowBlur = 4;
-          drawRadius = baseRadius;
-        } else {
-          ctx.fillStyle = 'rgba(96, 165, 250, 0.35)';
+          ctx.fillStyle = 'rgba(96, 165, 250, 0.50)';
           ctx.shadowBlur = 0;
-          drawRadius = baseRadius * 0.85;
+          drawRadius = baseRadius;
         }
       } else if (isSelectionActive) {
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.07)';
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.06)';
         ctx.shadowBlur = 0;
       } else if (isSubgraphActive && !isMatch) {
         ctx.fillStyle = 'rgba(100, 116, 139, 0.12)';
