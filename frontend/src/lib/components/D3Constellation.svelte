@@ -90,17 +90,12 @@
       .on('start', (event) => {
         if (!event.subject) return;
         isDraggingNode = true;
-        if (!event.active && simulation) simulation.alphaTarget(0.3).restart();
-        
         const sourceEvt = event.sourceEvent || event;
         const [mx, my] = d3.pointer(sourceEvt, canvasEl);
         const wx = (mx - transform.x) / transform.k;
         const wy = (my - transform.y) / transform.k;
         dragOffsetX = event.subject.x - wx;
         dragOffsetY = event.subject.y - wy;
-
-        event.subject.fx = event.subject.x;
-        event.subject.fy = event.subject.y;
       })
       .on('drag', (event) => {
         if (!event.subject) return;
@@ -108,18 +103,39 @@
         const [mx, my] = d3.pointer(sourceEvt, canvasEl);
         const wx = (mx - transform.x) / transform.k;
         const wy = (my - transform.y) / transform.k;
-        event.subject.fx = wx + dragOffsetX;
-        event.subject.fy = wy + dragOffsetY;
+
+        const targetX = wx + dragOffsetX;
+        const targetY = wy + dragOffsetY;
+        const dx = targetX - event.subject.x;
+        const dy = targetY - event.subject.y;
+
+        const globId = event.subject.glob_id;
+        if (globId && graphData.macroMap && graphData.macroMap.has(globId)) {
+          const macro = graphData.macroMap.get(globId);
+          macro.x += dx;
+          macro.y += dy;
+          macro.fx = macro.x;
+          macro.fy = macro.y;
+          if (macro.nodes) {
+            macro.nodes.forEach(n => {
+              n.x = macro.x + (n.offsetX || 0);
+              n.y = macro.y + (n.offsetY || 0);
+              n.fx = n.x;
+              n.fy = n.y;
+            });
+          }
+        } else {
+          event.subject.x = targetX;
+          event.subject.y = targetY;
+          event.subject.fx = targetX;
+          event.subject.fy = targetY;
+        }
         drawCanvas();
       })
       .on('end', (event) => {
         if (!event.subject) return;
         isDraggingNode = false;
-        if (!event.active && simulation) simulation.alphaTarget(0);
-        if (!event.subject.isPinned) {
-          event.subject.fx = null;
-          event.subject.fy = null;
-        }
+        drawCanvas();
       });
 
     d3Canvas.call(drag);
@@ -158,55 +174,6 @@
     d3.select(canvasEl).call(zoomInstance.transform, initialTransform);
   }
 
-  function forceClusterGlob(strength = 0.12) {
-    let nodes;
-    function force(alpha) {
-      const centroids = {};
-      const counts = {};
-
-      nodes.forEach(n => {
-        const tag = n.data_tag || n.category;
-        if (!tag || tag === 'outliers') return;
-        if (!centroids[tag]) {
-          centroids[tag] = { x: 0, y: 0 };
-          counts[tag] = 0;
-        }
-        centroids[tag].x += n.x;
-        centroids[tag].y += n.y;
-        counts[tag]++;
-      });
-
-      Object.keys(centroids).forEach(tag => {
-        if (counts[tag] > 0) {
-          centroids[tag].x /= counts[tag];
-          centroids[tag].y /= counts[tag];
-        }
-      });
-
-      nodes.forEach(n => {
-        const tag = n.data_tag || n.category;
-        if (!tag || tag === 'outliers' || !centroids[tag]) return;
-        const target = centroids[tag];
-
-        if (n.fx != null && n.fy != null) {
-          n.offsetX = n.x - target.x;
-          n.offsetY = n.y - target.y;
-        } else {
-          const targetX = target.x + (n.offsetX || 0);
-          const targetY = target.y + (n.offsetY || 0);
-          n.x += (targetX - n.x) * Math.min(1, alpha * 2.5 + 0.2);
-          n.y += (targetY - n.y) * Math.min(1, alpha * 2.5 + 0.2);
-          // Apply air resistance / friction damping to glob movement
-          n.vx *= 0.35;
-          n.vy *= 0.35;
-        }
-      });
-    }
-
-    force.initialize = _nodes => { nodes = _nodes; };
-    return force;
-  }
-
   async function initD3Simulation() {
     const rawNodes = graphData.nodes || [];
     if (rawNodes.length === 0) {
@@ -214,11 +181,11 @@
       return;
     }
 
-    loadMessage = 'Initializing cluster positions...';
+    loadMessage = 'Structuring Macro-Node Globs & Membranes...';
     loadProgress = 15;
     await new Promise(r => setTimeout(r, 16));
 
-    // Group initial nodes in spacious circular sectors around canvas center
+    // Group raw nodes into clusters by tag/category
     const clusters = {};
     rawNodes.forEach(n => {
       const tag = n.data_tag || n.category || 'outliers';
@@ -226,33 +193,68 @@
       clusters[tag].push(n);
     });
 
+    const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
+    const macroNodes = [];
+    const macroMap = new Map();
+    const nodeToMacro = new Map();
+
     const tags = Object.keys(clusters);
-    const centerCanvasX = 1600;
-    const centerCanvasY = 1100;
-    const numTags = tags.length;
-    const mainRadius = 600;
+    const goldenAngle = 2.399963229728653;
 
     tags.forEach((tag, idx) => {
-      const angle = (idx / numTags) * 2 * Math.PI;
-      const sectorCenterX = centerCanvasX + Math.cos(angle) * mainRadius;
-      const sectorCenterY = centerCanvasY + Math.sin(angle) * mainRadius;
+      const cNodes = clusters[tag];
 
-      const clusterNodes = clusters[tag];
-      const goldenAngle = 2.399963229728653;
-      clusterNodes.forEach((n, nIdx) => {
-        const r = 40 * Math.sqrt(nIdx + 1);
-        const theta = nIdx * goldenAngle;
-        n.offsetX = r * Math.cos(theta);
-        n.offsetY = r * Math.sin(theta);
-        n.x = sectorCenterX + n.offsetX;
-        n.y = sectorCenterY + n.offsetY;
-        n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
-      });
+      // Initial 2D Fermat Spiral placement for macro centroids (no 1D ring overlap)
+      const spiralR = 75 * Math.sqrt(idx + 1);
+      const spiralTheta = idx * goldenAngle;
+      const initCx = 1600 + spiralR * Math.cos(spiralTheta);
+      const initCy = 1100 + spiralR * Math.sin(spiralTheta);
+
+      if (tag !== 'outliers' && cNodes.length >= 2) {
+        const globId = `glob_${tag}`;
+        const globRadius = Math.max(22, 14 + 7 * Math.sqrt(cNodes.length));
+
+        const macro = {
+          id: globId,
+          isGlob: true,
+          tag: tag,
+          radius: globRadius,
+          x: initCx,
+          y: initCy,
+          nodes: cNodes
+        };
+        macroNodes.push(macro);
+        macroMap.set(globId, macro);
+
+        cNodes.forEach((n, nIdx) => {
+          const r = 12 * Math.sqrt(nIdx + 1);
+          const theta = nIdx * goldenAngle;
+          n.offsetX = r * Math.cos(theta);
+          n.offsetY = r * Math.sin(theta);
+          n.x = initCx + n.offsetX;
+          n.y = initCy + n.offsetY;
+          n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
+          n.glob_id = globId;
+          nodeToMacro.set(n.id, globId);
+        });
+      } else {
+        cNodes.forEach((n, nIdx) => {
+          const r = 35 * Math.sqrt(nIdx + 1);
+          const theta = nIdx * goldenAngle;
+          n.x = initCx + r * Math.cos(theta);
+          n.y = initCy + r * Math.sin(theta);
+          n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
+          n.glob_id = null;
+          macroNodes.push(n);
+          macroMap.set(n.id, n);
+          nodeToMacro.set(n.id, n.id);
+        });
+      }
     });
 
-    const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
-
-    const links = (graphData.relations || [])
+    // Accumulate relations into Inter-Glob links (membrane connections)
+    const rawRelations = graphData.relations || [];
+    const links = rawRelations
       .filter(rel => nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key))
       .map((rel, idx) => ({
         id: rel.id || `edge_${rel.source_key}_${rel.target_key}_${idx}`,
@@ -263,37 +265,54 @@
         similarity: rel.similarity_score
       }));
 
-    const interClusterLinks = links.filter(rel => {
-      const srcTag = rel.source?.data_tag || rel.source?.category || 'outliers';
-      const tgtTag = rel.target?.data_tag || rel.target?.category || 'outliers';
-      return srcTag !== tgtTag || srcTag === 'outliers';
+    const macroLinkMap = new Map();
+    links.forEach(rel => {
+      const srcMacro = nodeToMacro.get(rel.source_key);
+      const tgtMacro = nodeToMacro.get(rel.target_key);
+      if (srcMacro && tgtMacro && srcMacro !== tgtMacro) {
+        const key = srcMacro < tgtMacro ? `${srcMacro}_${tgtMacro}` : `${tgtMacro}_${srcMacro}`;
+        if (!macroLinkMap.has(key)) {
+          macroLinkMap.set(key, {
+            id: `macro_link_${key}`,
+            source: macroMap.get(srcMacro),
+            target: macroMap.get(tgtMacro),
+            sims: []
+          });
+        }
+        macroLinkMap.get(key).sims.push(rel.similarity || 0.5);
+      }
     });
 
-    simulation = d3.forceSimulation(rawNodes)
-      .velocityDecay(0.65)
+    const macroLinks = Array.from(macroLinkMap.values()).map(item => ({
+      id: item.id,
+      source: item.source,
+      target: item.target,
+      similarity: item.sims.reduce((a, b) => a + b, 0) / item.sims.length
+    }));
+
+    // Setup D3 Simulation ONLY on Macro-Nodes (Globs + Standalone)
+    simulation = d3.forceSimulation(macroNodes)
+      .velocityDecay(0.75) // High friction damping
       .alphaDecay(0.04)
-      .force('charge', d3.forceManyBody().strength(d => (d.data_tag && d.data_tag !== 'outliers' ? -2 : -15)).distanceMax(200))
-      .force('link', d3.forceLink(interClusterLinks).id(d => d.id).distance(d => Math.max(70, 160 * (1.0 - d.similarity))).strength(0.4))
-      .force('x', d3.forceX(1600).strength(0.04))
-      .force('y', d3.forceY(1100).strength(0.04))
-      .force('center', d3.forceCenter(1600, 1100).strength(0.05))
-      .force('collide', d3.forceCollide().radius(d => d.radius + 12).strength(0.75))
-      .force('cluster', forceClusterGlob(0.12))
-      .on('tick', () => {
-        if (isLoaded) drawCanvas();
-      })
+      .force('charge', d3.forceManyBody().strength(d => (d.isGlob ? -50 : -15)).distanceMax(350))
+      .force('link', d3.forceLink(macroLinks).id(d => d.id).distance(d => Math.max(90, 200 * (1.0 - d.similarity))).strength(0.45))
+      .force('x', d3.forceX(1600).strength(0.03))
+      .force('y', d3.forceY(1100).strength(0.03))
+      .force('center', d3.forceCenter(1600, 1100).strength(0.04))
+      .force('collide', d3.forceCollide().radius(d => (d.radius || 15) + 14).strength(0.8))
       .stop();
 
     graphData.nodes = rawNodes;
     graphData.links = links;
+    graphData.macroNodes = macroNodes;
+    graphData.macroMap = macroMap;
 
-    // Asynchronously pre-compute 180 physics ticks in batches of 6
-    // yielding to main thread to animate loading progress smoothly
-    const totalTicks = 180;
-    const batchSize = 6;
+    // Asynchronously pre-compute 250 ticks to reach static homeostasis
+    const totalTicks = 250;
+    const batchSize = 10;
     let completedTicks = 0;
 
-    loadMessage = `Pre-computing physics layout (0 / ${totalTicks} ticks)...`;
+    loadMessage = `Pre-computing graph homeostasis (0 / ${totalTicks} ticks)...`;
 
     while (completedTicks < totalTicks) {
       for (let i = 0; i < batchSize && completedTicks < totalTicks; i++) {
@@ -301,18 +320,29 @@
         completedTicks++;
       }
       loadProgress = Math.min(99, Math.round(20 + (completedTicks / totalTicks) * 79));
-      loadMessage = `Equilibrating graph layout (${completedTicks} / ${totalTicks} ticks)`;
+      loadMessage = `Equilibrating graph homeostasis (${completedTicks} / ${totalTicks} ticks)`;
       await new Promise(r => setTimeout(r, 0));
     }
 
-    // Stop simulation after reaching pre-computed equilibrium
-    simulation.stop();
+    // Harden homeostasis: update all member node positions and freeze
+    macroNodes.forEach(m => {
+      m.fx = m.x;
+      m.fy = m.y;
+      if (m.isGlob && m.nodes) {
+        m.nodes.forEach(n => {
+          n.x = m.x + (n.offsetX || 0);
+          n.y = m.y + (n.offsetY || 0);
+          n.fx = n.x;
+          n.fy = n.y;
+        });
+      }
+    });
 
-    // Reset camera view to frame pre-computed layout perfectly
+    simulation.stop();
     resetCameraView();
 
     loadProgress = 100;
-    loadMessage = 'Layout complete! Rendering constellation...';
+    loadMessage = 'Homeostasis achieved! Rendering hardened constellation...';
     await new Promise(r => setTimeout(r, 80));
     isLoaded = true;
     drawCanvas();
