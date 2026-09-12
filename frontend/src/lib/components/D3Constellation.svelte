@@ -181,38 +181,56 @@
       return;
     }
 
-    loadMessage = 'Structuring Macro-Node Globs & Membranes...';
+    loadMessage = 'Classifying node connections & structuring Macro-Node Globs...';
     loadProgress = 15;
     await new Promise(r => setTimeout(r, 16));
 
-    // Group raw nodes into clusters by tag/category
-    const clusters = {};
-    rawNodes.forEach(n => {
-      const tag = n.data_tag || n.category || 'outliers';
-      if (!clusters[tag]) clusters[tag] = [];
-      clusters[tag].push(n);
+    const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
+    const rawRelations = graphData.relations || [];
+
+    // Calculate node degrees to separate connected vs isolated nodes
+    const nodeDegrees = new Map(rawNodes.map(n => [n.id, 0]));
+    rawRelations.forEach(rel => {
+      if (nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key)) {
+        nodeDegrees.set(rel.source_key, nodeDegrees.get(rel.source_key) + 1);
+        nodeDegrees.set(rel.target_key, nodeDegrees.get(rel.target_key) + 1);
+      }
     });
 
-    const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
+    // Group raw nodes into clusters by tag/category
+    const connectedClusters = {};
+    const isolatedNodes = [];
+
+    rawNodes.forEach(n => {
+      const deg = nodeDegrees.get(n.id) || 0;
+      if (deg > 0) {
+        const tag = n.data_tag || n.category || 'connected_other';
+        if (!connectedClusters[tag]) connectedClusters[tag] = [];
+        connectedClusters[tag].push(n);
+      } else {
+        isolatedNodes.push(n);
+      }
+    });
+
     const macroNodes = [];
     const macroMap = new Map();
     const nodeToMacro = new Map();
 
-    const tags = Object.keys(clusters);
+    const tags = Object.keys(connectedClusters);
     const goldenAngle = 2.399963229728653;
 
+    // 1. Position Connected Clusters in 2D Fermat Spiral around main canvas (1600, 1100)
     tags.forEach((tag, idx) => {
-      const cNodes = clusters[tag];
+      const cNodes = connectedClusters[tag];
 
-      // Initial 2D Fermat Spiral placement for macro centroids (no 1D ring overlap)
-      const spiralR = 75 * Math.sqrt(idx + 1);
+      const spiralR = 120 * Math.sqrt(idx + 1);
       const spiralTheta = idx * goldenAngle;
       const initCx = 1600 + spiralR * Math.cos(spiralTheta);
       const initCy = 1100 + spiralR * Math.sin(spiralTheta);
 
-      if (tag !== 'outliers' && cNodes.length >= 2) {
+      if (cNodes.length >= 2) {
         const globId = `glob_${tag}`;
-        const globRadius = Math.max(22, 14 + 7 * Math.sqrt(cNodes.length));
+        const globRadius = Math.max(26, 16 + 8 * Math.sqrt(cNodes.length));
 
         const macro = {
           id: globId,
@@ -235,6 +253,7 @@
           n.y = initCy + n.offsetY;
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = globId;
+          n.isIsolated = false;
           nodeToMacro.set(n.id, globId);
         });
       } else {
@@ -245,6 +264,7 @@
           n.y = initCy + r * Math.sin(theta);
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = null;
+          n.isIsolated = false;
           macroNodes.push(n);
           macroMap.set(n.id, n);
           nodeToMacro.set(n.id, n.id);
@@ -252,8 +272,22 @@
       }
     });
 
-    // Accumulate relations into Inter-Glob links (membrane connections)
-    const rawRelations = graphData.relations || [];
+    // 2. Position Isolated Nodes in dedicated Isolated Archive Sector at (3800, 1800)
+    const isoCenterX = 3800;
+    const isoCenterY = 1800;
+    isolatedNodes.forEach((n, nIdx) => {
+      const cols = 40;
+      const row = Math.floor(nIdx / cols);
+      const col = nIdx % cols;
+      n.x = isoCenterX + (col - cols / 2) * 32;
+      n.y = isoCenterY + (row - 15) * 32;
+      n.radius = Math.max(6, Math.min(14, 4 + (n.turn_count || 1) * 0.6));
+      n.glob_id = null;
+      n.isIsolated = true;
+      nodeToMacro.set(n.id, n.id);
+    });
+
+    // Accumulate relations into Inter-Glob Single Membrane Links
     const links = rawRelations
       .filter(rel => nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key))
       .map((rel, idx) => ({
@@ -274,12 +308,17 @@
         if (!macroLinkMap.has(key)) {
           macroLinkMap.set(key, {
             id: `macro_link_${key}`,
+            source_id: srcMacro,
+            target_id: tgtMacro,
             source: macroMap.get(srcMacro),
             target: macroMap.get(tgtMacro),
+            weight: 0,
             sims: []
           });
         }
-        macroLinkMap.get(key).sims.push(rel.similarity || 0.5);
+        const item = macroLinkMap.get(key);
+        item.weight += 1;
+        item.sims.push(rel.similarity || 0.5);
       }
     });
 
@@ -287,25 +326,28 @@
       id: item.id,
       source: item.source,
       target: item.target,
+      weight: item.weight,
       similarity: item.sims.reduce((a, b) => a + b, 0) / item.sims.length
     }));
 
-    // Setup D3 Simulation ONLY on Macro-Nodes (Globs + Standalone)
+    // Setup D3 Simulation ONLY on Connected Macro-Nodes
     simulation = d3.forceSimulation(macroNodes)
-      .velocityDecay(0.75) // High friction damping
+      .velocityDecay(0.75)
       .alphaDecay(0.04)
-      .force('charge', d3.forceManyBody().strength(d => (d.isGlob ? -50 : -15)).distanceMax(350))
-      .force('link', d3.forceLink(macroLinks).id(d => d.id).distance(d => Math.max(90, 200 * (1.0 - d.similarity))).strength(0.45))
+      .force('charge', d3.forceManyBody().strength(d => (d.isGlob ? -60 : -20)).distanceMax(350))
+      .force('link', d3.forceLink(macroLinks).id(d => d.id).distance(d => Math.max(100, 220 * (1.0 - d.similarity))).strength(0.45))
       .force('x', d3.forceX(1600).strength(0.03))
       .force('y', d3.forceY(1100).strength(0.03))
       .force('center', d3.forceCenter(1600, 1100).strength(0.04))
-      .force('collide', d3.forceCollide().radius(d => (d.radius || 15) + 14).strength(0.8))
+      .force('collide', d3.forceCollide().radius(d => (d.radius || 15) + 16).strength(0.85))
       .stop();
 
     graphData.nodes = rawNodes;
     graphData.links = links;
     graphData.macroNodes = macroNodes;
+    graphData.macroLinks = macroLinks;
     graphData.macroMap = macroMap;
+    graphData.isolatedNodes = isolatedNodes;
 
     // Asynchronously pre-compute 250 ticks to reach static homeostasis
     const totalTicks = 250;
@@ -324,7 +366,7 @@
       await new Promise(r => setTimeout(r, 0));
     }
 
-    // Harden homeostasis: update all member node positions and freeze
+    // Harden homeostasis: update member node positions and freeze
     macroNodes.forEach(m => {
       m.fx = m.x;
       m.fy = m.y;
@@ -388,7 +430,6 @@
       });
     }
 
-    // Assign edgeDist ONLY to strict radial outgoing edges (Math.abs(du - dv) === 1)
     links.forEach(rel => {
       const u = typeof rel.source === 'object' ? rel.source.id : (rel.source_key || rel.source);
       const v = typeof rel.target === 'object' ? rel.target.id : (rel.target_key || rel.target);
@@ -410,42 +451,30 @@
   }
 
   function drawClusterBoundingHulls(visibleNodes, isSelectionActive = false) {
-    if (isSelectionActive) return; // Hide cluster hulls during node selection for zero background glow
-
     const nodes = graphData.nodes || [];
     const clusterMap = {};
 
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id) || typeof n.x !== 'number' || typeof n.y !== 'number') return;
-      const tag = n.data_tag || n.category || 'outliers';
+      const tag = n.data_tag || n.category || 'connected_other';
       if (!clusterMap[tag]) clusterMap[tag] = [];
       clusterMap[tag].push(n);
     });
 
     Object.keys(clusterMap).forEach(tag => {
       const cNodes = clusterMap[tag];
-      if (cNodes.length < 3) return;
+      if (cNodes.length < 2) return;
 
-      // Calculate centroid and filter out extreme spatial outliers for compact hulls
       let cx = 0, cy = 0;
       cNodes.forEach(n => { cx += n.x; cy += n.y; });
       cx /= cNodes.length;
       cy /= cNodes.length;
 
-      let targetNodes = cNodes;
-      if (cNodes.length >= 4) {
-        let sumDist = 0;
-        cNodes.forEach(n => { sumDist += Math.hypot(n.x - cx, n.y - cy); });
-        const avgDist = sumDist / cNodes.length;
-        targetNodes = cNodes.filter(n => Math.hypot(n.x - cx, n.y - cy) <= 1.8 * avgDist);
-      }
-      if (targetNodes.length < 3) targetNodes = cNodes;
-
       const allPoints = [];
-      const padding = 18;
-      const angleSteps = 8;
+      const padding = 22;
+      const angleSteps = 10;
 
-      targetNodes.forEach(n => {
+      cNodes.forEach(n => {
         const r = (n.radius || 8) + padding;
         for (let i = 0; i < angleSteps; i++) {
           const angle = (i * 2 * Math.PI) / angleSteps;
@@ -459,6 +488,9 @@
       const hull = d3.polygonHull(allPoints);
       if (!hull || hull.length < 3) return;
 
+      const isHoveredGroup = $hoveredNode && cNodes.some(cn => cn.id === $hoveredNode.id);
+      const isSelGroup = $selectedNode && cNodes.some(cn => cn.id === $selectedNode.id);
+
       ctx.beginPath();
       ctx.moveTo(hull[0][0], hull[0][1]);
       for (let i = 1; i < hull.length; i++) {
@@ -466,15 +498,33 @@
       }
       ctx.closePath();
 
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.18)';
-      ctx.lineWidth = 1.5;
+      if (isSelGroup) {
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.18)';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2.8;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 18;
+      } else if (isHoveredGroup) {
+        ctx.fillStyle = 'rgba(96, 165, 250, 0.14)';
+        ctx.strokeStyle = 'rgba(147, 197, 253, 0.90)';
+        ctx.lineWidth = 2.2;
+        ctx.shadowColor = '#60a5fa';
+        ctx.shadowBlur = 14;
+      } else {
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+        ctx.strokeStyle = 'rgba(96, 165, 250, 0.55)';
+        ctx.lineWidth = 1.8;
+        ctx.shadowColor = '#3b82f6';
+        ctx.shadowBlur = 8;
+      }
+
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
-      ctx.setLineDash([6, 4]);
+      ctx.setLineDash([8, 4]);
+      ctx.fill();
       ctx.stroke();
       ctx.setLineDash([]);
+      ctx.shadowBlur = 0;
     });
   }
 
@@ -489,7 +539,7 @@
     ctx.scale(transform.k, transform.k);
 
     const nodes = graphData.nodes || [];
-    const links = graphData.links || [];
+    const macroLinks = graphData.macroLinks || [];
 
     const visibleNodes = new Set();
     nodes.forEach(n => {
@@ -506,61 +556,77 @@
       ? computeMultiHopTraversal($selectedNode.id, 5, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
-    // Draw Translucent Cluster Hulls
+    // 1. Draw Prominent Polygonal Membrane Hulls around Collectives
     drawClusterBoundingHulls(visibleNodes, isSelectionActive);
 
-    // Draw D3 Links
-    links.forEach(rel => {
-      const srcId = rel.source.id || rel.source;
-      const tgtId = rel.target.id || rel.target;
-      if (!visibleNodes.has(srcId) || !visibleNodes.has(tgtId)) return;
+    // 2. Draw Membrane-to-Membrane Single Inter-Collective Links (NO internal lines drawn)
+    macroLinks.forEach(rel => {
+      const src = rel.source;
+      const tgt = rel.target;
+      if (!src || !tgt) return;
 
-      const edgeDist = edgeDistances.get(rel.id);
-      const isPathEdge = $searchPathEdges.has(rel.id);
+      const dx = tgt.x - src.x;
+      const dy = tgt.y - src.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist === 0) return;
+
+      const angle = Math.atan2(dy, dx);
+      const srcR = src.radius || 24;
+      const tgtR = tgt.radius || 24;
+
+      const startX = src.x + Math.cos(angle) * srcR;
+      const startY = src.y + Math.sin(angle) * srcR;
+      const endX = tgt.x - Math.cos(angle) * tgtR;
+      const endY = tgt.y - Math.sin(angle) * tgtR;
 
       ctx.beginPath();
-      ctx.moveTo(rel.source.x, rel.source.y);
-      ctx.lineTo(rel.target.x, rel.target.y);
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
 
-      if (isPathEdge) {
-        ctx.strokeStyle = '#f59e0b';
-        ctx.lineWidth = 3.5;
-        ctx.shadowColor = '#f59e0b';
-        ctx.shadowBlur = 18;
-      } else if (isSelectionActive && edgeDist !== undefined && edgeDist <= 5) {
-        const edgeOpacities = [0, 0.95, 0.65, 0.40, 0.22, 0.10];
-        const edgeWidths = [0, 3.4, 2.2, 1.5, 1.0, 0.7];
-        const edgeBlurs = [0, 12, 4, 0, 0, 0];
+      const weight = rel.weight || 1;
+      const baseWidth = Math.min(5.5, 1.2 + weight * 0.7);
 
-        const op = edgeOpacities[edgeDist] || 0.10;
-        const w = edgeWidths[edgeDist] || 0.7;
-        const b = edgeBlurs[edgeDist] || 0;
-
-        ctx.strokeStyle = edgeDist === 1 ? `rgba(56, 189, 248, ${op})` : `rgba(96, 165, 250, ${op})`;
-        ctx.lineWidth = w;
-        ctx.shadowColor = edgeDist === 1 ? '#38bdf8' : '#60a5fa';
-        ctx.shadowBlur = b;
-      } else {
-        const srcTag = rel.source?.data_tag || rel.source?.category || 'outliers';
-        const tgtTag = rel.target?.data_tag || rel.target?.category || 'outliers';
-        const isIntraCluster = (srcTag === tgtTag && srcTag !== 'outliers');
-
-        if (isIntraCluster && !isSelectionActive && !isSubgraphActive) {
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
-          ctx.lineWidth = 0.3;
-        } else {
-          ctx.strokeStyle = isSelectionActive 
-            ? 'rgba(255, 255, 255, 0.015)' 
-            : (isSubgraphActive ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.12)');
-          ctx.lineWidth = 0.4;
-        }
+      if (isSelectionActive) {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.lineWidth = 0.5;
         ctx.shadowBlur = 0;
+      } else {
+        ctx.strokeStyle = `rgba(56, 189, 248, ${Math.min(0.85, 0.35 + weight * 0.12)})`;
+        ctx.lineWidth = baseWidth;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 6;
       }
+
       ctx.stroke();
       ctx.shadowBlur = 0;
     });
 
-    // Draw D3 Nodes
+    // 3. Draw Labeled Boundary Box for Isolated Archive Sector
+    if (graphData.isolatedNodes && graphData.isolatedNodes.length > 0) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.40)';
+      ctx.lineWidth = 2.0;
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.35)';
+      ctx.setLineDash([10, 6]);
+
+      const boxX = 3100;
+      const boxY = 1250;
+      const boxW = 1400;
+      const boxH = 1100;
+
+      ctx.beginPath();
+      ctx.rect(boxX, boxY, boxW, boxH);
+      ctx.fill();
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
+      ctx.fillText(`📦 Isolated / Unlinked Chats Sector (${graphData.isolatedNodes.length} Chats - No Edges)`, boxX + 30, boxY + 45);
+      ctx.restore();
+    }
+
+    // 4. Draw D3 Nodes
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id)) return;
 
@@ -575,6 +641,7 @@
       if (n.actionability_tier === 'large_project') color = '#8b5cf6';
       if (n.actionability_tier === 'app_command') color = '#ec4899';
       if (isMatch) color = '#f59e0b';
+      if (n.isIsolated) color = '#64748b';
 
       if (isSel) {
         color = '#38bdf8';
