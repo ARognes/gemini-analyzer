@@ -210,36 +210,6 @@
     const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
     const rawRelations = graphData.relations || [];
 
-    // Calculate node degrees
-    const nodeDegrees = new Map(rawNodes.map(n => [n.id, 0]));
-    rawRelations.forEach(rel => {
-      if (nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key)) {
-        nodeDegrees.set(rel.source_key, nodeDegrees.get(rel.source_key) + 1);
-        nodeDegrees.set(rel.target_key, nodeDegrees.get(rel.target_key) + 1);
-      }
-    });
-
-    rawNodes.forEach(n => {
-      n.degree = nodeDegrees.get(n.id) || 0;
-    });
-
-    // Populate Histogram distribution data for interactive filter scales
-    const degMap = new Map();
-    for (let i = 0; i <= 50; i++) degMap.set(i, 0);
-    rawNodes.forEach(n => {
-      const deg = Math.min(50, n.degree || 0);
-      degMap.set(deg, (degMap.get(deg) || 0) + 1);
-    });
-    degreeHistogramData.set(Array.from(degMap.entries()).map(([bin, count]) => ({ bin, count })));
-
-    const turnMap = new Map();
-    for (let i = 1; i <= 50; i++) turnMap.set(i, 0);
-    rawNodes.forEach(n => {
-      const t = Math.min(50, Math.max(1, n.turn_count || 1));
-      turnMap.set(t, (turnMap.get(t) || 0) + 1);
-    });
-    turnsHistogramData.set(Array.from(turnMap.entries()).map(([bin, count]) => ({ bin, count })));
-
     // Group raw nodes into clusters by tag/category
     const clusters = {};
     rawNodes.forEach(n => {
@@ -315,6 +285,53 @@
         });
       }
     });
+
+    // Calculate node degrees (Total, Internal Intra-Group, External Inter-Group)
+    const nodeDegrees = new Map(rawNodes.map(n => [n.id, 0]));
+    const nodeInternalDegrees = new Map(rawNodes.map(n => [n.id, 0]));
+    const nodeExternalDegrees = new Map(rawNodes.map(n => [n.id, 0]));
+
+    rawRelations.forEach(rel => {
+      const srcId = rel.source_key;
+      const tgtId = rel.target_key;
+      if (nodeMap.has(srcId) && nodeMap.has(tgtId)) {
+        nodeDegrees.set(srcId, (nodeDegrees.get(srcId) || 0) + 1);
+        nodeDegrees.set(tgtId, (nodeDegrees.get(tgtId) || 0) + 1);
+
+        const srcMacro = nodeToMacro.get(srcId);
+        const tgtMacro = nodeToMacro.get(tgtId);
+        if (srcMacro && tgtMacro && srcMacro === tgtMacro && srcMacro.startsWith('glob_')) {
+          nodeInternalDegrees.set(srcId, (nodeInternalDegrees.get(srcId) || 0) + 1);
+          nodeInternalDegrees.set(tgtId, (nodeInternalDegrees.get(tgtId) || 0) + 1);
+        } else {
+          nodeExternalDegrees.set(srcId, (nodeExternalDegrees.get(srcId) || 0) + 1);
+          nodeExternalDegrees.set(tgtId, (nodeExternalDegrees.get(tgtId) || 0) + 1);
+        }
+      }
+    });
+
+    rawNodes.forEach(n => {
+      n.degree = nodeDegrees.get(n.id) || 0;
+      n.internal_degree = nodeInternalDegrees.get(n.id) || 0;
+      n.external_degree = nodeExternalDegrees.get(n.id) || 0;
+    });
+
+    // Populate Histogram distribution data for interactive filter scales
+    const degMap = new Map();
+    for (let i = 0; i <= 50; i++) degMap.set(i, 0);
+    rawNodes.forEach(n => {
+      const deg = Math.min(50, n.degree || 0);
+      degMap.set(deg, (degMap.get(deg) || 0) + 1);
+    });
+    degreeHistogramData.set(Array.from(degMap.entries()).map(([bin, count]) => ({ bin, count })));
+
+    const turnMap = new Map();
+    for (let i = 1; i <= 50; i++) turnMap.set(i, 0);
+    rawNodes.forEach(n => {
+      const t = Math.min(50, Math.max(1, n.turn_count || 1));
+      turnMap.set(t, (turnMap.get(t) || 0) + 1);
+    });
+    turnsHistogramData.set(Array.from(turnMap.entries()).map(([bin, count]) => ({ bin, count })));
 
     // Accumulate relations into Inter-Glob Single Membrane Links
     const links = rawRelations
@@ -719,7 +736,27 @@
         }
       });
     } else {
-      // Draw Membrane-to-Membrane Single Inter-Collective Links
+      // 3a. Draw Intra-Cluster Internal Filaments between member nodes of the same group
+      const allLinks = graphData.links || [];
+      allLinks.forEach(rel => {
+        const src = rel.source;
+        const tgt = rel.target;
+        if (!src || !tgt) return;
+        const srcId = src.id || src;
+        const tgtId = tgt.id || tgt;
+        if (!visibleNodes.has(srcId) || !visibleNodes.has(tgtId)) return;
+
+        if (src.glob_id && tgt.glob_id && src.glob_id === tgt.glob_id) {
+          ctx.beginPath();
+          ctx.moveTo(src.x, src.y);
+          ctx.lineTo(tgt.x, tgt.y);
+          ctx.strokeStyle = 'rgba(147, 197, 253, 0.45)';
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+        }
+      });
+
+      // 3b. Draw Membrane-to-Membrane Single Inter-Collective Links
       macroLinks.forEach(rel => {
         const src = rel.source;
         const tgt = rel.target;
@@ -905,7 +942,17 @@
       style="left: {transform.x + ($hoveredNode.x * transform.k) + 15}px; top: {transform.y + ($hoveredNode.y * transform.k) - 20}px;"
     >
       <div class="tooltip-title">{$hoveredNode.title || $hoveredNode.title_snippet}</div>
-      <div class="tooltip-meta">Turns: {$hoveredNode.turn_count || 1} • Tier: {$hoveredNode.actionability_tier || 'standard'}</div>
+      <div class="tooltip-meta">
+        <span class="meta-item">🔗 {$hoveredNode.degree || 0} edges{#if ($hoveredNode.internal_degree || 0) > 0 || ($hoveredNode.external_degree || 0) > 0} ({$hoveredNode.internal_degree || 0} group, {$hoveredNode.external_degree || 0} ext){/if}</span>
+        <span class="meta-sep">•</span>
+        <span class="meta-item">💬 {$hoveredNode.turn_count || 1} turns</span>
+        <span class="meta-sep">•</span>
+        <span class="meta-item">🏷️ {$hoveredNode.actionability_tier || 'standard'}</span>
+        {#if $hoveredNode.data_tag}
+          <span class="meta-sep">•</span>
+          <span class="meta-item">📂 {$hoveredNode.data_tag}</span>
+        {/if}
+      </div>
     </div>
   {/if}
 
@@ -916,6 +963,23 @@
       onclick={(e) => e.stopPropagation()}
     >
       {#if contextMenuNode}
+        <div class="menu-header node-header">
+          <div class="menu-node-title">{contextMenuNode.title || contextMenuNode.title_snippet}</div>
+          <div class="menu-node-stats">
+            <span class="stat-badge edges-badge">🔗 {contextMenuNode.degree || 0} Edges</span>
+            <span class="stat-badge turns-badge">💬 {contextMenuNode.turn_count || 1} Turns</span>
+            <span class="stat-badge tier-badge">🏷️ {contextMenuNode.actionability_tier || 'standard'}</span>
+          </div>
+          {#if (contextMenuNode.internal_degree || 0) > 0 || (contextMenuNode.external_degree || 0) > 0}
+            <div class="menu-edge-breakdown">
+              🔗 {contextMenuNode.internal_degree || 0} intra-group • {contextMenuNode.external_degree || 0} external
+            </div>
+          {/if}
+          {#if contextMenuNode.data_tag}
+            <div class="menu-node-group">📂 Group: <strong>{contextMenuNode.data_tag}</strong></div>
+          {/if}
+        </div>
+        <div class="menu-divider"></div>
         <button class="menu-item" onclick={() => openThreadDrawer(contextMenuNode.id)}>
           📖 Inspect Full Thread
         </button>
@@ -968,8 +1032,8 @@
     bottom: 1rem;
     left: 1rem;
     background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(245, 158, 11, 0.4);
-    color: #fbbf24;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
     font-size: 0.75rem;
@@ -980,23 +1044,23 @@
 
   .tooltip {
     position: absolute;
-    background: rgba(15, 23, 42, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    padding: 0.5rem 0.75rem;
+    background: rgba(15, 23, 42, 0.94);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    backdrop-filter: blur(14px);
+    padding: 0.55rem 0.85rem;
     border-radius: 8px;
     color: #f8fafc;
     font-size: 0.8rem;
     pointer-events: none;
     z-index: 1000;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    max-width: 260px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    max-width: 290px;
   }
 
   .tooltip-title {
     font-weight: 600;
     color: #38bdf8;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.25rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -1007,32 +1071,111 @@
   }
 
   .tooltip-meta {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: #94a3b8;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .meta-sep {
+    color: rgba(255, 255, 255, 0.2);
   }
 
   .context-menu {
     position: fixed;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 0.5rem;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 12px;
+    padding: 0.6rem;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    min-width: 210px;
+    min-width: 240px;
+    max-width: 320px;
     z-index: 1300;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 20px rgba(56, 189, 248, 0.15);
   }
 
   .menu-header {
     font-size: 0.75rem;
     font-weight: 700;
     color: #fbbf24;
-    padding: 0.35rem 0.6rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0.5rem;
     margin-bottom: 0.2rem;
+  }
+
+  .menu-header.node-header {
+    color: #f8fafc;
+    border-bottom: none;
+    padding-bottom: 0.2rem;
+  }
+
+  .menu-node-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #38bdf8;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .menu-node-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .edges-badge {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+  }
+
+  .turns-badge {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #c084fc;
+  }
+
+  .tier-badge {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+  }
+
+  .menu-edge-breakdown {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 0.15rem;
+    line-height: 1.3;
+  }
+
+  .menu-node-group {
+    font-size: 0.7rem;
+    color: #cbd5e1;
+    margin-top: 0.2rem;
+  }
+
+  .menu-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0.2rem 0 0.35rem 0;
   }
 
   .menu-item {
@@ -1040,7 +1183,7 @@
     border: none;
     color: #cbd5e1;
     text-align: left;
-    padding: 0.4rem 0.6rem;
+    padding: 0.45rem 0.6rem;
     border-radius: 6px;
     font-size: 0.8rem;
     cursor: pointer;
@@ -1048,7 +1191,7 @@
   }
 
   .menu-item:hover {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(56, 189, 248, 0.2);
     color: #ffffff;
   }
 
