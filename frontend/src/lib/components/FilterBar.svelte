@@ -304,9 +304,10 @@
             <button 
               class="group-chip" 
               class:selected={isSelected}
+              style="--group-color: {g.color || '#38bdf8'};"
               onclick={() => toggleGroupTag(g.tag)}
             >
-              <span class="chip-dot"></span>
+              <span class="chip-dot" style="background: {g.color || '#64748b'};"></span>
               <span class="chip-tag">{g.tag}</span>
               <span class="chip-count">{g.count}</span>
             </button>
@@ -672,9 +673,9 @@
   }
 
   .group-chip.selected {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.5);
-    color: #60a5fa;
+    background: color-mix(in srgb, var(--group-color, #38bdf8) 18%, rgba(15, 23, 42, 0.8));
+    border-color: color-mix(in srgb, var(--group-color, #38bdf8) 60%, transparent);
+    color: #ffffff;
     font-weight: 600;
   }
 
@@ -682,12 +683,11 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #64748b;
+    transition: box-shadow 0.2s ease;
   }
 
   .group-chip.selected .chip-dot {
-    background: #38bdf8;
-    box-shadow: 0 0 6px #38bdf8;
+    box-shadow: 0 0 8px var(--group-color, #38bdf8);
   }
 
   .chip-count {

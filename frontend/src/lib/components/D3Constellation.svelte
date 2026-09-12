@@ -44,6 +44,39 @@
   let contextMenuX = $state(0);
   let contextMenuY = $state(0);
   let contextMenuNode = $state(null);
+  let hoveredGroup = $state(null);
+  let activeClusterHulls = $state([]);
+
+  function formatTagLabel(tag) {
+    if (!tag || tag === 'ungrouped' || tag === 'outliers') return 'Ungrouped';
+    return tag.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function getGroupColor(tag) {
+    if (!tag || tag === 'ungrouped' || tag === 'outliers') {
+      return {
+        hex: '#94a3b8',
+        fill: 'rgba(148, 163, 184, 0.08)',
+        fillHover: 'rgba(148, 163, 184, 0.22)',
+        stroke: 'rgba(148, 163, 184, 0.50)',
+        strokeHover: '#e2e8f0',
+        glow: '#94a3b8'
+      };
+    }
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+      hash = (hash * 31 + tag.charCodeAt(i)) & 0xffffffff;
+    }
+    const hue = (Math.abs(hash) * 137.508) % 360;
+    return {
+      hex: `hsl(${hue.toFixed(1)}, 85%, 62%)`,
+      fill: `hsla(${hue.toFixed(1)}, 85%, 62%, 0.12)`,
+      fillHover: `hsla(${hue.toFixed(1)}, 90%, 65%, 0.28)`,
+      stroke: `hsla(${hue.toFixed(1)}, 85%, 62%, 0.65)`,
+      strokeHover: `hsl(${hue.toFixed(1)}, 100%, 75%)`,
+      glow: `hsl(${hue.toFixed(1)}, 85%, 62%)`
+    };
+  }
 
   $effect(() => {
     if (isLoaded && ctx) {
@@ -61,6 +94,7 @@
       const _searchIds = $searchMatchingNodeIds;
       const _selN = $selectedNode;
       const _hovN = $hoveredNode;
+      const _hovG = hoveredGroup;
       drawCanvas();
     }
   });
@@ -218,13 +252,17 @@
       clusters[tag].push(n);
     });
 
-    // Populate Available Groups for Group Filter Matrix
+    // Populate Available Groups for Group Filter Matrix with unique colors
     const groupTagList = Object.keys(clusters)
       .filter(t => t !== 'ungrouped' && t !== 'outliers' && clusters[t].length >= 2)
-      .map(t => ({
-        tag: t,
-        count: clusters[t].length
-      }))
+      .map((t, idx) => {
+        const colorObj = getGroupColor(t, idx);
+        return {
+          tag: t,
+          count: clusters[t].length,
+          color: colorObj.hex
+        };
+      })
       .sort((a, b) => b.count - a.count);
     availableGroupTags.set(groupTagList);
 
@@ -247,6 +285,7 @@
       if (tag !== 'ungrouped' && tag !== 'outliers' && cNodes.length >= 2) {
         const globId = `glob_${tag}`;
         const globRadius = Math.max(26, 16 + 8 * Math.sqrt(cNodes.length));
+        const groupColor = getGroupColor(tag, idx);
 
         const macro = {
           id: globId,
@@ -255,7 +294,8 @@
           radius: globRadius,
           x: initCx,
           y: initCy,
-          nodes: cNodes
+          nodes: cNodes,
+          color: groupColor
         };
         macroNodes.push(macro);
         macroMap.set(globId, macro);
@@ -269,6 +309,8 @@
           n.y = initCy + n.offsetY;
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = globId;
+          n.group_color = groupColor.hex;
+          n.group_tag = tag;
           nodeToMacro.set(n.id, globId);
         });
       } else {
@@ -279,6 +321,8 @@
           n.y = initCy + r * Math.sin(theta);
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = null;
+          n.group_color = '#64748b';
+          n.group_tag = null;
           macroNodes.push(n);
           macroMap.set(n.id, n);
           nodeToMacro.set(n.id, n.id);
@@ -581,6 +625,7 @@
   function drawClusterBoundingHulls(visibleNodes, isSelectionActive = false) {
     const nodes = graphData.nodes || [];
     const clusterMap = {};
+    activeClusterHulls = [];
 
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id) || typeof n.x !== 'number' || typeof n.y !== 'number') return;
@@ -617,8 +662,22 @@
       const hull = d3.polygonHull(allPoints);
       if (!hull || hull.length < 3) return;
 
-      const isHoveredGroup = $hoveredNode && cNodes.some(cn => cn.id === $hoveredNode.id);
-      const isSelGroup = $selectedNode && cNodes.some(cn => cn.id === $selectedNode.id);
+      const minY = Math.min(...hull.map(p => p[1]));
+      const colorObj = getGroupColor(tag);
+
+      // Record for hover hit testing
+      activeClusterHulls.push({
+        tag,
+        hull,
+        cx,
+        cy,
+        minY,
+        count: cNodes.length,
+        color: colorObj
+      });
+
+      const isHoveredGroup = (hoveredGroup === tag) || ($hoveredNode && ($hoveredNode.group_tag === tag || $hoveredNode.data_tag === tag));
+      const isSelGroup = $selectedNode && ($selectedNode.group_tag === tag || $selectedNode.data_tag === tag);
 
       ctx.beginPath();
       ctx.moveTo(hull[0][0], hull[0][1]);
@@ -628,22 +687,22 @@
       ctx.closePath();
 
       if (isSelGroup) {
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.18)';
+        ctx.fillStyle = colorObj.fillHover;
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2.8;
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 18;
+        ctx.lineWidth = 3.0;
+        ctx.shadowColor = colorObj.glow;
+        ctx.shadowBlur = 20;
       } else if (isHoveredGroup) {
-        ctx.fillStyle = 'rgba(96, 165, 250, 0.14)';
-        ctx.strokeStyle = 'rgba(147, 197, 253, 0.90)';
-        ctx.lineWidth = 2.2;
-        ctx.shadowColor = '#60a5fa';
-        ctx.shadowBlur = 14;
+        ctx.fillStyle = colorObj.fillHover;
+        ctx.strokeStyle = colorObj.strokeHover;
+        ctx.lineWidth = 2.4;
+        ctx.shadowColor = colorObj.glow;
+        ctx.shadowBlur = 16;
       } else {
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
-        ctx.strokeStyle = 'rgba(96, 165, 250, 0.55)';
-        ctx.lineWidth = 1.8;
-        ctx.shadowColor = '#3b82f6';
+        ctx.fillStyle = colorObj.fill;
+        ctx.strokeStyle = colorObj.stroke;
+        ctx.lineWidth = 1.6;
+        ctx.shadowColor = colorObj.glow;
         ctx.shadowBlur = 8;
       }
 
@@ -654,6 +713,28 @@
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.shadowBlur = 0;
+
+      // Draw floating on-canvas group badge
+      const badgeText = `📂 ${formatTagLabel(tag)} (${cNodes.length})`;
+      ctx.font = (isHoveredGroup || isSelGroup) ? 'bold 12px system-ui, -apple-system, sans-serif' : '600 11px system-ui, -apple-system, sans-serif';
+      const textWidth = ctx.measureText(badgeText).width;
+      const badgeW = textWidth + 18;
+      const badgeH = (isHoveredGroup || isSelGroup) ? 24 : 20;
+      const badgeX = cx - badgeW / 2;
+      const badgeY = minY - badgeH - 6;
+
+      ctx.beginPath();
+      ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 6);
+      ctx.fillStyle = (isHoveredGroup || isSelGroup) ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.78)';
+      ctx.fill();
+      ctx.strokeStyle = (isHoveredGroup || isSelGroup) ? colorObj.strokeHover : colorObj.stroke;
+      ctx.lineWidth = (isHoveredGroup || isSelGroup) ? 1.8 : 1.0;
+      ctx.stroke();
+
+      ctx.fillStyle = (isHoveredGroup || isSelGroup) ? '#ffffff' : colorObj.hex;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(badgeText, cx, badgeY + badgeH / 2);
     });
   }
 
@@ -721,11 +802,9 @@
 
       let baseRadius = n.radius || 8;
       let drawRadius = baseRadius;
-      let color = '#3b82f6';
-      if (n.actionability_tier === 'large_project') color = '#8b5cf6';
-      if (n.actionability_tier === 'app_command') color = '#ec4899';
+      let color = n.group_color || '#3b82f6';
+      if (n.isIsolated || !n.glob_id) color = n.group_color || '#64748b';
       if (isMatch) color = '#f59e0b';
-      if (n.isIsolated) color = '#64748b';
 
       if (isSel) {
         color = '#38bdf8';
@@ -756,7 +835,7 @@
         ctx.fillStyle = color;
         if (isHovered) {
           ctx.shadowColor = color;
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 14;
         } else {
           ctx.shadowBlur = 0;
         }
@@ -830,12 +909,15 @@
         if (!visibleNodes.has(srcId) || !visibleNodes.has(tgtId)) return;
 
         if (src.glob_id && tgt.glob_id && src.glob_id === tgt.glob_id) {
+          const gColor = src.group_color || 'rgba(147, 197, 253, 0.45)';
           ctx.beginPath();
           ctx.moveTo(src.x, src.y);
           ctx.lineTo(tgt.x, tgt.y);
-          ctx.strokeStyle = 'rgba(147, 197, 253, 0.45)';
+          ctx.strokeStyle = gColor;
+          ctx.globalAlpha = 0.6;
           ctx.lineWidth = 1.3;
           ctx.stroke();
+          ctx.globalAlpha = 1.0;
         }
       });
 
@@ -901,6 +983,18 @@
     });
 
     hoveredNode.set(hit || null);
+
+    if (hit && (hit.group_tag || hit.data_tag || hit.category)) {
+      hoveredGroup = hit.group_tag || hit.data_tag || hit.category;
+    } else {
+      // Check if pointer is inside any cluster bounding hull
+      const hitHull = activeClusterHulls.find(h => h.hull && d3.polygonContains(h.hull, [wx, wy]));
+      if (hitHull) {
+        hoveredGroup = hitHull.tag;
+      } else {
+        hoveredGroup = null;
+      }
+    }
   }
 
   function handleClick(e) {
@@ -1054,6 +1148,19 @@
     </div>
   {/if}
 
+  {#if hoveredGroup && !$hoveredNode}
+    {@const groupHull = activeClusterHulls.find(h => h.tag === hoveredGroup)}
+    {@const groupColor = groupHull?.color || getGroupColor(hoveredGroup)}
+    <div 
+      class="group-hud-tooltip"
+      style="left: {transform.x + (groupHull?.cx || 1600) * transform.k}px; top: {transform.y + (groupHull?.minY || 1100) * transform.k - 25}px;"
+    >
+      <span class="group-hud-icon">📂</span>
+      <span class="group-hud-name" style="color: {groupColor.hex};">{formatTagLabel(hoveredGroup)}</span>
+      <span class="group-hud-pill" style="border-color: {groupColor.stroke}; color: {groupColor.hex};">{groupHull?.count || 0} chats</span>
+    </div>
+  {/if}
+
   {#if isContextMenuOpen}
     <div 
       class="context-menu"
@@ -1172,6 +1279,33 @@
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     max-width: 290px;
+  }
+
+  .group-hud-tooltip {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+  }
+
+  .group-hud-pill {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid;
+    padding: 0.1rem 0.4rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
   }
 
   .tooltip-title {
