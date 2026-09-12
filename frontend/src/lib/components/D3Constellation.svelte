@@ -614,54 +614,7 @@
     // 1. Draw Prominent Polygonal Membrane Hulls around Collectives
     drawClusterBoundingHulls(visibleNodes, isSelectionActive);
 
-    // 2. Draw Membrane-to-Membrane Single Inter-Collective Links (NO internal lines drawn)
-    macroLinks.forEach(rel => {
-      const src = rel.source;
-      const tgt = rel.target;
-      if (!src || !tgt) return;
-
-      // Only draw if both collectives/nodes have visible nodes
-      const isSrcVisible = src.isGlob ? (src.nodes && src.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(src.id);
-      const isTgtVisible = tgt.isGlob ? (tgt.nodes && tgt.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(tgt.id);
-      if (!isSrcVisible || !isTgtVisible) return;
-
-      const dx = tgt.x - src.x;
-      const dy = tgt.y - src.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist === 0) return;
-
-      const angle = Math.atan2(dy, dx);
-      const srcR = src.radius || 24;
-      const tgtR = tgt.radius || 24;
-
-      const startX = src.x + Math.cos(angle) * srcR;
-      const startY = src.y + Math.sin(angle) * srcR;
-      const endX = tgt.x - Math.cos(angle) * tgtR;
-      const endY = tgt.y - Math.sin(angle) * tgtR;
-
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-
-      const weight = rel.weight || 1;
-      const baseWidth = Math.min(5.5, 1.2 + weight * 0.7);
-
-      if (isSelectionActive) {
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.lineWidth = 0.5;
-        ctx.shadowBlur = 0;
-      } else {
-        ctx.strokeStyle = `rgba(56, 189, 248, ${Math.min(0.85, 0.35 + weight * 0.12)})`;
-        ctx.lineWidth = baseWidth;
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 6;
-      }
-
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-    });
-
-    // 4. Draw D3 Nodes
+    // 2. Draw D3 Nodes (Middle Layer)
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id)) return;
 
@@ -727,6 +680,89 @@
         ctx.stroke();
       }
     });
+
+    // 3. Draw Edges LAST (Top Layer for maximum clarity & vibrancy)
+    if (isSelectionActive) {
+      // Draw 5-step deep traversal edges directly on top of nodes
+      const allLinks = graphData.links || [];
+      allLinks.forEach(rel => {
+        const srcId = rel.source.id || rel.source;
+        const tgtId = rel.target.id || rel.target;
+        if (!visibleNodes.has(srcId) || !visibleNodes.has(tgtId)) return;
+
+        const edgeDist = edgeDistances.get(rel.id);
+        const isPathEdge = $searchPathEdges.has(rel.id);
+
+        if (isPathEdge || (edgeDist !== undefined && edgeDist <= 5)) {
+          ctx.beginPath();
+          ctx.moveTo(rel.source.x, rel.source.y);
+          ctx.lineTo(rel.target.x, rel.target.y);
+
+          if (isPathEdge) {
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 3.5;
+            ctx.shadowColor = '#f59e0b';
+            ctx.shadowBlur = 18;
+          } else {
+            const edgeOpacities = [0, 0.95, 0.70, 0.45, 0.28, 0.15];
+            const edgeWidths = [0, 3.6, 2.5, 1.8, 1.2, 0.8];
+            const edgeBlurs = [0, 14, 6, 0, 0, 0];
+
+            const op = edgeOpacities[edgeDist] || 0.15;
+            const w = edgeWidths[edgeDist] || 0.8;
+            const b = edgeBlurs[edgeDist] || 0;
+
+            ctx.strokeStyle = edgeDist === 1 ? `rgba(56, 189, 248, ${op})` : `rgba(96, 165, 250, ${op})`;
+            ctx.lineWidth = w;
+            ctx.shadowColor = edgeDist === 1 ? '#38bdf8' : '#60a5fa';
+            ctx.shadowBlur = b;
+          }
+
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
+      });
+    } else {
+      // Draw Membrane-to-Membrane Single Inter-Collective Links
+      macroLinks.forEach(rel => {
+        const src = rel.source;
+        const tgt = rel.target;
+        if (!src || !tgt) return;
+
+        const isSrcVisible = src.isGlob ? (src.nodes && src.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(src.id);
+        const isTgtVisible = tgt.isGlob ? (tgt.nodes && tgt.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(tgt.id);
+        if (!isSrcVisible || !isTgtVisible) return;
+
+        const dx = tgt.x - src.x;
+        const dy = tgt.y - src.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist === 0) return;
+
+        const angle = Math.atan2(dy, dx);
+        const srcR = src.radius || 24;
+        const tgtR = tgt.radius || 24;
+
+        const startX = src.x + Math.cos(angle) * srcR;
+        const startY = src.y + Math.sin(angle) * srcR;
+        const endX = tgt.x - Math.cos(angle) * tgtR;
+        const endY = tgt.y - Math.sin(angle) * tgtR;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+
+        const weight = rel.weight || 1;
+        const baseWidth = Math.min(5.5, 1.4 + weight * 0.8);
+
+        ctx.strokeStyle = `rgba(56, 189, 248, ${Math.min(0.90, 0.40 + weight * 0.14)})`;
+        ctx.lineWidth = baseWidth;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 8;
+
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      });
+    }
 
     ctx.restore();
   }
