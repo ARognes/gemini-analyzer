@@ -1,1 +1,44 @@
-{"group_key": "1171aa27343c5c5d", "thread_id": "1171aa27343c5c5d", "turn_count": 1, "first_timestamp": "2026-02-04 16:59:06", "last_timestamp": "2026-02-04 16:59:06", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/1171aa27343c5c5d", "turns": [{"id": 6710, "thread_id": "1171aa27343c5c5d", "timestamp_iso": "2026-02-04 16:59:06", "timestamp_raw": "Feb 4, 2026, 4:59:06\u202fPM CDT", "prompt_text": "where is Raymond Gardens", "response_html": "<br><p><a href=\"\">Reiman Gardens</a> is located at 1407 University Blvd, Ames, IA 50011.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/1171aa27343c5c5d", "was_audio_input": 0}]}
+{
+  "group_key": "1171aa27343c5c5d",
+  "thread_id": "1171aa27343c5c5d",
+  "turn_count": 1,
+  "first_timestamp": "2026-02-04 16:59:06",
+  "last_timestamp": "2026-02-04 16:59:06",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/1171aa27343c5c5d",
+  "turns": [
+    {
+      "id": 6710,
+      "thread_id": "1171aa27343c5c5d",
+      "timestamp_iso": "2026-02-04 16:59:06",
+      "timestamp_raw": "Feb 4, 2026, 4:59:06 PM CDT",
+      "prompt_text": "where is Raymond Gardens",
+      "response_html": "<br><p><a href=\"\">Reiman Gardens</a> is located at 1407 University Blvd, Ames, IA 50011.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/1171aa27343c5c5d",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding where is Raymond Gardens. Provided concise guidance on Reiman Gardens is located at 1407 University Blvd, Ames, IA 50011..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Where is Raymond Gardens",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding where is Raymond Gardens. Provided concise guidance on Reiman Gardens is located at 1407 University Blvd, Ames, IA 50011..",
+      "keywords": [
+        "gardens",
+        "raymond",
+        "reiman",
+        "located"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: gardens, raymond, reiman"
+  ]
+}

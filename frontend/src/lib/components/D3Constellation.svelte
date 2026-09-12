@@ -13,6 +13,10 @@
     allGroupsEnabled,
     selectedGroupTags,
     availableGroupTags,
+    graphPerspective,
+    minYieldTurns,
+    selectedMacroDomain,
+    macroDomainsList,
     degreeHistogramData,
     turnsHistogramData,
     hoveredNode,
@@ -22,7 +26,7 @@
     isThreadDrawerOpen,
     activeThreadDrawerData
   } from '../stores.js';
-  import { fetchCanvasData, fetchStitchedThread } from '../api.js';
+  import { fetchCanvasData, fetchStitchedThread, fetchMacroDomains } from '../api.js';
 
   let canvasEl;
   let ctx;
@@ -78,9 +82,25 @@
     };
   }
 
+  function getMacroDomainColor(domainId) {
+    const DOMAIN_PALETTES = {
+      software: { hex: '#38bdf8', fill: 'rgba(56, 189, 248, 0.12)', fillHover: 'rgba(56, 189, 248, 0.28)', stroke: 'rgba(56, 189, 248, 0.75)', strokeHover: '#7dd3fc', glow: '#38bdf8' },
+      ai_agents: { hex: '#a855f7', fill: 'rgba(168, 85, 247, 0.12)', fillHover: 'rgba(168, 85, 247, 0.28)', stroke: 'rgba(168, 85, 247, 0.75)', strokeHover: '#c084fc', glow: '#a855f7' },
+      hardware: { hex: '#f59e0b', fill: 'rgba(245, 158, 11, 0.12)', fillHover: 'rgba(245, 158, 11, 0.28)', stroke: 'rgba(245, 158, 11, 0.75)', strokeHover: '#fbbf24', glow: '#f59e0b' },
+      creative: { hex: '#ec4899', fill: 'rgba(236, 72, 153, 0.12)', fillHover: 'rgba(236, 72, 153, 0.28)', stroke: 'rgba(236, 72, 153, 0.75)', strokeHover: '#f472b6', glow: '#ec4899' },
+      finance: { hex: '#10b981', fill: 'rgba(16, 185, 129, 0.12)', fillHover: 'rgba(16, 185, 129, 0.28)', stroke: 'rgba(16, 185, 129, 0.75)', strokeHover: '#34d399', glow: '#10b981' },
+      science: { hex: '#06b6d4', fill: 'rgba(6, 182, 212, 0.12)', fillHover: 'rgba(6, 182, 212, 0.28)', stroke: 'rgba(6, 182, 212, 0.75)', strokeHover: '#22d3ee', glow: '#06b6d4' },
+      explorations: { hex: '#64748b', fill: 'rgba(100, 116, 139, 0.12)', fillHover: 'rgba(100, 116, 139, 0.28)', stroke: 'rgba(100, 116, 139, 0.75)', strokeHover: '#94a3b8', glow: '#64748b' }
+    };
+    return DOMAIN_PALETTES[domainId] || DOMAIN_PALETTES.explorations;
+  }
+
   $effect(() => {
     if (isLoaded && ctx) {
-      // Re-draw whenever filters or selection stores update
+      // Re-draw whenever filters, perspective, or selection stores update
+      const _persp = $graphPerspective;
+      const _yieldT = $minYieldTurns;
+      const _macroD = $selectedMacroDomain;
       const _oneOff = $hideOneOffChats;
       const _tier = $selectedActionabilityTier;
       const _minT = $minTurnsFilter;
@@ -104,6 +124,10 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('click', closeContextMenu);
+
+    fetchMacroDomains().then(d => {
+      if (d && d.length > 0) macroDomainsList.set(d);
+    }).catch(e => console.warn('Failed to load macro domains:', e));
 
     // Setup D3 Zoom - Filter strictly for Middle Mouse Button (button === 1) or Scroll Wheel
     zoomInstance = d3.zoom()
@@ -627,12 +651,20 @@
     const clusterMap = {};
     activeClusterHulls = [];
 
+    const isDomainMode = ($graphPerspective === 'macro_domains');
+
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id) || typeof n.x !== 'number' || typeof n.y !== 'number') return;
-      const tag = n.data_tag || n.category || 'ungrouped';
-      if (tag === 'ungrouped' || tag === 'outliers') return;
-      if (!clusterMap[tag]) clusterMap[tag] = [];
-      clusterMap[tag].push(n);
+      if (isDomainMode) {
+        const d = n.macro_domain || 'explorations';
+        if (!clusterMap[d]) clusterMap[d] = [];
+        clusterMap[d].push(n);
+      } else {
+        const tag = n.data_tag || n.category || 'ungrouped';
+        if (tag === 'ungrouped' || tag === 'outliers') return;
+        if (!clusterMap[tag]) clusterMap[tag] = [];
+        clusterMap[tag].push(n);
+      }
     });
 
     Object.keys(clusterMap).forEach(tag => {
@@ -645,7 +677,7 @@
       cy /= cNodes.length;
 
       const allPoints = [];
-      const padding = 22;
+      const padding = isDomainMode ? 32 : 22;
       const angleSteps = 10;
 
       cNodes.forEach(n => {
@@ -663,7 +695,7 @@
       if (!hull || hull.length < 3) return;
 
       const minY = Math.min(...hull.map(p => p[1]));
-      const colorObj = getGroupColor(tag);
+      const colorObj = isDomainMode ? getMacroDomainColor(tag) : getGroupColor(tag);
 
       // Record for hover hit testing
       activeClusterHulls.push({
@@ -673,11 +705,14 @@
         cy,
         minY,
         count: cNodes.length,
-        color: colorObj
+        color: colorObj,
+        isDomain: isDomainMode,
+        label: isDomainMode ? (cNodes[0].macro_domain_label || tag) : formatTagLabel(tag),
+        icon: isDomainMode ? (cNodes[0].macro_domain_icon || '🪐') : '📂'
       });
 
-      const isHoveredGroup = (hoveredGroup === tag) || ($hoveredNode && ($hoveredNode.group_tag === tag || $hoveredNode.data_tag === tag));
-      const isSelGroup = $selectedNode && ($selectedNode.group_tag === tag || $selectedNode.data_tag === tag);
+      const isHoveredGroup = (hoveredGroup === tag) || ($hoveredNode && (isDomainMode ? ($hoveredNode.macro_domain === tag) : ($hoveredNode.group_tag === tag || $hoveredNode.data_tag === tag)));
+      const isSelGroup = $selectedNode && (isDomainMode ? ($selectedNode.macro_domain === tag) : ($selectedNode.group_tag === tag || $selectedNode.data_tag === tag));
 
       ctx.beginPath();
       ctx.moveTo(hull[0][0], hull[0][1]);
@@ -689,46 +724,48 @@
       if (isSelGroup) {
         ctx.fillStyle = colorObj.fillHover;
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 3.0;
+        ctx.lineWidth = 3.2;
         ctx.shadowColor = colorObj.glow;
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = 22;
       } else if (isHoveredGroup) {
         ctx.fillStyle = colorObj.fillHover;
         ctx.strokeStyle = colorObj.strokeHover;
-        ctx.lineWidth = 2.4;
+        ctx.lineWidth = 2.6;
         ctx.shadowColor = colorObj.glow;
-        ctx.shadowBlur = 16;
+        ctx.shadowBlur = 18;
       } else {
         ctx.fillStyle = colorObj.fill;
         ctx.strokeStyle = colorObj.stroke;
-        ctx.lineWidth = 1.6;
+        ctx.lineWidth = isDomainMode ? 2.0 : 1.6;
         ctx.shadowColor = colorObj.glow;
         ctx.shadowBlur = 8;
       }
 
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
-      ctx.setLineDash([8, 4]);
+      ctx.setLineDash(isDomainMode ? [12, 6] : [8, 4]);
       ctx.fill();
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.shadowBlur = 0;
 
-      // Draw floating on-canvas group badge
-      const badgeText = `📂 ${formatTagLabel(tag)} (${cNodes.length})`;
-      ctx.font = (isHoveredGroup || isSelGroup) ? 'bold 12px system-ui, -apple-system, sans-serif' : '600 11px system-ui, -apple-system, sans-serif';
+      // Draw floating on-canvas group/domain badge
+      const badgeIcon = isDomainMode ? (cNodes[0].macro_domain_icon || '🪐') : '📂';
+      const badgeTitle = isDomainMode ? (cNodes[0].macro_domain_label || formatTagLabel(tag)) : formatTagLabel(tag);
+      const badgeText = `${badgeIcon} ${badgeTitle} (${cNodes.length})`;
+      ctx.font = (isHoveredGroup || isSelGroup) ? 'bold 13px system-ui, -apple-system, sans-serif' : '600 11px system-ui, -apple-system, sans-serif';
       const textWidth = ctx.measureText(badgeText).width;
-      const badgeW = textWidth + 18;
-      const badgeH = (isHoveredGroup || isSelGroup) ? 24 : 20;
+      const badgeW = textWidth + 20;
+      const badgeH = (isHoveredGroup || isSelGroup) ? 26 : 22;
       const badgeX = cx - badgeW / 2;
       const badgeY = minY - badgeH - 6;
 
       ctx.beginPath();
       ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 6);
-      ctx.fillStyle = (isHoveredGroup || isSelGroup) ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.78)';
+      ctx.fillStyle = (isHoveredGroup || isSelGroup) ? 'rgba(15, 23, 42, 0.96)' : 'rgba(15, 23, 42, 0.82)';
       ctx.fill();
       ctx.strokeStyle = (isHoveredGroup || isSelGroup) ? colorObj.strokeHover : colorObj.stroke;
-      ctx.lineWidth = (isHoveredGroup || isSelGroup) ? 1.8 : 1.0;
+      ctx.lineWidth = (isHoveredGroup || isSelGroup) ? 2.0 : 1.2;
       ctx.stroke();
 
       ctx.fillStyle = (isHoveredGroup || isSelGroup) ? '#ffffff' : colorObj.hex;
@@ -750,12 +787,41 @@
 
     const nodes = graphData.nodes || [];
     const macroLinks = graphData.macroLinks || [];
+    const allLinks = graphData.links || [];
+
+    // Pre-calculate High-Yield neighborhood if active
+    let highYieldNodes = null;
+    if ($graphPerspective === 'high_yield') {
+      const anchorSet = new Set();
+      nodes.forEach(n => {
+        if ((n.turn_count || 1) >= $minYieldTurns || n.actionability_tier === 'large_project') {
+          anchorSet.add(n.id);
+        }
+      });
+      highYieldNodes = new Set(anchorSet);
+      allLinks.forEach(rel => {
+        const srcId = typeof rel.source === 'object' ? rel.source.id : (rel.source_key || rel.source);
+        const tgtId = typeof rel.target === 'object' ? rel.target.id : (rel.target_key || rel.target);
+        if (anchorSet.has(srcId)) highYieldNodes.add(tgtId);
+        if (anchorSet.has(tgtId)) highYieldNodes.add(srcId);
+      });
+    }
 
     const visibleNodes = new Set();
     nodes.forEach(n => {
       const deg = n.degree || 0;
       const turns = n.turn_count || 1;
       const isOneOff = (n.actionability_tier === 'one_off' || turns <= 1);
+
+      // High-yield perspective filter
+      if ($graphPerspective === 'high_yield' && highYieldNodes && !highYieldNodes.has(n.id)) {
+        return;
+      }
+
+      // Macro Domain specific filter
+      if ($selectedMacroDomain && n.macro_domain !== $selectedMacroDomain) {
+        return;
+      }
 
       // Pre-filters
       if ($hideOneOffChats && isOneOff) return;
@@ -772,7 +838,7 @@
       if (!n.glob_id && !$showUngroupedNodes) return;
 
       // Group selection filter
-      if (n.glob_id) {
+      if (n.glob_id && $graphPerspective !== 'macro_domains') {
         const tag = n.data_tag || n.category;
         if (!$allGroupsEnabled && $selectedGroupTags.size > 0 && !$selectedGroupTags.has(tag)) {
           return;
@@ -788,7 +854,7 @@
       ? computeMultiHopTraversal($selectedNode.id, 5, visibleNodes) 
       : { nodeDistances: new Map(), edgeDistances: new Map() };
 
-    // 1. Draw Prominent Polygonal Membrane Hulls around Collectives
+    // 1. Draw Prominent Polygonal Membrane Hulls around Collectives / Domains
     drawClusterBoundingHulls(visibleNodes, isSelectionActive);
 
     // 2. Draw D3 Nodes (Middle Layer)
@@ -802,9 +868,16 @@
 
       let baseRadius = n.radius || 8;
       let drawRadius = baseRadius;
+      
       let color = n.group_color || '#3b82f6';
-      if (n.isIsolated || !n.glob_id) color = n.group_color || '#64748b';
+      if ($graphPerspective === 'macro_domains' && n.macro_domain_color) {
+        color = n.macro_domain_color;
+      } else if (n.isIsolated || !n.glob_id) {
+        color = n.group_color || '#64748b';
+      }
       if (isMatch) color = '#f59e0b';
+
+      const isAnchorYieldNode = ($graphPerspective === 'high_yield' && (n.turn_count || 1) >= $minYieldTurns);
 
       if (isSel) {
         color = '#38bdf8';
@@ -844,6 +917,15 @@
       ctx.beginPath();
       ctx.arc(n.x, n.y, drawRadius, 0, Math.PI * 2);
       ctx.fill();
+
+      // High-Yield Deep Core Golden Halo Ring
+      if (isAnchorYieldNode) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, drawRadius + 4, 0, Math.PI * 2);
+        ctx.strokeStyle = '#fbbf24';
+        ctx.lineWidth = 2.0;
+        ctx.stroke();
+      }
 
       if (isSel) {
         ctx.strokeStyle = '#ffffff';
@@ -1083,6 +1165,9 @@
           thread.connectedness_archetype = contextMenuNode.connectedness_archetype;
           thread.connectedness_badge = contextMenuNode.connectedness_badge;
           thread.reach_2hop = contextMenuNode.reach_2hop;
+          thread.macro_domain = contextMenuNode.macro_domain;
+          thread.macro_domain_label = contextMenuNode.macro_domain_label;
+          thread.macro_domain_icon = contextMenuNode.macro_domain_icon;
         }
         activeThreadDrawerData.set(thread);
         isThreadDrawerOpen.set(true);
@@ -1132,6 +1217,11 @@
         <span class="conn-score-pill">⚡ Connectedness: <strong>{$hoveredNode.connectedness || 0}%</strong></span>
         <span class="conn-badge">{$hoveredNode.connectedness_badge || '⭕ Isolated'}</span>
       </div>
+      {#if $hoveredNode.executive_narrative}
+        <div class="tooltip-narrative-snippet">
+          {$hoveredNode.executive_narrative}
+        </div>
+      {/if}
       <div class="tooltip-meta">
         <span class="meta-item">🔗 {$hoveredNode.degree || 0} edges{#if ($hoveredNode.internal_degree || 0) > 0 || ($hoveredNode.external_degree || 0) > 0} ({$hoveredNode.internal_degree || 0} group, {$hoveredNode.external_degree || 0} ext){/if}</span>
         {#if ($hoveredNode.reach_2hop || 0) > 0}
@@ -1140,9 +1230,13 @@
         {/if}
         <span class="meta-sep">•</span>
         <span class="meta-item">💬 {$hoveredNode.turn_count || 1} turns</span>
-        {#if $hoveredNode.data_tag}
+        {#if $hoveredNode.stream_count && $hoveredNode.stream_count > 1}
           <span class="meta-sep">•</span>
-          <span class="meta-item">📂 {$hoveredNode.data_tag}</span>
+          <span class="meta-item" style="color: #fbbf24;">📚 {$hoveredNode.stream_count} chapters</span>
+        {/if}
+        {#if $hoveredNode.macro_domain}
+          <span class="meta-sep">•</span>
+          <span class="meta-item" style="color: {$hoveredNode.macro_domain_color || '#38bdf8'};">{$hoveredNode.macro_domain_icon || '🪐'} {$hoveredNode.macro_domain_label || $hoveredNode.macro_domain}</span>
         {/if}
       </div>
     </div>
@@ -1278,7 +1372,20 @@
     pointer-events: none;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-    max-width: 290px;
+    max-width: 320px;
+  }
+
+  .tooltip-narrative-snippet {
+    font-size: 0.72rem;
+    color: #cbd5e1;
+    line-height: 1.35;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .group-hud-tooltip {

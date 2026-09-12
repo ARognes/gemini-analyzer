@@ -1,1 +1,44 @@
-{"group_key": "be10f9b39ec3db35", "thread_id": "be10f9b39ec3db35", "turn_count": 1, "first_timestamp": "2025-09-13 15:09:57", "last_timestamp": "2025-09-13 15:09:57", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/be10f9b39ec3db35", "turns": [{"id": 7759, "thread_id": "be10f9b39ec3db35", "timestamp_iso": "2025-09-13 15:09:57", "timestamp_raw": "Sep 13, 2025, 3:09:57\u202fPM CDT", "prompt_text": "what time is the Ohio State game today", "response_html": "<br><p>Ohio State will be playing Ohio in Columbus today at 6:00 PM.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/be10f9b39ec3db35", "was_audio_input": 0}]}
+{
+  "group_key": "be10f9b39ec3db35",
+  "thread_id": "be10f9b39ec3db35",
+  "turn_count": 1,
+  "first_timestamp": "2025-09-13 15:09:57",
+  "last_timestamp": "2025-09-13 15:09:57",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/be10f9b39ec3db35",
+  "turns": [
+    {
+      "id": 7759,
+      "thread_id": "be10f9b39ec3db35",
+      "timestamp_iso": "2025-09-13 15:09:57",
+      "timestamp_raw": "Sep 13, 2025, 3:09:57 PM CDT",
+      "prompt_text": "what time is the Ohio State game today",
+      "response_html": "<br><p>Ohio State will be playing Ohio in Columbus today at 6:00 PM.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/be10f9b39ec3db35",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding what time is the Ohio State game today. Provided concise guidance on Ohio State will be playing Ohio in Columbus today at 6:00 PM..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What time is the Ohio State",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding what time is the Ohio State game today. Provided concise guidance on Ohio State will be playing Ohio in Columbus today at 6:00 PM..",
+      "keywords": [
+        "ohio",
+        "state",
+        "today",
+        "time"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: ohio, state, today"
+  ]
+}

@@ -1,1 +1,44 @@
-{"group_key": "e7591ec6ccafec72", "thread_id": "e7591ec6ccafec72", "turn_count": 1, "first_timestamp": "2026-01-04 16:37:34", "last_timestamp": "2026-01-04 16:37:34", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/e7591ec6ccafec72", "turns": [{"id": 7114, "thread_id": "e7591ec6ccafec72", "timestamp_iso": "2026-01-04 16:37:34", "timestamp_raw": "Jan 4, 2026, 4:37:34\u202fPM CDT", "prompt_text": "when do the Vikings play next", "response_html": "<br><p>The Vikings won 16 to 3 today against the Packers.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/e7591ec6ccafec72", "was_audio_input": 0}]}
+{
+  "group_key": "e7591ec6ccafec72",
+  "thread_id": "e7591ec6ccafec72",
+  "turn_count": 1,
+  "first_timestamp": "2026-01-04 16:37:34",
+  "last_timestamp": "2026-01-04 16:37:34",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/e7591ec6ccafec72",
+  "turns": [
+    {
+      "id": 7114,
+      "thread_id": "e7591ec6ccafec72",
+      "timestamp_iso": "2026-01-04 16:37:34",
+      "timestamp_raw": "Jan 4, 2026, 4:37:34 PM CDT",
+      "prompt_text": "when do the Vikings play next",
+      "response_html": "<br><p>The Vikings won 16 to 3 today against the Packers.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/e7591ec6ccafec72",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding when do the Vikings play next. Provided concise guidance on The Vikings won 16 to 3 today against the Packers..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "When do the Vikings play next",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding when do the Vikings play next. Provided concise guidance on The Vikings won 16 to 3 today against the Packers..",
+      "keywords": [
+        "vikings",
+        "play",
+        "next",
+        "today"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: vikings, play, next"
+  ]
+}

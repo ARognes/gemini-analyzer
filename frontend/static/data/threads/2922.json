@@ -1,1 +1,44 @@
-{"group_key": "2922", "thread_id": "", "turn_count": 1, "first_timestamp": "2026-06-22 00:36:58", "last_timestamp": "2026-06-22 00:36:58", "has_audio_input": 0, "details_url": "", "turns": [{"id": 2922, "thread_id": "", "timestamp_iso": "2026-06-22 00:36:58", "timestamp_raw": "Jun 22, 2026, 12:36:58\u202fAM CDT", "prompt_text": "", "response_html": "Selected preferred draft<br>Jun 22, 2026, 12:36:58\u202fAM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "2922",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2026-06-22 00:36:58",
+  "last_timestamp": "2026-06-22 00:36:58",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 2922,
+      "thread_id": "",
+      "timestamp_iso": "2026-06-22 00:36:58",
+      "timestamp_raw": "Jun 22, 2026, 12:36:58 AM CDT",
+      "prompt_text": "",
+      "response_html": "Selected preferred draft<br>Jun 22, 2026, 12:36:58 AM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Selected preferred draft Jun 22, 2026, 12:36:58 AM CDT.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Selected • Preferred • Draft",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Selected preferred draft Jun 22, 2026, 12:36:58 AM CDT.",
+      "keywords": [
+        "selected",
+        "preferred",
+        "draft",
+        "jun"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: selected, preferred, draft"
+  ]
+}

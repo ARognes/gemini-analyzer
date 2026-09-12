@@ -16,6 +16,13 @@ export const minEdgesFilter = writable(0);
 export const maxEdgesFilter = writable(50);
 export const correlationThresholdPct = writable(38);
 
+// Graph Perspective Sub-Views
+export const graphPerspective = writable('global'); // 'global' (Full Universe), 'high_yield' (Deep High-Turn Core), 'macro_domains' (Domain Clusters)
+export const minYieldTurns = writable(5); // Minimum turn threshold for high-yield perspective
+export const selectedMacroDomain = writable(''); // Filter by specific macro domain ('', 'software', 'hardware', 'ai_agents', etc.)
+/** @type {import('svelte/store').Writable<Array<any>>} */
+export const macroDomainsList = writable([]); // Dynamic list of 7 Macro Super-Groups
+
 // Layering & Group Filters
 export const showUnlinkedNodes = writable(true); // Toggle 0-edge nodes
 export const showUngroupedNodes = writable(true); // Toggle standalone nodes with no group

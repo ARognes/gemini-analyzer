@@ -1,1 +1,58 @@
-{"group_key": "40e1e99bf0d086ba", "thread_id": "40e1e99bf0d086ba", "turn_count": 2, "first_timestamp": "2026-06-27 20:21:47", "last_timestamp": "2026-06-27 20:22:02", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba", "turns": [{"id": 2598, "thread_id": "40e1e99bf0d086ba", "timestamp_iso": "2026-06-27 20:21:47", "timestamp_raw": "Jun 27, 2026, 8:21:47\u202fPM CDT", "prompt_text": "Hey, Google.", "response_html": "<br><p>Hey there! How can I help you on your drive today?</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba", "was_audio_input": 0}, {"id": 2597, "thread_id": "40e1e99bf0d086ba", "timestamp_iso": "2026-06-27 20:22:02", "timestamp_raw": "Jun 27, 2026, 8:22:02\u202fPM CDT", "prompt_text": "a Communications query.", "response_html": "<br><br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba", "was_audio_input": 0}]}
+{
+  "group_key": "40e1e99bf0d086ba",
+  "thread_id": "40e1e99bf0d086ba",
+  "turn_count": 2,
+  "first_timestamp": "2026-06-27 20:21:47",
+  "last_timestamp": "2026-06-27 20:22:02",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba",
+  "turns": [
+    {
+      "id": 2598,
+      "thread_id": "40e1e99bf0d086ba",
+      "timestamp_iso": "2026-06-27 20:21:47",
+      "timestamp_raw": "Jun 27, 2026, 8:21:47 PM CDT",
+      "prompt_text": "Hey, Google.",
+      "response_html": "<br><p>Hey there! How can I help you on your drive today?</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba",
+      "was_audio_input": 0
+    },
+    {
+      "id": 2597,
+      "thread_id": "40e1e99bf0d086ba",
+      "timestamp_iso": "2026-06-27 20:22:02",
+      "timestamp_raw": "Jun 27, 2026, 8:22:02 PM CDT",
+      "prompt_text": "a Communications query.",
+      "response_html": "<br><br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/40e1e99bf0d086ba",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Focused 2-turn exploration initiated with 'Hey, Google.'. Followed up with clarifications on 'a Communications query.'.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Hey, Google",
+      "turn_range": [
+        1,
+        2
+      ],
+      "turn_count": 2,
+      "summary": "Focused 2-turn exploration initiated with 'Hey, Google.'. Followed up with clarifications on 'a Communications query.'.",
+      "keywords": [
+        "hey",
+        "google",
+        "drive",
+        "today",
+        "communications",
+        "query"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Main topic: hey",
+    "Total dialogue depth: 2 iterative exchanges"
+  ]
+}

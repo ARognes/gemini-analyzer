@@ -62,6 +62,10 @@ export async function fetchDomainMatrix(minSim = 0.38) {
   return fetchWithFallback(`/api/domain_matrix?min_similarity=${minSim}`, 'data/domain_matrix.json', { domains: [], matrix: [] });
 }
 
+export async function fetchMacroDomains() {
+  return fetchWithFallback('/api/macro_domains', 'data/macro_domains.json', []);
+}
+
 export async function fetchStitchedThread(threadId) {
   if (!threadId) return null;
   

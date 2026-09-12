@@ -1,1 +1,44 @@
-{"group_key": "a7eb15328a0e5662", "thread_id": "a7eb15328a0e5662", "turn_count": 1, "first_timestamp": "2025-10-05 12:40:01", "last_timestamp": "2025-10-05 12:40:01", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/a7eb15328a0e5662", "turns": [{"id": 7654, "thread_id": "a7eb15328a0e5662", "timestamp_iso": "2025-10-05 12:40:01", "timestamp_raw": "Oct 5, 2025, 12:40:01\u202fPM CDT", "prompt_text": "what time do the Vikings play today", "response_html": "<br><p>The Vikings won 21 to 17 today against the Browns.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/a7eb15328a0e5662", "was_audio_input": 0}]}
+{
+  "group_key": "a7eb15328a0e5662",
+  "thread_id": "a7eb15328a0e5662",
+  "turn_count": 1,
+  "first_timestamp": "2025-10-05 12:40:01",
+  "last_timestamp": "2025-10-05 12:40:01",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/a7eb15328a0e5662",
+  "turns": [
+    {
+      "id": 7654,
+      "thread_id": "a7eb15328a0e5662",
+      "timestamp_iso": "2025-10-05 12:40:01",
+      "timestamp_raw": "Oct 5, 2025, 12:40:01 PM CDT",
+      "prompt_text": "what time do the Vikings play today",
+      "response_html": "<br><p>The Vikings won 21 to 17 today against the Browns.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/a7eb15328a0e5662",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding what time do the Vikings play today. Provided concise guidance on The Vikings won 21 to 17 today against the Browns..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What time do the Vikings play",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding what time do the Vikings play today. Provided concise guidance on The Vikings won 21 to 17 today against the Browns..",
+      "keywords": [
+        "vikings",
+        "today",
+        "time",
+        "play"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: vikings, today, time"
+  ]
+}

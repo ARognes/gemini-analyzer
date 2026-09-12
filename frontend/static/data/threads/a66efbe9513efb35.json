@@ -1,1 +1,44 @@
-{"group_key": "a66efbe9513efb35", "thread_id": "a66efbe9513efb35", "turn_count": 1, "first_timestamp": "2025-09-06 08:43:16", "last_timestamp": "2025-09-06 08:43:16", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/a66efbe9513efb35", "turns": [{"id": 7784, "thread_id": "a66efbe9513efb35", "timestamp_iso": "2025-09-06 08:43:16", "timestamp_raw": "Sep 6, 2025, 8:43:16\u202fAM CDT", "prompt_text": "Lobster", "response_html": "<br><p>A lobster is a type of marine crustacean with a hard exoskeleton and a long, muscular tail. They are known for their large claws, which are used for crushing and tearing food.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/a66efbe9513efb35", "was_audio_input": 0}]}
+{
+  "group_key": "a66efbe9513efb35",
+  "thread_id": "a66efbe9513efb35",
+  "turn_count": 1,
+  "first_timestamp": "2025-09-06 08:43:16",
+  "last_timestamp": "2025-09-06 08:43:16",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/a66efbe9513efb35",
+  "turns": [
+    {
+      "id": 7784,
+      "thread_id": "a66efbe9513efb35",
+      "timestamp_iso": "2025-09-06 08:43:16",
+      "timestamp_raw": "Sep 6, 2025, 8:43:16 AM CDT",
+      "prompt_text": "Lobster",
+      "response_html": "<br><p>A lobster is a type of marine crustacean with a hard exoskeleton and a long, muscular tail. They are known for their large claws, which are used for crushing and tearing food.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/a66efbe9513efb35",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding Lobster. Provided concise guidance on A lobster is a type of marine crustacean with a hard exoskeleton and a long, muscular tail.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Lobster",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding Lobster. Provided concise guidance on A lobster is a type of marine crustacean with a hard exoskeleton and a long, muscular tail.",
+      "keywords": [
+        "lobster",
+        "type",
+        "marine",
+        "crustacean"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: lobster, type, marine"
+  ]
+}

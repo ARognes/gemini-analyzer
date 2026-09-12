@@ -11,6 +11,10 @@
     allGroupsEnabled,
     selectedGroupTags,
     availableGroupTags,
+    graphPerspective,
+    minYieldTurns,
+    selectedMacroDomain,
+    macroDomainsList,
     degreeHistogramData,
     turnsHistogramData,
     isLayerFiltersOpen,
@@ -42,6 +46,14 @@
 
   function toggleLayerPanel() {
     isLayerFiltersOpen.update(v => !v);
+  }
+
+  function selectPerspective(mode) {
+    graphPerspective.set(mode);
+  }
+
+  function selectMacroDomain(domainId) {
+    selectedMacroDomain.update(cur => cur === domainId ? '' : domainId);
   }
 
   function selectAllGroups() {
@@ -89,6 +101,9 @@
     showUngroupedNodes.set(true);
     allGroupsEnabled.set(true);
     selectedGroupTags.set(new Set());
+    graphPerspective.set('global');
+    selectedMacroDomain.set('');
+    minYieldTurns.set(5);
   }
 
   let filteredGroupTags = $derived(
@@ -104,13 +119,59 @@
     ($minEdgesFilter > 0 || $maxEdgesFilter < 50 ? 1 : 0) +
     (!$showUnlinkedNodes ? 1 : 0) +
     (!$showUngroupedNodes ? 1 : 0) +
-    (!$allGroupsEnabled ? 1 : 0)
+    (!$allGroupsEnabled ? 1 : 0) +
+    ($graphPerspective !== 'global' ? 1 : 0) +
+    ($selectedMacroDomain ? 1 : 0)
   );
 </script>
 
 <div class="filter-system">
   <!-- Top Horizontal Filter Strip -->
   <div class="filter-bar">
+    <!-- Graph Perspective Sub-Tab Buttons -->
+    <div class="perspective-switcher">
+      <button 
+        class="persp-btn" 
+        class:active={$graphPerspective === 'global'}
+        onclick={() => selectPerspective('global')}
+        title="Full Constellation graph universe"
+      >
+        🌌 Global Universe
+      </button>
+      <button 
+        class="persp-btn high-yield" 
+        class:active={$graphPerspective === 'high_yield'}
+        onclick={() => selectPerspective('high_yield')}
+        title="Focus on long-running multi-turn chats & connected filaments"
+      >
+        💎 High-Yield Deep Core
+      </button>
+      <button 
+        class="persp-btn macro-domains" 
+        class:active={$graphPerspective === 'macro_domains'}
+        onclick={() => selectPerspective('macro_domains')}
+        title="View 7 macro super-group domain clusters"
+      >
+        🪐 Macro Domains
+      </button>
+    </div>
+
+    <!-- Quick Yield Adjuster if in High-Yield Perspective -->
+    {#if $graphPerspective === 'high_yield'}
+      <div class="yield-adjuster">
+        <span class="yield-label">⚡ Yield:</span>
+        {#each [3, 5, 8, 12] as t}
+          <button 
+            class="yield-turn-btn" 
+            class:active={$minYieldTurns === t}
+            onclick={() => minYieldTurns.set(t)}
+          >
+            ≥{t} turns
+          </button>
+        {/each}
+      </div>
+    {/if}
+
     <!-- Layer Filters Expander Button -->
     <button 
       class="layer-toggle-btn" 
@@ -118,7 +179,7 @@
       onclick={toggleLayerPanel}
     >
       <span class="icon">🎛️</span>
-      <span class="label">Layering Filters & Scales</span>
+      <span class="label">Layering Filters</span>
       {#if activeFiltersCount > 0}
         <span class="filter-count-badge">{activeFiltersCount}</span>
       {/if}
@@ -153,7 +214,6 @@
 
     <!-- Quick Pre-Filters & Unlinked Toggles -->
     <div class="filter-group">
-      <span class="group-label">Quick:</span>
       <button 
         class="toggle-pill" 
         class:active={!$showUnlinkedNodes}
@@ -176,7 +236,7 @@
     <!-- Correlation Cutoff Spectrum Trigger & Reset -->
     <div class="filter-group right-group">
       <button class="corr-btn" onclick={openCorrModal}>
-        📊 Similarity: <span class="val">{$correlationThresholdPct}%</span>
+        📊 Sim: <span class="val">{$correlationThresholdPct}%</span>
       </button>
       {#if activeFiltersCount > 0}
         <button class="reset-btn" onclick={resetAllFilters} title="Reset all filters">
@@ -314,6 +374,45 @@
           {/each}
         </div>
       </div>
+
+      <!-- Section 4: Macro Super-Groups (7 Domains) -->
+      <div class="panel-section domain-section">
+        <div class="section-header">
+          <div class="title-with-badge">
+            <span class="section-icon">🪐</span>
+            <span class="section-title">Macro Super-Groups (7 Domains)</span>
+          </div>
+          {#if $selectedMacroDomain}
+            <button class="mini-reset" onclick={() => selectedMacroDomain.set('')}>Clear Domain</button>
+          {/if}
+        </div>
+
+        <div class="domain-chips-container">
+          {#each ($macroDomainsList.length > 0 ? $macroDomainsList : [
+            { id: 'software', label: 'Software & Engineering', icon: '💻', color: '#38bdf8' },
+            { id: 'ai_agents', label: 'AI & Autonomous Agents', icon: '🧠', color: '#a855f7' },
+            { id: 'hardware', label: 'Hardware & Electronics', icon: '⚡', color: '#f59e0b' },
+            { id: 'creative', label: 'Creative & Narrative', icon: '🎨', color: '#ec4899' },
+            { id: 'finance', label: 'Finance & Strategy', icon: '📈', color: '#10b981' },
+            { id: 'science', label: 'Science, Health & Philosophy', icon: '🔬', color: '#06b6d4' },
+            { id: 'explorations', label: 'General Life & Curiosity', icon: '🧭', color: '#64748b' }
+          ]) as d}
+            {@const isDomainSel = $selectedMacroDomain === d.id}
+            <button 
+              class="domain-chip" 
+              class:selected={isDomainSel}
+              style="--domain-color: {d.color};"
+              onclick={() => selectMacroDomain(d.id)}
+            >
+              <span class="domain-icon">{d.icon}</span>
+              <span class="domain-label">{d.label}</span>
+              {#if d.node_count}
+                <span class="domain-count">{d.node_count}</span>
+              {/if}
+            </button>
+          {/each}
+        </div>
+      </div>
     </div>
   {/if}
 </div>
@@ -327,6 +426,123 @@
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .perspective-switcher {
+    display: flex;
+    align-items: center;
+    background: rgba(2, 6, 23, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .persp-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .persp-btn:hover {
+    color: #f8fafc;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .persp-btn.active {
+    background: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+  }
+
+  .persp-btn.high-yield.active {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    box-shadow: 0 0 14px rgba(245, 158, 11, 0.7);
+  }
+
+  .persp-btn.macro-domains.active {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.7);
+  }
+
+  .yield-adjuster {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.72rem;
+  }
+
+  .yield-label {
+    color: #fbbf24;
+    font-weight: 700;
+  }
+
+  .yield-turn-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #fde68a;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    cursor: pointer;
+  }
+
+  .yield-turn-btn.active {
+    background: #f59e0b;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  .domain-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .domain-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .domain-chip:hover {
+    background: rgba(51, 65, 85, 0.8);
+    color: #ffffff;
+  }
+
+  .domain-chip.selected {
+    background: color-mix(in srgb, var(--domain-color, #38bdf8) 20%, rgba(15, 23, 42, 0.8));
+    border-color: var(--domain-color, #38bdf8);
+    color: #ffffff;
+    box-shadow: 0 0 10px var(--domain-color, #38bdf8);
+    font-weight: 700;
+  }
+
+  .domain-count {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.05rem 0.35rem;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
   }
 
   .filter-bar {

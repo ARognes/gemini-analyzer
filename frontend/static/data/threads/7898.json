@@ -1,1 +1,44 @@
-{"group_key": "7898", "thread_id": "", "turn_count": 1, "first_timestamp": "2025-08-18 15:01:55", "last_timestamp": "2025-08-18 15:01:55", "has_audio_input": 0, "details_url": "", "turns": [{"id": 7898, "thread_id": "", "timestamp_iso": "2025-08-18 15:01:55", "timestamp_raw": "Aug 18, 2025, 3:01:55\u202fPM CDT", "prompt_text": "", "response_html": "Gave feedback: Bad response<br><br>Aug 18, 2025, 3:01:55\u202fPM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "7898",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2025-08-18 15:01:55",
+  "last_timestamp": "2025-08-18 15:01:55",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 7898,
+      "thread_id": "",
+      "timestamp_iso": "2025-08-18 15:01:55",
+      "timestamp_raw": "Aug 18, 2025, 3:01:55 PM CDT",
+      "prompt_text": "",
+      "response_html": "Gave feedback: Bad response<br><br>Aug 18, 2025, 3:01:55 PM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Gave feedback: Bad response Aug 18, 2025, 3:01:55 PM CDT.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Gave • Feedback • Bad",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Gave feedback: Bad response Aug 18, 2025, 3:01:55 PM CDT.",
+      "keywords": [
+        "gave",
+        "feedback",
+        "bad",
+        "response"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: gave, feedback, bad"
+  ]
+}

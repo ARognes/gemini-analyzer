@@ -1,1 +1,44 @@
-{"group_key": "432840137d3c59d7", "thread_id": "432840137d3c59d7", "turn_count": 1, "first_timestamp": "2025-11-28 00:14:22", "last_timestamp": "2025-11-28 00:14:22", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/432840137d3c59d7", "turns": [{"id": 7419, "thread_id": "432840137d3c59d7", "timestamp_iso": "2025-11-28 00:14:22", "timestamp_raw": "Nov 28, 2025, 12:14:22\u202fAM CDT", "prompt_text": "please stop Voice access", "response_html": "<br><p>I can&#39;t turn off Voice Access for you. You can turn off Voice Access with your device&#39;s accessibility settings.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/432840137d3c59d7", "was_audio_input": 0}]}
+{
+  "group_key": "432840137d3c59d7",
+  "thread_id": "432840137d3c59d7",
+  "turn_count": 1,
+  "first_timestamp": "2025-11-28 00:14:22",
+  "last_timestamp": "2025-11-28 00:14:22",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/432840137d3c59d7",
+  "turns": [
+    {
+      "id": 7419,
+      "thread_id": "432840137d3c59d7",
+      "timestamp_iso": "2025-11-28 00:14:22",
+      "timestamp_raw": "Nov 28, 2025, 12:14:22 AM CDT",
+      "prompt_text": "please stop Voice access",
+      "response_html": "<br><p>I can&#39;t turn off Voice Access for you. You can turn off Voice Access with your device&#39;s accessibility settings.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/432840137d3c59d7",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding please stop Voice access. Provided concise guidance on I can t turn off Voice Access for you.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Stop Voice access",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding please stop Voice access. Provided concise guidance on I can t turn off Voice Access for you.",
+      "keywords": [
+        "voice",
+        "access",
+        "turn",
+        "stop"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: voice, access, turn"
+  ]
+}

@@ -1,8 +1,17 @@
 <script>
   import { isThreadDrawerOpen, activeThreadDrawerData } from '../stores.js';
 
+  let activeStreamId = $state(null);
+
   function closeDrawer() {
     isThreadDrawerOpen.set(false);
+  }
+
+  function scrollToTurn(turnNumber) {
+    const el = document.getElementById(`turn-block-${turnNumber}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function getGeminiResponseHtml(turn) {
@@ -17,7 +26,7 @@
 </script>
 
 {#if $isThreadDrawerOpen && $activeThreadDrawerData}
-  <div class="drawer-overlay" onclick={closeDrawer}></div>
+  <div class="drawer-overlay" role="button" tabindex="0" onclick={closeDrawer} onkeydown={(e) => e.key === 'Escape' && closeDrawer()}></div>
   <aside class="thread-drawer" id="sideDrawer">
     <div class="drawer-header">
       <div class="header-title">
@@ -29,6 +38,11 @@
     <div class="thread-meta">
       <h3>{$activeThreadDrawerData.title || $activeThreadDrawerData.title_snippet}</h3>
       <div class="tags-row">
+        {#if $activeThreadDrawerData.macro_domain}
+          <span class="badge" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">
+            {$activeThreadDrawerData.macro_domain_icon || '📂'} {$activeThreadDrawerData.macro_domain_label || $activeThreadDrawerData.macro_domain}
+          </span>
+        {/if}
         <span class="badge">{$activeThreadDrawerData.actionability_tier || 'standard'}</span>
         {#if $activeThreadDrawerData.connectedness !== undefined}
           <span class="badge" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8;">
@@ -40,17 +54,57 @@
             🔗 {$activeThreadDrawerData.degree} Edges
           </span>
         {/if}
-        {#if $activeThreadDrawerData.primary_tag}
-          <span class="badge tag">#{$activeThreadDrawerData.primary_tag}</span>
-        {/if}
-        <span class="meta-item">Turns: {$activeThreadDrawerData.turn_count || 1}</span>
+        <span class="meta-item">Turns: {$activeThreadDrawerData.turn_count || $activeThreadDrawerData.turns?.length || 1}</span>
       </div>
     </div>
+
+    <!-- Executive Narrative & Conversation Harvesting Summary -->
+    {#if $activeThreadDrawerData.executive_narrative}
+      <div class="narrative-card">
+        <div class="narrative-header">
+          <span class="narrative-icon">🌾</span>
+          <span class="narrative-title">Harvested Narrative Overview</span>
+        </div>
+        <p class="narrative-body">{$activeThreadDrawerData.executive_narrative}</p>
+        {#if $activeThreadDrawerData.key_insights && $activeThreadDrawerData.key_insights.length > 0}
+          <div class="narrative-insights">
+            {#each $activeThreadDrawerData.key_insights as insight}
+              <div class="insight-bullet">⚡ {insight}</div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    {/if}
+
+    <!-- Conversation Stream Sub-Division (Chapters) for Multi-Stream Threads -->
+    {#if $activeThreadDrawerData.streams && $activeThreadDrawerData.streams.length > 1}
+      <div class="streams-container">
+        <div class="streams-header">
+          <span>📚 Conversation Streams ({$activeThreadDrawerData.streams.length} Chapters)</span>
+        </div>
+        <div class="stream-pills">
+          {#each $activeThreadDrawerData.streams as stream}
+            <button 
+              class="stream-pill"
+              class:active={activeStreamId === stream.stream_id}
+              onclick={() => {
+                activeStreamId = stream.stream_id;
+                scrollToTurn(stream.turn_range[0]);
+              }}
+            >
+              <span class="pill-id">Ch. {stream.stream_id}</span>
+              <span class="pill-range">Turns {stream.turn_range[0]}–{stream.turn_range[1]}</span>
+              <span class="pill-title">{stream.title}</span>
+            </button>
+          {/each}
+        </div>
+      </div>
+    {/if}
 
     <div class="drawer-content">
       {#if $activeThreadDrawerData.turns && $activeThreadDrawerData.turns.length > 0}
         {#each $activeThreadDrawerData.turns as turn, idx}
-          <div class="turn-block">
+          <div class="turn-block" id="turn-block-{idx + 1}">
             <div class="turn-header">
               <span class="turn-num">Turn #{idx + 1}</span>
               {#if turn.was_audio_input}
@@ -165,6 +219,113 @@
     background: rgba(16, 185, 129, 0.2);
     color: #34d399;
     border-color: rgba(16, 185, 129, 0.3);
+  }
+
+  .narrative-card {
+    margin: 0.75rem 1.25rem 0.25rem 1.25rem;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.25), rgba(15, 23, 42, 0.6));
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .narrative-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-bottom: 0.35rem;
+  }
+
+  .narrative-body {
+    margin: 0 0 0.4rem 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #e2e8f0;
+  }
+
+  .narrative-insights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.35rem;
+  }
+
+  .insight-bullet {
+    font-size: 0.72rem;
+    color: #94a3b8;
+  }
+
+  .streams-container {
+    margin: 0.5rem 1.25rem 0 1.25rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .streams-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 0.45rem;
+  }
+
+  .stream-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: 140px;
+    overflow-y: auto;
+  }
+
+  .stream-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    padding: 0.3rem 0.55rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+  }
+
+  .stream-pill:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #ffffff;
+  }
+
+  .stream-pill.active {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #fbbf24;
+    font-weight: 600;
+  }
+
+  .pill-id {
+    font-weight: 700;
+    color: #38bdf8;
+  }
+
+  .pill-range {
+    color: #94a3b8;
+    font-size: 0.68rem;
+  }
+
+  .pill-title {
+    margin-left: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 230px;
   }
 
   .drawer-content {

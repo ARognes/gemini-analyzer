@@ -1,1 +1,41 @@
-{"group_key": "e972f97efb2d9c0e", "thread_id": "e972f97efb2d9c0e", "turn_count": 1, "first_timestamp": "2026-02-25 10:19:22", "last_timestamp": "2026-02-25 10:19:22", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/e972f97efb2d9c0e", "turns": [{"id": 6206, "thread_id": "e972f97efb2d9c0e", "timestamp_iso": "2026-02-25 10:19:22", "timestamp_raw": "Feb 25, 2026, 10:19:22\u202fAM CDT", "prompt_text": "what time is it", "response_html": "<br><p>It is <strong>9:19 AM</strong>.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/e972f97efb2d9c0e", "was_audio_input": 0}]}
+{
+  "group_key": "e972f97efb2d9c0e",
+  "thread_id": "e972f97efb2d9c0e",
+  "turn_count": 1,
+  "first_timestamp": "2026-02-25 10:19:22",
+  "last_timestamp": "2026-02-25 10:19:22",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/e972f97efb2d9c0e",
+  "turns": [
+    {
+      "id": 6206,
+      "thread_id": "e972f97efb2d9c0e",
+      "timestamp_iso": "2026-02-25 10:19:22",
+      "timestamp_raw": "Feb 25, 2026, 10:19:22 AM CDT",
+      "prompt_text": "what time is it",
+      "response_html": "<br><p>It is <strong>9:19 AM</strong>.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/e972f97efb2d9c0e",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding what time is it.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What time is it",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding what time is it.",
+      "keywords": [
+        "time"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: time"
+  ]
+}

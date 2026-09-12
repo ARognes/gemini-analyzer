@@ -1,1 +1,44 @@
-{"group_key": "b7b2405c1dffc226", "thread_id": "b7b2405c1dffc226", "turn_count": 1, "first_timestamp": "2026-02-05 21:03:42", "last_timestamp": "2026-02-05 21:03:42", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/b7b2405c1dffc226", "turns": [{"id": 6657, "thread_id": "b7b2405c1dffc226", "timestamp_iso": "2026-02-05 21:03:42", "timestamp_raw": "Feb 5, 2026, 9:03:42\u202fPM CDT", "prompt_text": "what time does Mills Fleet Farm in Ankeny close", "response_html": "<br><p><a href=\"\">Fleet Farm</a> in Ankeny closes at 9:00 PM tonight.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/b7b2405c1dffc226", "was_audio_input": 0}]}
+{
+  "group_key": "b7b2405c1dffc226",
+  "thread_id": "b7b2405c1dffc226",
+  "turn_count": 1,
+  "first_timestamp": "2026-02-05 21:03:42",
+  "last_timestamp": "2026-02-05 21:03:42",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/b7b2405c1dffc226",
+  "turns": [
+    {
+      "id": 6657,
+      "thread_id": "b7b2405c1dffc226",
+      "timestamp_iso": "2026-02-05 21:03:42",
+      "timestamp_raw": "Feb 5, 2026, 9:03:42 PM CDT",
+      "prompt_text": "what time does Mills Fleet Farm in Ankeny close",
+      "response_html": "<br><p><a href=\"\">Fleet Farm</a> in Ankeny closes at 9:00 PM tonight.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/b7b2405c1dffc226",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding what time does Mills Fleet Farm in Ankeny close. Provided concise guidance on Fleet Farm in Ankeny closes at 9:00 PM tonight..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What time does Mills Fleet Farm",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding what time does Mills Fleet Farm in Ankeny close. Provided concise guidance on Fleet Farm in Ankeny closes at 9:00 PM tonight..",
+      "keywords": [
+        "fleet",
+        "farm",
+        "ankeny",
+        "time"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: fleet, farm, ankeny"
+  ]
+}

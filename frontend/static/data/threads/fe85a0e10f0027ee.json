@@ -1,1 +1,44 @@
-{"group_key": "fe85a0e10f0027ee", "thread_id": "fe85a0e10f0027ee", "turn_count": 1, "first_timestamp": "2025-09-14 18:20:19", "last_timestamp": "2025-09-14 18:20:19", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/fe85a0e10f0027ee", "turns": [{"id": 7755, "thread_id": "fe85a0e10f0027ee", "timestamp_iso": "2025-09-14 18:20:19", "timestamp_raw": "Sep 14, 2025, 6:20:19\u202fPM CDT", "prompt_text": "what tools do you need to pick a lock", "response_html": "<br><p>You need two primary tools: a tension wrench and a lock pick. The tension wrench applies turning pressure to the lock, while the pick manipulates the pins inside. There are different types of picks, like hooks and rakes, depending on the lock type and picking method.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/fe85a0e10f0027ee", "was_audio_input": 0}]}
+{
+  "group_key": "fe85a0e10f0027ee",
+  "thread_id": "fe85a0e10f0027ee",
+  "turn_count": 1,
+  "first_timestamp": "2025-09-14 18:20:19",
+  "last_timestamp": "2025-09-14 18:20:19",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/fe85a0e10f0027ee",
+  "turns": [
+    {
+      "id": 7755,
+      "thread_id": "fe85a0e10f0027ee",
+      "timestamp_iso": "2025-09-14 18:20:19",
+      "timestamp_raw": "Sep 14, 2025, 6:20:19 PM CDT",
+      "prompt_text": "what tools do you need to pick a lock",
+      "response_html": "<br><p>You need two primary tools: a tension wrench and a lock pick. The tension wrench applies turning pressure to the lock, while the pick manipulates the pins inside. There are different types of picks, like hooks and rakes, depending on the lock type and picking method.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/fe85a0e10f0027ee",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding what tools do you need to pick a lock. Provided concise guidance on You need two primary tools: a tension wrench and a lock pick.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What tools do you need to",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding what tools do you need to pick a lock. Provided concise guidance on You need two primary tools: a tension wrench and a lock pick.",
+      "keywords": [
+        "lock",
+        "pick",
+        "tools",
+        "need"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: lock, pick, tools"
+  ]
+}

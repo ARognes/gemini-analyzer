@@ -1,1 +1,44 @@
-{"group_key": "7109", "thread_id": "", "turn_count": 1, "first_timestamp": "2026-01-05 00:31:08", "last_timestamp": "2026-01-05 00:31:08", "has_audio_input": 0, "details_url": "", "turns": [{"id": 7109, "thread_id": "", "timestamp_iso": "2026-01-05 00:31:08", "timestamp_raw": "Jan 5, 2026, 12:31:08\u202fAM CDT", "prompt_text": "", "response_html": "Created Gemini Canvas titled\u00a0Carborundum is silicon carbide, SiC, a very hard material used as an abrasive on sandpaper - YouTube<br>http://googleusercontent.com/youtube_content/0<br>Jan 5, 2026, 12:31:08\u202fAM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "7109",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2026-01-05 00:31:08",
+  "last_timestamp": "2026-01-05 00:31:08",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 7109,
+      "thread_id": "",
+      "timestamp_iso": "2026-01-05 00:31:08",
+      "timestamp_raw": "Jan 5, 2026, 12:31:08 AM CDT",
+      "prompt_text": "",
+      "response_html": "Created Gemini Canvas titled Carborundum is silicon carbide, SiC, a very hard material used as an abrasive on sandpaper - YouTube<br>http://googleusercontent.com/youtube_content/0<br>Jan 5, 2026, 12:31:08 AM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled Carborundum is silicon carbide, SiC, a very hard material used as an abrasive on sandpaper - YouTube http://goo.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Created • Gemini • Canvas",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled Carborundum is silicon carbide, SiC, a very hard material used as an abrasive on sandpaper - YouTube http://goo.",
+      "keywords": [
+        "created",
+        "gemini",
+        "canvas",
+        "titled"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: created, gemini, canvas"
+  ]
+}

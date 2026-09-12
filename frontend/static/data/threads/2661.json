@@ -1,1 +1,44 @@
-{"group_key": "2661", "thread_id": "", "turn_count": 1, "first_timestamp": "2026-06-26 20:40:30", "last_timestamp": "2026-06-26 20:40:30", "has_audio_input": 0, "details_url": "", "turns": [{"id": 2661, "thread_id": "", "timestamp_iso": "2026-06-26 20:40:30", "timestamp_raw": "Jun 26, 2026, 8:40:30\u202fPM CDT", "prompt_text": "", "response_html": "Created Gemini Canvas titled\u00a0Document Text Detection (OCR) with EasyOCR and Python - YouTube<br>http://googleusercontent.com/youtube_content/0<br>Jun 26, 2026, 8:40:30\u202fPM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "2661",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2026-06-26 20:40:30",
+  "last_timestamp": "2026-06-26 20:40:30",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 2661,
+      "thread_id": "",
+      "timestamp_iso": "2026-06-26 20:40:30",
+      "timestamp_raw": "Jun 26, 2026, 8:40:30 PM CDT",
+      "prompt_text": "",
+      "response_html": "Created Gemini Canvas titled Document Text Detection (OCR) with EasyOCR and Python - YouTube<br>http://googleusercontent.com/youtube_content/0<br>Jun 26, 2026, 8:40:30 PM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled Document Text Detection (OCR) with EasyOCR and Python - YouTube http://googleusercontent.com/youtube_content/0 .",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Created • Gemini • Canvas",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled Document Text Detection (OCR) with EasyOCR and Python - YouTube http://googleusercontent.com/youtube_content/0 .",
+      "keywords": [
+        "created",
+        "gemini",
+        "canvas",
+        "titled"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: created, gemini, canvas"
+  ]
+}

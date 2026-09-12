@@ -1,1 +1,44 @@
-{"group_key": "20244c0ce8258d0e", "thread_id": "20244c0ce8258d0e", "turn_count": 1, "first_timestamp": "2026-05-05 20:58:52", "last_timestamp": "2026-05-05 20:58:52", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/20244c0ce8258d0e", "turns": [{"id": 4714, "thread_id": "20244c0ce8258d0e", "timestamp_iso": "2026-05-05 20:58:52", "timestamp_raw": "May 5, 2026, 8:58:52\u202fPM CDT", "prompt_text": "What time does the West Hy-Vee in Ames close?", "response_html": "<br><p>The <a href=\"\">Hy-Vee Grocery Store</a> on West Lincoln Way is open until 11:00 PM tonight.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/20244c0ce8258d0e", "was_audio_input": 0}]}
+{
+  "group_key": "20244c0ce8258d0e",
+  "thread_id": "20244c0ce8258d0e",
+  "turn_count": 1,
+  "first_timestamp": "2026-05-05 20:58:52",
+  "last_timestamp": "2026-05-05 20:58:52",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/20244c0ce8258d0e",
+  "turns": [
+    {
+      "id": 4714,
+      "thread_id": "20244c0ce8258d0e",
+      "timestamp_iso": "2026-05-05 20:58:52",
+      "timestamp_raw": "May 5, 2026, 8:58:52 PM CDT",
+      "prompt_text": "What time does the West Hy-Vee in Ames close?",
+      "response_html": "<br><p>The <a href=\"\">Hy-Vee Grocery Store</a> on West Lincoln Way is open until 11:00 PM tonight.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/20244c0ce8258d0e",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding What time does the West Hy-Vee in Ames close?. Provided concise guidance on The Hy-Vee Grocery Store on West Lincoln Way is open until 11:00 PM tonight..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "What time does the West Hy-Vee",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding What time does the West Hy-Vee in Ames close?. Provided concise guidance on The Hy-Vee Grocery Store on West Lincoln Way is open until 11:00 PM tonight..",
+      "keywords": [
+        "west",
+        "hy-vee",
+        "time",
+        "ames"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: west, hy-vee, time"
+  ]
+}

@@ -1,1 +1,44 @@
-{"group_key": "fe01bc887d18dab7", "thread_id": "fe01bc887d18dab7", "turn_count": 1, "first_timestamp": "2025-08-08 15:30:43", "last_timestamp": "2025-08-08 15:30:43", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/fe01bc887d18dab7", "turns": [{"id": 8046, "thread_id": "fe01bc887d18dab7", "timestamp_iso": "2025-08-08 15:30:43", "timestamp_raw": "Aug 8, 2025, 3:30:43\u202fPM CDT", "prompt_text": "explain heart rate variability to me", "response_html": "<br><p>Heart rate variability is the natural fluctuation in the time interval between consecutive heartbeats. This variation, regulated by the autonomic nervous system, reflects your body&#39;s ability to adapt to stress and is a key indicator of overall health and fitness. A higher HRV is generally associated with a healthy, well-recovered state, while a lower HRV can signal stress, fatigue, or illness.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/fe01bc887d18dab7", "was_audio_input": 0}]}
+{
+  "group_key": "fe01bc887d18dab7",
+  "thread_id": "fe01bc887d18dab7",
+  "turn_count": 1,
+  "first_timestamp": "2025-08-08 15:30:43",
+  "last_timestamp": "2025-08-08 15:30:43",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/fe01bc887d18dab7",
+  "turns": [
+    {
+      "id": 8046,
+      "thread_id": "fe01bc887d18dab7",
+      "timestamp_iso": "2025-08-08 15:30:43",
+      "timestamp_raw": "Aug 8, 2025, 3:30:43 PM CDT",
+      "prompt_text": "explain heart rate variability to me",
+      "response_html": "<br><p>Heart rate variability is the natural fluctuation in the time interval between consecutive heartbeats. This variation, regulated by the autonomic nervous system, reflects your body&#39;s ability to adapt to stress and is a key indicator of overall health and fitness. A higher HRV is generally associated with a healthy, well-recovered state, while a lower HRV can signal stress, fatigue, or illness.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/fe01bc887d18dab7",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding explain heart rate variability to me. Provided concise guidance on Heart rate variability is the natural fluctuation in the time interval between consecutive heartbeats.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Explain heart rate variability to me",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding explain heart rate variability to me. Provided concise guidance on Heart rate variability is the natural fluctuation in the time interval between consecutive heartbeats.",
+      "keywords": [
+        "heart",
+        "rate",
+        "variability",
+        "stress"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: heart, rate, variability"
+  ]
+}

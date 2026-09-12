@@ -1,1 +1,44 @@
-{"group_key": "654b777fcef51fc4", "thread_id": "654b777fcef51fc4", "turn_count": 1, "first_timestamp": "2025-09-11 16:05:42", "last_timestamp": "2025-09-11 16:05:42", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/654b777fcef51fc4", "turns": [{"id": 7774, "thread_id": "654b777fcef51fc4", "timestamp_iso": "2025-09-11 16:05:42", "timestamp_raw": "Sep 11, 2025, 4:05:42\u202fPM CDT", "prompt_text": "can you read this article for me", "response_html": "<br><p>I can help with that! Please provide me with the URL or the text of the article you&#39;d like me to read.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/654b777fcef51fc4", "was_audio_input": 0}]}
+{
+  "group_key": "654b777fcef51fc4",
+  "thread_id": "654b777fcef51fc4",
+  "turn_count": 1,
+  "first_timestamp": "2025-09-11 16:05:42",
+  "last_timestamp": "2025-09-11 16:05:42",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/654b777fcef51fc4",
+  "turns": [
+    {
+      "id": 7774,
+      "thread_id": "654b777fcef51fc4",
+      "timestamp_iso": "2025-09-11 16:05:42",
+      "timestamp_raw": "Sep 11, 2025, 4:05:42 PM CDT",
+      "prompt_text": "can you read this article for me",
+      "response_html": "<br><p>I can help with that! Please provide me with the URL or the text of the article you&#39;d like me to read.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/654b777fcef51fc4",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding can you read this article for me. Provided concise guidance on I can help with that! Please provide me with the URL or the text of the article you d like me to read..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Read this article for me",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding can you read this article for me. Provided concise guidance on I can help with that! Please provide me with the URL or the text of the article you d like me to read..",
+      "keywords": [
+        "read",
+        "article",
+        "provide",
+        "url"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: read, article, provide"
+  ]
+}

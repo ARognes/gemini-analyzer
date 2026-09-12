@@ -1,1 +1,44 @@
-{"group_key": "11d39592436fdff9", "thread_id": "11d39592436fdff9", "turn_count": 1, "first_timestamp": "2025-08-11 16:38:06", "last_timestamp": "2025-08-11 16:38:06", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/11d39592436fdff9", "turns": [{"id": 7966, "thread_id": "11d39592436fdff9", "timestamp_iso": "2025-08-11 16:38:06", "timestamp_raw": "Aug 11, 2025, 4:38:06\u202fPM CDT", "prompt_text": "where can I purchase a spool of copper wire", "response_html": "<br><p>You can buy spools of copper wire from a variety of retailers, including home improvement stores like Home Depot, electrical supply companies such as Graybar and Steiner Electric Company, and specialty online shops for crafting and jewelry making like Rio Grande and Craftwire USA. For large-scale industrial projects, suppliers like MWS Wire and thyssenkrupp Materials are also available.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/11d39592436fdff9", "was_audio_input": 0}]}
+{
+  "group_key": "11d39592436fdff9",
+  "thread_id": "11d39592436fdff9",
+  "turn_count": 1,
+  "first_timestamp": "2025-08-11 16:38:06",
+  "last_timestamp": "2025-08-11 16:38:06",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/11d39592436fdff9",
+  "turns": [
+    {
+      "id": 7966,
+      "thread_id": "11d39592436fdff9",
+      "timestamp_iso": "2025-08-11 16:38:06",
+      "timestamp_raw": "Aug 11, 2025, 4:38:06 PM CDT",
+      "prompt_text": "where can I purchase a spool of copper wire",
+      "response_html": "<br><p>You can buy spools of copper wire from a variety of retailers, including home improvement stores like Home Depot, electrical supply companies such as Graybar and Steiner Electric Company, and specialty online shops for crafting and jewelry making like Rio Grande and Craftwire USA. For large-scale industrial projects, suppliers like MWS Wire and thyssenkrupp Materials are also available.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/11d39592436fdff9",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding where can I purchase a spool of copper wire. Provided concise guidance on You can buy spools of copper wire from a variety of retailers, including home improvement stores like Home Depot, electrical supply companie.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Where can I purchase a spool",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding where can I purchase a spool of copper wire. Provided concise guidance on You can buy spools of copper wire from a variety of retailers, including home improvement stores like Home Depot, electrical supply companie.",
+      "keywords": [
+        "wire",
+        "copper",
+        "home",
+        "purchase"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: wire, copper, home"
+  ]
+}

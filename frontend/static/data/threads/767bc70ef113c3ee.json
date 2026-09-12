@@ -1,1 +1,44 @@
-{"group_key": "767bc70ef113c3ee", "thread_id": "767bc70ef113c3ee", "turn_count": 1, "first_timestamp": "2026-02-04 16:59:26", "last_timestamp": "2026-02-04 16:59:26", "has_audio_input": 0, "details_url": "https://gemini.google.com/app/767bc70ef113c3ee", "turns": [{"id": 6709, "thread_id": "767bc70ef113c3ee", "timestamp_iso": "2026-02-04 16:59:26", "timestamp_raw": "Feb 4, 2026, 4:59:26\u202fPM CDT", "prompt_text": "where is Raymond Music", "response_html": "<br><p><a href=\"\">Rieman Music - Ames</a> is located at 620 Lincoln Way #4, Ames, IA 50010.</p>\n<br>", "media_files_json": "[]", "details_url": "https://gemini.google.com/app/767bc70ef113c3ee", "was_audio_input": 0}]}
+{
+  "group_key": "767bc70ef113c3ee",
+  "thread_id": "767bc70ef113c3ee",
+  "turn_count": 1,
+  "first_timestamp": "2026-02-04 16:59:26",
+  "last_timestamp": "2026-02-04 16:59:26",
+  "has_audio_input": 0,
+  "details_url": "https://gemini.google.com/app/767bc70ef113c3ee",
+  "turns": [
+    {
+      "id": 6709,
+      "thread_id": "767bc70ef113c3ee",
+      "timestamp_iso": "2026-02-04 16:59:26",
+      "timestamp_raw": "Feb 4, 2026, 4:59:26 PM CDT",
+      "prompt_text": "where is Raymond Music",
+      "response_html": "<br><p><a href=\"\">Rieman Music - Ames</a> is located at 620 Lincoln Way #4, Ames, IA 50010.</p>\n<br>",
+      "media_files_json": "[]",
+      "details_url": "https://gemini.google.com/app/767bc70ef113c3ee",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding where is Raymond Music. Provided concise guidance on Rieman Music - Ames is located at 620 Lincoln Way #4, Ames, IA 50010..",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Where is Raymond Music",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding where is Raymond Music. Provided concise guidance on Rieman Music - Ames is located at 620 Lincoln Way #4, Ames, IA 50010..",
+      "keywords": [
+        "music",
+        "ames",
+        "raymond",
+        "rieman"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: music, ames, raymond"
+  ]
+}

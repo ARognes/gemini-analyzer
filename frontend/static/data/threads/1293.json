@@ -1,1 +1,44 @@
-{"group_key": "1293", "thread_id": "", "turn_count": 1, "first_timestamp": "2026-08-02 15:23:18", "last_timestamp": "2026-08-02 15:23:18", "has_audio_input": 0, "details_url": "", "turns": [{"id": 1293, "thread_id": "", "timestamp_iso": "2026-08-02 15:23:18", "timestamp_raw": "Aug 2, 2026, 3:23:18\u202fPM CDT", "prompt_text": "", "response_html": "Used\u00a0Gemini Apps<br>Aug 2, 2026, 3:23:18\u202fPM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "1293",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2026-08-02 15:23:18",
+  "last_timestamp": "2026-08-02 15:23:18",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 1293,
+      "thread_id": "",
+      "timestamp_iso": "2026-08-02 15:23:18",
+      "timestamp_raw": "Aug 2, 2026, 3:23:18 PM CDT",
+      "prompt_text": "",
+      "response_html": "Used Gemini Apps<br>Aug 2, 2026, 3:23:18 PM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Used Gemini Apps Aug 2, 2026, 3:23:18 PM CDT.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Used • Gemini • Apps",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Used Gemini Apps Aug 2, 2026, 3:23:18 PM CDT.",
+      "keywords": [
+        "used",
+        "gemini",
+        "apps",
+        "aug"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: used, gemini, apps"
+  ]
+}

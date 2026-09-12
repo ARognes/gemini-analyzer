@@ -1,1 +1,44 @@
-{"group_key": "6079", "thread_id": "", "turn_count": 1, "first_timestamp": "2026-03-12 21:54:28", "last_timestamp": "2026-03-12 21:54:28", "has_audio_input": 0, "details_url": "", "turns": [{"id": 6079, "thread_id": "", "timestamp_iso": "2026-03-12 21:54:28", "timestamp_raw": "Mar 12, 2026, 9:54:28\u202fPM CDT", "prompt_text": "", "response_html": "Created Gemini Canvas titled\u00a0THE YOGIS OF TIBET - Rare Documentary Film<br>http://googleusercontent.com/youtube_content/0<br>Mar 12, 2026, 9:54:28\u202fPM CDT<br>", "media_files_json": "[]", "details_url": "", "was_audio_input": 0}]}
+{
+  "group_key": "6079",
+  "thread_id": "",
+  "turn_count": 1,
+  "first_timestamp": "2026-03-12 21:54:28",
+  "last_timestamp": "2026-03-12 21:54:28",
+  "has_audio_input": 0,
+  "details_url": "",
+  "turns": [
+    {
+      "id": 6079,
+      "thread_id": "",
+      "timestamp_iso": "2026-03-12 21:54:28",
+      "timestamp_raw": "Mar 12, 2026, 9:54:28 PM CDT",
+      "prompt_text": "",
+      "response_html": "Created Gemini Canvas titled THE YOGIS OF TIBET - Rare Documentary Film<br>http://googleusercontent.com/youtube_content/0<br>Mar 12, 2026, 9:54:28 PM CDT<br>",
+      "media_files_json": "[]",
+      "details_url": "",
+      "was_audio_input": 0
+    }
+  ],
+  "executive_narrative": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled THE YOGIS OF TIBET - Rare Documentary Film http://googleusercontent.com/youtube_content/0 Mar 12, 2026, 9:54:28.",
+  "streams": [
+    {
+      "stream_id": 1,
+      "title": "Created • Gemini • Canvas",
+      "turn_range": [
+        1,
+        1
+      ],
+      "turn_count": 1,
+      "summary": "Direct inquiry regarding . Provided concise guidance on Created Gemini Canvas titled THE YOGIS OF TIBET - Rare Documentary Film http://googleusercontent.com/youtube_content/0 Mar 12, 2026, 9:54:28.",
+      "keywords": [
+        "created",
+        "gemini",
+        "canvas",
+        "titled"
+      ]
+    }
+  ],
+  "key_insights": [
+    "Core focus: created, gemini, canvas"
+  ]
+}
