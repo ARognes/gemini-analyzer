@@ -30,6 +30,16 @@
       <h3>{$activeThreadDrawerData.title || $activeThreadDrawerData.title_snippet}</h3>
       <div class="tags-row">
         <span class="badge">{$activeThreadDrawerData.actionability_tier || 'standard'}</span>
+        {#if $activeThreadDrawerData.connectedness !== undefined}
+          <span class="badge" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8;">
+            ⚡ {$activeThreadDrawerData.connectedness}% ({$activeThreadDrawerData.connectedness_badge || 'Connected'})
+          </span>
+        {/if}
+        {#if $activeThreadDrawerData.degree !== undefined && $activeThreadDrawerData.degree > 0}
+          <span class="badge" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc;">
+            🔗 {$activeThreadDrawerData.degree} Edges
+          </span>
+        {/if}
         {#if $activeThreadDrawerData.primary_tag}
           <span class="badge tag">#{$activeThreadDrawerData.primary_tag}</span>
         {/if}

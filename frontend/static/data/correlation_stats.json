@@ -1,8 +1,8 @@
 {
   "threshold": 0.3,
   "threshold_pct": 30,
-  "total_pairs": 1432278,
-  "qualified_pairs": 1222,
+  "total_pairs": 1365378,
+  "qualified_pairs": 476,
   "buckets": [
     {
       "min": 0.15,

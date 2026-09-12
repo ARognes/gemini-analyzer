@@ -310,10 +310,93 @@
       }
     });
 
+    // Build Adjacency Graph for Network Topology & Connectedness Heuristic
+    const adj = new Map();
+    rawNodes.forEach(n => adj.set(n.id, new Map()));
+
+    rawRelations.forEach(rel => {
+      const srcId = rel.source_key;
+      const tgtId = rel.target_key;
+      const sim = rel.similarity_score || 0.5;
+      if (nodeMap.has(srcId) && nodeMap.has(tgtId)) {
+        adj.get(srcId).set(tgtId, sim);
+        adj.get(tgtId).set(srcId, sim);
+      }
+    });
+
+    // Calculate node degrees and Connectedness Heuristic
     rawNodes.forEach(n => {
-      n.degree = nodeDegrees.get(n.id) || 0;
-      n.internal_degree = nodeInternalDegrees.get(n.id) || 0;
-      n.external_degree = nodeExternalDegrees.get(n.id) || 0;
+      const neighbors = adj.get(n.id) || new Map();
+      const deg = neighbors.size;
+      n.degree = deg;
+
+      if (deg === 0) {
+        n.internal_degree = 0;
+        n.external_degree = 0;
+        n.reach_2hop = 0;
+        n.bridged_groups_count = 0;
+        n.connectedness = 0;
+        n.connectedness_archetype = 'Isolated';
+        n.connectedness_badge = '⭕ Isolated';
+        return;
+      }
+
+      const srcMacro = nodeToMacro.get(n.id);
+      let intDeg = 0;
+      let extDeg = 0;
+      const bridgedGroups = new Set();
+      let totalSim = 0.0;
+
+      neighbors.forEach((sim, nbrId) => {
+        totalSim += sim;
+        const tgtMacro = nodeToMacro.get(nbrId);
+        if (srcMacro && tgtMacro && srcMacro === tgtMacro && srcMacro.startsWith('glob_')) {
+          intDeg++;
+        } else {
+          extDeg++;
+          if (tgtMacro) bridgedGroups.add(tgtMacro);
+        }
+      });
+
+      n.internal_degree = intDeg;
+      n.external_degree = extDeg;
+      n.bridged_groups_count = bridgedGroups.size;
+
+      // Calculate 2-hop neighborhood reach
+      const hop2 = new Set(neighbors.keys());
+      neighbors.forEach((_, nbrId) => {
+        const nbrNeighbors = adj.get(nbrId);
+        if (nbrNeighbors) {
+          nbrNeighbors.forEach((_, nbr2Id) => {
+            if (nbr2Id !== n.id) hop2.add(nbr2Id);
+          });
+        }
+      });
+      n.reach_2hop = hop2.size;
+
+      const avgSim = totalSim / deg;
+      const base = Math.min(40, deg * 4.0) + Math.min(25, n.reach_2hop * 0.8);
+      const bridgeBonus = Math.min(25, bridgedGroups.size * 6.0);
+      const simBonus = avgSim * 10;
+      const score = Math.round(Math.min(100, Math.max(5, base + bridgeBonus + simBonus)));
+      n.connectedness = score;
+
+      if (score >= 70 || (bridgedGroups.size >= 3 && deg >= 5)) {
+        n.connectedness_archetype = 'Nexus Hub';
+        n.connectedness_badge = '🌐 Nexus Hub';
+      } else if (extDeg >= 2 && bridgedGroups.size >= 2) {
+        n.connectedness_archetype = 'Bridge Node';
+        n.connectedness_badge = '🌉 Bridge Node';
+      } else if (intDeg >= 2 && intDeg >= extDeg) {
+        n.connectedness_archetype = 'Cluster Anchor';
+        n.connectedness_badge = '⚓ Cluster Anchor';
+      } else if (deg >= 1 && score >= 35) {
+        n.connectedness_archetype = 'Connected';
+        n.connectedness_badge = '🔗 Connected';
+      } else {
+        n.connectedness_archetype = 'Satellite';
+        n.connectedness_badge = '🛰️ Satellite';
+      }
     });
 
     // Populate Histogram distribution data for interactive filter scales
@@ -898,6 +981,15 @@
     try {
       const thread = await fetchStitchedThread(threadId);
       if (thread) {
+        if (contextMenuNode && contextMenuNode.id === threadId) {
+          thread.degree = contextMenuNode.degree;
+          thread.internal_degree = contextMenuNode.internal_degree;
+          thread.external_degree = contextMenuNode.external_degree;
+          thread.connectedness = contextMenuNode.connectedness;
+          thread.connectedness_archetype = contextMenuNode.connectedness_archetype;
+          thread.connectedness_badge = contextMenuNode.connectedness_badge;
+          thread.reach_2hop = contextMenuNode.reach_2hop;
+        }
         activeThreadDrawerData.set(thread);
         isThreadDrawerOpen.set(true);
       }
@@ -942,12 +1034,18 @@
       style="left: {transform.x + ($hoveredNode.x * transform.k) + 15}px; top: {transform.y + ($hoveredNode.y * transform.k) - 20}px;"
     >
       <div class="tooltip-title">{$hoveredNode.title || $hoveredNode.title_snippet}</div>
+      <div class="tooltip-conn-row">
+        <span class="conn-score-pill">⚡ Connectedness: <strong>{$hoveredNode.connectedness || 0}%</strong></span>
+        <span class="conn-badge">{$hoveredNode.connectedness_badge || '⭕ Isolated'}</span>
+      </div>
       <div class="tooltip-meta">
         <span class="meta-item">🔗 {$hoveredNode.degree || 0} edges{#if ($hoveredNode.internal_degree || 0) > 0 || ($hoveredNode.external_degree || 0) > 0} ({$hoveredNode.internal_degree || 0} group, {$hoveredNode.external_degree || 0} ext){/if}</span>
+        {#if ($hoveredNode.reach_2hop || 0) > 0}
+          <span class="meta-sep">•</span>
+          <span class="meta-item">🌐 {$hoveredNode.reach_2hop} 2-hop reach</span>
+        {/if}
         <span class="meta-sep">•</span>
         <span class="meta-item">💬 {$hoveredNode.turn_count || 1} turns</span>
-        <span class="meta-sep">•</span>
-        <span class="meta-item">🏷️ {$hoveredNode.actionability_tier || 'standard'}</span>
         {#if $hoveredNode.data_tag}
           <span class="meta-sep">•</span>
           <span class="meta-item">📂 {$hoveredNode.data_tag}</span>
@@ -965,14 +1063,33 @@
       {#if contextMenuNode}
         <div class="menu-header node-header">
           <div class="menu-node-title">{contextMenuNode.title || contextMenuNode.title_snippet}</div>
+          
+          <!-- Connectedness Heuristic Meter -->
+          <div class="menu-conn-section">
+            <div class="menu-conn-header">
+              <span class="conn-lbl">⚡ Connectedness Heuristic</span>
+              <span class="conn-val">{contextMenuNode.connectedness || 0}%</span>
+            </div>
+            <div class="conn-bar-bg">
+              <div 
+                class="conn-bar-fill" 
+                style="width: {contextMenuNode.connectedness || 0}%; background: {contextMenuNode.connectedness >= 70 ? 'linear-gradient(90deg, #38bdf8, #a855f7)' : contextMenuNode.connectedness >= 35 ? 'linear-gradient(90deg, #38bdf8, #34d399)' : '#64748b'};"
+              ></div>
+            </div>
+            <div class="conn-archetype-tag">{contextMenuNode.connectedness_badge || '⭕ Isolated'}</div>
+          </div>
+
           <div class="menu-node-stats">
             <span class="stat-badge edges-badge">🔗 {contextMenuNode.degree || 0} Edges</span>
+            {#if (contextMenuNode.reach_2hop || 0) > 0}
+              <span class="stat-badge reach-badge">🌐 {contextMenuNode.reach_2hop} 2-Hop Reach</span>
+            {/if}
             <span class="stat-badge turns-badge">💬 {contextMenuNode.turn_count || 1} Turns</span>
             <span class="stat-badge tier-badge">🏷️ {contextMenuNode.actionability_tier || 'standard'}</span>
           </div>
           {#if (contextMenuNode.internal_degree || 0) > 0 || (contextMenuNode.external_degree || 0) > 0}
             <div class="menu-edge-breakdown">
-              🔗 {contextMenuNode.internal_degree || 0} intra-group • {contextMenuNode.external_degree || 0} external
+              🔗 {contextMenuNode.internal_degree || 0} intra-group • {contextMenuNode.external_degree || 0} external{#if (contextMenuNode.bridged_groups_count || 0) > 0} (bridges {contextMenuNode.bridged_groups_count} groups){/if}
             </div>
           {/if}
           {#if contextMenuNode.data_tag}
@@ -1125,20 +1242,86 @@
     overflow: hidden;
   }
 
-  .menu-node-stats {
+  .tooltip-conn-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .conn-score-pill {
+    font-size: 0.72rem;
+    color: #e2e8f0;
+  }
+
+  .conn-score-pill strong {
+    color: #38bdf8;
+  }
+
+  .conn-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.1rem 0.4rem;
+    border-radius: 6px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+  }
+
+  .menu-conn-section {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.45rem 0.55rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .menu-conn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .conn-lbl {
+    font-weight: 600;
+    color: #94a3b8;
+  }
+
+  .conn-val {
+    font-weight: 700;
+    color: #38bdf8;
+  }
+
+  .conn-bar-bg {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
     margin-bottom: 0.35rem;
   }
 
-  .stat-badge {
-    font-size: 0.68rem;
+  .conn-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+
+  .conn-archetype-tag {
+    font-size: 0.72rem;
     font-weight: 600;
-    padding: 0.15rem 0.45rem;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+  }
+
+  .reach-badge {
+    background: rgba(14, 165, 233, 0.15);
+    border-color: rgba(14, 165, 233, 0.4);
+    color: #38bdf8;
   }
 
   .edges-badge {

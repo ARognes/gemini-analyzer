@@ -10,7 +10,16 @@ DATA_DIR = os.path.join(ROOT_DIR, 'frontend', 'static', 'data')
 THREADS_DIR = os.path.join(DATA_DIR, 'threads')
 
 APP_COMMAND_PATTERNS = [
-    r'^\s*(open|launch|start|run|show|go to|play|set alarm|call|message|text|navigate to|search for)\b',
+    r'^\s*(open|launch|start|run|show|go to)\b',
+    r'^\s*set\s+(an?\s+)?(alarm|timer)\b',
+    r'^\s*(cancel|stop|turn off|disable|dismiss|pause|resume)\s+(the\s+)?(alarm|timer|video|music)\b',
+    r'^\s*(turn\s+(on|off)|toggle)\s+(flashlight|bluetooth|wifi|do not disturb|dnd|airplane mode)\b',
+    r'^\s*(call|text|message|dial)\s+[A-Z]',
+    r'^\s*navigate\s+to\s+',
+    r'^\s*search\s+(for\s+)?(youtube|google|play store|photos|maps|audible)\b',
+    r'^\s*play\s+(audible|youtube|music|next|song|audiobook|pandora|spongebob|young thug)\b',
+    r'^\s*(increase|decrease|raise|lower|mute|unmute)\s+volume\b',
+    r'^\s*(read\s+this\s+out\s+loud|read\s+this\s+article)\s*(for\s+me)?\s*(please)?\.?$',
     r'^\s*(youtube|home depot|maps|photos|audible|snapchat|play store|pandora|chrome|settings|meet|drive|keep|perplexity|allegiant|calendar|clock|contacts|gmail|messages|phone)\b'
 ]
 

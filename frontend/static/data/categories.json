@@ -10968,15 +10968,6 @@
       "title_snippet": "If I wanted to make a small robotic soccer ball so that it can move itself like one of the droids in Star Wars, what methods are possible to do this"
     },
     {
-      "group_key": "da9dd58592f6fce5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"alarm\", \"clock\", \"entityid\", \"set\", \"sure\", \"setting\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-29 00:20:30",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 12:45"
-    },
-    {
       "group_key": "da43535f9f71f889",
       "primary_category": "software",
       "keywords_json": "[\"neovim\", \"install\", \"trying\", \"even\", \"moves\", \"rabbit\", \"using\", \"find\"]",
@@ -13128,15 +13119,6 @@
       "title_snippet": "Everett blow up by Target exercise ball Attached 1 file. - 1fc35cbc-f4d2-4615-bde7-a2d52cb63949"
     },
     {
-      "group_key": "bead40fd0b3a3d68",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"wednesday\", \"clock\", \"entityid\", \"morning\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-23 18:55:09",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for Wednesday at 10:00 a.m. in the morning"
-    },
-    {
       "group_key": "6231",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"feb\"]",
@@ -13180,15 +13162,6 @@
       "first_timestamp": "2026-02-22 17:28:18",
       "turn_count": 1,
       "title_snippet": "Can you read the last two messages aloud Attached 1 file. - image.png"
-    },
-    {
-      "group_key": "0598ddadebcc32bf",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-22 14:54:53",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 3:50 p.m."
     },
     {
       "group_key": "4d498f64da55400f",
@@ -13333,15 +13306,6 @@
       "first_timestamp": "2026-02-20 20:10:33",
       "turn_count": 76,
       "title_snippet": "Hello Gemini, hope your day is going well. I have a 3D printer with me. I have some TPU. I also have PEG HF, which is currently set up, I'm looking to create a T-intersection tube. The dimensions are as follows: Left & right: 9.5mm outer diameter, 5.5,, inner diameter, bottom: 6mm outer diameter, 3.5mm inner diameter"
-    },
-    {
-      "group_key": "afca35b1baeef1b5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-20 14:55:54",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 5:30"
     },
     {
       "group_key": "f0a77377b1599075",
@@ -14163,15 +14127,6 @@
       "title_snippet": "How do I use this bottle jack Attached 1 file. - 827c7993-6955-4a91-854b-6e4460fc497f"
     },
     {
-      "group_key": "013c6dcff8809c9a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-05 03:37:44",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 10:00 a.m."
-    },
-    {
       "group_key": "57dde3460b6b24b4",
       "primary_category": "hardware",
       "keywords_json": "[\"nad\", \"nicotinamide\", \"adenine\", \"electrons\", \"high\", \"like\", \"nmn\", \"cellular\"]",
@@ -14667,15 +14622,6 @@
       "title_snippet": "Can you parse and understand my idea here? I work at a grocery store, and we take out bags all day. If there is a way to make that constant task much more efficient, that would help everybody. Attached 1 file. - Bag-Holder.pdf"
     },
     {
-      "group_key": "2072c4995c49954b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-29 15:48:55",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 4:00 p.m."
-    },
-    {
       "group_key": "619c7a69be681fa0",
       "primary_category": "ai_agents",
       "keywords_json": "[\"fish\", \"config\", \"file\", \"eza\", \"starship\", \"add\", \"way\", \"use\"]",
@@ -15054,15 +15000,6 @@
       "title_snippet": "what's the difference between USB type-c and Thunderbolt"
     },
     {
-      "group_key": "43d014130686c9bb",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-24 20:08:09",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 7:15"
-    },
-    {
       "group_key": "c21394e46bca8563",
       "primary_category": "finance",
       "keywords_json": "[\"bees\", \"rice\", \"test\", \"period\", \"queen\", \"where\", \"cannoli\", \"carniolan\"]",
@@ -15133,15 +15070,6 @@
       "first_timestamp": "2026-01-23 18:04:08",
       "turn_count": 2,
       "title_snippet": "what is a Zebulon knot"
-    },
-    {
-      "group_key": "a9ebd229f5aeda70",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-23 10:04:41",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:20"
     },
     {
       "group_key": "8f88bc7052efd9df",
@@ -15405,15 +15333,6 @@
       "title_snippet": "please make a new Google keep note"
     },
     {
-      "group_key": "0b2dd32000be21a2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-17 03:44:03",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 9:00 a.m."
-    },
-    {
       "group_key": "7011",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"polymaths\", \"century\", \"evey\", \"wolfe\"]",
@@ -15439,15 +15358,6 @@
       "first_timestamp": "2026-01-16 16:48:27",
       "turn_count": 1,
       "title_snippet": "At fareway, are we allowed to wear scarves?"
-    },
-    {
-      "group_key": "ba700b32728219f8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-16 06:39:43",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:00 a.m."
     },
     {
       "group_key": "7017",
@@ -15576,15 +15486,6 @@
       "title_snippet": "I have this calligraphy pen."
     },
     {
-      "group_key": "220a4a4c32deabe5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"noon\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-12 11:21:33",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for noon"
-    },
-    {
       "group_key": "0360c2b66b72819e",
       "primary_category": "software",
       "keywords_json": "[\"many\", \"often\", \"mother\", \"boy\", \"during\", \"specific\", \"while\", \"historical\"]",
@@ -15610,15 +15511,6 @@
       "first_timestamp": "2026-01-10 17:50:40",
       "turn_count": 1,
       "title_snippet": "how many amps are in a Duracell D battery"
-    },
-    {
-      "group_key": "82946adef2fe2ddc",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-09 05:31:59",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:20 a.m."
     },
     {
       "group_key": "a9d4f1423f5839fa",
@@ -15673,15 +15565,6 @@
       "first_timestamp": "2026-01-08 18:09:32",
       "turn_count": 1,
       "title_snippet": "I own a google chromebook 11, I would like to install linux on it"
-    },
-    {
-      "group_key": "88b75fa495b4984f",
-      "primary_category": "outliers",
-      "keywords_json": "[\"set\", \"alarm\", \"sunday\", \"morning\", \"time\", \"like\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-08 17:19:21",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for Sunday morning"
     },
     {
       "group_key": "7079",
@@ -15819,15 +15702,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "0fa40d337ff0c297",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-05 12:01:36",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 12:30"
-    },
-    {
       "group_key": "7103",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"jan\"]",
@@ -15925,15 +15799,6 @@
       "first_timestamp": "2026-01-02 12:11:25",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "efddd83d539b7d76",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"tomorrow\", \"clock\", \"january\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-01 18:55:07",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:00 a.m. tomorrow"
     },
     {
       "group_key": "7133",
@@ -16071,15 +15936,6 @@
       "title_snippet": "I would like to purchase or make an hourglass or something that can function similarly"
     },
     {
-      "group_key": "baeadbbc314a8c1d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"tomorrow\", \"clock\", \"december\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-24 22:53:19",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 1:00 p.m. tomorrow"
-    },
-    {
       "group_key": "7178",
       "primary_category": "outliers",
       "keywords_json": "[\"gave\", \"feedback\", \"good\", \"response\", \"dec\", \"cdt\"]",
@@ -16188,15 +16044,6 @@
       "title_snippet": "can you tell me about an odb2 for vehicles"
     },
     {
-      "group_key": "82d91787221bb44d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"monday\", \"clock\", \"december\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-21 18:15:13",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for Monday at 5:00 p.m."
-    },
-    {
       "group_key": "08ee51b049530b45",
       "primary_category": "hardware",
       "keywords_json": "[\"she\", \"her\", \"perspective\", \"very\", \"high\", \"often\", \"someone\", \"likely\"]",
@@ -16231,15 +16078,6 @@
       "first_timestamp": "2025-12-20 02:32:39",
       "turn_count": 1,
       "title_snippet": "The GE Profile 4.8 cu. ft. Smart UltraFast Electric Washer Dryer Combo in Jade Green with Ventless Heat Pump Technology is sold at Home Depot, i have an old washer/drier currently hooked up, only a few years old. Do I need the Semi-Rigd Dryer Duct or the Dryer Power Cord?"
-    },
-    {
-      "group_key": "2212b5ac1bb18eb1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-20 00:02:57",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 7:00 a.m."
     },
     {
       "group_key": "c676dc217f7c324b",
@@ -16746,15 +16584,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "b86065642516e2b9",
-      "primary_category": "outliers",
-      "keywords_json": "[\"set\", \"alarm\", \"never\", \"mind\", \"want\", \"understand\", \"but\", \"then\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-12-03 22:05:11",
-      "turn_count": 1,
-      "title_snippet": "set an alarm never mind"
-    },
-    {
       "group_key": "a9a687886fd099ef",
       "primary_category": "software",
       "keywords_json": "[\"youtube\", \"like\", \"api\", \"https\", \"www\", \"com\", \"joerogan\", \"videos\"]",
@@ -16809,15 +16638,6 @@
       "title_snippet": "How do you journal?"
     },
     {
-      "group_key": "3545198f03a67894",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-02 15:30:21",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 3:20 p.m."
-    },
-    {
       "group_key": "932a195e588931ef",
       "primary_category": "ai_agents",
       "keywords_json": "[\"voice\", \"access\", \"enable\", \"app\", \"now\", \"enabled\", \"sorry\", \"something\"]",
@@ -16825,15 +16645,6 @@
       "first_timestamp": "2025-12-02 13:42:01",
       "turn_count": 2,
       "title_snippet": "voice access"
-    },
-    {
-      "group_key": "baa575285a9720bd",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-01 12:52:10",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 3:20 p.m."
     },
     {
       "group_key": "526e97056950936a",
@@ -17196,15 +17007,6 @@
       "title_snippet": "hey Google set an alarm for 10:30 a.m."
     },
     {
-      "group_key": "cacfb782632074e1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"midnight\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-06 22:53:38",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for midnight"
-    },
-    {
       "group_key": "907b5d796ccb055f",
       "primary_category": "outliers",
       "keywords_json": "[\"like\", \"backyard\", \"terracing\", \"ways\", \"could\", \"terraformed\", \"terraform\", \"reshaping\"]",
@@ -17266,51 +17068,6 @@
       "first_timestamp": "2025-11-05 21:02:14",
       "turn_count": 3,
       "title_snippet": "how do you use water and salt to neutralize a battery"
-    },
-    {
-      "group_key": "b384fd326f66dc50",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"november\", \"clock\", \"titled\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-05 16:04:45",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for November 20th at 4:00 p.m. titled"
-    },
-    {
-      "group_key": "7f4753732d5c10a9",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-04 20:52:05",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 8:10"
-    },
-    {
-      "group_key": "8c57056db7df1676",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"tomorrow\", \"clock\", \"november\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-04 20:46:53",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 4:00 p.m. tomorrow"
-    },
-    {
-      "group_key": "ff331d8dc8cf6047",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-04 17:34:37",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 5:05"
-    },
-    {
-      "group_key": "04c1a91d0e083aeb",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"disturb\", \"mode\", \"turn\", \"turned\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-03 20:10:07",
-      "turn_count": 1,
-      "title_snippet": "turn on do not disturb mode"
     },
     {
       "group_key": "e244c80f9c287684",
@@ -17430,15 +17187,6 @@
       "title_snippet": "search for people with two rows of teeth"
     },
     {
-      "group_key": "99873cd48c47dbee",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-31 23:16:38",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 4:35 a.m."
-    },
-    {
       "group_key": "2193b5886183ceee",
       "primary_category": "outliers",
       "keywords_json": "[\"fake\", \"blood\", \"hey\", \"google\", \"understand\", \"use\", \"good\", \"choice\"]",
@@ -17455,15 +17203,6 @@
       "first_timestamp": "2025-10-31 22:47:59",
       "turn_count": 2,
       "title_snippet": "how can you get liquid to come out of your nose"
-    },
-    {
-      "group_key": "159c6a8f07c9a43e",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-31 10:06:58",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:40"
     },
     {
       "group_key": "1241f6617935561d",
@@ -17529,15 +17268,6 @@
       "title_snippet": "is 7UP and Dr Pepper in the same family"
     },
     {
-      "group_key": "9a9ce34029c4b27a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"tomorrow\", \"morning\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-21 23:06:35",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 8:00 a.m. tomorrow morning"
-    },
-    {
       "group_key": "886411d27e419f20",
       "primary_category": "outliers",
       "keywords_json": "[\"result\", \"print\", \"perform\", \"multiplication\", \"product\", \"times\"]",
@@ -17545,15 +17275,6 @@
       "first_timestamp": "2025-10-18 18:25:13",
       "turn_count": 1,
       "title_snippet": "what is 1.27 * 12.99"
-    },
-    {
-      "group_key": "14d0e888aff701f4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-18 13:35:51",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 3:30"
     },
     {
       "group_key": "b821a5afa79bd7e1",
@@ -17727,24 +17448,6 @@
       "title_snippet": "how do you get old tape off of a window"
     },
     {
-      "group_key": "02e591f1c8b98af4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-03 11:22:27",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:45"
-    },
-    {
-      "group_key": "e36f08da78679ef3",
-      "primary_category": "creative",
-      "keywords_json": "[\"video\", \"pause\", \"paused\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2025-09-30 10:09:04",
-      "turn_count": 1,
-      "title_snippet": "pause video"
-    },
-    {
       "group_key": "587d0064701dc0c1",
       "primary_category": "outliers",
       "keywords_json": "[\"used\", \"assistant\", \"feature\", \"sep\", \"cdt\"]",
@@ -17788,15 +17491,6 @@
       "first_timestamp": "2025-09-29 15:10:35",
       "turn_count": 1,
       "title_snippet": "what ingredients are necessary to make tikka masala"
-    },
-    {
-      "group_key": "052e1a745febfbd8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-28 22:58:04",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:50"
     },
     {
       "group_key": "fd55fa3e8b1945fe",
@@ -17907,24 +17601,6 @@
       "title_snippet": "This outlet"
     },
     {
-      "group_key": "123e6ded3716a5c6",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-19 23:10:52",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 8:00 a.m."
-    },
-    {
-      "group_key": "cb725b4a06552490",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-18 22:48:13",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 8:00 a.m."
-    },
-    {
       "group_key": "27e5eba169b9d4e8",
       "primary_category": "outliers",
       "keywords_json": "[\"warren\", \"rognes\", \"birthday\", \"couldn\", \"find\"]",
@@ -17995,15 +17671,6 @@
       "first_timestamp": "2025-09-15 10:33:07",
       "turn_count": 2,
       "title_snippet": "can you pick a 0524 b q lock"
-    },
-    {
-      "group_key": "b7968d1f6bc98ee0",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 00:40:43",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 6:30 a.m."
     },
     {
       "group_key": "f84f704bfcef163f",
@@ -18148,24 +17815,6 @@
       "first_timestamp": "2025-09-06 08:43:16",
       "turn_count": 1,
       "title_snippet": "Lobster"
-    },
-    {
-      "group_key": "1eba7396152a3c77",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-05 15:26:25",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 3:45"
-    },
-    {
-      "group_key": "80d27eb075ceb6fa",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-05 10:14:33",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 11:00 a.m."
     },
     {
       "group_key": "9d77e6d1c53c38db",
@@ -18384,15 +18033,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "1da61d7d014c9f3a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-22 23:35:46",
-      "turn_count": 1,
-      "title_snippet": "set an alarm for 8:00 a.m."
-    },
-    {
       "group_key": "3f193bf7281c73dd",
       "primary_category": "ai_agents",
       "keywords_json": "[\"google\", \"hey\", \"where\", \"large\", \"language\", \"model\", \"trained\"]",
@@ -18553,15 +18193,6 @@
       "first_timestamp": "2025-08-12 16:28:43",
       "turn_count": 3,
       "title_snippet": "Read this out loud for me. Please."
-    },
-    {
-      "group_key": "008b04043cd5bd85",
-      "primary_category": "outliers",
-      "keywords_json": "[\"read\", \"loud\", \"text\", \"cannot\", \"only\", \"provide\", \"responses\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-12 16:28:28",
-      "turn_count": 1,
-      "title_snippet": "read this out loud for me"
     },
     {
       "group_key": "9780e5304dc634e8",
