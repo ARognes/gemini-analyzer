@@ -2,7 +2,6 @@
   import { onMount, onDestroy } from 'svelte';
   import { 
     hideOneOffChats, 
-    hideAppCommands, 
     selectedActionabilityTier, 
     minTurnsFilter, 
     maxTurnsFilter,
@@ -377,7 +376,6 @@
     nodes.forEach(n => {
       if (typeof n.worldX !== 'number') return;
       if ($hideOneOffChats && (n.actionability_tier === 'one_off' || n.turn_count <= 1)) return;
-      if ($hideAppCommands && n.actionability_tier === 'app_command') return;
       if ($selectedActionabilityTier && n.actionability_tier !== $selectedActionabilityTier) return;
       if (n.turn_count < $minTurnsFilter || n.turn_count > $maxTurnsFilter) return;
 

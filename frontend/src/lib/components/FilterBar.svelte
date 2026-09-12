@@ -1,7 +1,6 @@
 <script>
   import { 
     hideOneOffChats, 
-    hideAppCommands, 
     selectedActionabilityTier, 
     minTurnsFilter, 
     maxTurnsFilter, 
@@ -23,10 +22,6 @@
 
   function toggleOneOffs() {
     hideOneOffChats.update(v => !v);
-  }
-
-  function toggleAppCommands() {
-    hideAppCommands.update(v => !v);
   }
 
   function toggleUnlinked() {
@@ -85,7 +80,6 @@
 
   function resetAllFilters() {
     hideOneOffChats.set(false);
-    hideAppCommands.set(false);
     selectedActionabilityTier.set('');
     minTurnsFilter.set(1);
     maxTurnsFilter.set(100);
@@ -105,7 +99,6 @@
 
   let activeFiltersCount = $derived(
     ($hideOneOffChats ? 1 : 0) +
-    ($hideAppCommands ? 1 : 0) +
     ($selectedActionabilityTier ? 1 : 0) +
     ($minTurnsFilter > 1 || $maxTurnsFilter < 100 ? 1 : 0) +
     ($minEdgesFilter > 0 || $maxEdgesFilter < 50 ? 1 : 0) +

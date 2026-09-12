@@ -7629,15 +7629,6 @@
       "title_snippet": "So I wonder where this hole looks. Maxing thing came from a little bit. There are many different narratives about how people look for the most part. It does become toxic and or controlling which is why people try to step away from it. But the saying sucks sells is true and companies and corporations and advertising and social media really pump into the ecosystem because it does feel good despite how uncontrollable it is"
     },
     {
-      "group_key": "fd62142e2a875cd2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-06-19 21:25:38",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
       "group_key": "a9c563ef3332aee5",
       "primary_category": "ai_agents",
       "keywords_json": "[\"want\", \"like\", \"really\", \"level\", \"agent\", \"but\", \"now\", \"time\"]",
@@ -8934,15 +8925,6 @@
       "title_snippet": "What is the best price for buying ESP32? In small batches to in bulk?"
     },
     {
-      "group_key": "38f268b5e6549ae2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"keep\", \"open\", \"opened\", \"notes\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-06-02 17:52:54",
-      "turn_count": 1,
-      "title_snippet": "Open Keep"
-    },
-    {
       "group_key": "33caacd926ea0949",
       "primary_category": "creative",
       "keywords_json": "[\"like\", \"clippy\", \"him\", \"his\", \"see\", \"want\", \"make\", \"agent\"]",
@@ -9004,15 +8986,6 @@
       "first_timestamp": "2026-06-01 15:54:57",
       "turn_count": 1,
       "title_snippet": "What is the difference between ps4, ps4 slim, and ps4 pro?"
-    },
-    {
-      "group_key": "d1e1032f9d5aa10f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"keep\", \"open\", \"opened\", \"notes\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-06-01 14:53:29",
-      "turn_count": 1,
-      "title_snippet": "open Keep"
     },
     {
       "group_key": "273a409fdfefa599",
@@ -9924,15 +9897,6 @@
       "title_snippet": "Do you see these suspender pieces? The one on the right is broken Attached 1 file. - 5088c731-ac86-4948-b66d-38d53e3a209c"
     },
     {
-      "group_key": "84c4c78c79eba20d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-05-18 19:06:57",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "164dc1c6af165f4a",
       "primary_category": "software",
       "keywords_json": "[\"like\", \"toys\", \"different\", \"well\", \"toy\", \"use\", \"really\", \"even\"]",
@@ -9949,15 +9913,6 @@
       "first_timestamp": "2026-05-18 17:40:17",
       "turn_count": 2,
       "title_snippet": "I've got this bop it with me and I see that the Muppet extreme is very expensive"
-    },
-    {
-      "group_key": "5fd22ae48d9e2f42",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-05-18 16:35:51",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "46063276a066a142",
@@ -10120,24 +10075,6 @@
       "first_timestamp": "2026-05-13 17:45:50",
       "turn_count": 9,
       "title_snippet": "I would like to be able to lift my Chevy Malibu up in the back end so that I can get under it and do some maintenance. Mainly adding a trailer hitch, the Jack, I have cannot get my vehicle up that high, in the past what I've done as I stack bricks and lay cardboard up on top of it so it doesn't pop my tires and then I just drive up to get the height"
-    },
-    {
-      "group_key": "1b13e9dd39137316",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"play\", \"please\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-05-13 14:17:06",
-      "turn_count": 1,
-      "title_snippet": "play audible please"
-    },
-    {
-      "group_key": "61f4786d60a66310",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"audible\", \"got\", \"could\", \"unlock\", \"phone\", \"need\", \"open\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-05-13 14:16:23",
-      "turn_count": 1,
-      "title_snippet": "play Audible"
     },
     {
       "group_key": "8a1c7475f19ba405",
@@ -10338,15 +10275,6 @@
       "title_snippet": "I would like to buy a Nintendo switch. 2. Where's the best outlet to purchase one of these devices"
     },
     {
-      "group_key": "eb6373cf809e02dc",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-05-10 18:32:34",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "53bd24ba70e6c6f6",
       "primary_category": "hardware",
       "keywords_json": "[\"ultrasonic\", \"fish\", \"think\", \"belonged\", \"tank\", \"attached\", \"file\", \"mist\"]",
@@ -10509,15 +10437,6 @@
       "title_snippet": "I'm at a John Deere facility here in Johnston Iowa is there anything cool I can do here"
     },
     {
-      "group_key": "8cbea3e6269dd0d5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-05-07 13:46:37",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
       "group_key": "4698",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"may\"]",
@@ -10678,15 +10597,6 @@
       "first_timestamp": "2026-05-05 09:49:53",
       "turn_count": 2,
       "title_snippet": "In https://www.fnbames.com, where can I get my tax INT statements? It has a route to TurboTax, but I don't use that"
-    },
-    {
-      "group_key": "eb7b2a0a66110ae5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"mcdonald\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-05-04 23:20:13",
-      "turn_count": 1,
-      "title_snippet": "open McDonald's"
     },
     {
       "group_key": "09035434b0e3b332",
@@ -11139,15 +11049,6 @@
       "title_snippet": "Sometimes people or different media talk about. Like I know when their Apple TV show the severance they reference they're being a big me and a little me. So like when they're working they're the literally but then there's they call him a biggie"
     },
     {
-      "group_key": "71e58222606396e3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gemini\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2026-04-27 17:38:24",
-      "turn_count": 1,
-      "title_snippet": "open Gemini"
-    },
-    {
       "group_key": "41859137dc1074cd",
       "primary_category": "finance",
       "keywords_json": "[\"mdma\", \"while\", \"chemical\", \"lighter\", \"often\", \"like\", \"technically\", \"brain\"]",
@@ -11400,15 +11301,6 @@
       "title_snippet": "I'm looking for a magnetic electronic educational kit for kids I seen they had it at Iowa State they had a bunch of them"
     },
     {
-      "group_key": "0c754b83063a22d9",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"keep\", \"open\", \"opened\", \"notes\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-22 11:23:54",
-      "turn_count": 1,
-      "title_snippet": "open Keep"
-    },
-    {
       "group_key": "5c5ff826d206c000",
       "primary_category": "outliers",
       "keywords_json": "[\"trip\", \"mushroom\", \"like\", \"added\", \"gummies\", \"tryptamines\", \"road\", \"contains\"]",
@@ -11436,15 +11328,6 @@
       "title_snippet": "I'm at Menards and I am wondering if they would have anything here at the Ankeny Menards that might help me to secure a ceiling Joist hook"
     },
     {
-      "group_key": "ce5ba47f5a536b0b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"perplexity\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-21 15:26:37",
-      "turn_count": 1,
-      "title_snippet": "open perplexity"
-    },
-    {
       "group_key": "5065",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"apr\"]",
@@ -11452,15 +11335,6 @@
       "first_timestamp": "2026-04-21 15:23:10",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "07c9693f39f26376",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-04-21 15:23:05",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "be6c06dccc553880",
@@ -11524,15 +11398,6 @@
       "first_timestamp": "2026-04-19 14:59:52",
       "turn_count": 1,
       "title_snippet": "My Bambu lab nozzles are covered in PLA and PETG HF Attached 1 file. - b2b7076f-295e-40bc-a005-7cc1f00da0ce"
-    },
-    {
-      "group_key": "03990abd5a8f95ae",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"perplexity\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-19 13:25:57",
-      "turn_count": 1,
-      "title_snippet": "open perplexity"
     },
     {
       "group_key": "5b55e471dbed1293",
@@ -11625,15 +11490,6 @@
       "title_snippet": "does there exists a machine or a device or tool that can cut dandelions so that I can get a large bundle of them"
     },
     {
-      "group_key": "8bc0a54cc2d3cb8a",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-04-16 10:50:45",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "64a703c717630ea3",
       "primary_category": "software",
       "keywords_json": "[\"graph\", \"permutations\", \"branching\", \"might\", \"useful\", \"pascal\", \"triangle\", \"these\"]",
@@ -11686,15 +11542,6 @@
       "first_timestamp": "2026-04-15 16:39:43",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "896300d1e885e5ab",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-04-15 16:39:37",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "1ed64ab15dd38124",
@@ -11850,15 +11697,6 @@
       "title_snippet": "I got a bamboo lab A1 and I need to replace the AMS tubes"
     },
     {
-      "group_key": "0da9901d6a4f443c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-12 01:39:37",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
       "group_key": "ab134f803e970a7c",
       "primary_category": "hardware",
       "keywords_json": "[\"since\", \"fuse\", \"transformer\", \"but\", \"magnet\", \"stirrer\", \"magnetic\", \"field\"]",
@@ -11940,15 +11778,6 @@
       "title_snippet": "I have a fish tank and I'm wondering what it is sealed with"
     },
     {
-      "group_key": "f4f14385b95b37c8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"voice\", \"memo\", \"opened\", \"recorder\", \"app\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-07 16:55:54",
-      "turn_count": 1,
-      "title_snippet": "open voice memo"
-    },
-    {
       "group_key": "a0b1f3c789082eb7",
       "primary_category": "creative",
       "keywords_json": "[\"like\", \"really\", \"but\", \"different\", \"could\", \"work\", \"computer\", \"things\"]",
@@ -11956,15 +11785,6 @@
       "first_timestamp": "2026-04-06 21:16:19",
       "turn_count": 38,
       "title_snippet": "All right, so I have a few questions. The first question I have is a long time ago when I was at Iowa State, I ate a bunch of different a variety of meat, but I had just a ton of it. I had a steak, I part of a rib eye, I had pulled pork, I had chicken, I had just all sorts of protein. And later that night, and when I was then lying in bed, I couldn't sleep and I kept waking back up because I was sweating profusely. And it was just having a tough time. I also had to go to the bathroom really bad."
-    },
-    {
-      "group_key": "7665169294ae77ca",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gemini\", \"opening\", \"user\", \"open\", \"please\", \"system\", \"use\", \"phrase\"]",
-      "outlier_score": 0.6,
-      "first_timestamp": "2026-04-06 21:08:22",
-      "turn_count": 1,
-      "title_snippet": "open Gemini please"
     },
     {
       "group_key": "5634",
@@ -11992,15 +11812,6 @@
       "first_timestamp": "2026-04-06 16:07:46",
       "turn_count": 1,
       "title_snippet": "feature"
-    },
-    {
-      "group_key": "3fb262b73305295f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"chipotle\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-06 14:07:52",
-      "turn_count": 1,
-      "title_snippet": "open Chipotle"
     },
     {
       "group_key": "5638",
@@ -12219,24 +12030,6 @@
       "title_snippet": "hey Google"
     },
     {
-      "group_key": "e6c28a680b29531a",
-      "primary_category": "outliers",
-      "keywords_json": "[\"menards\", \"navigate\", \"ames\", \"starting\", \"navigation\", \"southeast\", \"street\", \"drive\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-04-03 16:31:34",
-      "turn_count": 1,
-      "title_snippet": "navigate to Menards in Ames"
-    },
-    {
-      "group_key": "8b19d72f0c87138e",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"google\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-03 16:31:18",
-      "turn_count": 1,
-      "title_snippet": "open Google Maps"
-    },
-    {
       "group_key": "5730",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"apr\"]",
@@ -12354,15 +12147,6 @@
       "title_snippet": "Where can I find some cheap TVs and monitors with the Iowa State surplus? Be good. Are there other places I should look?"
     },
     {
-      "group_key": "7ec5468d3b84a130",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"parkmobile\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-04-01 16:10:51",
-      "turn_count": 1,
-      "title_snippet": "open parkmobile"
-    },
-    {
       "group_key": "40e1cffc267803bc",
       "primary_category": "ai_agents",
       "keywords_json": "[\"those\", \"like\", \"different\", \"many\", \"things\", \"here\", \"monitors\", \"specific\"]",
@@ -12370,24 +12154,6 @@
       "first_timestamp": "2026-04-01 03:00:18",
       "turn_count": 3,
       "title_snippet": "Do you know those like piles of TVs or they have like a collage of many monitors and TVs? I see them sometimes in different shows."
-    },
-    {
-      "group_key": "dc94489067b3bd74",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"app\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-03-30 21:51:54",
-      "turn_count": 1,
-      "title_snippet": "open the audible app"
-    },
-    {
-      "group_key": "363ef3b73aea7006",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"audible\", \"directly\", \"but\", \"help\", \"navigation\", \"finding\", \"place\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-30 21:51:45",
-      "turn_count": 1,
-      "title_snippet": "play Audible"
     },
     {
       "group_key": "db7e3ac44dd471d4",
@@ -12406,15 +12172,6 @@
       "first_timestamp": "2026-03-30 21:25:07",
       "turn_count": 1,
       "title_snippet": "hey Google can you enable Bluetooth please"
-    },
-    {
-      "group_key": "d366459f598c1c48",
-      "primary_category": "outliers",
-      "keywords_json": "[\"ames\", \"iowa\", \"navigate\", \"navigating\", \"drive\", \"miles\", \"should\", \"take\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-30 21:17:16",
-      "turn_count": 1,
-      "title_snippet": "navigate to Ames Iowa"
     },
     {
       "group_key": "3517d8acaaf7997e",
@@ -12534,15 +12291,6 @@
       "title_snippet": "Does Ikea have a credit card program"
     },
     {
-      "group_key": "cab75c93f912656a",
-      "primary_category": "outliers",
-      "keywords_json": "[\"ikea\", \"bloomington\", \"navigate\", \"minneapolis\", \"starting\", \"navigation\", \"via\", \"should\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-30 11:10:52",
-      "turn_count": 1,
-      "title_snippet": "navigate to IKEA in Minneapolis"
-    },
-    {
       "group_key": "fcd5ef9c62f12ab2",
       "primary_category": "outliers",
       "keywords_json": "[\"ride\", \"use\", \"sidewalk\", \"minneapolis\", \"bike\", \"lanes\", \"speed\", \"must\"]",
@@ -12550,15 +12298,6 @@
       "first_timestamp": "2026-03-29 21:11:50",
       "turn_count": 2,
       "title_snippet": "can you ride e-scooters in Minneapolis"
-    },
-    {
-      "group_key": "28c9911f7c5e4607",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"phone\", \"sure\", \"opening\", \"contentmetadata\", \"open\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-03-29 19:34:55",
-      "turn_count": 1,
-      "title_snippet": "open phone"
     },
     {
       "group_key": "5828",
@@ -12604,15 +12343,6 @@
       "first_timestamp": "2026-03-29 13:09:49",
       "turn_count": 1,
       "title_snippet": "What is a queen size bed dimensions?"
-    },
-    {
-      "group_key": "6abc45011fdcbb8e",
-      "primary_category": "outliers",
-      "keywords_json": "[\"mall\", \"america\", \"navigate\", \"starting\", \"navigation\", \"drive\", \"approximately\", \"miles\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-29 09:59:39",
-      "turn_count": 1,
-      "title_snippet": "navigate to the Mall of America"
     },
     {
       "group_key": "9b2352bc3f13673c",
@@ -12750,15 +12480,6 @@
       "title_snippet": "how much is a GTX graphics processor"
     },
     {
-      "group_key": "df670ddd28dce787",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-24 18:23:37",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "623c448078720700",
       "primary_category": "software",
       "keywords_json": "[\"notion\", \"sir\", \"chrome\", \"gemini\", \"zen\", \"mode\", \"button\", \"like\"]",
@@ -12858,15 +12579,6 @@
       "title_snippet": "I'm currently playing and a on a meta Quest 3 5 1 2."
     },
     {
-      "group_key": "58af53f4bc44618b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"keep\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-03-17 15:37:30",
-      "turn_count": 1,
-      "title_snippet": "open Google Keep"
-    },
-    {
       "group_key": "246d1c7ba855c666",
       "primary_category": "ai_agents",
       "keywords_json": "[\"wax\", \"hair\", \"waxing\", \"professional\", \"removal\", \"kits\", \"these\", \"find\"]",
@@ -12892,15 +12604,6 @@
       "first_timestamp": "2026-03-15 21:58:40",
       "turn_count": 1,
       "title_snippet": "there's a blizzard and there's a guy stuck in a ditch what should I do"
-    },
-    {
-      "group_key": "ec05b36020e87363",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-03-15 17:05:45",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "7c01d18d48612fdb",
@@ -12982,15 +12685,6 @@
       "first_timestamp": "2026-03-14 11:16:31",
       "turn_count": 3,
       "title_snippet": "what is a m i d i"
-    },
-    {
-      "group_key": "cf82d17acdb1eff7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-03-13 20:41:20",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
     },
     {
       "group_key": "302b7f3f74500235",
@@ -13263,15 +12957,6 @@
       "title_snippet": "does baking soda go well with steel?"
     },
     {
-      "group_key": "d1a3a741c7c7a8af",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gemini\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2026-03-07 13:44:16",
-      "turn_count": 1,
-      "title_snippet": "open Gemini."
-    },
-    {
       "group_key": "e7f90b4dcc9f547e",
       "primary_category": "hardware",
       "keywords_json": "[\"alcohol\", \"oil\", \"adhesive\", \"water\", \"isopropyl\", \"off\", \"layer\", \"like\"]",
@@ -13317,15 +13002,6 @@
       "title_snippet": "What does reminisce mean?"
     },
     {
-      "group_key": "b7ab1de8d12155c8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"messages\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-03-04 13:22:11",
-      "turn_count": 1,
-      "title_snippet": "Open messages."
-    },
-    {
       "group_key": "95dec7a116a926c7",
       "primary_category": "creative",
       "keywords_json": "[\"google\", \"keep\", \"new\", \"note\", \"https\", \"com\", \"make\", \"key\"]",
@@ -13360,33 +13036,6 @@
       "first_timestamp": "2026-02-27 10:47:40",
       "turn_count": 1,
       "title_snippet": "Actually, I can't do that."
-    },
-    {
-      "group_key": "ae24adf2fd00a96e",
-      "primary_category": "outliers",
-      "keywords_json": "[\"navigate\", \"naked\", \"view\", \"high\", \"school\", \"sorry\", \"appears\", \"help\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-25 22:16:42",
-      "turn_count": 1,
-      "title_snippet": "navigate to naked View High School"
-    },
-    {
-      "group_key": "9d5d4975170f1f5d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-25 22:15:41",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "34f35521f3ad8522",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-25 13:03:30",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "e972f97efb2d9c0e",
@@ -13432,15 +13081,6 @@
       "first_timestamp": "2026-02-24 18:21:21",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "c3912c87b1b52f2b",
-      "primary_category": "outliers",
-      "keywords_json": "[\"michaels\", \"navigate\", \"found\", \"few\", \"locations\", \"like\", \"delaware\", \"ave\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-24 18:21:15",
-      "turn_count": 1,
-      "title_snippet": "navigate to Michaels"
     },
     {
       "group_key": "7a03ac2f8eab6b8d",
@@ -13524,15 +13164,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "3b798d46c768ad8d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"media\", \"open\", \"messages\", \"stored\", \"files\", \"search\", \"google\", \"photos\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-23 09:47:50",
-      "turn_count": 1,
-      "title_snippet": "open messages stored media"
-    },
-    {
       "group_key": "fc4e83d80dcbace7",
       "primary_category": "software",
       "keywords_json": "[\"openscad\", \"scad\", \"file\", \"lid\", \"script\", \"salt\", \"top\", \"screw\"]",
@@ -13542,15 +13173,6 @@
       "title_snippet": "hey Gemini, I'd like to make a 3D rendering of a salt shaker from the SCAT files."
     },
     {
-      "group_key": "9cc6ea8de4550658",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-22 20:30:26",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "406abf49e47f1172",
       "primary_category": "creative",
       "keywords_json": "[\"last\", \"two\", \"messages\", \"today\", \"sent\", \"bailey\", \"read\", \"aloud\"]",
@@ -13558,33 +13180,6 @@
       "first_timestamp": "2026-02-22 17:28:18",
       "turn_count": 1,
       "title_snippet": "Can you read the last two messages aloud Attached 1 file. - image.png"
-    },
-    {
-      "group_key": "bc381f0b26f0985f",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-22 17:27:56",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "8a7dae80a6be2bd8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"messages\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-22 17:27:39",
-      "turn_count": 1,
-      "title_snippet": "open messages"
-    },
-    {
-      "group_key": "69545f581ae7cd3c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"alarms\", \"opened\", \"clock\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-22 14:55:06",
-      "turn_count": 1,
-      "title_snippet": "open alarms"
     },
     {
       "group_key": "0598ddadebcc32bf",
@@ -13603,15 +13198,6 @@
       "first_timestamp": "2026-02-22 12:58:04",
       "turn_count": 2,
       "title_snippet": "look for Bailey Haydn"
-    },
-    {
-      "group_key": "8b1b40d80ae03756",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"messages\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-22 12:57:55",
-      "turn_count": 1,
-      "title_snippet": "open messages"
     },
     {
       "group_key": "18d8a8ef13bf0193",
@@ -13657,15 +13243,6 @@
       "first_timestamp": "2026-02-22 08:50:23",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "f08251832abe9638",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-21 21:10:13",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "5c11cba10ec09218",
@@ -13812,15 +13389,6 @@
       "title_snippet": "I really enjoy looking at minor apps to break down complex information. It reminds me of what many large organizations do when they create many forms of reports. Or what libraries do in order to organize and archive their vast amount of information. sort of a very large public Zettelkasten."
     },
     {
-      "group_key": "cbd6eb099a30254d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-19 15:58:41",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "7a245154d5605aed",
       "primary_category": "software",
       "keywords_json": "[\"excalidraw\", \"draw\", \"custom\", \"version\", \"built\", \"use\", \"app\", \"obsidian\"]",
@@ -13846,15 +13414,6 @@
       "first_timestamp": "2026-02-18 11:31:07",
       "turn_count": 2,
       "title_snippet": "take me to the Ames Surplus"
-    },
-    {
-      "group_key": "3408393d3c5edb89",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-18 11:31:02",
-      "turn_count": 1,
-      "title_snippet": "open maps"
     },
     {
       "group_key": "6374",
@@ -13900,15 +13459,6 @@
       "first_timestamp": "2026-02-17 18:17:25",
       "turn_count": 4,
       "title_snippet": "what does exfoliate mean"
-    },
-    {
-      "group_key": "d64ab213b63ac7c2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-17 16:56:32",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
     },
     {
       "group_key": "a7fca73a2257bb11",
@@ -13999,15 +13549,6 @@
       "first_timestamp": "2026-02-15 18:23:32",
       "turn_count": 8,
       "title_snippet": "I have a Chevy Malibu and I'd like to put a hitch on it. How can I go about doing that?"
-    },
-    {
-      "group_key": "a1c9424aae7ab15a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"keep\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-15 15:42:27",
-      "turn_count": 1,
-      "title_snippet": "open Google Keep"
     },
     {
       "group_key": "dde2976755dd876b",
@@ -14361,15 +13902,6 @@
       "title_snippet": "are there any tiny dog shock collars for things like shih tzus"
     },
     {
-      "group_key": "4e11a5e5747d4a1f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-11 15:39:36",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
       "group_key": "d5f7ca22e31ea611",
       "primary_category": "outliers",
       "keywords_json": "[\"niacinamide\", \"well\", \"high\", \"but\", \"use\", \"yes\", \"current\", \"take\"]",
@@ -14377,15 +13909,6 @@
       "first_timestamp": "2026-02-11 02:07:14",
       "turn_count": 5,
       "title_snippet": "what is niacinamide"
-    },
-    {
-      "group_key": "568a87966be4ad01",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"storage\", \"open\", \"opened\", \"settings\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-10 23:43:36",
-      "turn_count": 1,
-      "title_snippet": "open storage"
     },
     {
       "group_key": "6581",
@@ -14404,24 +13927,6 @@
       "first_timestamp": "2026-02-10 22:20:09",
       "turn_count": 2,
       "title_snippet": "Attached 1 file. - 6bf41ca8-bbd1-4dbd-8b9b-0c09aafd543b"
-    },
-    {
-      "group_key": "f0bc6ebb66734cde",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"contacts\", \"open\", \"opening\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-10 17:45:23",
-      "turn_count": 1,
-      "title_snippet": "open contacts"
-    },
-    {
-      "group_key": "43c95184d3b04b9d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-10 17:45:02",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "cf55b858861edaf5",
@@ -14604,15 +14109,6 @@
       "title_snippet": "I have a few lights like these can I DIY this and use a battery instead of the wall outlet or do I need the wall outlet Attached 1 file. - 33d168b5-ed2c-469e-ad17-fa735a32bdc3"
     },
     {
-      "group_key": "98df15b5bfedcdbd",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"rocket\", \"money\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-05 21:04:10",
-      "turn_count": 1,
-      "title_snippet": "open Rocket money"
-    },
-    {
       "group_key": "6656",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"feb\"]",
@@ -14667,15 +14163,6 @@
       "title_snippet": "How do I use this bottle jack Attached 1 file. - 827c7993-6955-4a91-854b-6e4460fc497f"
     },
     {
-      "group_key": "3bdf5a8a0d6dedc8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"messages\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-05 16:44:44",
-      "turn_count": 1,
-      "title_snippet": "open messages"
-    },
-    {
       "group_key": "013c6dcff8809c9a",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"entityid\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
@@ -14683,24 +14170,6 @@
       "first_timestamp": "2026-02-05 03:37:44",
       "turn_count": 1,
       "title_snippet": "set an alarm for 10:00 a.m."
-    },
-    {
-      "group_key": "035c2927c5e94201",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"drive\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-05 03:34:32",
-      "turn_count": 1,
-      "title_snippet": "open Drive"
-    },
-    {
-      "group_key": "1ddb05009f600ab1",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"ears\", \"help\", \"projects\", \"schoolwork\", \"anything\", \"else\", \"today\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-05 02:51:17",
-      "turn_count": 1,
-      "title_snippet": "open up"
     },
     {
       "group_key": "57dde3460b6b24b4",
@@ -14901,15 +14370,6 @@
       "title_snippet": "how late is Romantix in Ames open"
     },
     {
-      "group_key": "91c96cb8ad6d409c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"screenshots\", \"open\", \"opened\", \"pixel\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-03 20:57:59",
-      "turn_count": 1,
-      "title_snippet": "Open screenshots"
-    },
-    {
       "group_key": "6739",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"feb\"]",
@@ -14935,15 +14395,6 @@
       "first_timestamp": "2026-02-03 17:14:15",
       "turn_count": 1,
       "title_snippet": "what's the difference between hemp and marijuana"
-    },
-    {
-      "group_key": "e81c8bdcac3a87a3",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"money\", \"cash\", \"king\", \"like\", \"explore\", \"investment\", \"strategies\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-02-03 16:07:41",
-      "turn_count": 1,
-      "title_snippet": "open with money"
     },
     {
       "group_key": "1f29e93615be6054",
@@ -14973,15 +14424,6 @@
       "title_snippet": "look up The Foundry Apartments"
     },
     {
-      "group_key": "6de826a8b577670d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"settings\", \"open\", \"opened\", \"page\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-03 14:32:21",
-      "turn_count": 1,
-      "title_snippet": "open settings"
-    },
-    {
       "group_key": "6749",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"feb\"]",
@@ -14989,15 +14431,6 @@
       "first_timestamp": "2026-02-03 13:26:59",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "25d528d370df43c1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gemini\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2026-02-03 13:26:20",
-      "turn_count": 1,
-      "title_snippet": "open Gemini"
     },
     {
       "group_key": "c226080a7ef382b4",
@@ -15027,15 +14460,6 @@
       "title_snippet": "what does apothecary mean"
     },
     {
-      "group_key": "173423b33912150b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"messages\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-02 15:25:15",
-      "turn_count": 1,
-      "title_snippet": "open messages"
-    },
-    {
       "group_key": "a23d8263c9ed7d0d",
       "primary_category": "outliers",
       "keywords_json": "[\"blow\", \"ring\", \"vape\", \"blowing\", \"rings\", \"classic\", \"day\", \"trick\"]",
@@ -15061,15 +14485,6 @@
       "first_timestamp": "2026-02-01 21:39:32",
       "turn_count": 5,
       "title_snippet": "What kind of style of lights are these and what can they plug into Attached 1 file. - b14166c9-29ff-46b4-ae7d-f36caf527b44"
-    },
-    {
-      "group_key": "2b21cefd54e1f651",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-02-01 18:34:48",
-      "turn_count": 1,
-      "title_snippet": "open maps"
     },
     {
       "group_key": "0993736ed3670081",
@@ -15450,15 +14865,6 @@
       "title_snippet": "Does there exist a portable scanner? I know I can scan documents using my phone but it takes so long and if I had a lot of pages to go through it would take a lot of time"
     },
     {
-      "group_key": "1096beb8ffe8921a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"alarms\", \"opened\", \"clock\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-27 15:03:13",
-      "turn_count": 1,
-      "title_snippet": "open alarms"
-    },
-    {
       "group_key": "273643f90ed87142",
       "primary_category": "finance",
       "keywords_json": "[\"card\", \"cards\", \"chase\", \"bonus\", \"business\", \"american\", \"express\", \"cash\"]",
@@ -15657,15 +15063,6 @@
       "title_snippet": "set an alarm for 7:15"
     },
     {
-      "group_key": "f394514450b3ffce",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-24 12:56:14",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
       "group_key": "c21394e46bca8563",
       "primary_category": "finance",
       "keywords_json": "[\"bees\", \"rice\", \"test\", \"period\", \"queen\", \"where\", \"cannoli\", \"carniolan\"]",
@@ -15835,24 +15232,6 @@
       "first_timestamp": "2026-01-21 04:50:29",
       "turn_count": 4,
       "title_snippet": "I own an intel realsense L515"
-    },
-    {
-      "group_key": "623c5f07d3051a45",
-      "primary_category": "outliers",
-      "keywords_json": "[\"scarf\", \"length\", \"look\", \"show\", \"ways\", \"wear\", \"wearing\", \"versatile\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-20 00:44:48",
-      "turn_count": 1,
-      "title_snippet": "show me some ways to wear a scarf"
-    },
-    {
-      "group_key": "64cef6abae4ab4f7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"printmaster\", \"opened\", \"print\", \"master\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-20 00:00:28",
-      "turn_count": 1,
-      "title_snippet": "open printmaster"
     },
     {
       "group_key": "8b4b546c1d8c7fa7",
@@ -16062,24 +15441,6 @@
       "title_snippet": "At fareway, are we allowed to wear scarves?"
     },
     {
-      "group_key": "15e92d3ed11f9093",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"display\", \"settings\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-16 16:33:54",
-      "turn_count": 1,
-      "title_snippet": "open display settings"
-    },
-    {
-      "group_key": "0594f266f40139d2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-16 12:10:27",
-      "turn_count": 1,
-      "title_snippet": "set alarm for 11:47"
-    },
-    {
       "group_key": "ba700b32728219f8",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -16215,15 +15576,6 @@
       "title_snippet": "I have this calligraphy pen."
     },
     {
-      "group_key": "1fc511ed3b7054c1",
-      "primary_category": "finance",
-      "keywords_json": "[\"open\", \"parkmobile\", \"app\", \"store\", \"parking\", \"online\", \"download\", \"apple\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2026-01-13 16:47:06",
-      "turn_count": 1,
-      "title_snippet": "open parkmobile"
-    },
-    {
       "group_key": "220a4a4c32deabe5",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"noon\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
@@ -16260,15 +15612,6 @@
       "title_snippet": "how many amps are in a Duracell D battery"
     },
     {
-      "group_key": "abfd19f74e09e084",
-      "primary_category": "outliers",
-      "keywords_json": "[\"photos\", \"open\", \"sure\", \"opening\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-09 22:28:59",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
       "group_key": "82946adef2fe2ddc",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -16303,15 +15646,6 @@
       "first_timestamp": "2026-01-09 05:22:19",
       "turn_count": 1,
       "title_snippet": "How do AC, DC, and their brushless variants function differently? Learning coach was used in this chat. Manage your Gems."
-    },
-    {
-      "group_key": "f94b4a0bc44b4a25",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"target\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-08 22:42:07",
-      "turn_count": 1,
-      "title_snippet": "open Target"
     },
     {
       "group_key": "91beb32b32236762",
@@ -16438,15 +15772,6 @@
       "first_timestamp": "2026-01-05 17:40:33",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "8cb57d060fd383e7",
-      "primary_category": "outliers",
-      "keywords_json": "[\"ankeny\", \"clips\", \"sport\", \"haircuts\", \"search\", \"sports\", \"found\", \"two\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-05 17:40:27",
-      "turn_count": 1,
-      "title_snippet": "search for Sports Clips in Ankeny"
     },
     {
       "group_key": "fbc94fc23cc9b71a",
@@ -16593,24 +15918,6 @@
       "title_snippet": "what is Cyrano de Bergerac"
     },
     {
-      "group_key": "d558dfe0a90b97e1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-02 19:03:46",
-      "turn_count": 1,
-      "title_snippet": "open Play Store"
-    },
-    {
-      "group_key": "aa02a7f1747399bf",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2026-01-02 16:25:53",
-      "turn_count": 1,
-      "title_snippet": "set alarm for 3:50"
-    },
-    {
       "group_key": "7126",
       "primary_category": "outliers",
       "keywords_json": "[\"gave\", \"feedback\", \"good\", \"response\", \"jan\", \"cdt\"]",
@@ -16618,15 +15925,6 @@
       "first_timestamp": "2026-01-02 12:11:25",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "f906b00bc0c7a99d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-01 19:01:33",
-      "turn_count": 1,
-      "title_snippet": "open maps"
     },
     {
       "group_key": "efddd83d539b7d76",
@@ -16638,15 +15936,6 @@
       "title_snippet": "set an alarm for 11:00 a.m. tomorrow"
     },
     {
-      "group_key": "60590d21462069f7",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-01 18:54:50",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "7133",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"http\", \"googleusercontent\", \"com\", \"jan\"]",
@@ -16654,24 +15943,6 @@
       "first_timestamp": "2026-01-01 18:53:01",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "dfd9db2fd0e2082c",
-      "primary_category": "outliers",
-      "keywords_json": "[\"website\", \"wild\", \"things\", \"show\", \"pet\", \"shop\", \"https\", \"thewildthingspetshop\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-01 18:52:55",
-      "turn_count": 1,
-      "title_snippet": "show me the website for Wild Things"
-    },
-    {
-      "group_key": "37c7624f96d5dcb6",
-      "primary_category": "outliers",
-      "keywords_json": "[\"directions\", \"show\", \"hop\", \"getting\", \"via\", \"state\", \"should\", \"take\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2026-01-01 18:52:37",
-      "turn_count": 1,
-      "title_snippet": "show me the directions to 30 hop"
     },
     {
       "group_key": "7136",
@@ -16719,24 +15990,6 @@
       "title_snippet": "can I doordash to go pick something up that I've already ordered"
     },
     {
-      "group_key": "45ad39e88a038144",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"waze\", \"matching\", \"installed\", \"apps\", \"found\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-12-29 20:52:23",
-      "turn_count": 1,
-      "title_snippet": "open Waze"
-    },
-    {
-      "group_key": "a545c1dd576d18f5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"ihome\", \"open\", \"opened\", \"fitness\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-29 17:29:02",
-      "turn_count": 1,
-      "title_snippet": "open iHome"
-    },
-    {
       "group_key": "c96d3227cc0e1a6c",
       "primary_category": "outliers",
       "keywords_json": "[\"llc\", \"iowa\", \"need\", \"official\", \"website\", \"members\", \"file\", \"here\"]",
@@ -16744,15 +15997,6 @@
       "first_timestamp": "2025-12-29 15:26:36",
       "turn_count": 3,
       "title_snippet": "Hello, if I were to start an LLC in Ankeny, Iowa and I say it only has one or two members. Would I be able to add remove members later on?"
-    },
-    {
-      "group_key": "137778a47016678f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"timer\", \"open\", \"opened\", \"clock\", \"app\", \"includes\", \"functionality\", \"contentmetadata\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-29 15:18:52",
-      "turn_count": 1,
-      "title_snippet": "open timer"
     },
     {
       "group_key": "580bbcdfc3488c63",
@@ -16890,15 +16134,6 @@
       "title_snippet": "Round up some wholesome news from today"
     },
     {
-      "group_key": "c7aff50f37dd4a2f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gemini\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-12-22 18:12:14",
-      "turn_count": 1,
-      "title_snippet": "open Gemini"
-    },
-    {
       "group_key": "d0f61855fe2e262c",
       "primary_category": "hardware",
       "keywords_json": "[\"add\", \"butane\", \"ensure\", \"refill\", \"cool\", \"down\", \"device\", \"lighter\"]",
@@ -17007,15 +16242,6 @@
       "title_snippet": "set an alarm for 7:00 a.m."
     },
     {
-      "group_key": "34169f919e7cc607",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"chrome\", \"open\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-19 11:49:55",
-      "turn_count": 1,
-      "title_snippet": "open Google Chrome"
-    },
-    {
       "group_key": "c676dc217f7c324b",
       "primary_category": "outliers",
       "keywords_json": "[\"uninstall\", \"lovable\", \"sorry\", \"cannot\", \"apps\"]",
@@ -17023,15 +16249,6 @@
       "first_timestamp": "2025-12-19 11:49:31",
       "turn_count": 1,
       "title_snippet": "uninstall lovable"
-    },
-    {
-      "group_key": "f561e10425501666",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"lovable\", \"open\", \"opened\", \"app\", \"explanation\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-19 11:49:15",
-      "turn_count": 1,
-      "title_snippet": "open lovable"
     },
     {
       "group_key": "7248",
@@ -17140,15 +16357,6 @@
       "first_timestamp": "2025-12-17 21:33:08",
       "turn_count": 1,
       "title_snippet": "Do you see these cable symbols Attached 1 file. - ee231127-9a7c-4360-958d-8bede4dfc516"
-    },
-    {
-      "group_key": "3223e8d5a6fd0e9a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"settings\", \"open\", \"opened\", \"general\", \"page\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-17 18:24:55",
-      "turn_count": 1,
-      "title_snippet": "open settings"
     },
     {
       "group_key": "15c5d0ef57b2bddc",
@@ -17331,24 +16539,6 @@
       "title_snippet": "Can you see the videos in this webpage? https://www.domestika.org/en/courses/5758-brain-nutrition-for-creatives-eat-for-innovation-flow/units/21133-strategic-eating-for-creative-flow"
     },
     {
-      "group_key": "71533f35f920109e",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"whiskey\", \"river\", \"ankeny\", \"pharmacy\", \"tonight\", \"walgreens\", \"blvd\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-12-13 21:53:46",
-      "turn_count": 1,
-      "title_snippet": "open tonight"
-    },
-    {
-      "group_key": "122fd925b68df215",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"alarms\", \"opened\", \"clock\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-13 13:43:20",
-      "turn_count": 1,
-      "title_snippet": "open alarms"
-    },
-    {
       "group_key": "7319",
       "primary_category": "software",
       "keywords_json": "[\"created\", \"gemini\", \"canvas\", \"titled\", \"internal\", \"mic\", \"settings\", \"mac\"]",
@@ -17430,15 +16620,6 @@
       "title_snippet": "Let's create a poster: Moving from traditional recitation to discussion improves student involvement. Discussion allows students to clear up their reasoning and teachers to help them and allows them to shift their thinking to the mathematical community. Students are increasingly learning using video games, and teachers are increasingly helping students learn by themselves making video games designed around subjects or curriculum 1 generated image."
     },
     {
-      "group_key": "6e2eaf3c8632a9b0",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-12-08 13:43:05",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "11cf381c68f226f9",
       "primary_category": "outliers",
       "keywords_json": "[\"tongue\", \"examples\", \"strongly\", \"attached\", \"condition\", \"please\", \"show\", \"describing\"]",
@@ -17500,15 +16681,6 @@
       "first_timestamp": "2025-12-07 13:09:15",
       "turn_count": 5,
       "title_snippet": "Given what you know about me. I'm looking to start better. Hope. therapy with therapist but I need to create an initial prompt. For the therapist to get to know me."
-    },
-    {
-      "group_key": "b76268b6572ed0fe",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"settings\", \"opened\", \"general\", \"page\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-12-07 13:05:56",
-      "turn_count": 1,
-      "title_snippet": "settings"
     },
     {
       "group_key": "3fd1dd390abe0e84",
@@ -17727,24 +16899,6 @@
       "title_snippet": "what is the difference between a string bean and a green bean"
     },
     {
-      "group_key": "4ba4be85a536e311",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-28 22:52:46",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
-      "group_key": "703d9ce3cf20972c",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"audiobook\", \"cannot\", \"directly\", \"control\", \"device\", \"apps\", \"need\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-28 22:52:18",
-      "turn_count": 1,
-      "title_snippet": "play audiobook"
-    },
-    {
       "group_key": "be8a3791812c21f5",
       "primary_category": "outliers",
       "keywords_json": "[\"football\", \"player\", \"trans\", \"canadian\", \"famous\", \"quinn\", \"non\", \"binary\"]",
@@ -17889,15 +17043,6 @@
       "title_snippet": "can you use old iPhones to mine Bitcoin"
     },
     {
-      "group_key": "936c64eb7a29c98b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-17 16:57:46",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
       "group_key": "e098ab86fb948cf9",
       "primary_category": "finance",
       "keywords_json": "[\"nicotine\", \"salt\", \"products\", \"question\", \"cost\", \"here\", \"product\", \"freebase\"]",
@@ -17968,24 +17113,6 @@
       "first_timestamp": "2025-11-15 00:19:02",
       "turn_count": 7,
       "title_snippet": "Hey Gemini. how Do marijuana plants grow? And do they need a lot of light? enter"
-    },
-    {
-      "group_key": "88a4bff70140ceae",
-      "primary_category": "outliers",
-      "keywords_json": "[\"voice\", \"access\", \"start\", \"started\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-14 11:28:11",
-      "turn_count": 1,
-      "title_snippet": "start voice access"
-    },
-    {
-      "group_key": "bf20aed740f19ff8",
-      "primary_category": "creative",
-      "keywords_json": "[\"youtube\", \"music\", \"open\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-11-13 17:30:13",
-      "turn_count": 1,
-      "title_snippet": "open YouTube music"
     },
     {
       "group_key": "d5afcb3a557a9b78",
@@ -18150,15 +17277,6 @@
       "title_snippet": "set an alarm for November 20th at 4:00 p.m. titled"
     },
     {
-      "group_key": "f1dd57cf88ea11fc",
-      "primary_category": "outliers",
-      "keywords_json": "[\"maps\", \"open\", \"sure\", \"opening\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-05 00:01:09",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
       "group_key": "7f4753732d5c10a9",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -18213,24 +17331,6 @@
       "title_snippet": "look up Andrea look up fisher Investments"
     },
     {
-      "group_key": "0d9aa2894832a914",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-02 19:15:39",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "92d2e4b6a1fee929",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-02 18:14:00",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "32723894962bfb2d",
       "primary_category": "ai_agents",
       "keywords_json": "[\"disturb\", \"mode\", \"off\", \"turn\", \"turned\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
@@ -18238,15 +17338,6 @@
       "first_timestamp": "2025-11-02 13:10:26",
       "turn_count": 1,
       "title_snippet": "turn Do Not Disturb mode off"
-    },
-    {
-      "group_key": "6423e99edaa79a09",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-11-02 13:09:19",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "51e94b3688b7c310",
@@ -18312,15 +17403,6 @@
       "title_snippet": "hey Alexa what time is the Vikings game today"
     },
     {
-      "group_key": "beb87b486afe1cc2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-11-02 02:29:11",
-      "turn_count": 1,
-      "title_snippet": "open Play Store"
-    },
-    {
       "group_key": "227f9c71991b3bd1",
       "primary_category": "outliers",
       "keywords_json": "[\"state\", \"iowa\", \"football\", \"game\", \"watch\", \"arizona\", \"where\", \"against\"]",
@@ -18375,33 +17457,6 @@
       "title_snippet": "how can you get liquid to come out of your nose"
     },
     {
-      "group_key": "c8871a5977f138c4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-31 20:44:01",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "16ced133ec0e1f55",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"contacts\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-31 18:02:40",
-      "turn_count": 1,
-      "title_snippet": "open contacts"
-    },
-    {
-      "group_key": "9e691708b36fe9aa",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"outlook\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-31 14:49:50",
-      "turn_count": 1,
-      "title_snippet": "open Outlook"
-    },
-    {
       "group_key": "159c6a8f07c9a43e",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -18438,15 +17493,6 @@
       "title_snippet": "where is the nearby music store"
     },
     {
-      "group_key": "899ddc99c474ef74",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"discord\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-28 22:32:07",
-      "turn_count": 1,
-      "title_snippet": "open Discord"
-    },
-    {
       "group_key": "3d6df197fd6b0bba",
       "primary_category": "outliers",
       "keywords_json": "[\"partir\", \"means\", \"does\", \"partira\", \"mean\", \"spanish\", \"third\", \"person\"]",
@@ -18465,24 +17511,6 @@
       "title_snippet": "what does Prima mean"
     },
     {
-      "group_key": "c9799743252a6bc1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"authenticator\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-28 01:02:42",
-      "turn_count": 1,
-      "title_snippet": "open Authenticator"
-    },
-    {
-      "group_key": "a25478e27f08b536",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"decatur\", \"open\", \"device\", \"google\", \"search\", \"couldn\", \"find\", \"app\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-28 01:02:33",
-      "turn_count": 1,
-      "title_snippet": "open Decatur"
-    },
-    {
       "group_key": "5bb1ac11b676ef44",
       "primary_category": "outliers",
       "keywords_json": "[\"play\", \"noon\", \"today\", \"football\", \"games\", \"dolphins\", \"falcons\", \"bears\"]",
@@ -18490,15 +17518,6 @@
       "first_timestamp": "2025-10-26 11:39:18",
       "turn_count": 1,
       "title_snippet": "what football games play today"
-    },
-    {
-      "group_key": "5436cf41c6b1f190",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-24 21:37:02",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
     },
     {
       "group_key": "751d61f1e4273d7e",
@@ -18510,51 +17529,6 @@
       "title_snippet": "is 7UP and Dr Pepper in the same family"
     },
     {
-      "group_key": "2a3d368b36e2529d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"application\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-22 19:42:39",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "dc4a9f29f0601539",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-22 16:24:24",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "a65cad089eb68e78",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"outlook\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-22 07:47:19",
-      "turn_count": 1,
-      "title_snippet": "open Outlook"
-    },
-    {
-      "group_key": "5d5e9d06ea5f97f8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"opened\", \"app\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-22 07:40:54",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "62c17eea26479d75",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"app\", \"alarms\", \"got\", \"could\", \"unlock\", \"phone\", \"need\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-21 23:24:48",
-      "turn_count": 1,
-      "title_snippet": "open alarms"
-    },
-    {
       "group_key": "9a9ce34029c4b27a",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"tomorrow\", \"morning\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
@@ -18562,105 +17536,6 @@
       "first_timestamp": "2025-10-21 23:06:35",
       "turn_count": 1,
       "title_snippet": "set an alarm for 8:00 a.m. tomorrow morning"
-    },
-    {
-      "group_key": "e8e2bdc57168d700",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"outlook\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-21 23:02:09",
-      "turn_count": 1,
-      "title_snippet": "open Outlook"
-    },
-    {
-      "group_key": "c7700755c965645f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"maps\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-21 22:31:56",
-      "turn_count": 1,
-      "title_snippet": "open Google Maps"
-    },
-    {
-      "group_key": "975b0d604dc78e6a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"notes\", \"open\", \"opened\", \"keep\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-20 16:56:30",
-      "turn_count": 1,
-      "title_snippet": "open notes"
-    },
-    {
-      "group_key": "b43f29e648d5a79c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"translate\", \"play\", \"store\", \"website\", \"open\", \"couldn\", \"find\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 23:47:16",
-      "turn_count": 1,
-      "title_snippet": "open Google Translate"
-    },
-    {
-      "group_key": "eee378aaa18a1caf",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"yahoo\", \"open\", \"opened\", \"mail\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 23:35:32",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo"
-    },
-    {
-      "group_key": "60e2532ae74ada65",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 21:10:51",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "5e05ae47fda3788a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"notes\", \"open\", \"opened\", \"keep\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 20:48:58",
-      "turn_count": 1,
-      "title_snippet": "open notes"
-    },
-    {
-      "group_key": "fb38c3ec291efbd5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 20:28:44",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "07121559ce9c78c9",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 19:58:35",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
-      "group_key": "b2d46dbce1449be4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"docs\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-19 18:11:36",
-      "turn_count": 1,
-      "title_snippet": "open Google Docs"
-    },
-    {
-      "group_key": "513e9764f34740ce",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-10-19 18:07:33",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "886411d27e419f20",
@@ -18679,24 +17554,6 @@
       "first_timestamp": "2025-10-18 13:35:51",
       "turn_count": 1,
       "title_snippet": "set an alarm for 3:30"
-    },
-    {
-      "group_key": "7b6a3cb30063c9a7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-18 10:37:32",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "364c41c23277f4eb",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"notes\", \"open\", \"opened\", \"keep\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-18 10:16:09",
-      "turn_count": 1,
-      "title_snippet": "open notes"
     },
     {
       "group_key": "b821a5afa79bd7e1",
@@ -18724,15 +17581,6 @@
       "first_timestamp": "2025-10-14 14:18:36",
       "turn_count": 5,
       "title_snippet": "what makes fountain pens so expensive"
-    },
-    {
-      "group_key": "3e19f5f35f6415b3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"target\", \"app\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-14 14:16:29",
-      "turn_count": 1,
-      "title_snippet": "open the Target app"
     },
     {
       "group_key": "ff2e048c5f9eed78",
@@ -18789,42 +17637,6 @@
       "title_snippet": "what can you use to get rust off of metal"
     },
     {
-      "group_key": "029c4cbe7d854b32",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"allegiant\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-13 11:15:29",
-      "turn_count": 1,
-      "title_snippet": "open Allegiant"
-    },
-    {
-      "group_key": "25a8ee36b7a2d85c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-13 09:35:02",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "afc9277bdc03dffd",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-13 09:00:50",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "bfd88444ce32d4b4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-12 16:40:16",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
       "group_key": "c93d09fb18bccdb6",
       "primary_category": "creative",
       "keywords_json": "[\"file\", \"transfer\", \"images\", \"without\", \"losing\", \"quality\", \"share\", \"cloud\"]",
@@ -18879,24 +17691,6 @@
       "title_snippet": "what recipes can you make with dragon fruit"
     },
     {
-      "group_key": "370e1c0c15e29114",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-06 16:38:16",
-      "turn_count": 1,
-      "title_snippet": "open the Play Store"
-    },
-    {
-      "group_key": "c09a14f31c99d25e",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"venmo\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-06 16:23:35",
-      "turn_count": 1,
-      "title_snippet": "open venmo"
-    },
-    {
       "group_key": "24ae358e93ef032f",
       "primary_category": "creative",
       "keywords_json": "[\"tree\", \"show\", \"cottonwood\", \"leaf\", \"image\", \"picture\", \"like\", \"know\"]",
@@ -18904,15 +17698,6 @@
       "first_timestamp": "2025-10-06 13:22:38",
       "turn_count": 3,
       "title_snippet": "What leaf is this?"
-    },
-    {
-      "group_key": "13a146fa7882aef5",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"facebook\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-06 12:35:18",
-      "turn_count": 1,
-      "title_snippet": "open Facebook"
     },
     {
       "group_key": "bad31e22fc71072a",
@@ -18942,24 +17727,6 @@
       "title_snippet": "how do you get old tape off of a window"
     },
     {
-      "group_key": "9f18bd287bd78a75",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-04 09:49:33",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
-      "group_key": "bcfb9e6db552bf3d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-10-03 15:09:06",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
       "group_key": "02e591f1c8b98af4",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -18967,24 +17734,6 @@
       "first_timestamp": "2025-10-03 11:22:27",
       "turn_count": 1,
       "title_snippet": "set an alarm for 11:45"
-    },
-    {
-      "group_key": "28a12aa00c52a48f",
-      "primary_category": "outliers",
-      "keywords_json": "[\"steam\", \"open\", \"find\", \"app\", \"called\", \"device\", \"like\", \"search\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-10-02 19:03:32",
-      "turn_count": 1,
-      "title_snippet": "open Steam"
-    },
-    {
-      "group_key": "7199b300950151d4",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"audible\", \"please\", \"tell\", \"where\", \"want\", \"such\", \"app\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-10-01 14:45:51",
-      "turn_count": 1,
-      "title_snippet": "play Audible"
     },
     {
       "group_key": "e36f08da78679ef3",
@@ -19057,24 +17806,6 @@
       "first_timestamp": "2025-09-28 14:51:17",
       "turn_count": 1,
       "title_snippet": "how do you make black ink out of walnuts"
-    },
-    {
-      "group_key": "0b523c26a05c41ee",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-09-26 22:14:11",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "93784fd1b6dcd83f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"timer\", \"open\", \"opened\", \"clock\", \"app\", \"should\", \"include\", \"functionality\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-26 11:42:35",
-      "turn_count": 1,
-      "title_snippet": "open timer"
     },
     {
       "group_key": "ba03f88bb7b56c61",
@@ -19158,60 +17889,6 @@
       "title_snippet": "What kind of berries are these?"
     },
     {
-      "group_key": "f8fd8795e4f9e4dc",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"photos\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-23 20:28:18",
-      "turn_count": 1,
-      "title_snippet": "open Google photos"
-    },
-    {
-      "group_key": "9fc39d8e9402a2bb",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"minutes\", \"clock\", \"now\", \"off\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-23 08:31:59",
-      "turn_count": 1,
-      "title_snippet": "set alarm for 20 minutes"
-    },
-    {
-      "group_key": "8b72a599c9016948",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-23 08:23:49",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "7fe2f6734c21fea4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"print\", \"master\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-22 18:49:00",
-      "turn_count": 1,
-      "title_snippet": "open print master"
-    },
-    {
-      "group_key": "e6e216a164155575",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-22 14:55:29",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "0e7835283e6340ee",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-22 13:46:33",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
       "group_key": "16142d3a9e1802fd",
       "primary_category": "creative",
       "keywords_json": "[\"piano\", \"play\", \"ankeny\", \"public\", \"pianos\", \"des\", \"moines\", \"music\"]",
@@ -19248,33 +17925,6 @@
       "title_snippet": "set an alarm for 8:00 a.m."
     },
     {
-      "group_key": "e61a4c0a0ceffaa6",
-      "primary_category": "outliers",
-      "keywords_json": "[\"rocket\", \"money\", \"app\", \"bunny\", \"store\", \"bills\", \"budgets\", \"open\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-09-18 20:09:24",
-      "turn_count": 1,
-      "title_snippet": "open rocket bunny"
-    },
-    {
-      "group_key": "6b8cd53fcfa9bb42",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-18 18:38:18",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "b45b278cbbddb57f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-18 18:37:27",
-      "turn_count": 1,
-      "title_snippet": "open the Play Store"
-    },
-    {
       "group_key": "27e5eba169b9d4e8",
       "primary_category": "outliers",
       "keywords_json": "[\"warren\", \"rognes\", \"birthday\", \"couldn\", \"find\"]",
@@ -19282,69 +17932,6 @@
       "first_timestamp": "2025-09-17 19:54:32",
       "turn_count": 1,
       "title_snippet": "what is Warren rognes birthday"
-    },
-    {
-      "group_key": "1e43e0194c1c03f1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-17 14:32:38",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
-    },
-    {
-      "group_key": "70a79ffd4b9faca4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-17 12:42:28",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "e6a2dc79e9bfa0d7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-16 19:57:23",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
-      "group_key": "e3f480891fcdf000",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-16 14:18:41",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
-    },
-    {
-      "group_key": "1b624132b3fd3c22",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-16 08:58:30",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
-      "group_key": "5ffdac05563c652d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"alibaba\", \"matching\", \"installed\", \"apps\", \"found\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-09-16 08:55:02",
-      "turn_count": 1,
-      "title_snippet": "open Alibaba"
-    },
-    {
-      "group_key": "49045356481981ce",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"target\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-16 08:50:13",
-      "turn_count": 1,
-      "title_snippet": "open Target"
     },
     {
       "group_key": "2390426852f2c0e1",
@@ -19383,24 +17970,6 @@
       "title_snippet": "look up a Google look up for a woodworking shop nearby"
     },
     {
-      "group_key": "24e622e311c852a0",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 22:19:26",
-      "turn_count": 1,
-      "title_snippet": "set alarm for 6:30 a.m."
-    },
-    {
-      "group_key": "722e95993507eb72",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 15:03:29",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
-    },
-    {
       "group_key": "2f1e49942dd0dd18",
       "primary_category": "outliers",
       "keywords_json": "[\"japanese\", \"version\", \"abacus\", \"called\", \"soroban\"]",
@@ -19408,24 +17977,6 @@
       "first_timestamp": "2025-09-15 12:56:01",
       "turn_count": 1,
       "title_snippet": "what is the Japanese version of an abacus"
-    },
-    {
-      "group_key": "629b6b831b02961d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 12:53:01",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
-      "group_key": "e764cfd588ef37af",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"walmart\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 12:47:03",
-      "turn_count": 1,
-      "title_snippet": "open Walmart"
     },
     {
       "group_key": "7e97ffdde9143788",
@@ -19444,15 +17995,6 @@
       "first_timestamp": "2025-09-15 10:33:07",
       "turn_count": 2,
       "title_snippet": "can you pick a 0524 b q lock"
-    },
-    {
-      "group_key": "d2cd758e0ba40426",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-15 10:22:39",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
     },
     {
       "group_key": "b7968d1f6bc98ee0",
@@ -19480,24 +18022,6 @@
       "first_timestamp": "2025-09-14 18:20:19",
       "turn_count": 1,
       "title_snippet": "what tools do you need to pick a lock"
-    },
-    {
-      "group_key": "12f72c35884c03f3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-13 15:17:35",
-      "turn_count": 1,
-      "title_snippet": "open the Play Store"
-    },
-    {
-      "group_key": "e30eaf83f213d6e3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-13 15:12:47",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
     },
     {
       "group_key": "9361880e102aa459",
@@ -19534,24 +18058,6 @@
       "first_timestamp": "2025-09-13 15:05:33",
       "turn_count": 1,
       "title_snippet": "where can I watch the Iowa game"
-    },
-    {
-      "group_key": "e582cfebd30b78e2",
-      "primary_category": "outliers",
-      "keywords_json": "[\"watch\", \"iowa\", \"state\", \"game\", \"show\", \"where\", \"also\", \"available\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-09-13 15:05:18",
-      "turn_count": 1,
-      "title_snippet": "show me where I can watch the Iowa State game"
-    },
-    {
-      "group_key": "fd234fb1bd604fa8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"snapchat\", \"now\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-11 19:33:36",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
     },
     {
       "group_key": "2cdaf9c7038c29a4",
@@ -19608,15 +18114,6 @@
       "title_snippet": "look up staircase painting"
     },
     {
-      "group_key": "e0ae7871b378d5ba",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"chrome\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-07 13:02:43",
-      "turn_count": 1,
-      "title_snippet": "open Google Chrome"
-    },
-    {
       "group_key": "df709aca41a7e29f",
       "primary_category": "creative",
       "keywords_json": "[\"media\", \"molecule\", \"look\", \"british\", \"video\", \"game\", \"developer\", \"best\"]",
@@ -19653,42 +18150,6 @@
       "title_snippet": "Lobster"
     },
     {
-      "group_key": "8056017ba33dc8af",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-06 08:39:03",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
-      "group_key": "afdc38458ec26584",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"target\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-06 08:32:56",
-      "turn_count": 1,
-      "title_snippet": "open Target"
-    },
-    {
-      "group_key": "3e0791b0ba07857f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"alarms\", \"open\", \"opened\", \"clock\", \"app\", \"should\", \"allow\", \"manage\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-05 23:53:23",
-      "turn_count": 1,
-      "title_snippet": "open alarms"
-    },
-    {
-      "group_key": "e792b5c21bcca50a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-05 18:46:58",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
       "group_key": "1eba7396152a3c77",
       "primary_category": "ai_agents",
       "keywords_json": "[\"set\", \"alarm\", \"clock\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"tool\"]",
@@ -19705,24 +18166,6 @@
       "first_timestamp": "2025-09-05 10:14:33",
       "turn_count": 1,
       "title_snippet": "set an alarm for 11:00 a.m."
-    },
-    {
-      "group_key": "b19f52df25472472",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"calculator\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-04 20:54:48",
-      "turn_count": 1,
-      "title_snippet": "open calculator"
-    },
-    {
-      "group_key": "9b7b25d6abea5cbd",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-04 19:09:13",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
     },
     {
       "group_key": "9d77e6d1c53c38db",
@@ -19761,15 +18204,6 @@
       "title_snippet": "I have a different D50 printer as well I've installed the app to use it can you open that application"
     },
     {
-      "group_key": "2aa0ec6b0e165502",
-      "primary_category": "outliers",
-      "keywords_json": "[\"door\", \"open\", \"application\", \"couldn\", \"find\", \"app\", \"named\", \"device\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-09-04 10:56:57",
-      "turn_count": 1,
-      "title_snippet": "open the door application"
-    },
-    {
       "group_key": "38d6b99327d151fe",
       "primary_category": "outliers",
       "keywords_json": "[\"three\", \"two\", \"way\", \"switch\", \"single\", \"pole\", \"between\", \"controls\"]",
@@ -19786,42 +18220,6 @@
       "first_timestamp": "2025-09-04 10:40:43",
       "turn_count": 3,
       "title_snippet": "Uh, do you see these pieces of wood?"
-    },
-    {
-      "group_key": "07cd7f6f8daecc0d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-03 21:01:08",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "a5716a3dd3b652ff",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"store\", \"open\", \"app\", \"opened\", \"google\", \"play\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-03 18:26:34",
-      "turn_count": 1,
-      "title_snippet": "open the app store"
-    },
-    {
-      "group_key": "0010f5a0a62363b9",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-03 17:11:42",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "ce57bd6d96342816",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-03 14:04:47",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
     },
     {
       "group_key": "9f2a38808b81b089",
@@ -19842,24 +18240,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "79a316d1fed1d84a",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-09-03 13:22:32",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "ef3b3d358d8e5bd4",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-31 18:13:00",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
-    },
-    {
       "group_key": "828755bb98ab9079",
       "primary_category": "outliers",
       "keywords_json": "[\"ankeny\", \"study\", \"provides\", \"where\", \"good\", \"place\", \"offers\", \"several\"]",
@@ -19878,15 +18258,6 @@
       "title_snippet": "what does the French word Estes mean"
     },
     {
-      "group_key": "373347973aebac66",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"craigslist\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-30 18:15:21",
-      "turn_count": 1,
-      "title_snippet": "open Craigslist"
-    },
-    {
       "group_key": "ef3448c606676941",
       "primary_category": "ai_agents",
       "keywords_json": "[\"car\", \"connect\", \"connecting\", \"requires\", \"additional\", \"information\", \"please\", \"specify\"]",
@@ -19894,24 +18265,6 @@
       "first_timestamp": "2025-08-27 20:03:24",
       "turn_count": 1,
       "title_snippet": "connect to car"
-    },
-    {
-      "group_key": "818fc20abf524089",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"yahoo\", \"opened\", \"mail\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-27 13:29:41",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo"
-    },
-    {
-      "group_key": "81867aaf5d3ab723",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"craigslist\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-27 13:26:17",
-      "turn_count": 1,
-      "title_snippet": "open Craigslist"
     },
     {
       "group_key": "7850",
@@ -19930,24 +18283,6 @@
       "first_timestamp": "2025-08-27 13:22:21",
       "turn_count": 1,
       "title_snippet": "what do the colors of a mood ring represent"
-    },
-    {
-      "group_key": "126ddc67da630003",
-      "primary_category": "outliers",
-      "keywords_json": "[\"google\", \"play\", \"playstation\", \"app\", \"store\", \"open\", \"download\", \"see\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-27 13:21:22",
-      "turn_count": 1,
-      "title_snippet": "open Google play and download the PlayStation app"
-    },
-    {
-      "group_key": "2263e4bb158af2aa",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"opened\", \"open\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-27 13:21:17",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
     },
     {
       "group_key": "e39d366a562f8e55",
@@ -20022,15 +18357,6 @@
       "title_snippet": "Do you see this installation guide? Attached 1 file. - 5d2cb79d-649d-4a95-a993-bd6c978988c6"
     },
     {
-      "group_key": "15f3602c41aadd5d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-24 15:56:21",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "b8b5e074e565b05e",
       "primary_category": "outliers",
       "keywords_json": "[\"blood\", \"donation\", \"center\", \"ankeny\", \"near\", \"search\", \"online\", \"centers\"]",
@@ -20040,24 +18366,6 @@
       "title_snippet": "when is a blood donation"
     },
     {
-      "group_key": "68258b2d8eb40495",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"chipotle\", \"open\", \"device\", \"see\", \"installed\", \"now\", \"opened\", \"contentmetadata\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-24 14:20:47",
-      "turn_count": 1,
-      "title_snippet": "open Chipotle"
-    },
-    {
-      "group_key": "79b25356a971a44b",
-      "primary_category": "software",
-      "keywords_json": "[\"github\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2025-08-24 13:41:54",
-      "turn_count": 1,
-      "title_snippet": "open GitHub"
-    },
-    {
       "group_key": "6780a2d9c0cf4eab",
       "primary_category": "hardware",
       "keywords_json": "[\"wire\", \"okay\", \"see\", \"work\", \"bolt\", \"like\", \"looks\", \"might\"]",
@@ -20065,15 +18373,6 @@
       "first_timestamp": "2025-08-23 13:32:05",
       "turn_count": 17,
       "title_snippet": "Do you see this very small boat Attached 1 file. - 58b98250-f57d-402c-8142-f3e6d125dbfa"
-    },
-    {
-      "group_key": "0909b22771968906",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-23 12:07:10",
-      "turn_count": 1,
-      "title_snippet": "open photos"
     },
     {
       "group_key": "a54ca804d2faa0fa",
@@ -20094,15 +18393,6 @@
       "title_snippet": "set an alarm for 8:00 a.m."
     },
     {
-      "group_key": "23f35a29e5f9cd49",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"notes\", \"open\", \"opened\", \"keep\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-22 19:15:54",
-      "turn_count": 1,
-      "title_snippet": "open notes"
-    },
-    {
       "group_key": "3f193bf7281c73dd",
       "primary_category": "ai_agents",
       "keywords_json": "[\"google\", \"hey\", \"where\", \"large\", \"language\", \"model\", \"trained\"]",
@@ -20110,24 +18400,6 @@
       "first_timestamp": "2025-08-19 14:04:30",
       "turn_count": 1,
       "title_snippet": "hey Google where are you"
-    },
-    {
-      "group_key": "1d581b52c6f16b8d",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-18 20:07:17",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
-      "group_key": "9602d26627e10190",
-      "primary_category": "outliers",
-      "keywords_json": "[\"compass\", \"app\", \"open\", \"couldn\", \"find\", \"named\", \"device\", \"like\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-18 15:36:22",
-      "turn_count": 1,
-      "title_snippet": "open a compass"
     },
     {
       "group_key": "7898",
@@ -20166,15 +18438,6 @@
       "title_snippet": "how do you how do you diagnose in a clogged toilet"
     },
     {
-      "group_key": "1c5029f023bd9ba3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-15 23:26:33",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
       "group_key": "85be363c4b6b1530",
       "primary_category": "outliers",
       "keywords_json": "[\"youtube\", \"exit\", \"stopped\"]",
@@ -20193,60 +18456,6 @@
       "title_snippet": "how do you get grease out of dark clothing fabric"
     },
     {
-      "group_key": "26e21080023dc3e1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-15 09:39:00",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "5c0482c365a655b2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"mahjong\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-15 09:37:26",
-      "turn_count": 1,
-      "title_snippet": "open Mahjong"
-    },
-    {
-      "group_key": "f9dfc876ed6be265",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"john\", \"please\", \"provide\", \"context\", \"able\", \"person\", \"name\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2025-08-15 09:37:15",
-      "turn_count": 1,
-      "title_snippet": "open my John"
-    },
-    {
-      "group_key": "5a6f771972fb6d02",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"resumed\", \"playing\", \"media\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-14 19:08:26",
-      "turn_count": 1,
-      "title_snippet": "play"
-    },
-    {
-      "group_key": "105743a6e0b644ef",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-14 19:08:20",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "a7afabb2bdf051b7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-14 16:06:58",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
       "group_key": "71bce44dcdd7df2f",
       "primary_category": "outliers",
       "keywords_json": "[\"used\", \"assistant\", \"feature\", \"aug\", \"cdt\"]",
@@ -20256,51 +18465,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "858d59f16908ec82",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-14 14:45:15",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "8428b51e8f95f317",
-      "primary_category": "creative",
-      "keywords_json": "[\"youtube\", \"music\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-08-14 14:44:06",
-      "turn_count": 1,
-      "title_snippet": "open YouTube music"
-    },
-    {
-      "group_key": "f59261a71b4295db",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-14 14:38:30",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "0078c788295609f3",
-      "primary_category": "creative",
-      "keywords_json": "[\"youtube\", \"music\", \"google\", \"play\", \"search\", \"opened\", \"app\", \"contentmetadata\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-08-14 12:32:07",
-      "turn_count": 1,
-      "title_snippet": "search for YouTube music in Google Play"
-    },
-    {
-      "group_key": "5cecdf58ef2754a3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"opened\", \"open\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-14 12:31:53",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
       "group_key": "9c3827129b4e6846",
       "primary_category": "outliers",
       "keywords_json": "[\"used\", \"assistant\", \"feature\", \"aug\", \"cdt\"]",
@@ -20308,15 +18472,6 @@
       "first_timestamp": "2025-08-14 12:31:49",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "6154e6ecbc8b8426",
-      "primary_category": "creative",
-      "keywords_json": "[\"music\", \"youtube\", \"google\", \"app\", \"search\", \"streaming\", \"service\", \"developed\"]",
-      "outlier_score": 0.3,
-      "first_timestamp": "2025-08-14 12:31:32",
-      "turn_count": 1,
-      "title_snippet": "search for YouTube music"
     },
     {
       "group_key": "8b9932dbaaf22180",
@@ -20391,15 +18546,6 @@
       "title_snippet": "Keep reading the screen, please."
     },
     {
-      "group_key": "184029bb4be84e6b",
-      "primary_category": "outliers",
-      "keywords_json": "[\"keep\", \"reading\", \"please\", \"should\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-12 16:30:03",
-      "turn_count": 1,
-      "title_snippet": "keep reading please"
-    },
-    {
       "group_key": "1156dc50c41f2383",
       "primary_category": "ai_agents",
       "keywords_json": "[\"okay\", \"eritha\", \"may\", \"keep\", \"read\", \"here\", \"text\", \"screen\"]",
@@ -20445,15 +18591,6 @@
       "title_snippet": "what gauges does copper wire normally be sold in"
     },
     {
-      "group_key": "b30cfd6df5efd5dc",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"app\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-11 16:38:26",
-      "turn_count": 1,
-      "title_snippet": "open the Home Depot app"
-    },
-    {
       "group_key": "11d39592436fdff9",
       "primary_category": "finance",
       "keywords_json": "[\"wire\", \"like\", \"copper\", \"home\", \"where\", \"purchase\", \"spool\", \"buy\"]",
@@ -20472,24 +18609,6 @@
       "title_snippet": "what kind of oil does a 2021 Chevrolet Malibu need"
     },
     {
-      "group_key": "124ec919d0a33212",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"yahoo\", \"mail\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-11 13:27:25",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo mail"
-    },
-    {
-      "group_key": "4709b745e49e1898",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"walmart\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 20:02:54",
-      "turn_count": 1,
-      "title_snippet": "open Walmart"
-    },
-    {
       "group_key": "b68317ef25ab7b8a",
       "primary_category": "outliers",
       "keywords_json": "[\"pint\", \"ounces\", \"many\", \"solid\", \"dry\", \"weight\", \"measure\", \"volume\"]",
@@ -20499,42 +18618,6 @@
       "title_snippet": "how many ounces are in a pint"
     },
     {
-      "group_key": "1f93acd512cda34f",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"yahoo\", \"mail\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 19:07:12",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo mail"
-    },
-    {
-      "group_key": "9cfa3ad543eb6908",
-      "primary_category": "outliers",
-      "keywords_json": "[\"yahoo\", \"open\", \"app\", \"mail\", \"found\", \"installed\", \"apps\", \"but\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-10 19:06:52",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo app"
-    },
-    {
-      "group_key": "6550a79cc4a5f73b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"yahoo\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 19:06:42",
-      "turn_count": 1,
-      "title_snippet": "open Yahoo"
-    },
-    {
-      "group_key": "f051105d6a255a3b",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-10 19:04:17",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "c599c34720200465",
       "primary_category": "software",
       "keywords_json": "[\"security\", \"code\", \"sent\", \"last\", \"discover\", \"email\", \"unable\", \"provide\"]",
@@ -20542,15 +18625,6 @@
       "first_timestamp": "2025-08-10 19:02:57",
       "turn_count": 1,
       "title_snippet": "what is the last security code sent from discover"
-    },
-    {
-      "group_key": "6bbedf4b30a08bea",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"rocket\", \"money\", \"opened\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 18:59:10",
-      "turn_count": 1,
-      "title_snippet": "open Rocket money"
     },
     {
       "group_key": "7607edd5910df308",
@@ -20580,15 +18654,6 @@
       "title_snippet": "open password manager"
     },
     {
-      "group_key": "26a58effdb6e5ba3",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"discover\", \"app\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 18:45:32",
-      "turn_count": 1,
-      "title_snippet": "open Discover app"
-    },
-    {
       "group_key": "4f60818de46436aa",
       "primary_category": "creative",
       "keywords_json": "[\"merchandising\", \"video\", \"visual\", \"but\", \"anything\", \"interesting\", \"displays\", \"products\"]",
@@ -20614,15 +18679,6 @@
       "first_timestamp": "2025-08-10 18:31:33",
       "turn_count": 1,
       "title_snippet": "can you write a description of the captions of this video"
-    },
-    {
-      "group_key": "864246deb3fbe781",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-10 18:12:32",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
     },
     {
       "group_key": "77c5ea6eed6cc73e",
@@ -20652,51 +18708,6 @@
       "title_snippet": "Create a calendar event from this Attached 1 file. - 1c77ad1a-2c74-437b-b346-242034d30e1e"
     },
     {
-      "group_key": "92afd0e686b6637c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"youtube\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-09 17:41:41",
-      "turn_count": 1,
-      "title_snippet": "open YouTube"
-    },
-    {
-      "group_key": "1dbebf3ccd1f402c",
-      "primary_category": "creative",
-      "keywords_json": "[\"play\", \"sound\", \"spongebob\", \"laugh\", \"sorry\", \"but\", \"cannot\", \"audio\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2025-08-09 17:32:49",
-      "turn_count": 1,
-      "title_snippet": "play the sound of SpongeBob's laugh"
-    },
-    {
-      "group_key": "7453f7104e0c2e96",
-      "primary_category": "creative",
-      "keywords_json": "[\"youtube\", \"music\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-08-09 15:44:29",
-      "turn_count": 1,
-      "title_snippet": "open YouTube music"
-    },
-    {
-      "group_key": "5f596d951f805c5d",
-      "primary_category": "outliers",
-      "keywords_json": "[\"play\", \"young\", \"thug\", \"sure\", \"help\", \"these\", \"media\", \"providers\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-09 14:55:19",
-      "turn_count": 1,
-      "title_snippet": "play Young Thug"
-    },
-    {
-      "group_key": "24ee5b53c8b57228",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-09 14:27:09",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
       "group_key": "059fed82661fae83",
       "primary_category": "outliers",
       "keywords_json": "[\"heat\", \"stroke\", \"body\", \"temperature\", \"occur\", \"strenuous\", \"activity\", \"indoors\"]",
@@ -20704,15 +18715,6 @@
       "first_timestamp": "2025-08-08 23:01:50",
       "turn_count": 5,
       "title_snippet": "how does heat stroke work"
-    },
-    {
-      "group_key": "620556ee5bc90fae",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"maps\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-08 22:39:06",
-      "turn_count": 1,
-      "title_snippet": "open Google Maps"
     },
     {
       "group_key": "bd689d6d11da6a05",
@@ -20787,24 +18789,6 @@
       "title_snippet": "look up a picture of Benjamin Franklin"
     },
     {
-      "group_key": "ff4efa45bcf300e1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"duolingo\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-08 18:35:30",
-      "turn_count": 1,
-      "title_snippet": "open Duolingo"
-    },
-    {
-      "group_key": "62d91a68bfee73c7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"duolingo\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-08 17:09:57",
-      "turn_count": 1,
-      "title_snippet": "open Duolingo"
-    },
-    {
       "group_key": "16bbcd4f84364d10",
       "primary_category": "outliers",
       "keywords_json": "[\"oxygen\", \"body\", \"pulse\", \"level\", \"max\", \"maximal\", \"consumption\", \"maximum\"]",
@@ -20839,24 +18823,6 @@
       "first_timestamp": "2025-08-08 13:48:36",
       "turn_count": 1,
       "title_snippet": "what is 388 * 3"
-    },
-    {
-      "group_key": "13f5cdc415c7ffdb",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"opened\", \"app\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-08 12:10:25",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
-      "group_key": "6b459d28a5881336",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"open\", \"photo\", \"gallery\", \"opened\", \"photos\", \"app\", \"contentmetadata\", \"tag\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-08 12:06:24",
-      "turn_count": 1,
-      "title_snippet": "open photo gallery"
     },
     {
       "group_key": "bd3a0da5d3070e3a",
@@ -20931,15 +18897,6 @@
       "title_snippet": "play the Spanish learning book"
     },
     {
-      "group_key": "0b21639cbac6fc10",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"audible\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-07 16:45:48",
-      "turn_count": 1,
-      "title_snippet": "open Audible"
-    },
-    {
       "group_key": "7a5d40c382026dc8",
       "primary_category": "outliers",
       "keywords_json": "[\"unlock\", \"phone\", \"voice\", \"but\", \"any\", \"way\", \"sorry\", \"cannot\"]",
@@ -20985,24 +18942,6 @@
       "title_snippet": "Can you find the instruction manual for this light switch Attached 1 file. - d49564aa-f4d5-43aa-ac94-88b72267e93b"
     },
     {
-      "group_key": "84abee91a34466b2",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-07 14:58:22",
-      "turn_count": 1,
-      "title_snippet": "open Google"
-    },
-    {
-      "group_key": "a1daf83b449b4460",
-      "primary_category": "software",
-      "keywords_json": "[\"app\", \"phomemo\", \"com\", \"google\", \"play\", \"print\", \"master\", \"https\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-07 11:45:40",
-      "turn_count": 1,
-      "title_snippet": "open D50 label maker"
-    },
-    {
       "group_key": "885c518409fdc810",
       "primary_category": "outliers",
       "keywords_json": "[\"used\", \"assistant\", \"feature\", \"aug\", \"cdt\"]",
@@ -21019,24 +18958,6 @@
       "first_timestamp": "2025-08-07 11:08:02",
       "turn_count": 2,
       "title_snippet": "close Pandora"
-    },
-    {
-      "group_key": "6555520813ce4080",
-      "primary_category": "outliers",
-      "keywords_json": "[\"next\", \"song\", \"play\", \"played\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-07 10:56:38",
-      "turn_count": 1,
-      "title_snippet": "play next song"
-    },
-    {
-      "group_key": "f4f5fd81ba41bb00",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"pandora\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-07 10:53:32",
-      "turn_count": 1,
-      "title_snippet": "open Pandora"
     },
     {
       "group_key": "b6a2a7b46040d69e",
@@ -21057,15 +18978,6 @@
       "title_snippet": "Do you know what this is?"
     },
     {
-      "group_key": "1099edf99f5d7f32",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 22:35:15",
-      "turn_count": 1,
-      "title_snippet": "open Play Store"
-    },
-    {
       "group_key": "61eaf6843610c24f",
       "primary_category": "hardware",
       "keywords_json": "[\"handle\", \"right\", \"any\", \"fix\", \"pin\", \"find\", \"looks\", \"like\"]",
@@ -21073,15 +18985,6 @@
       "first_timestamp": "2025-08-06 22:29:10",
       "turn_count": 7,
       "title_snippet": "What kind of door handle is this?"
-    },
-    {
-      "group_key": "ac0c491f9a1db8f0",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 20:54:06",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
     },
     {
       "group_key": "22d25fd69569e9bd",
@@ -21100,69 +19003,6 @@
       "first_timestamp": "2025-08-06 19:30:15",
       "turn_count": 1,
       "title_snippet": "are there any electronic shops around Ankeny"
-    },
-    {
-      "group_key": "f45976ac10abe4d0",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 19:00:07",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
-      "group_key": "813c146dd966eded",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"facebook\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 18:45:39",
-      "turn_count": 1,
-      "title_snippet": "open Facebook"
-    },
-    {
-      "group_key": "0599551dcf95af19",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 17:25:18",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
-    },
-    {
-      "group_key": "9047ea5348bc6e95",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"gmail\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 16:50:14",
-      "turn_count": 1,
-      "title_snippet": "open Gmail"
-    },
-    {
-      "group_key": "0231659f5e82f6ad",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"home\", \"depot\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 16:49:18",
-      "turn_count": 1,
-      "title_snippet": "open Home Depot"
-    },
-    {
-      "group_key": "c8289f425ff4e28a",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-06 16:35:50",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "c5556b9ab928f9ab",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"outlook\", \"open\", \"opening\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-06 14:47:46",
-      "turn_count": 1,
-      "title_snippet": "open Outlook"
     },
     {
       "group_key": "c0989b6c89c13661",
@@ -21201,15 +19041,6 @@
       "title_snippet": "\ud83e\udeb4 Plant care tips Deleting this prompt here will remove it from your Gemini Apps Activity, but not from Messages"
     },
     {
-      "group_key": "4ba571435c90615b",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"pandora\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-04 15:56:24",
-      "turn_count": 1,
-      "title_snippet": "open Pandora"
-    },
-    {
       "group_key": "2c062ee09b9cd66e",
       "primary_category": "creative",
       "keywords_json": "[\"car\", \"use\", \"connect\", \"android\", \"auto\", \"phone\", \"bluetooth\", \"sure\"]",
@@ -21226,15 +19057,6 @@
       "first_timestamp": "2025-08-04 15:40:47",
       "turn_count": 1,
       "title_snippet": ""
-    },
-    {
-      "group_key": "9855c2e1ff5580cb",
-      "primary_category": "outliers",
-      "keywords_json": "[\"query\", \"sensitive\", \"communications\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-04 15:40:29",
-      "turn_count": 2,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "37cbb3a44d6cfd3a",
@@ -21282,24 +19104,6 @@
       "title_snippet": "find a corn husking machine that fits within a 1 M by 1 M by 2 m space"
     },
     {
-      "group_key": "e07d0e3d62694b25",
-      "primary_category": "software",
-      "keywords_json": "[\"dolphin\", \"nautilus\", \"pro\", \"features\", \"show\", \"robotic\", \"pool\", \"cleaner\"]",
-      "outlier_score": 0.8,
-      "first_timestamp": "2025-08-03 19:54:36",
-      "turn_count": 1,
-      "title_snippet": "show me the dolphin Nautilus CC Pro"
-    },
-    {
-      "group_key": "afcd2fcf355ec2e6",
-      "primary_category": "outliers",
-      "keywords_json": "[\"show\", \"water\", \"roomba\", \"sure\", \"help\", \"first\", \"please\", \"unlock\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-03 19:41:58",
-      "turn_count": 1,
-      "title_snippet": "show me a water Roomba"
-    },
-    {
       "group_key": "8160",
       "primary_category": "hardware",
       "keywords_json": "[\"guide\", \"commercial\", \"corn\", \"husking\", \"solutions\", \"created\", \"gemini\", \"canvas\"]",
@@ -21318,15 +19122,6 @@
       "title_snippet": "I need to be able to husk corn cobs that are already in a bag that looks like these ones Attached 2 files. - 4115.jpg - 4114.jpg"
     },
     {
-      "group_key": "828b7778a8004c63",
-      "primary_category": "creative",
-      "keywords_json": "[\"handheld\", \"video\", \"vacuum\", \"cord\", \"cusker\", \"videos\", \"corded\", \"stick\"]",
-      "outlier_score": 0.7,
-      "first_timestamp": "2025-08-03 19:22:33",
-      "turn_count": 1,
-      "title_snippet": "show me a video of a handheld cord cusker"
-    },
-    {
       "group_key": "ae7c5936fa5bc1ff",
       "primary_category": "ai_agents",
       "keywords_json": "[\"corn\", \"hand\", \"sheller\", \"https\", \"few\", \"handheld\", \"options\", \"www\"]",
@@ -21343,24 +19138,6 @@
       "first_timestamp": "2025-08-03 19:00:00",
       "turn_count": 4,
       "title_snippet": "what kind of plants are these"
-    },
-    {
-      "group_key": "26f8cb4030a39f17",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"calculator\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-03 18:53:57",
-      "turn_count": 1,
-      "title_snippet": "open calculator"
-    },
-    {
-      "group_key": "b912a64436009d8a",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"google\", \"meet\", \"got\", \"could\", \"unlock\", \"phone\", \"need\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-03 18:53:40",
-      "turn_count": 1,
-      "title_snippet": "open Google meet"
     },
     {
       "group_key": "4dec7ea603e0fb1b",
@@ -21453,24 +19230,6 @@
       "title_snippet": "friends the same"
     },
     {
-      "group_key": "de70efd6c33b2f84",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-03 18:04:24",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "3dcfae1e01c699f8",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"meet\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-03 18:01:15",
-      "turn_count": 1,
-      "title_snippet": "open Google meet"
-    },
-    {
       "group_key": "783049bd2797723d",
       "primary_category": "outliers",
       "keywords_json": "[\"dad\", \"term\", \"google\", \"informal\", \"male\", \"parent\", \"father\", \"word\"]",
@@ -21478,15 +19237,6 @@
       "first_timestamp": "2025-08-03 17:56:35",
       "turn_count": 1,
       "title_snippet": "Google me Dad"
-    },
-    {
-      "group_key": "31cf84df15e3cdfa",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-03 17:00:08",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
     },
     {
       "group_key": "3cb1b8a47659c327",
@@ -21498,33 +19248,6 @@
       "title_snippet": "Google Maps"
     },
     {
-      "group_key": "d6fec1e01487e384",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"meet\", \"opened\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-03 12:40:35",
-      "turn_count": 1,
-      "title_snippet": "open Google meet"
-    },
-    {
-      "group_key": "e442415c02615ab4",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-03 12:38:35",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
-      "group_key": "ca2e8ffef1535d24",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"contacts\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-03 12:33:50",
-      "turn_count": 1,
-      "title_snippet": "open contacts"
-    },
-    {
       "group_key": "2fc68ea1daf5460c",
       "primary_category": "outliers",
       "keywords_json": "[\"google\", \"mom\", \"human\", \"name\", \"assistant\", \"help\"]",
@@ -21534,15 +19257,6 @@
       "title_snippet": "Google me Mom"
     },
     {
-      "group_key": "160d121d8c747312",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"play\", \"open\", \"opened\", \"store\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-02 23:47:42",
-      "turn_count": 1,
-      "title_snippet": "open Google Play"
-    },
-    {
       "group_key": "a09628316acb7040",
       "primary_category": "finance",
       "keywords_json": "[\"shoes\", \"google\", \"anything\", \"else\", \"those\", \"like\", \"okay\", \"need\"]",
@@ -21550,15 +19264,6 @@
       "first_timestamp": "2025-08-02 23:43:20",
       "turn_count": 5,
       "title_snippet": "what extensions do you have"
-    },
-    {
-      "group_key": "9aed7aab6ac988b7",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"play\", \"store\", \"open\", \"opened\", \"google\", \"contentmetadata\", \"tag\", \"toolattribution\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-02 23:39:21",
-      "turn_count": 1,
-      "title_snippet": "open Play Store"
     },
     {
       "group_key": "8e7aa7c6b5330da8",
@@ -21579,15 +19284,6 @@
       "title_snippet": ""
     },
     {
-      "group_key": "4e5e2455b3174a21",
-      "primary_category": "outliers",
-      "keywords_json": "[\"communications\", \"query\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-01 17:19:54",
-      "turn_count": 1,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "82857ee1f632ee82",
       "primary_category": "outliers",
       "keywords_json": "[\"find\", \"jamie\", \"email\", \"bayer\", \"any\", \"emails\", \"baker\", \"sorry\"]",
@@ -21606,24 +19302,6 @@
       "title_snippet": "hey Google open wallet"
     },
     {
-      "group_key": "755202e56aeabd87",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"google\", \"meet\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-01 15:47:52",
-      "turn_count": 1,
-      "title_snippet": "open Google meet"
-    },
-    {
-      "group_key": "f1fa84fa43e0c57f",
-      "primary_category": "outliers",
-      "keywords_json": "[\"query\", \"sensitive\", \"communications\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-01 15:46:34",
-      "turn_count": 2,
-      "title_snippet": "a Communications query."
-    },
-    {
       "group_key": "c85ced8c2f2139d4",
       "primary_category": "creative",
       "keywords_json": "[\"facetime\", \"apple\", \"calls\", \"videotelephony\", \"product\", \"video\", \"audio\", \"ios\"]",
@@ -21631,15 +19309,6 @@
       "first_timestamp": "2025-08-01 15:46:21",
       "turn_count": 1,
       "title_snippet": "FaceTime"
-    },
-    {
-      "group_key": "b4800b032fb7acff",
-      "primary_category": "outliers",
-      "keywords_json": "[\"open\", \"phone\", \"opened\", \"home\", \"screen\"]",
-      "outlier_score": 0.95,
-      "first_timestamp": "2025-08-01 12:33:58",
-      "turn_count": 1,
-      "title_snippet": "Open phone"
     },
     {
       "group_key": "559c3320ad2066bd",
@@ -21687,33 +19356,6 @@
       "title_snippet": "how's the weather tomorrow at 8:50 Google hey Google hey Google hey Google hey Google hey Google hey Google hey Google"
     },
     {
-      "group_key": "00feab0592cf70d9",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"photos\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-01 08:52:52",
-      "turn_count": 1,
-      "title_snippet": "open photos"
-    },
-    {
-      "group_key": "a161c3276c906d11",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"settings\", \"open\", \"opened\", \"page\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-01 01:31:35",
-      "turn_count": 1,
-      "title_snippet": "open settings"
-    },
-    {
-      "group_key": "8b73883b32b6a4a1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"sleep\", \"settings\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-08-01 01:04:12",
-      "turn_count": 1,
-      "title_snippet": "open Sleep settings"
-    },
-    {
       "group_key": "d16256d243dd916d",
       "primary_category": "outliers",
       "keywords_json": "[\"banana\", \"peel\", \"bread\", \"bananas\", \"breads\", \"making\", \"yes\", \"should\"]",
@@ -21721,42 +19363,6 @@
       "first_timestamp": "2025-07-31 18:16:04",
       "turn_count": 1,
       "title_snippet": "do you peel banana breads when making banana bread"
-    },
-    {
-      "group_key": "efe54fb84370be76",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"pandora\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 16:33:28",
-      "turn_count": 1,
-      "title_snippet": "open Pandora"
-    },
-    {
-      "group_key": "7cad01604aa7ce1c",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"location\", \"settings\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 16:11:05",
-      "turn_count": 1,
-      "title_snippet": "go to location settings"
-    },
-    {
-      "group_key": "c72009073a2df5b1",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"maps\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 16:09:22",
-      "turn_count": 1,
-      "title_snippet": "open maps"
-    },
-    {
-      "group_key": "818847560e7535ab",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"snapchat\", \"opened\", \"open\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\", \"device\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 12:55:46",
-      "turn_count": 1,
-      "title_snippet": "open Snapchat"
     },
     {
       "group_key": "3bfcf3dc72f54e3e",
@@ -21784,24 +19390,6 @@
       "first_timestamp": "2025-07-31 12:41:09",
       "turn_count": 8,
       "title_snippet": "Design a bathroom with a Japanese style toilet Brainstormer was used in this chat. Manage your Gems."
-    },
-    {
-      "group_key": "cb28f43a39a68372",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"mint\", \"mobile\", \"open\", \"opened\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 12:32:25",
-      "turn_count": 1,
-      "title_snippet": "open Mint mobile"
-    },
-    {
-      "group_key": "76d22c668a806672",
-      "primary_category": "ai_agents",
-      "keywords_json": "[\"chipotle\", \"open\", \"opened\", \"app\", \"contentmetadata\", \"tag\", \"toolattribution\", \"displayname\"]",
-      "outlier_score": 0.9,
-      "first_timestamp": "2025-07-31 12:23:44",
-      "turn_count": 1,
-      "title_snippet": "open Chipotle"
     },
     {
       "group_key": "2aaa44d22fc7614e",

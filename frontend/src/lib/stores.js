@@ -9,8 +9,7 @@ export const stats = writable({ total_chats: 0, voice_chats: 0, total_threads: 0
 
 // Global Graph Filters
 export const hideOneOffChats = writable(false);
-export const hideAppCommands = writable(false);
-export const selectedActionabilityTier = writable(''); // '', 'large_project', 'standard', 'one_off', 'app_command'
+export const selectedActionabilityTier = writable(''); // '', 'large_project', 'standard', 'one_off'
 export const minTurnsFilter = writable(1);
 export const maxTurnsFilter = writable(100);
 export const minEdgesFilter = writable(0);

@@ -3,7 +3,6 @@
   import * as d3 from 'd3';
   import { 
     hideOneOffChats, 
-    hideAppCommands, 
     selectedActionabilityTier, 
     minTurnsFilter, 
     maxTurnsFilter,
@@ -50,7 +49,6 @@
     if (isLoaded && ctx) {
       // Re-draw whenever filters or selection stores update
       const _oneOff = $hideOneOffChats;
-      const _appCmd = $hideAppCommands;
       const _tier = $selectedActionabilityTier;
       const _minT = $minTurnsFilter;
       const _maxT = $maxTurnsFilter;
@@ -577,11 +575,9 @@
       const deg = n.degree || 0;
       const turns = n.turn_count || 1;
       const isOneOff = (n.actionability_tier === 'one_off' || turns <= 1);
-      const isAppCmd = n.actionability_tier === 'app_command';
 
       // Pre-filters
       if ($hideOneOffChats && isOneOff) return;
-      if ($hideAppCommands && isAppCmd) return;
       if ($selectedActionabilityTier && n.actionability_tier !== $selectedActionabilityTier) return;
 
       // Range scales
@@ -939,9 +935,6 @@
         </button>
         <button class="menu-item" onclick={() => { hideOneOffChats.update(v => !v); closeContextMenu(); }}>
           ⚡ Toggle One-Off Chats ({#if $hideOneOffChats}Show{:else}Hide{/if})
-        </button>
-        <button class="menu-item" onclick={() => { hideAppCommands.update(v => !v); closeContextMenu(); }}>
-          📱 Toggle App Commands ({#if $hideAppCommands}Show{:else}Hide{/if})
         </button>
       {/if}
     </div>
