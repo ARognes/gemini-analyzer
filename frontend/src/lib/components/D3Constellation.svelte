@@ -7,6 +7,15 @@
     selectedActionabilityTier, 
     minTurnsFilter, 
     maxTurnsFilter,
+    minEdgesFilter,
+    maxEdgesFilter,
+    showUnlinkedNodes,
+    showUngroupedNodes,
+    allGroupsEnabled,
+    selectedGroupTags,
+    availableGroupTags,
+    degreeHistogramData,
+    turnsHistogramData,
     hoveredNode,
     selectedNode,
     searchMatchingNodeIds,
@@ -39,6 +48,21 @@
 
   $effect(() => {
     if (isLoaded && ctx) {
+      // Re-draw whenever filters or selection stores update
+      const _oneOff = $hideOneOffChats;
+      const _appCmd = $hideAppCommands;
+      const _tier = $selectedActionabilityTier;
+      const _minT = $minTurnsFilter;
+      const _maxT = $maxTurnsFilter;
+      const _minE = $minEdgesFilter;
+      const _maxE = $maxEdgesFilter;
+      const _unlinked = $showUnlinkedNodes;
+      const _ungrouped = $showUngroupedNodes;
+      const _allG = $allGroupsEnabled;
+      const _selG = $selectedGroupTags;
+      const _searchIds = $searchMatchingNodeIds;
+      const _selN = $selectedNode;
+      const _hovN = $hoveredNode;
       drawCanvas();
     }
   });
@@ -188,7 +212,7 @@
     const nodeMap = new Map(rawNodes.map(n => [n.id, n]));
     const rawRelations = graphData.relations || [];
 
-    // Calculate node degrees to separate connected vs isolated nodes
+    // Calculate node degrees
     const nodeDegrees = new Map(rawNodes.map(n => [n.id, 0]));
     rawRelations.forEach(rel => {
       if (nodeMap.has(rel.source_key) && nodeMap.has(rel.target_key)) {
@@ -197,38 +221,62 @@
       }
     });
 
-    // Group raw nodes into clusters by tag/category
-    const connectedClusters = {};
-    const isolatedNodes = [];
-
     rawNodes.forEach(n => {
-      const deg = nodeDegrees.get(n.id) || 0;
-      if (deg > 0) {
-        const tag = n.data_tag || n.category || 'connected_other';
-        if (!connectedClusters[tag]) connectedClusters[tag] = [];
-        connectedClusters[tag].push(n);
-      } else {
-        isolatedNodes.push(n);
-      }
+      n.degree = nodeDegrees.get(n.id) || 0;
     });
+
+    // Populate Histogram distribution data for interactive filter scales
+    const degMap = new Map();
+    for (let i = 0; i <= 50; i++) degMap.set(i, 0);
+    rawNodes.forEach(n => {
+      const deg = Math.min(50, n.degree || 0);
+      degMap.set(deg, (degMap.get(deg) || 0) + 1);
+    });
+    degreeHistogramData.set(Array.from(degMap.entries()).map(([bin, count]) => ({ bin, count })));
+
+    const turnMap = new Map();
+    for (let i = 1; i <= 50; i++) turnMap.set(i, 0);
+    rawNodes.forEach(n => {
+      const t = Math.min(50, Math.max(1, n.turn_count || 1));
+      turnMap.set(t, (turnMap.get(t) || 0) + 1);
+    });
+    turnsHistogramData.set(Array.from(turnMap.entries()).map(([bin, count]) => ({ bin, count })));
+
+    // Group raw nodes into clusters by tag/category
+    const clusters = {};
+    rawNodes.forEach(n => {
+      const tag = n.data_tag || n.category || 'ungrouped';
+      if (!clusters[tag]) clusters[tag] = [];
+      clusters[tag].push(n);
+    });
+
+    // Populate Available Groups for Group Filter Matrix
+    const groupTagList = Object.keys(clusters)
+      .filter(t => t !== 'ungrouped' && t !== 'outliers' && clusters[t].length >= 2)
+      .map(t => ({
+        tag: t,
+        count: clusters[t].length
+      }))
+      .sort((a, b) => b.count - a.count);
+    availableGroupTags.set(groupTagList);
 
     const macroNodes = [];
     const macroMap = new Map();
     const nodeToMacro = new Map();
 
-    const tags = Object.keys(connectedClusters);
+    const tags = Object.keys(clusters);
     const goldenAngle = 2.399963229728653;
 
-    // 1. Position Connected Clusters in 2D Fermat Spiral around main canvas (1600, 1100)
+    // Position Connected Clusters & Standalone Nodes in Unified 2D Fermat Spiral
     tags.forEach((tag, idx) => {
-      const cNodes = connectedClusters[tag];
+      const cNodes = clusters[tag];
 
-      const spiralR = 120 * Math.sqrt(idx + 1);
+      const spiralR = 90 * Math.sqrt(idx + 1);
       const spiralTheta = idx * goldenAngle;
       const initCx = 1600 + spiralR * Math.cos(spiralTheta);
       const initCy = 1100 + spiralR * Math.sin(spiralTheta);
 
-      if (cNodes.length >= 2) {
+      if (tag !== 'ungrouped' && tag !== 'outliers' && cNodes.length >= 2) {
         const globId = `glob_${tag}`;
         const globRadius = Math.max(26, 16 + 8 * Math.sqrt(cNodes.length));
 
@@ -253,7 +301,6 @@
           n.y = initCy + n.offsetY;
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = globId;
-          n.isIsolated = false;
           nodeToMacro.set(n.id, globId);
         });
       } else {
@@ -264,27 +311,11 @@
           n.y = initCy + r * Math.sin(theta);
           n.radius = Math.max(7, Math.min(18, 5 + (n.turn_count || 1) * 0.8));
           n.glob_id = null;
-          n.isIsolated = false;
           macroNodes.push(n);
           macroMap.set(n.id, n);
           nodeToMacro.set(n.id, n.id);
         });
       }
-    });
-
-    // 2. Position Isolated Nodes in dedicated Isolated Archive Sector at (3800, 1800)
-    const isoCenterX = 3800;
-    const isoCenterY = 1800;
-    isolatedNodes.forEach((n, nIdx) => {
-      const cols = 40;
-      const row = Math.floor(nIdx / cols);
-      const col = nIdx % cols;
-      n.x = isoCenterX + (col - cols / 2) * 32;
-      n.y = isoCenterY + (row - 15) * 32;
-      n.radius = Math.max(6, Math.min(14, 4 + (n.turn_count || 1) * 0.6));
-      n.glob_id = null;
-      n.isIsolated = true;
-      nodeToMacro.set(n.id, n.id);
     });
 
     // Accumulate relations into Inter-Glob Single Membrane Links
@@ -330,7 +361,7 @@
       similarity: item.sims.reduce((a, b) => a + b, 0) / item.sims.length
     }));
 
-    // Setup D3 Simulation ONLY on Connected Macro-Nodes
+    // Setup D3 Simulation on Macro-Nodes
     simulation = d3.forceSimulation(macroNodes)
       .velocityDecay(0.75)
       .alphaDecay(0.04)
@@ -347,7 +378,6 @@
     graphData.macroNodes = macroNodes;
     graphData.macroLinks = macroLinks;
     graphData.macroMap = macroMap;
-    graphData.isolatedNodes = isolatedNodes;
 
     // Asynchronously pre-compute 250 ticks to reach static homeostasis
     const totalTicks = 250;
@@ -456,7 +486,8 @@
 
     nodes.forEach(n => {
       if (!visibleNodes.has(n.id) || typeof n.x !== 'number' || typeof n.y !== 'number') return;
-      const tag = n.data_tag || n.category || 'connected_other';
+      const tag = n.data_tag || n.category || 'ungrouped';
+      if (tag === 'ungrouped' || tag === 'outliers') return;
       if (!clusterMap[tag]) clusterMap[tag] = [];
       clusterMap[tag].push(n);
     });
@@ -543,10 +574,34 @@
 
     const visibleNodes = new Set();
     nodes.forEach(n => {
-      if ($hideOneOffChats && (n.actionability_tier === 'one_off' || n.turn_count <= 1)) return;
-      if ($hideAppCommands && n.actionability_tier === 'app_command') return;
+      const deg = n.degree || 0;
+      const turns = n.turn_count || 1;
+      const isOneOff = (n.actionability_tier === 'one_off' || turns <= 1);
+      const isAppCmd = n.actionability_tier === 'app_command';
+
+      // Pre-filters
+      if ($hideOneOffChats && isOneOff) return;
+      if ($hideAppCommands && isAppCmd) return;
       if ($selectedActionabilityTier && n.actionability_tier !== $selectedActionabilityTier) return;
-      if (n.turn_count < $minTurnsFilter || n.turn_count > $maxTurnsFilter) return;
+
+      // Range scales
+      if (turns < $minTurnsFilter || turns > $maxTurnsFilter) return;
+      if (deg < $minEdgesFilter || deg > $maxEdgesFilter) return;
+
+      // Unlinked / 0-edge filter
+      if (deg === 0 && !$showUnlinkedNodes) return;
+
+      // Ungrouped filter
+      if (!n.glob_id && !$showUngroupedNodes) return;
+
+      // Group selection filter
+      if (n.glob_id) {
+        const tag = n.data_tag || n.category;
+        if (!$allGroupsEnabled && $selectedGroupTags.size > 0 && !$selectedGroupTags.has(tag)) {
+          return;
+        }
+      }
+
       visibleNodes.add(n.id);
     });
 
@@ -564,6 +619,11 @@
       const src = rel.source;
       const tgt = rel.target;
       if (!src || !tgt) return;
+
+      // Only draw if both collectives/nodes have visible nodes
+      const isSrcVisible = src.isGlob ? (src.nodes && src.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(src.id);
+      const isTgtVisible = tgt.isGlob ? (tgt.nodes && tgt.nodes.some(n => visibleNodes.has(n.id))) : visibleNodes.has(tgt.id);
+      if (!isSrcVisible || !isTgtVisible) return;
 
       const dx = tgt.x - src.x;
       const dy = tgt.y - src.y;
@@ -600,31 +660,6 @@
       ctx.stroke();
       ctx.shadowBlur = 0;
     });
-
-    // 3. Draw Labeled Boundary Box for Isolated Archive Sector
-    if (graphData.isolatedNodes && graphData.isolatedNodes.length > 0) {
-      ctx.save();
-      ctx.strokeStyle = 'rgba(148, 163, 184, 0.40)';
-      ctx.lineWidth = 2.0;
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.35)';
-      ctx.setLineDash([10, 6]);
-
-      const boxX = 3100;
-      const boxY = 1250;
-      const boxW = 1400;
-      const boxH = 1100;
-
-      ctx.beginPath();
-      ctx.rect(boxX, boxY, boxW, boxH);
-      ctx.fill();
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
-      ctx.fillText(`📦 Isolated / Unlinked Chats Sector (${graphData.isolatedNodes.length} Chats - No Edges)`, boxX + 30, boxY + 45);
-      ctx.restore();
-    }
 
     // 4. Draw D3 Nodes
     nodes.forEach(n => {

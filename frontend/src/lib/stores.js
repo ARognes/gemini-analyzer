@@ -8,12 +8,30 @@ export const activeSubtab = writable('d3_constellation'); // 'd3_constellation',
 export const stats = writable({ total_chats: 0, voice_chats: 0, total_threads: 0 });
 
 // Global Graph Filters
-export const hideOneOffChats = writable(true);
-export const hideAppCommands = writable(true);
+export const hideOneOffChats = writable(false);
+export const hideAppCommands = writable(false);
 export const selectedActionabilityTier = writable(''); // '', 'large_project', 'standard', 'one_off', 'app_command'
 export const minTurnsFilter = writable(1);
-export const maxTurnsFilter = writable(50);
+export const maxTurnsFilter = writable(100);
+export const minEdgesFilter = writable(0);
+export const maxEdgesFilter = writable(50);
 export const correlationThresholdPct = writable(38);
+
+// Layering & Group Filters
+export const showUnlinkedNodes = writable(true); // Toggle 0-edge nodes
+export const showUngroupedNodes = writable(true); // Toggle standalone nodes with no group
+export const allGroupsEnabled = writable(true); // Master toggle for all groups
+/** @type {import('svelte/store').Writable<Set<string>>} */
+export const selectedGroupTags = writable(new Set()); // Set of enabled group tag names (empty = all enabled)
+/** @type {import('svelte/store').Writable<Array<{tag: string, count: number, color?: string}>>} */
+export const availableGroupTags = writable([]); // Dynamic list of all multi-node groups
+export const isLayerFiltersOpen = writable(false);
+
+// Histogram Distribution Data
+/** @type {import('svelte/store').Writable<Array<{bin: number, count: number}>>} */
+export const degreeHistogramData = writable([]); // Array of { bin: degree, count: nNodes }
+/** @type {import('svelte/store').Writable<Array<{bin: number, count: number}>>} */
+export const turnsHistogramData = writable([]); // Array of { bin: turnCount, count: nNodes }
 
 // Subgraph Search state
 export const activeSearchQuery = writable('');
@@ -38,3 +56,4 @@ export const isThreadDrawerOpen = writable(false);
 export const isCorrelationModalOpen = writable(false);
 /** @type {import('svelte/store').Writable<any>} */
 export const correlationModalData = writable(null);
+
